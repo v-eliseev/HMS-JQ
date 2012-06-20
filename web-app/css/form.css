@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+fieldset {
+	width: 310px;
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid;
+	border-radius: 5px;
+}
+
+div.col {
+	float: left;
+}
+
+div#buttonRow {
+	display: block;
+	width: 100%;
+	left: 0;
+	clear: both;
+}
+
+fieldset>legend {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+label, span.label {
+    clear: left;
+    float: left;
+    padding: 3px 10px 2px;
+    text-align: right;
+    width: 90px;
+}
+
+.textfield, .textarea, .selectlist, button {
+    font-size: 12px;
+    margin: 0 0 8px;
+    width: 180px;
+}
+
+.textarea {
+	resize: none;
+}

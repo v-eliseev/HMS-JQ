@@ -25,8 +25,15 @@ class AdminController extends BaseController {
 		def usersList = license?.users
 		def hotel = Hotel.findByLicense(license)
 		def roomCategoryList = hotel.roomCategories
+		def reservationList = hotel.reservations
 		
-		[licenseInstance: license, hotelInstance: hotel, userInstanceList: usersList, roomCategoryInstanceList: roomCategoryList]
+		[
+			licenseInstance: license, 
+			hotelInstance: hotel, 
+			userInstanceList: usersList, 
+			roomCategoryInstanceList: roomCategoryList,
+			reservationInstanceList: reservationList
+		]
 	}
 
 	def createUser() {

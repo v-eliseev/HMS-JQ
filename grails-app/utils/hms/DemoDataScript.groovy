@@ -68,23 +68,34 @@ class DemoDataScript {
 			).save()
 
 		rc.addToRoomFeatures(rf).save()
-		RoomCategoryRoomFeature.create(rc, rf)
-		
+		rf.addToRoomCategories(rc).save()
 
+		Room r = new Room(
+			name: "Room 401",
+			roomCategory: rc,
+			description: "",
+			maxOccupants: 2
+			).save()
+
+		Reservation res = new Reservation(
+			fromDate: new Date() + 1,
+			toDate: new Date() + 7
+			).save()
 		
+		h.addToReservations(res)		
 			
+		r.addToReservations(res).save()
+		res.addToRooms(r).save()
+			
+		
+		
+		
 		new RateCode(
 				name: "Normal rate",
 				shortDescription: "",
 				description: ""
 				).save()
 
-		new Room(
-				name: "Room 401",
-				roomCategory: rc,
-				description: "",
-				maxOccupants: 2
-				).save()
 
 		TaxCode tc = new TaxCode(
 				name: "VAT 18%",

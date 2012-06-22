@@ -15,11 +15,14 @@
 
 		<div>
 			<h4>License</h4>
-			Key: ${fieldValue(bean: licenseInstance, field: "key")}<br>
-			Issued: <g:formatDate date="${licenseInstance.issued}"/><br>
-			Expires: <g:formatDate date="${licenseInstance.expires}"/><br>
-			Days left: ${licenseInstance.expires-licenseInstance.issued}
-			
+			Key:
+			${fieldValue(bean: licenseInstance, field: "key")}<br> Issued:
+			<g:formatDate date="${licenseInstance.issued}" />
+			<br> Expires:
+			<g:formatDate date="${licenseInstance.expires}" />
+			<br> Days left:
+			${licenseInstance.expires-licenseInstance.issued}
+
 			<h4>Hotel</h4>
 			<g:link controller="hotel" action="show" id="${hotelInstance.id}">
 				${fieldValue(bean: hotelInstance, field: "name")}
@@ -27,7 +30,8 @@
 
 			<h4>Room Categories</h4>
 			<ul>
-				<g:each in="${roomCategoryInstanceList}" status="i"	var="roomCategoryInstance">
+				<g:each in="${roomCategoryInstanceList}" status="i"
+					var="roomCategoryInstance">
 					<li><g:link controller="roomCategory" action="show"
 							id="${roomCategoryInstance.id}">
 							${fieldValue(bean: roomCategoryInstance, field: "name")}
@@ -35,7 +39,7 @@
 				</g:each>
 			</ul>
 			<g:link action="addRoomCategory">Add room category...</g:link>
-			
+
 			<h4>Users</h4>
 			<g:if test="${!userInstanceList.empty}">
 				<table>
@@ -80,6 +84,19 @@
 				<g:link action="createUser">New user...</g:link>
 			</g:if>
 		</div>
+
+		<h4>Reservations</h4>
+		<ul>
+			<g:each in="${reservationInstanceList}" status="i"
+				var="reservationInstance">
+				<li><g:link controller="reservation" action="show"
+						id="${reservationInstance.id}">
+						${fieldValue(bean: reservationInstance, field: "rooms")}
+					</g:link>(${reservationInstance.fromDate}--${reservationInstance.toDate}])</li>
+			</g:each>
+		</ul>
+		<g:link action="addReservation">Add reservation...</g:link>
+
 	</div>
 </body>
 </html>

@@ -7,7 +7,9 @@ class Room extends DomainBaseClass {
 	String description
 	Integer maxOccupants = 1
 	
-	static belongsTo = RoomCategory
+	static belongsTo = [RoomCategory, Room]
+	
+	static hasMany = [reservations: Reservation]
 		
     static constraints = {
 		name(blank:false)

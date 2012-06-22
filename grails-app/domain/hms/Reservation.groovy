@@ -12,7 +12,10 @@ class Reservation extends DomainBaseClass {
     //CancellationReason cancellationReason
 	String notes
 	
-	//static hasMany = [rooms:Room, customers:Customer, articles:Article]
+	// Do not need the string below as it is cascaded via RoomCategory->Room
+	// static belongsTo = Hotel  
+	
+	static hasMany = [rooms: Room]
 	
     static constraints = {
 		//distributionChannel(nullable:true)

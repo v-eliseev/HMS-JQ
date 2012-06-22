@@ -28,7 +28,7 @@ class Hotel extends DomainBaseClass {
 	String invoiceStartId
 	String invoiceSuffix
 
-	static hasMany = [roomCategories: RoomCategory]
+	static hasMany = [roomCategories: RoomCategory, reservations: Reservation]
 
 	License license
 	static belongsTo = License

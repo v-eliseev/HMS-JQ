@@ -19,7 +19,7 @@ class BootStrap {
 
 			case "development":
 				LicenseService licenseService = new LicenseService()
-				License license = licenseService.createDemoLicense()
+				License license = licenseService.createDemoLicense("WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6")
 				println "License key: " + license.key + "\n"
 				
 				AdminService adminService = new AdminService()

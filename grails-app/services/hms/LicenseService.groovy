@@ -46,9 +46,9 @@ def checkLicense(License license) {
 	valid
 }
 
-def createDemoLicense() {
+def createDemoLicense(String licenseKey = null) {
 	License newLicense = new License(
-			key: generateLicenseKey(),
+			key: licenseKey ? licenseKey : generateLicenseKey(),
 			issued: new Date(),
 			expires: new Date() + 30,
 			demoMode: true

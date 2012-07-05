@@ -108,7 +108,12 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'hms.auth.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.UserRole'
 grails.plugins.springsecurity.authority.className = 'hms.auth.Role'
-
+grails.plugins.springsecurity.useSecurityEventListener = true
+grails.plugins.springsecurity.logout.handlerNames =
+	['rememberMeServices',
+	 'securityContextLogoutHandler',
+	 'securityEventListener']
+	
 grails.resources.modules = {
 	core {
 		dependsOn 'jquery, jquery-ui'

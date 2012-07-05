@@ -1,10 +1,15 @@
+
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 // Place your Spring DSL code here
 beans = {
+
 	passwordEncoder(hms.auth.CustomPasswordEncoder)
+	
 	saltSource(hms.auth.CustomSaltSource)
+	
 	userDetailsService(hms.auth.CustomUserDetailsService)
+
 	authenticationProcessingFilter(hms.auth.CustomAuthenticationFilter){
 		def conf = SpringSecurityUtils.securityConfig
 		authenticationManager = ref('authenticationManager')
@@ -27,5 +32,6 @@ beans = {
 		preAuthenticationChecks = ref('preAuthenticationChecks')
 		postAuthenticationChecks = ref('postAuthenticationChecks')
 	}
-
+	
+	securityEventListener(hms.auth.CustomSecurityEventListener)
 }

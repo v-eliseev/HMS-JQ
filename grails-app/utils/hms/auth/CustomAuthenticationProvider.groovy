@@ -66,9 +66,6 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
 		def result = new CustomAuthenticationToken(userDetails,
 				authentication.credentials, licenseKey, authorities)
 		result.details = authentication.details
-
-		log.info 'User $userDetails.username for license $userDetails.licenseKey successfully logged in.'
-
 		result
 	}
 

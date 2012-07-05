@@ -36,7 +36,7 @@
 					<p>
 						<label for='license'><g:message
 								code="springSecurity.login.license.label" />:</label> <input type='text'
-							class='text_' name='j_licenseKey' id='license' />
+							class='text_' name='j_licenseKey' id='license' value='WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6' />
 					</p>
 				</div>
 

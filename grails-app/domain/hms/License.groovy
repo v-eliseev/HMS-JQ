@@ -1,6 +1,6 @@
 package hms
 
-import hms.auth.User
+import hms.auth.SecUser
 
 class License extends DomainBaseClass {
 
@@ -18,6 +18,8 @@ class License extends DomainBaseClass {
 		email nullable: true
 		expires nullable: true
 		issued nullable: true
+		owner nullable: true
+		hotel nullable: true
     }
 	
 	String key
@@ -25,8 +27,11 @@ class License extends DomainBaseClass {
 	Date expires
 	Date issued
 	boolean demoMode
-	
-	static hasMany = [users: User]
+	Owner owner
+
+	Hotel hotel
+
+	static hasMany = [users: SecUser]
 	
 	@Override
 	String toString() {

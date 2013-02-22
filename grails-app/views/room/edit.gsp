@@ -1,21 +1,28 @@
-<!DOCTYPE html> 
-<html>
+<g:applyLayout name="threeblocks">
 <head>
-	<title>Edit Room</title>
+<title><g:message code="title.admin.rooms" /></title>
+<r:require modules="togglebuttons, datepicker"/>
 </head>
-<body>
-<div class="body">
-<h3>Edit Room</h3>
-<g:form action="editRoom" id="${roomId}">
-<fieldset>
-	<legend>Room data</legend>
-	<label for="name">Name:</label>
-	<g:textField name="name" value="${roomName}"/>
-	<label for="roomCategory">RoomCategory:</label>
-	<g:select name="roomCategory" value="${roomCategory}" from="${roomCategories}" optionKey="id" optionValue="name"/>
-</fieldset>
-<g:submitButton name="editRoom" value="Save"></g:submitButton>
+
+<content tag="top"> 
+</content>
+
+<content tag="main"> 
+<legend>Room data</legend>
+<g:form class="form-horizontal" action="update" id="${roomInstance?.id}" method="POST">
+    <fieldset>
+        <g:render template="form"/>
+    </fieldset>
+    <div class="control-group">
+        <div class="controls">
+		    <button class="btn btn-primary" href="#">Update</button>
+		</div>
+	</div>
 </g:form>
-</div>
-</body>
-</html>
+</content>
+
+<content tag="sidemenu">
+<g:render template="/templates/adminNavigation"/>
+</content>
+
+</g:applyLayout>

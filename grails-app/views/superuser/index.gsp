@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="threeblocks">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<meta name="layout" content="main" />
-<title>Superuser page</title>
+<title><g:message code="title.superuser.index" /></title>
 </head>
-<body>
-	<div class="body">
-		<div class="nav" role="navigation">
-			<ul>
-				<li><g:link action="createStandardLicense">Create standard license</g:link></li>
-				<li><g:link action="showLicenses">Show licences</g:link></li>
-				<li><g:link action="showApplicationStatus">Show application status</g:link></li>
-			</ul>
-		</div>
-	</div>
-</body>
-</html>
+
+<content tag="top"> 
+</content>
+
+<content tag="main"> 
+</content>
+
+<content tag="sidemenu">
+	<li><g:link action="showLicenses">Show licences</g:link></li>
+	<li><g:link action="showApplicationStatus">Show application status</g:link></li>
+	<li><g:link action="showStatistics">Show statistics</g:link></li>
+	<li><g:link action="cleanup">Cleanup</g:link></li>
+</content>
+
+</g:applyLayout>

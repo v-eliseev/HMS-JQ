@@ -1,13 +1,12 @@
 package hms
 
 import grails.plugins.springsecurity.Secured;
-import hms.jq.BaseController;
 
 import org.springframework.dao.DataIntegrityViolationException
 
 
 //@Secured(['ROLE_SUPERUSER'])
-class LicenseController  extends BaseController {
+class LicenseController extends BaseController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 

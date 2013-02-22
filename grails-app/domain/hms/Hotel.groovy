@@ -30,11 +30,11 @@ class Hotel extends DomainBaseClass {
 
 	static hasMany = [roomCategories: RoomCategory, reservations: Reservation]
 
-	License license
+	//License license
 	static belongsTo = License
 	
 	static constraints = {
-		license nullable: false
+		//license nullable: false
 		name nullable: true
 		
 		phone nullable: true
@@ -56,11 +56,14 @@ class Hotel extends DomainBaseClass {
 		invoicePrefix nullable: true
 		invoiceStartId nullable: true
 		invoiceSuffix nullable: true
-		
+	}
+
+	static def getFor(License license) {
+		license.getHotel()
 	}
 	
 	@Override
 	String toString() {
-		name + "@" + license?.key
+		name 
 	}
 }

@@ -32,6 +32,9 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
+// DBConsole resources
+grails.resources.adhoc.patterns = ['/dbconsole/images/*', '/dbconsole/css/*', '/dbconsole/js/*'] 
+
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
@@ -55,16 +58,16 @@ grails.exceptionresolver.params.exclude = ['password']
 
 // set per-environment serverURL stem for creating absolute links
 environments {
-    production {
-        grails.serverURL = "http://www.changeme.com"
-    }
     development {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
+        //grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
     }
     test {
-        grails.serverURL = "http://localhost:8080/${appName}"
+        grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
     }
-
+    production {
+        grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
+    }
 }
 
 // log4j configuration
@@ -76,11 +79,19 @@ log4j = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 	
-	appenders {
-		appender new CustomLogAppender(
-			name: "dblogger"
-			)
-	}
+	// appenders {
+	// 	appender new CustomLogAppender(
+	// 		name: "dblogger"
+	// 		)
+	//}
+
+  appenders {
+    rollingFile name: "logFile", maxFileSize: 1024000, file: "hms-jq.log"
+  }
+
+  root {
+    error 'console', 'logFile'
+  }
 	
 //	root {
 //		console, dblogger
@@ -97,11 +108,21 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+    
+    error  'grails.app'
 
     warn   'org.mortbay.log'
 
-	info   'grails.app',
-		   'hms'
+	  debug     'grails.app.conf', 
+              'grails.app.bootstrap',
+              'grails.app.services.hms', 
+              'grails.app.domain.hms', 
+              'grails.app.domain.roomplanner', 
+              'grails.app.controllers.hms', 
+              'grails.app.controllers.roomplanner',
+              'grails.app.utils'
+
+    debug     'hms.DemoDataScript'
 }
 
 // Added by the Spring Security Core plugin:
@@ -114,8 +135,36 @@ grails.plugins.springsecurity.logout.handlerNames =
 	 'securityContextLogoutHandler',
 	 'securityEventListener']
 	
-grails.resources.modules = {
-	core {
-		dependsOn 'jquery, jquery-ui'
+//grails.gorm.default.mapping = {
+//	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
+//	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentInterval, class: org.joda.time.Interval
+//}	
+
+service.roomplanner.url = "${grails.roomplannerURL}/services/roomPlanner"
+cxf {
+	client {
+		roomPlannerServiceClient {
+			wsdl = "src/java/roomPlanner.wsdl" //only used for wsdl2java script target
+			//wsdlArgs = "-autoNameResolution"
+			outputDir = "src/java/ws"
+			clientInterface = ws.roomplanner.RoomPlannerService
+			serviceEndpointAddress = "${service.roomplanner.url}"
+			namespace = "ws.roomplanner"
+			receiveTimeout = 0 //no timeout
+			connectionTimeout = 0 //no timeout
+		}
 	}
+}
+
+grails {
+   mail {
+     host = "smtp.gmail.com"
+     port = 465
+     username = "vladislav.eliseev@gmail.com"
+     password = "zAN9uX3c"
+     props = ["mail.smtp.auth":"true",             
+              "mail.smtp.socketFactory.port":"465",
+              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+              "mail.smtp.socketFactory.fallback":"false"]
+   }
 }

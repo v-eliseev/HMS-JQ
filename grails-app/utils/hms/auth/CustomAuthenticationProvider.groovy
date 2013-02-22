@@ -32,7 +32,7 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
 		String licenseKey = authentication.licenseKey
 
 		String hql = '''\
-			from User u
+			from SecUser u
 			where u.license.key=:licenseKey
 			and u.username=:username'''
 
@@ -40,8 +40,8 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
 		def authorities
 
 		// use withTransaction to avoid lazy loading exceptions
-		User.withTransaction { status ->
-			User user = User.executeQuery(hql,
+		SecUser.withTransaction { status ->
+			SecUser user = SecUser.executeQuery(hql,
 					[licenseKey: licenseKey, username: username],
 					[max: 1])[0]
 

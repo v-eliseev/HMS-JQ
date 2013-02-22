@@ -22,9 +22,9 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User.withTransaction { status ->
+		SecUser.withTransaction { status ->
 
-			User user = User.findByUsernameAndLicense(username, licenseKey)
+			SecUser user = SecUser.findByUsernameAndLicense(username, licenseKey)
 			if (!user) throw new UsernameNotFoundException(
 				'User not found', username)
 

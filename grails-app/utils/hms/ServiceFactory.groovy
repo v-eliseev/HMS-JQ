@@ -1,6 +1,5 @@
 package hms
 
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 /**
  * 
@@ -8,14 +7,16 @@ import org.codehaus.groovy.grails.commons.ApplicationHolder
  *
  */
 class ServiceFactory {
-	
+
+	static private mainContext
 	static private serviceFactory = null
 	
 	private ServiceFactory() {
 	}
 	
-	static ServiceFactory getServiceFactory() {
+	static ServiceFactory getServiceFactory(Object ctx) {
 		if (serviceFactory== null) {
+			mainContext = ctx
 			serviceFactory = new ServiceFactory() 
 		}
 		serviceFactory
@@ -27,9 +28,7 @@ class ServiceFactory {
 	 * @return
 	 */
 	def getServiceByName(serviceName) {
-		//def grailsApplication
-		//grailsApplication.getMainContext().getBean(serviceName)
-		ApplicationHolder.getApplication().getMainContext().getBean(serviceName)
+		mainContext.getBean(serviceName)
 	}
 
 	/**

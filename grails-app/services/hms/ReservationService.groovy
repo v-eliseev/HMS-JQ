@@ -1,10 +1,12 @@
 package hms
 
-import hms.Reservation
+class ReservationService {
 
-class ReservationService extends CRUDService {
+	def getReservation = { id ->
+		Reservation.get(id)
+	}
 
-	def getDomainClass() {
-		Reservation.class
+	def getReservations(License license, Date fromDate, Date toDate) {
+		Reservation.getAllFor(license)
 	}
 }

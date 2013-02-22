@@ -5,16 +5,23 @@ class Room extends DomainBaseClass {
 	String name
 	RoomCategory roomCategory
 	String description
-	Integer maxOccupants = 1
+	Integer adults = 1
 	
-	static belongsTo = [RoomCategory, Reservation]
+	static belongsTo = [RoomCategory] //, Reservation]
 	
-	static hasMany = [reservations: Reservation]
+//	static hasMany = [reservations: Reservation]
 		
     static constraints = {
 		name(blank:false)
 		roomCategory(nullable:false)
 		description(nullable:true)
-		maxOccupants(min:0)
+		adults(min:0)
     }
+	
+	static def getAllFor(License license) {
+		def hotel = license.getHotel()
+		def result = (hotel.roomCategories*.rooms).flatten()
+		result	
+	}
+
 }

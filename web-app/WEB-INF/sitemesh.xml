@@ -9,6 +9,6 @@
     </page-parsers>
 
     <decorator-mappers>
-		<mapper class="hms.MobileDecoratorMapper" />
+        <mapper class="org.codehaus.groovy.grails.web.sitemesh.GrailsLayoutDecoratorMapper" />
     </decorator-mappers>
 </sitemesh>

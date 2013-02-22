@@ -1,8 +1,8 @@
 package hms
 
-class RoomCategoryService extends CRUDService {
+class RoomCategoryService {
 	
-	def getDomainClass() {
-		RoomCategory.class
-	}
+	def getRoomCategory = { id ->
+		RoomCategory.get(id)
+	}
 }

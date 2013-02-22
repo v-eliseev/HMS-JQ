@@ -8,6 +8,8 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
+grails.server.port.http = 9090
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -35,19 +37,47 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-         runtime 'mysql:mysql-connector-java:5.1.19'
+        runtime 'mysql:mysql-connector-java:5.1.21'
+//		build 'org.jadira.usertype:usertype.jodatime:2.0.1'
+        build 'org.freemarker:freemarker:2.3.19'
+
+        test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
     plugins {
+        compile ":lesscss-resources:1.3.1"
+        compile ":cxf:1.1.0"
+        compile ":cxf-client:1.5.0"
+        runtime ":mail:1.0.1"
+        compile ":quartz:1.0-RC5"
+
+        runtime ":jquery:1.8.3"
+        compile ":jquery-ui:1.8.24"
+        compile ":jquery-mobile:1.1.0.5"
+
+        runtime ":resources:1.2.RC2"
+
+        compile ":spring-security-core:1.2.7.3"
+        compile ":spring-mobile:0.4"
+
         runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.7.1"
-        runtime ":resources:1.1.6"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        build ":tomcat:$grailsVersion"
+        runtime ":database-migration:1.3.2"
+
+        compile ':cache:1.0.1'
+
+        build   ":tomcat:$grailsVersion"
+
+        test(":spock:0.7") {
+            exclude "spock-grails-support"
+        }
+        test ":code-coverage:1.2.5"
+
+        compile ":codenarc:0.18.1"
     }
 }

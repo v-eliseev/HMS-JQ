@@ -1,16 +1,14 @@
 package hms
 
-import hms.CRUDService
-import hms.Hotel
+class HotelService {
 
-class HotelService extends CRUDService {
-
-	def getDomainClass() {
-		Hotel.class
+	def createRandomHotelData(License license) {
+		license.hotel = DemoDataScript.generateRandomData(license)
+		license.save()
 	}
 	
 	def createHotel(String name, License license) {
-		def newHotel = new Hotel(name: name, license: license)
+		def newHotel = new Hotel(name: name)
 		if (!newHotel.save()) {
 			newHotel.errors.each { log.error(it) }
 			throw Exception('Hotel was not created')
@@ -22,8 +20,24 @@ class HotelService extends CRUDService {
 		newHotel
 	}
 	
-	def list(License license) {
-		Hotel.findByLicense(license)
+	def get(License license) {
+		Hotel.getFor(license)
+	}
+
+	def show(def objectId) {
+		Hotel.get(objectId)
+	}
+
+	def listRooms(License license) {
+		Room.getAllFor(license)
+	}
+
+	def listRoomCategories(License license) {
+		RoomCategory.getAllFor(license)
+	}
+
+	def listReservations(License license) {
+		Reservation.getAllFor(license)
 	}
 
 }

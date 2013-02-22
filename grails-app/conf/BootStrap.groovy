@@ -6,39 +6,49 @@ import hms.AdminService
 import hms.DemoDataScript
 import hms.License
 import hms.LicenseService
-import hms.auth.User
-import hms.auth.UserRole
+import hms.auth.SecUser
+import hms.auth.SecUserRole
 
 class BootStrap {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass())
+	//protected final Logger log = LoggerFactory.getLogger(getClass())
 	
 	def init = {  servletContext ->
 
 		switch (GrailsUtil.environment) {
 
 			case "development":
+			try {
 				LicenseService licenseService = new LicenseService()
 				License license = licenseService.createDemoLicense("WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6")
-				println "License key: " + license.key + "\n"
+				log.info("Demo license created: " + license.key)
 				
 				AdminService adminService = new AdminService()
 
 				def adminRole = adminService.getAdminRole()
 				def userRole = adminService.getUserRole()
-				def superuserRole = adminService.getRole('ROLE_SUPERUSER')
+				//def superuserRole = adminService.getRole('ROLE_SUPERUSER')
+				log.info("Roles created")
 				
-				User adminUser = adminService.createUser("admin", "admin", license)
-				UserRole.create(adminUser, adminRole)
+				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license)
+				SecUserRole.create(adminUser, adminRole)
+				// adminUser.addToAuthorities(adminRole)
+				// adminUser.save()
+				log.info("Admin user for license " + license.key + " created")
 
-				User userUser = adminService.createUser("user", "test", license)
-				UserRole.create(userUser, userRole)
+				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license)
+				SecUserRole.create(userUser, userRole)
+				// userUser.addToAuthorities(userRole)
+				// userUser.save()
+				log.info("Normal user for license " + license.key + " created")
 
-				User superUser = adminService.createUser("super", "user", license)
-				UserRole.create(superUser, superuserRole)
-
-				DemoDataScript.createDemoData(license)
+				// DemoDataScript.generateRandomData(license)
+				
 				break
+			} catch (Exception e) {
+				log.error("Error executing BootStrap", e)
+			}
+				
 		}
 		
 		log.info("Application started...")

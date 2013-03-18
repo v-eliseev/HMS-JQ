@@ -1,7 +1,7 @@
 package hms
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
-import net.sourceforge.wurfl.core.Device
+//import net.sourceforge.wurfl.core.Device
 import org.apache.commons.lang.StringUtils
 import org.codehaus.groovy.grails.web.context.ServletContextHolder
 import org.springframework.web.context.support.WebApplicationContextUtils
@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext
  * @author gdaley
  */
 class MobileService {
-	def wurflManager
+	//def wurflManager
 
 	def isMobileUser(HttpServletRequest request) {
 		boolean isMobile = false
@@ -53,7 +53,7 @@ class MobileService {
 
 	def isMobileBrowser(HttpServletRequest request) {
 		def device = request.getAttribute('currentDevice')
-		boolean detected = device.isMobile()
+		boolean detected = false // TODO device.isMobile()
 		if (detected) {
 			def userAgent = request.getHeader('User-Agent')
 			if (userAgent?.contains('iPad')) { // skip iPads

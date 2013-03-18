@@ -113,16 +113,18 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-	  debug     'grails.app.conf', 
-              'grails.app.bootstrap',
-              'grails.app.services.hms', 
-              'grails.app.domain.hms', 
-              'grails.app.domain.roomplanner', 
-              'grails.app.controllers.hms', 
-              'grails.app.controllers.roomplanner',
-              'grails.app.utils'
+	  debug  'grails.app.conf', 
+           'grails.app.bootstrap',
+           'grails.app.services.hms', 
+           'grails.app.domain.hms', 
+           'grails.app.domain.roomplanner', 
+           'grails.app.controllers.hms', 
+           'grails.app.controllers.roomplanner',
+           'grails.app.utils'
+    
+    debug  'org.apache.cxf'
 
-    debug     'hms.DemoDataScript'
+    debug  'hms.DemoDataScript'
 }
 
 // Added by the Spring Security Core plugin:
@@ -147,9 +149,10 @@ cxf {
 			wsdl = "src/java/roomPlanner.wsdl" //only used for wsdl2java script target
 			//wsdlArgs = "-autoNameResolution"
 			outputDir = "src/java/ws"
+      namespace = "ws.roomplanner"
+
 			clientInterface = ws.roomplanner.RoomPlannerService
 			serviceEndpointAddress = "${service.roomplanner.url}"
-			namespace = "ws.roomplanner"
 			receiveTimeout = 0 //no timeout
 			connectionTimeout = 0 //no timeout
 		}

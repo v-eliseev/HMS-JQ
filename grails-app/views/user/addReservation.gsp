@@ -12,11 +12,30 @@
 <content tag="main">
     <div>
         <g:form action="doAddReservation" method="POST">
-            <ul>
-                <li>From:</li>
-                <li>To:</li>
-                <li>Adults:</li>
-            </ul>
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="From" />:
+                </label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter from date" value="${reservationInstance?.fromDate}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="To" />:
+                </label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter to date" value="${reservationInstance?.toDate}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="Adults" />:
+                </label>
+                <div class="controls">
+                    <input type="text" placeholder="Enter adults" value="${reservationInstance?.adults}">
+                </div>
+            </div>
             <g:remoteLink action="checkReservation"
                 params="[from: '2012-07-29', to: '2012-07-31', adults: 2]" onSuccess="alert(data.status)">Check!</g:remoteLink>
                 <!-- \$('#checkReservationStatus').val(data.status) -->

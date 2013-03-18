@@ -10,10 +10,10 @@
 
 <div class="row-fluid show-grid">
 <div class="span2">
-    <a href="#" class="btn btn-primary">
+    <g:link controller="user" action="addReservation" class="btn btn-primary">
         <i class="icon-th-list icon-white"></i>
-        <span><strong>Reservations</strong></span>            
-    </a>
+        <span><strong>New Reservation</strong></span>            
+    </g:link>
 </div>
 <div class="span1">
     <a href="#" class="btn btn-primary">

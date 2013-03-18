@@ -12,7 +12,7 @@ import ws.roomplanner.Plan as PlanDto
 
 class RoomPlannerService {
 
-	final ws.roomplanner.RoomPlannerService roomPlannerServiceClient
+	def roomPlannerServiceClient
 	
 	def getSavedPlan(License license) {
 		Plan.findByLicenseId(license.id)
@@ -50,7 +50,17 @@ class RoomPlannerService {
 
 	protected Plan createNewPlan(License license) {
 		PlanDto planSoap = null
+		
+		// if (roomPlannerServiceClient == null) {
+		// 	log.debug("Client is null")
+		// 	throw new Exception("Client is null")
+		// }
+		// else {
+		// 	log.debug("Client is OK")
+		// }
+
 		try {
+
 			def roomCategories = RoomCategory.getAllFor(license)
 			def rooms = Room.getAllFor(license)
 			def reservations = Reservation.getAllFor(license)

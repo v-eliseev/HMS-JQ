@@ -13,6 +13,8 @@ class UserController extends BaseController {
 	 */
 	def afterInterceptor = [action: this.&handleMobile]
 
+	def roomPlannerService
+
 	def index() {
 		License license = getLicense(request)
 
@@ -39,6 +41,7 @@ class UserController extends BaseController {
 		def from = params.from
 		def to = params.to
 		def adults = params.int('adults')
+
 		
 		def jsonData = [status: 'OK']
 		

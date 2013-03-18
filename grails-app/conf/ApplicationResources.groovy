@@ -34,9 +34,9 @@ modules = {
   }
 
   daterangepicker {
-    dependsOn 'jquery'
+    dependsOn 'bootstrap'
 
-    resource url:'css/daterangepicker/daterangepicker.css', attrs:[rel: "stylesheet/less", type:'css']
+    resource url:'css/daterangepicker/daterangepicker.css'
 
     resource url:'js/daterangepicker/date.js'
     resource url:'js/daterangepicker/daterangepicker.js'

@@ -18,17 +18,19 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
+    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
+
         grailsPlugins()
         grailsHome()
         grailsCentral()
+
+        //mavenLocal()
         mavenCentral()
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
-        //mavenCentral()
-        //mavenLocal()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -37,19 +39,19 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'mysql:mysql-connector-java:5.1.21'
-//		build 'org.jadira.usertype:usertype.jodatime:2.0.1'
+        runtime 'mysql:mysql-connector-java:5.1.22'
+		//build 'org.jadira.usertype:usertype.jodatime:2.0.1'
         build 'org.freemarker:freemarker:2.3.19'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
     plugins {
-        compile ":lesscss-resources:1.3.1"
+        compile (":lesscss-resources:1.3.3")
         compile ":cxf:1.1.0"
-        compile ":cxf-client:1.5.0"
+        compile ":cxf-client:1.5.2"
         runtime ":mail:1.0.1"
-        compile ":quartz:1.0-RC5"
+        compile ":quartz:1.0-RC6"
 
         runtime ":jquery:1.8.3"
         compile ":jquery-ui:1.8.24"
@@ -58,7 +60,7 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.2.RC2"
 
         compile ":spring-security-core:1.2.7.3"
-        compile ":spring-mobile:0.4"
+        //compile ":spring-mobile:0.4"
 
         runtime ":hibernate:$grailsVersion"
 

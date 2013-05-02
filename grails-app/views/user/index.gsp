@@ -1,6 +1,7 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
+<r:require module="daterangepicker"/>
 </head>
 
 <content tag="top">
@@ -10,7 +11,7 @@
 
 <div class="row-fluid show-grid">
 <div class="span2">
-    <g:link controller="user" action="addReservation" class="btn btn-primary">
+    <g:link fragment="addReservation" class="btn btn-primary" data-toggle="modal">
         <i class="icon-th-list icon-white"></i>
         <span><strong>New Reservation</strong></span>            
     </g:link>
@@ -63,6 +64,78 @@
     </ul>
 </div>
 </div>
+
+<!-- Modal Add Reservation -->
+<div id="addReservation" class="modal hide fade" tabindex="-1" role="dialog" style="display: none;">
+    <g:form id="modal-form" action="doAddReservation" method="POST">
+    <div class="modal-header">
+        <h3>Add reservation...</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="From" />:
+                </label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-calendar"></i></span>
+                        <input type="text" name="daterange" id="daterange" />
+                    </div>                    
+                </div>
+            </div>
+%{--             <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="From" />:
+                </label>
+                <div class="controls">
+                    <input name="fromDate" type="text" class="datepicker" placeholder="Enter from date" value="${reservationInstance?.fromDate}">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="To" />:
+                </label>
+                <div class="controls">
+                    <input id="toDate" name="toDate" type="text" class="datepicker" placeholder="Enter to date" value="${reservationInstance?.toDate}">
+                </div>
+            </div>
+ --}%            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="Adults" />:
+                </label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-user"></i></span>
+                        <input name="adults" type="text" placeholder="Enter adults" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    <g:message code="user.name.label" default="RoomCategory" />:
+                </label>
+                <div class="controls">
+                    <g:select name="roomCategory" from="${roomCategoryInstanceList}" optionKey="id" optionValue="name"/>
+                </div>
+            </div>
+            <g:remoteLink action="checkReservation"
+                params="[from: '2012-07-29', to: '2012-07-31', adults: 2]" onSuccess="alert(data.status)">Check!</g:remoteLink>
+                <!-- \$('#checkReservationStatus').val(data.status) -->
+            <div id="checkReservationStatus"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+    </g:form>
+</div>
+<r:script>
+$('#daterange').daterangepicker();
+</r:script>
+<!-- End Add Reservation -->
+
 </content>
 
 <content tag="sidemenu">

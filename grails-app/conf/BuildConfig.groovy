@@ -1,4 +1,4 @@
-grails.project.work.dir = "D:/Grails/work/HMS-JQ"
+grails.project.work.dir = "~/Grails/work/HMS-JQ"
 
 grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
@@ -39,7 +39,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'mysql:mysql-connector-java:5.1.22'
+        runtime 'mysql:mysql-connector-java:5.1.25'
 		//build 'org.jadira.usertype:usertype.jodatime:2.0.1'
         build 'org.freemarker:freemarker:2.3.19'
 
@@ -48,10 +48,10 @@ grails.project.dependency.resolution = {
 
     plugins {
         compile (":lesscss-resources:1.3.3")
-        compile ":cxf:1.1.0"
-        compile ":cxf-client:1.5.2"
+        compile ":cxf:1.1.1"
+        compile ":cxf-client:1.5.3"
         runtime ":mail:1.0.1"
-        compile ":quartz:1.0-RC6"
+        compile ":quartz:1.0-RC7"
 
         runtime ":jquery:1.8.3"
         compile ":jquery-ui:1.8.24"
@@ -69,7 +69,7 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        runtime ":database-migration:1.3.2"
+        runtime ":database-migration:1.3.3"
 
         compile ':cache:1.0.1'
 
@@ -78,8 +78,8 @@ grails.project.dependency.resolution = {
         test(":spock:0.7") {
             exclude "spock-grails-support"
         }
-        test ":code-coverage:1.2.5"
+        test ":code-coverage:1.2.6"
 
-        compile ":codenarc:0.18.1"
+        //compile ":CodeNarc:0.18.1"
     }
 }

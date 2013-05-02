@@ -215,7 +215,7 @@ class DemoDataScript {
 	
 	static def generateRandomData(License license) {
 		int NUMBER_OF_ROOMS = 15
-		int NUMBER_OF_RESERVATIONS = 30
+		int NUMBER_OF_RESERVATIONS = 12
 		
 		def today = new DateTime()
 

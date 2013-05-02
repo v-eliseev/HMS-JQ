@@ -18,11 +18,11 @@ class SOAPCallController extends BaseController {
 		
 		Plan plan = roomPlannerService.getCurrentPlan(license)
 		
-		def startDate = new DateTime(2013, 03, 15, 12, 0, 0, 0)
-		def endDate = new DateTime(2013, 03, 30, 12, 0, 0, 0)
+		def startDate = new DateTime()
+		def endDate = startDate.plusDays(7)
 		
 		def planningWindow = []
-		for (DateTime date : new DateTimeRange(startDate.minusDays(2), endDate.plusDays(7))) {
+		for (DateTime date : new DateTimeRange(startDate.minusDays(7), endDate.plusDays(2))) {
 			planningWindow << date
 		}
 		
@@ -35,13 +35,14 @@ class SOAPCallController extends BaseController {
 
 		Plan plan = roomPlannerService.deleteSavedPlan(license)
 
-		def startDate = new DateTime(2013, 03, 15, 12, 0, 0, 0)
-		def endDate = new DateTime(2013, 03, 30, 12, 0, 0, 0)
+		def startDate = new DateTime()
+		def endDate = startDate.plusDays(7)
 		
 		def planningWindow = []
-		for (DateTime date : new DateTimeRange(startDate.minusDays(2), endDate.plusDays(7))) {
+		for (DateTime date : new DateTimeRange(startDate.minusDays(7), endDate.plusDays(2))) {
 			planningWindow << date
 		}
+
 		render(view: 'index', model: [planningWindow: planningWindow, rooms: Room.getAllFor(license), plan: plan])
 	}
 }

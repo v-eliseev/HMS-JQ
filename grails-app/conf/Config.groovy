@@ -122,7 +122,7 @@ log4j = {
            'grails.app.controllers.roomplanner',
            'grails.app.utils'
     
-    debug  'org.apache.cxf'
+    error  'org.apache.cxf'
 
     debug  'hms.DemoDataScript'
 }

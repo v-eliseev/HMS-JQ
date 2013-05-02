@@ -1,6 +1,10 @@
-modules = {
+  modules = {
   application {
     resource url:'js/application.js'
+  }
+
+  utils {
+    resource url:'js/utils.js'
   }
 
   core {
@@ -52,9 +56,9 @@ modules = {
    datepicker {
      dependsOn 'bootstrap'
 
-  //   resource url:'less/datepicker/datepicker.less', attrs:[rel: "stylesheet/less", type:'css']
+     resource url:'less/datepicker/datepicker.less', attrs:[rel: "stylesheet/less", type:'css']
 
-  //   resource url:'js/datepicker/bootstrap-datepicker.js'
+     resource url:'js/datepicker/bootstrap-datepicker.js'
   //   // TODO add locales
 
   }

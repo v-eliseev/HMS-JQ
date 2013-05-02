@@ -2,7 +2,7 @@ package hms
 
 import hms.Hotel
 import hms.License
-import grails.converters.*
+import grails.converters.JSON
 
 class UserController extends BaseController {
 
@@ -14,6 +14,7 @@ class UserController extends BaseController {
 	def afterInterceptor = [action: this.&handleMobile]
 
 	def roomPlannerService
+	def reservationService
 
 	def index() {
 		License license = getLicense(request)
@@ -34,6 +35,17 @@ class UserController extends BaseController {
 	}
 	
 	def doAddReservation() {
+		License license = getLicense(request)
+
+		log.debug("Modal form parameters: ${params}")
+
+		def fromDate = new Date(params.fromDate)
+		def toDate = new Date(params.toDate)
+		def adults = params.int('adults')
+		def roomCategoryId = params.long('roomCategoryId')
+
+		reservationService.createReservation(license, fromDate, toDate, roomCategoryId)
+
 		redirect action: 'index'
 	}
 	

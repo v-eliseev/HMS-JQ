@@ -9,6 +9,8 @@ import ws.roomplanner.RoomCategory as RoomCategoryDto
 import ws.roomplanner.RoomAssignment as RoomAssignmentDto
 import ws.roomplanner.Plan as PlanDto
 
+import javax.xml.ws.soap.SOAPFaultException
+
 
 class RoomPlannerService {
 
@@ -25,7 +27,6 @@ class RoomPlannerService {
 		}
 		else {
 			currentPlan = createNewPlan(license)
-			currentPlan.save(flush: true)
 		}
 		currentPlan
 	}
@@ -33,6 +34,8 @@ class RoomPlannerService {
 	def deleteSavedPlan(License license) {
 		Plan plan = getSavedPlan(license)
 		if (plan != null) {
+			log.debug("Delete saved plan...")
+			
 			plan.delete(flush: true)
 			Hotel h = license.hotel
 			license.hotel = null
@@ -42,10 +45,9 @@ class RoomPlannerService {
 			license.hotel = DemoDataScript.generateRandomData(license)
 			license.save(flush: true)
 
+			log.debug("...succeed")
 		}
 		plan = createNewPlan(license)
-		plan.save()
-
 	}
 
 	protected Plan createNewPlan(License license) {
@@ -66,17 +68,17 @@ class RoomPlannerService {
 			def reservations = Reservation.getAllFor(license)
 			def roomAssignments = []
 			
-			log.trace("Hotel data acquired...")
-			log.trace("RoomCategories: " + roomCategories)
-			log.trace("Rooms: " + rooms)
-			log.trace("Reservations: " + reservations)
+			log.debug("Hotel data acquired...")
+			log.debug("RoomCategories: " + roomCategories)
+			log.debug("Rooms: " + rooms)
+			log.debug("Reservations: " + reservations)
 
 			List<RoomCategoryDto> dtoRoomCategories = roomCategories.collect { roomCategory ->
 				new RoomCategoryDto(
 					id: roomCategory.id
 				)
 			}
-			log.trace("Room Categories: " + dtoRoomCategories)
+			log.debug("Room Categories: " + dtoRoomCategories)
 			
 			List<RoomDto> dtoRooms = rooms.collect { room ->
 				new RoomDto(
@@ -85,7 +87,7 @@ class RoomPlannerService {
 					adults: room.adults
 				)
 			}
-			log.trace("Rooms: " + dtoRooms)
+			log.debug("Rooms: " + dtoRooms)
 			
 			List<ReservationDto> dtoReservations = reservations.collect { reservation ->
 				new ReservationDto(
@@ -95,16 +97,18 @@ class RoomPlannerService {
 					bookingInterval: reservation.fromDate.getTime() + "-" + reservation.toDate.getTime()
 				)
 			}
-			log.trace("Reservations: " + dtoReservations)
+			log.debug("Reservations: " + dtoReservations)
 			
 			List<RoomAssignmentDto> dtoRoomAssignments = []
 			
 			log.debug("RoomPlanner call..")
 			planSoap = roomPlannerServiceClient.doPlan(dtoRooms, dtoRoomCategories, dtoReservations, dtoRoomAssignments)
 			log.debug("...done")
-		} catch (Exception e) {
-			log.error("Error calling RoomPlanner", e)
+		} catch (SOAPFaultException e) {
+			log.error("Error calling RoomPlanner" + e.message)
 		}
+
+		log.debug("PlanSOAP:" + planSoap)
 
 		Plan plan = new Plan()
 		plan.licenseId = license.id
@@ -122,6 +126,7 @@ class RoomPlannerService {
 						).save()
 					)
 		}
+		plan.save(flush: true)
 		plan
 	}
 }

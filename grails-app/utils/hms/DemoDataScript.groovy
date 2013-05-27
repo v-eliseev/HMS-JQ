@@ -270,6 +270,11 @@ class DemoDataScript {
 			).save()
 			rc.addToRooms(r)
 		}
+
+		rcList.each() {
+			log.debug("RoomCategory: $it.id[$it.name]")
+			log.debug(it.rooms)
+		}
 		
 		// generate reservations
 		for (i in 1..NUMBER_OF_RESERVATIONS) {

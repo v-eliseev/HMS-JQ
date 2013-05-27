@@ -104,8 +104,14 @@ class RoomPlannerService {
 			log.debug("RoomPlanner call..")
 			planSoap = roomPlannerServiceClient.doPlan(dtoRooms, dtoRoomCategories, dtoReservations, dtoRoomAssignments)
 			log.debug("...done")
-		} catch (SOAPFaultException e) {
-			log.error("Error calling RoomPlanner" + e.message)
+		} 
+		catch (SOAPFaultException se) {
+			log.error("SOAPException calling RoomPlanner" + se.message)
+			throw new Exception(se)
+		}
+		catch (Exception e) {
+			log.error("Error calling RoomPlanner " + e.getCause())
+			throw new Exception(e)
 		}
 
 		log.debug("PlanSOAP:" + planSoap)

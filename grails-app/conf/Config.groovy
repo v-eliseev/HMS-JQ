@@ -155,6 +155,7 @@ cxf {
 			serviceEndpointAddress = "${service.roomplanner.url}"
 			receiveTimeout = 0 //no timeout
 			connectionTimeout = 0 //no timeout
+      allowChunking = true
 		}
 	}
 }

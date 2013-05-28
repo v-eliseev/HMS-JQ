@@ -20,8 +20,10 @@ class Room extends DomainBaseClass {
 	
 	static def getAllFor(License license) {
 		def hotel = license.getHotel()
-		def result = (hotel.roomCategories*.rooms).flatten()
-		result	
+		def result = hotel.roomCategories*.rooms
+		result.removeAll([null])
+		result.flatten()
+		result
 	}
 
 }

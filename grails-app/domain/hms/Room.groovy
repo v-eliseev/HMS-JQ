@@ -23,7 +23,6 @@ class Room extends DomainBaseClass {
 		def result = hotel.roomCategories*.rooms
 		result.removeAll([null])
 		result.flatten()
-		result
 	}
 
 }

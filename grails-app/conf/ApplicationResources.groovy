@@ -7,6 +7,16 @@
     resource url:'js/utils.js'
   }
 
+  // jquery {
+  //   resource url:'js/jquery/jquery-2.0.2.min.js'
+  // }
+
+  // jquery-ui {
+  //   dependsOn 'jquery'
+
+  //   resource url:'js/jquery-ui/'
+  // }
+
   core {
 	  dependsOn 'jquery, jquery-ui'
   }

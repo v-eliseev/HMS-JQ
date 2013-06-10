@@ -51,9 +51,9 @@ grails.project.dependency.resolution = {
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.5.3"
         runtime ":mail:1.0.1"
-        compile ":quartz:1.0-RC7"
+        compile ":quartz:1.0-RC8"
 
-        runtime ":jquery:1.8.3"
+        runtime ":jquery:1.10.0"
         compile ":jquery-ui:1.8.24"
         compile ":jquery-mobile:1.1.0.5"
 

@@ -1,10 +1,5 @@
 package hms
 
-import java.util.Calendar
-
-import hms.ConfirmationRequest;
-import hms.License
-
 import grails.converters.JSON
 
 class ConfirmationRequestService {
@@ -24,7 +19,7 @@ class ConfirmationRequestService {
 		
 		if (!cr.save()) {
 			cr.errors.each { log.error(it) }
-			throw Exception("Error creating ConfirmationRequest")
+			throw new Exception("Error creating ConfirmationRequest")
 		}
 
 		cr
@@ -45,7 +40,7 @@ class ConfirmationRequestService {
 		
 		if (!cr.save()) {
 			cr.errors.each { log.error(it) }
-			throw Exception("Error creating ConfirmationRequest")
+			throw new Exception("Error creating ConfirmationRequest")
 		}
 
 		cr

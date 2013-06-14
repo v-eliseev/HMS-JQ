@@ -38,6 +38,8 @@
 
 # "temporary" build files
 /target
+/target-eclipse
+/sql
 
 # other
 *.iws

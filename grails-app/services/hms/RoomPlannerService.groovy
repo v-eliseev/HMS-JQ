@@ -37,14 +37,14 @@ class RoomPlannerService {
 		if (plan != null) {
 			log.debug("Delete saved plan...")
 			
-			plan.delete(flush: true)
+			plan.delete()
 			Hotel h = license.hotel
 			license.hotel = null
-			license.save(flush: true)
-			h.delete(flush: true)
+			license.save()
+			h.delete()
 
 			license.hotel = DemoDataScript.generateRandomData(license)
-			license.save(flush: true)
+			license.save()
 
 			log.debug("...succeed")
 		}

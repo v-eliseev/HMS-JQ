@@ -172,3 +172,8 @@ grails {
               "mail.smtp.socketFactory.fallback":"false"]
    }
 }
+
+// jquery {
+//   sources = "jquery"
+//   version = "2.0.2"
+// }

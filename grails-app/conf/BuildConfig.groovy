@@ -10,6 +10,8 @@ grails.project.source.level = 1.6
 
 grails.server.port.http = 9090
 
+grails.plugin.location.'roomplanner-api' = '../roomplanner-api'
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -50,6 +52,9 @@ grails.project.dependency.resolution = {
         compile (":lesscss-resources:1.3.3")
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.5.3"
+
+        compile ":remoting:1.3"
+        
         runtime ":mail:1.0.1"
         compile ":quartz:1.0-RC8"
 

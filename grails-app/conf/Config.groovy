@@ -146,6 +146,8 @@ service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoa
 service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
 service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
 
+service.roomplanner.mode = "Hessian"
+
 cxf {
 	client {
 		roomPlannerServiceClient {

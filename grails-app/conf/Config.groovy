@@ -142,7 +142,10 @@ grails.plugins.springsecurity.logout.handlerNames =
 //	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentInterval, class: org.joda.time.Interval
 //}	
 
-service.roomplanner.url = "${grails.roomplannerURL}/services/roomPlanner"
+service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoap"
+service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
+service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
+
 cxf {
 	client {
 		roomPlannerServiceClient {
@@ -152,7 +155,7 @@ cxf {
       namespace = "ws.roomplanner"
 
 			clientInterface = ws.roomplanner.RoomPlannerService
-			serviceEndpointAddress = "${service.roomplanner.url}"
+			serviceEndpointAddress = "${service.roomplanner.soap.url}"
 			receiveTimeout = 0 //no timeout
 			connectionTimeout = 0 //no timeout
       allowChunking = true

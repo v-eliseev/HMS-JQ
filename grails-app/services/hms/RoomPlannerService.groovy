@@ -14,8 +14,11 @@ import javax.xml.ws.soap.SOAPFaultException
 
 class RoomPlannerService {
 
+	def grailsApplication
+
 	// SOAP client
 	def roomPlannerServiceClient
+	def roomPlannerHessianService
 	
 	def getSavedPlan(License license) {
 		Plan.findByLicenseId(license.id)

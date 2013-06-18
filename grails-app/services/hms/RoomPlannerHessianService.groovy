@@ -60,9 +60,9 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 	def callPlanner(def roomCategoriesDto, def roomsDto, def reservationsDto, def roomAssignmentsDto) {
         def plan
         try {
-            log.debug("RoomPlanner call..")
+            log.trace("RoomPlanner call..")
             plan = roomPlannerRemoteService.doPlan(roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
-            log.debug("...done")
+            log.trace("...done")
         } 
         catch (Exception e) {
             log.error("Exception calling RoomPlanner" + e.message)
@@ -72,7 +72,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 	}
 
 	def convertResponse(def license, def dtoPlan) {
-        log.debug("dtoPlan:" + dtoPlan)
+        log.trace("dtoPlan:" + dtoPlan)
 
         Plan plan = new Plan()
         plan.licenseId = license.id

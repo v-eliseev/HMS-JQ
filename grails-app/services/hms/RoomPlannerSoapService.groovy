@@ -28,7 +28,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 				id: roomCategory.id
 			)
 		}
-		log.debug("Room Categories: " + roomCategoriesDto)
+		log.trace("Room Categories: " + roomCategoriesDto)
 		
 		def roomsDto = rooms.collect { room ->
 			new RoomDto(
@@ -37,7 +37,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 				adults: room.adults
 			)
 		}
-		log.debug("Rooms: " + roomsDto)
+		log.trace("Rooms: " + roomsDto)
 		
 		def reservationsDto = reservations.collect { reservation ->
 			new ReservationDto(
@@ -47,7 +47,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 				bookingInterval: reservation.fromDate.getTime() + "-" + reservation.toDate.getTime()
 			)
 		}
-		log.debug("Reservations: " + reservationsDto)
+		log.trace("Reservations: " + reservationsDto)
 		
 		def roomAssignmentsDto = roomAssignments.collect { roomAssignment ->
 			new RoomAssignmentDto (
@@ -66,7 +66,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 	*/
 	def convertResponse(def license, def dtoPlan) {
 		
-		log.debug("dtoPlan:" + dtoPlan)
+		log.trace("dtoPlan:" + dtoPlan)
 
 		Plan plan = new Plan()
 		plan.licenseId = license.id
@@ -95,9 +95,9 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 	def callPlanner(def dtoRoomCategories, def dtoRooms, def dtoReservations, def dtoRoomAssignments) {
 		def plan
 		try {
-			log.debug("RoomPlanner call..")
+			log.trace("RoomPlanner call..")
 			plan = roomPlannerServiceClient.doPlan(dtoRooms, dtoRoomCategories, dtoReservations, dtoRoomAssignments)
-			log.debug("...done")
+			log.trace("...done")
 		} 
 		catch (SOAPFaultException se) {
 			log.error("SOAPException calling RoomPlanner" + se.message)

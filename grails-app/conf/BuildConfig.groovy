@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
     plugins {
         compile (":lesscss-resources:1.3.3")
         compile ":cxf:1.1.1"
-        compile ":cxf-client:1.5.3"
+        compile ":cxf-client:1.5.4"
 
         compile ":remoting:1.3"
         

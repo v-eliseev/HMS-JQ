@@ -10,7 +10,11 @@ grails.project.source.level = 1.6
 
 grails.server.port.http = 9090
 
-grails.plugin.location.'roomplanner-api' = '../roomplanner-api'
+def env = System.getProperty('grails.env')
+
+if (env in ['development', 'test']) {
+    grails.plugin.location.'roomplanner-api' = '../roomplanner-api'
+}
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -37,6 +41,10 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+
+        mavenRepo name: 'HMS',
+          root: 'http://192.168.0.35:8080/artifactory/HMS'
+
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -74,7 +82,7 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        runtime ":database-migration:1.3.3"
+        runtime ":database-migration:1.3.5"
 
         compile ':cache:1.0.1'
 
@@ -86,5 +94,10 @@ grails.project.dependency.resolution = {
         test ":code-coverage:1.2.6"
 
         compile ":codenarc:0.18.1"
+
+        if (env == 'jenkins') {
+            runtime "grails-roomplanner-api:grails-roomplanner-api:0.1"
+        }
+
     }
 }

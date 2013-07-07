@@ -50,8 +50,8 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         runtime 'mysql:mysql-connector-java:5.1.25'
-		//build 'org.jadira.usertype:usertype.jodatime:2.0.1'
-        build 'org.freemarker:freemarker:2.3.19'
+        build   'org.freemarker:freemarker:2.3.20'
+        compile 'joda-time:joda-time:2.2'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
@@ -96,7 +96,7 @@ grails.project.dependency.resolution = {
         compile ":codenarc:0.18.1"
 
         if (env == 'jenkins') {
-            runtime "grails-roomplanner-api:grails-roomplanner-api:0.1"
+            runtime "grails-roomplanner-api:grails-roomplanner-api:0.2"
         }
 
     }

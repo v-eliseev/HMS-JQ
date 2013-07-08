@@ -42,9 +42,10 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
 
-        mavenRepo name: 'HMS',
-          root: 'http://192.168.0.35:8080/artifactory/HMS'
-
+        if (env == 'jenkins') {
+            mavenRepo name: 'HMS',
+              root: 'http://192.168.0.35:8080/artifactory/HMS'
+        }
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -66,7 +67,7 @@ grails.project.dependency.resolution = {
         runtime ":mail:1.0.1"
         compile ":quartz:1.0-RC9"
 
-        runtime ":jquery:1.10.0"
+        runtime ":jquery:1.10.2"
         compile ":jquery-ui:1.8.24"
         compile ":jquery-mobile:1.1.0.5"
 
@@ -84,7 +85,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.3.5"
 
-        compile ':cache:1.0.1'
+        compile ':cache:1.1.1'
 
         build   ":tomcat:$grailsVersion"
 

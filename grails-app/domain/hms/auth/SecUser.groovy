@@ -10,8 +10,7 @@ class SecUser extends DomainBaseClass {
 	String username
 	String password // hashed
 
-	License license
-	static belongsTo = License
+	static belongsTo = [license: License]
 	
 	boolean enabled = true
 	boolean accountExpired = false

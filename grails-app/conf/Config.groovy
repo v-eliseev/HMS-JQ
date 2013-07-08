@@ -128,20 +128,26 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'hms.auth.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.UserRole'
-grails.plugins.springsecurity.authority.className = 'hms.auth.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
+grails.plugins.springsecurity.authority.className = 'hms.auth.SecRole'
 grails.plugins.springsecurity.useSecurityEventListener = true
 grails.plugins.springsecurity.logout.handlerNames =
 	['rememberMeServices',
 	 'securityContextLogoutHandler',
 	 'securityEventListener']
-	
-//grails.gorm.default.mapping = {
-//	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
-//	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentInterval, class: org.joda.time.Interval
-//}	
 
+// environments {
+//   development {
+//     grails.plugins.springsecurity.mock.active = true
+//     grails.plugins.springsecurity.mock.fullName = "Administrator"
+//     grails.plugins.springsecurity.mock.email = "admin@email.com"
+//     grails.plugins.springsecurity.mock.username =  "admin"
+//     grails.plugins.springsecurity.mock.roles = [ 'ROLE_USER', 'ROLE_ADMIN' ]
+//     grails.plugins.springsecurity.ipRestrictions = [ '/**': ['127.0.0.0/8', '::1/128'] ]
+//   }
+// }   
+	
 service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoap"
 service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
 service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"

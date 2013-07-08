@@ -61,7 +61,7 @@ class AdminService {
 		if (!license.demoMode) {
 			throw new Exception("Demo license is required")
 		}
-		SecUser newUser = createUser("admin", "admin", license)
+		SecUser newUser = createUser("admin", "admin", "", license)
 		newUser
 	}
 

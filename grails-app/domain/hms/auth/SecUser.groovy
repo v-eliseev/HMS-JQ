@@ -37,7 +37,7 @@ class SecUser extends DomainBaseClass {
 	Set<SecRole> getAuthorities() {
 		SecUserRole.findAllByUser(this).collect { it.role } as Set
 	}
-	
+
 	@Override
 	String toString() {
 		username + "@" + license?.key

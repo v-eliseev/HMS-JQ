@@ -8,7 +8,7 @@ import spock.lang.*
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(License)
-@Mock([License, SecUser, Hotel, Room, RoomCategory, Reservation])
+//@Mock([License, SecUser, Hotel, Room, RoomCategory, Reservation])
 class LicenseSpec extends Specification {
 
 	def licenseService

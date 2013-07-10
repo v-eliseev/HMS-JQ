@@ -5,7 +5,7 @@ import hms.License
 
 class SecUser extends DomainBaseClass {
 
-	transient springSecurityService
+	//transient springSecurityService
 	
 	String username
 	String password // hashed
@@ -36,6 +36,12 @@ class SecUser extends DomainBaseClass {
 
 	Set<SecRole> getAuthorities() {
 		SecUserRole.findAllByUser(this).collect { it.role } as Set
+	}
+
+	def beforeDelete = {
+		SecUserRole.withNewSession {
+			SecUserRole.findAllByUser(this)*.delete(flush:true)
+		}
 	}
 
 	@Override

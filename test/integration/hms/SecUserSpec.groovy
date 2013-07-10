@@ -7,8 +7,8 @@ import spock.lang.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(SecUser)
-@Mock([SecUser, SecRole, SecUserRole, License, Hotel, Room, RoomCategory, Reservation])
+//@TestFor(SecUser)
+//@Mock([SecUser, SecRole, SecUserRole, License, Hotel, Room, RoomCategory, Reservation])
 class SecUserSpec extends Specification {
 
 	def licenseService
@@ -27,7 +27,7 @@ class SecUserSpec extends Specification {
 			def license = licenseService.createDemoLicense()
 			def adminUser = adminService.createUser("admin", "admin", "admin@email.com", license)
 			def adminRole = adminService.getAdminRole()
-			SecUserRole.create(adminUser, adminRole)
+			SecUserRole.create(adminUser, adminRole, true)
 
 			assert License.list().size() == 1
 			assert Hotel.list().size() == 1
@@ -36,7 +36,8 @@ class SecUserSpec extends Specification {
 			assert SecUserRole.list().size() == 1
 
 		when:
-			adminUser.delete()
+			license.removeFromUsers(adminUser)
+			adminUser.delete(flush:true)
 
 		then:
 

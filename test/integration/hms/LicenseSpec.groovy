@@ -7,7 +7,7 @@ import spock.lang.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(License)
+//@TestFor(License)
 //@Mock([License, SecUser, Hotel, Room, RoomCategory, Reservation])
 class LicenseSpec extends Specification {
 
@@ -29,10 +29,13 @@ class LicenseSpec extends Specification {
 
 			assert License.list().size() == 1
 			assert Hotel.list().size() == 1
+			assert RoomCategory.list().size() > 0
+			assert Room.list().size() > 0
+			assert Reservation.list().size() > 0
 			assert SecUser.list().size() == 1
 
 		when:
-			license.delete()
+			license.delete(flush:true)
 
 		then:
 

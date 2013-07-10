@@ -12,7 +12,7 @@ class AdminService {
 		def hash = new CustomPasswordEncoder().encodePassword(password, license.key)
 		def newUser = new SecUser(username: username, password: hash, email: email, license: license)
 		if (!newUser.save())
-			throw new Exception('User was not created')
+		 	throw new Exception('User was not created')
 
 		license.addToUsers(newUser)
 		license.save()

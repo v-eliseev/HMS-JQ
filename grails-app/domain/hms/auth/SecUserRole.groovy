@@ -4,7 +4,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 
 class SecUserRole implements Serializable {
 
-	static belongsTo = [user: SecUser, role: SecRole]
+	SecUser user
+	SecRole role
+	//static belongsTo = [user: SecUser, role: SecRole]
 
 	boolean equals(other) {
 		if (!(other instanceof SecUserRole)) {

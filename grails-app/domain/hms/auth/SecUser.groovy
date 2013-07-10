@@ -5,7 +5,7 @@ import hms.License
 
 class SecUser extends DomainBaseClass {
 
-	//transient springSecurityService
+	transient springSecurityService
 	
 	String username
 	String password // hashed

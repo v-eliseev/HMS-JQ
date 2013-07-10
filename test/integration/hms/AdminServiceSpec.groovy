@@ -9,8 +9,8 @@ import spock.lang.*
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(AdminService)
-@Mock([SecUser, License, Hotel, RoomCategory, Room, Reservation])
+//@TestFor(AdminService)
+//@Mock([SecUser, License, Hotel, RoomCategory, Room, Reservation])
 class AdminServiceSpec extends Specification {
 
 	def licenseService

@@ -37,4 +37,8 @@ class License extends DomainBaseClass {
 	String toString() {
 		key
 	}
+
+	static mapping = {
+		sort key: 'asc'
+	}
 }

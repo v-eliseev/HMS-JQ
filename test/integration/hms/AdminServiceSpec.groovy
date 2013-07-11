@@ -38,6 +38,10 @@ class AdminServiceSpec extends Specification {
 			SecUser.list().size() == 3
 			license1.users.size() == 2
 			license2.users.size() == 1
+
+		cleanup:
+			license1.delete(flush:true)
+			license2.delete(flush:true)	
 	}
 
 	def 'Check users' () {
@@ -56,6 +60,10 @@ class AdminServiceSpec extends Specification {
 			adminService.checkUser("supervisor", "manager", license1) == false
 			adminService.checkUser("admin", "admin", license2) == true
 
+		cleanup:
+			license1.delete(flush:true)
+			license2.delete(flush:true)	
+
 	}
 
 	def 'Demo license creation check' () {
@@ -66,5 +74,8 @@ class AdminServiceSpec extends Specification {
 		then:
 			demoLicense != null
 			adminService.checkUser("admin", "admin", demoLicense) == true
+
+		cleanup:
+			demoLicense.delete(flush:true)
 	}
 }

@@ -46,5 +46,8 @@ class SecUserSpec extends Specification {
 			SecUser.list().size() == 0
 			SecRole.list().size() == 1
 			SecUserRole.list().size() == 0
+
+		cleanup:
+			license.delete(flush:true)
 	}
 }

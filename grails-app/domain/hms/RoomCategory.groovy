@@ -20,6 +20,10 @@ class RoomCategory extends DomainBaseClass {
 		//hotel(nullable: false)
 	}
 
+	static mapping = {
+		sort name: 'asc'
+	}
+
 //	Set<RoomFeature> getFeatures() {
 //		RoomCategoryRoomFeature.findAllByRoomCategory(this).collect { it.roomFeature } as Set
 //	}

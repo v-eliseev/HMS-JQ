@@ -32,6 +32,11 @@ class Reservation extends DomainBaseClass {
 		adults(nullable: false)
 		roomCategory(nullable: false)
     }
+
+   	static mapping = {
+		sort fromDate: 'asc'
+	}
+
 	
 	static def getAllFor(License license) {
 		def hotel = license.getHotel()

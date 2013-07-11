@@ -18,6 +18,10 @@ class Room extends DomainBaseClass {
 		adults(min:0)
     }
 	
+	static mapping = {
+		sort name: 'asc'
+	}
+
 	static def getAllFor(License license) {
 		def hotel = license.getHotel()
 		def result = hotel.roomCategories*.rooms

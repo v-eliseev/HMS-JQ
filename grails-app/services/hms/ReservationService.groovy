@@ -1,6 +1,8 @@
 package hms
 
 class ReservationService {
+		
+	def reservationStatusService
 
 	def getReservation = { id ->
 		Reservation.get(id)
@@ -10,16 +12,29 @@ class ReservationService {
 		Reservation.getAllFor(license)
 	}
 
-	def createReservation(License license, Date fromDate, Date toDate, int adults, Long roomCategoryId) {
+	def getCheckins(License license, Date forDate, Integer max_count = null) {
+		Reservation.findAllByLicenseAndStatusAndFromDateGreaterThanEquals(
+			license, reservationStatusService.getStatusPlanned(), forDate)
+	}
+
+	def getCheckouts(License license, Date toDate, Integer max_count = null) {
+		Reservation.getAllByLicenseAndStatusAndToDateGreaterThanEquals(
+			license, reservationStatusService.getStatusCheckedIn(), toDate)
+	}
+
+	def createReservation(License license, Date fromDate, Date toDate, int adults, RoomCategory roomCategory) {
 		def hotel = license.getHotel()
-		def roomCategory = RoomCategory.get(roomCategoryId)
+		def status = reservationStatusService.getStatusPlanned()
 		def reservation = new Reservation(
 				fromDate: fromDate,
 				toDate: toDate,
 				adults: adults,
-				roomCategory: roomCategory
+				roomCategory: roomCategory,
+				status: status
 			).save()
-		hotel.reservations.add(reservation)
-		// hotel.save()
+		hotel.addToReservations(reservation)
+		hotel.save()
+
+		reservation
 	}
 }

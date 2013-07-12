@@ -11,7 +11,7 @@ class Reservation extends DomainBaseClass {
 	Integer adults
 	RoomCategory roomCategory
 	
-	//ReservationStatus reservationStatus
+	ReservationStatus status
  	//DistributionChannel distributionChannel
     //ReservationMotive reservationMotive
     //ReservationType reservationType
@@ -25,12 +25,12 @@ class Reservation extends DomainBaseClass {
 		//distributionChannel(nullable:true)
 		//reservationMotive(nullable:true)
 		//reservationType(nullable:true) // TODO
-		//reservationStatus(nullable:true) // TODO
+		status nullable: false
 		//cancellationReason(nullable:true)
-		notes(nullable: true)
+		notes nullable: true
 		//hotel(nullable: false)
-		adults(nullable: false)
-		roomCategory(nullable: false)
+		adults nullable: false
+		roomCategory nullable: false
     }
 
    	static mapping = {

@@ -275,7 +275,12 @@ class DemoDataScript {
 			log.debug("RoomCategory: $it.id[$it.name]")
 			log.debug(it.rooms)
 		}
+
 		
+		def reservationStatus = new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
+		if (reservationStatus == null) {
+			throw new Exception("Reserevation status is null")
+		}
 		// generate reservations
 		for (i in 1..NUMBER_OF_RESERVATIONS) {
 			DateTime fromDate = new DateTime().minusDays(seed.nextInt(MAX_DURATION_DAYS))
@@ -292,8 +297,12 @@ class DemoDataScript {
 				fromDate: fromDate.toDate(),
 				toDate: toDate.toDate(),
 				roomCategory: rcList[seed.nextInt(rcList.size())],
-				adults: seed.nextInt(ADULTS_MAX)+1
+				adults: seed.nextInt(ADULTS_MAX)+1,
+				status: reservationStatus
 			).save()
+			if (r == null) {
+				throw new Exception("Reservation is null")
+			}
 			h.addToReservations(r)
 		}
 		

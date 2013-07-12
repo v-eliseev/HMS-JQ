@@ -73,6 +73,20 @@
 </div>
 <div class="span4">
     <legend>Check-in</legend>
+    <table class="table table-striped table-condensed">
+    <tbody>
+        <g:each in="${todayCheckinList}" status="i" var="checkinInstance">
+        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+        <td>
+            <span class="label">${i+1}</span>&nbsp;
+            <span>${checkinInstance.id}</span><br>
+            <span>${checkinInstance.fromDate}-${checkinInstance.toDate}</span><br>
+            <span>${checkinInstance.roomCategory.name} ${checkinInstance.adults} bed(s)</span>
+        </td>
+        </tr>
+        </g:each>
+    </tbody>
+    </table>
 </div>
 <div class="span4">
     <legend>Check-out</legend>
@@ -80,6 +94,15 @@
 </div>
 
 <div class="row-fluid show-grid">
+<div class="span4">
+    <legend>Booking plan</legend>
+</div>
+<div class="span4">
+    <legend>Statistics</legend>
+</div>
+<div class="span4">
+    <legend>Additional</legend>
+</div>
 </div>
 
 <r:script>

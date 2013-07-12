@@ -22,12 +22,16 @@ class UserController extends BaseController {
 		def hotel = license.hotel
 		def roomCategoryList = hotel.roomCategories
 		def reservationList = hotel.reservations
+		def checkinList = reservationService.getCheckins(license, new Date(), 5)
+		def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
 
 		[
 			licenseInstance: license,
 			hotelInstance: hotel,
 			roomCategoryInstanceList: roomCategoryList,
-			reservationInstanceList: reservationList
+			reservationInstanceList: reservationList,
+			todayCheckinList: checkinList,
+			todayCheckOutList: checkoutList
 		]
 	}
 	

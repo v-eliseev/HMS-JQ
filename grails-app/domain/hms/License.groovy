@@ -40,5 +40,6 @@ class License extends DomainBaseClass {
 
 	static mapping = {
 		sort key: 'asc'
+		sort users: 'asc'
 	}
 }

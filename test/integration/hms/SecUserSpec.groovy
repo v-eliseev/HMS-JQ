@@ -29,6 +29,10 @@ class SecUserSpec extends Specification {
 			def adminRole = adminService.getAdminRole()
 			SecUserRole.create(adminUser, adminRole, true)
 
+			assert license != null
+			assert adminUser != null
+			assert adminRole != null
+
 			assert License.list().size() == 1
 			assert Hotel.list().size() == 1
 			assert SecUser.list().size() == 1

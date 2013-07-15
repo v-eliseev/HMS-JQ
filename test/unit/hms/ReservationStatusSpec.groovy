@@ -14,6 +14,7 @@ class ReservationStatusSpec extends Specification {
 			ReservationStatus rs = new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
 		then:
 			ReservationStatus.list().size() == 1
+			ReservationStatus.list()[0].code == ReservationStatus.StatusCode.PLANNED
 		cleanup:
 			rs.delete(flush:true)
 	}
@@ -27,4 +28,5 @@ class ReservationStatusSpec extends Specification {
 		then:
 			ReservationStatus.list().size() == 0
 	}
+
 }

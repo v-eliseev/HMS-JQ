@@ -3,7 +3,7 @@ package hms
 class ReservationStatusService {
 
 	private def getStatus(ReservationStatus.StatusCode statusCode) {
-		ReservationStatus.findByCode(statusCode.value) ?: new ReservationStatus(code: statusCode).save()
+		ReservationStatus.findByCode(statusCode) ?: new ReservationStatus(code: statusCode).save()
 	}
 
 	def getStatusNew() {
@@ -24,6 +24,9 @@ class ReservationStatusService {
 
 	def getStatusCheckedOut() {
 		getStatus(ReservationStatus.StatusCode.CHECKED_OUT)
+	}
+	def getStatusNoShow() {
+		getStatus(ReservationStatus.StatusCode.NO_SHOW)
 	}
 	
 }

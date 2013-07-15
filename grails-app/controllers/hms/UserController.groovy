@@ -15,6 +15,7 @@ class UserController extends BaseController {
 
 	def roomPlannerService
 	def reservationService
+	def reservationStatusService
 
 	def index() {
 		License license = getLicense(request)
@@ -36,9 +37,6 @@ class UserController extends BaseController {
 	}
 	
 	def addReservation() {
-	}
-	
-	def doAddReservation() {
 		License license = getLicense(request)
 
 		log.debug("Modal form parameters: ${params}")
@@ -46,20 +44,33 @@ class UserController extends BaseController {
 		def fromDate = new Date(params.fromDate)
 		def toDate = new Date(params.toDate)
 		def adults = params.int('adults')
-		def roomCategoryId = params.long('roomCategoryId')
+		def roomCategory = RoomCategory.get(params.long('roomCategoryId'))
 
-		reservationService.createReservation(license, fromDate, toDate, roomCategoryId)
+		reservationService.createReservation(license, fromDate, toDate, roomCategory)
 
 		redirect action: 'index'
 	}
 	
 	def checkReservation() {
-		def from = params.from
-		def to = params.to
-		def adults = params.int('adults')
+		License license = getLicense(request)
 
+		def fromDate = new Date(params.fromDate)
+		def toDate = new Date(params.toDate)
+		def adults = params.int('adults')
+		def roomCategory = RoomCategory.findById(params.long('roomCategoryId'))
+
+		def reservation = new Reservation(
+			fromDate: fromDate,
+			toDate: toDate,
+			adults: adults,
+			roomCategory: roomCategory,
+			status: reservationStatusService.getStatusNew()
+		)
+
+		def roomAssignment = roomPlannerService.checkReservation(license, reservation)
 		
-		def jsonData = [status: 'OK']
+		def result = (roomAssignment != null) ? 'OK' : 'Not OK'
+		def jsonData = [status: result]
 		
 		render jsonData as JSON
 	}

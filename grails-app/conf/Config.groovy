@@ -109,6 +109,10 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
     
+    // Enable Hibernate SQL logging with param values
+    //trace  'org.hibernate.type'
+    //debug  'org.hibernate.SQL'
+
     error  'grails.app'
 
     warn   'org.mortbay.log'
@@ -123,6 +127,7 @@ log4j = {
            'grails.app.utils'
     
     error  'org.apache.cxf'
+
 
     debug  'hms.DemoDataScript'
 }

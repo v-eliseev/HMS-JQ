@@ -27,6 +27,9 @@ class LicenseSpec extends Specification {
 			def license = licenseService.createDemoLicense()
 			def user = adminService.createUser("admin", "admin", "admin@email.com", license)
 
+			assert license != null
+			assert user != null
+
 			assert License.list().size() == 1
 			assert Hotel.list().size() == 1
 			assert RoomCategory.list().size() > 0
@@ -45,5 +48,7 @@ class LicenseSpec extends Specification {
 			Room.list().size() == 0
 			Reservation.list().size() == 0
 			SecUser.list().size() == 0
+
+			
 	}
 }

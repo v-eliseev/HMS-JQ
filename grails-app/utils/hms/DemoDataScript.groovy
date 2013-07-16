@@ -277,13 +277,15 @@ class DemoDataScript {
 		}
 
 		
-		def reservationStatus = new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
+		def reservationStatus = ReservationStatus.findByCode(ReservationStatus.StatusCode.PLANNED) ?: new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
 		if (reservationStatus == null) {
 			throw new Exception("Reserevation status is null")
 		}
 		// generate reservations
 		for (i in 1..NUMBER_OF_RESERVATIONS) {
-			DateTime fromDate = new DateTime().minusDays(seed.nextInt(MAX_DURATION_DAYS))
+			DateTime fromDate = new DateTime().
+									minusDays(MAX_DURATION_DAYS).
+									plusDays(seed.nextInt(MAX_DURATION_DAYS)+3)
 						// years[seed.nextInt(years.size())],
 						// months[seed.nextInt(months.size())],
 						// days[seed.nextInt(days.size())],

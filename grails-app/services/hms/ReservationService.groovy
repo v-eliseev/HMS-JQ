@@ -12,14 +12,39 @@ class ReservationService {
 		Reservation.getAllFor(license)
 	}
 
-	def getCheckins(License license, Date forDate, Integer max_count = null) {
-		Reservation.findAllByLicenseAndStatusAndFromDateGreaterThanEquals(
-			license, reservationStatusService.getStatusPlanned(), forDate)
+	def getCheckins(License license, Date forDate, Integer maxCount = null) {
+
+		def result = Reservation.createCriteria().list {
+
+			'in'('id', license.hotel.reservations.collect{ it.id })
+			eq('status', reservationStatusService.getStatusPlanned())
+			ge('fromDate', forDate)
+
+			order('fromDate')
+
+			if (maxCount != null) {
+				maxResults(maxCount)
+			}
+		}
+		log.debug("Checkins: $result")
+		result
 	}
 
-	def getCheckouts(License license, Date toDate, Integer max_count = null) {
-		Reservation.getAllByLicenseAndStatusAndToDateGreaterThanEquals(
-			license, reservationStatusService.getStatusCheckedIn(), toDate)
+	def getCheckouts(License license, Date toDate, Integer maxCount = null) {
+		def result = Reservation.createCriteria().list {
+
+			'in'('id', license.hotel.reservations.collect{ it.id })
+			eq('status', reservationStatusService.getStatusCheckedIn())
+			ge('toDate', toDate)
+
+			order('fromDate')
+
+			if (maxCount != null) {
+				maxResults(maxCount)
+			}
+		}
+		log.debug("Checkouts: $result")
+		result
 	}
 
 	def createReservation(License license, Date fromDate, Date toDate, int adults, RoomCategory roomCategory) {

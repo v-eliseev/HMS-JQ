@@ -48,7 +48,7 @@ class Reservation extends DomainBaseClass {
 		def hotel = license.getHotel()
 		def planningWindow = new Interval(fromDate, toDate)
 		def result = hotel.reservations.findAll { 
-			new Interval(it.fromDate, itToDate).overlap(planningWindow)
+			new Interval(it.fromDate, it.toDate).overlap(planningWindow)
 		}
 		result
 	}

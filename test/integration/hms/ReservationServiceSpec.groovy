@@ -39,7 +39,40 @@ class ReservationServiceSpec extends Specification {
 		then:
 			Reservation.list().size() == count + 1
 
-		// cleanup:
-		// 	r.delete()
+		cleanup:
+			license.delete()
 	}
+
+	def 'Get checkins for the date' () {
+		given:
+			def license = licenseService.createDemoLicense()
+
+			assert license != null
+
+		when:
+			def checkinList = reservationService.getCheckins(license, new Date(), 5)
+
+		then:
+			checkinList.size() != 0
+
+		cleanup:
+			license.delete()
+	}
+
+	def 'Get checkouts for the date' () {
+		given:
+			def license = licenseService.createDemoLicense()
+
+			assert license != null
+
+		when:
+			def checkinList = reservationService.getCheckouts(license, new Date(), 5)
+
+		then:
+			checkinList.size() == 0
+
+		cleanup:
+			license.delete()
+	}
+
 }

@@ -69,11 +69,11 @@ class RoomPlannerService {
 		log.debug("Rooms: " + rooms)
 		log.debug("Reservations: " + reservations)
 
-		reservations << reservation
+		//reservations << reservation
 
 		def plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
 		RoomAssignment roomAssignment = null
-		if (plan.feasible) {
+		if (plan.score.feasible) {
 			roomAssignment = plan.roomAssignments.find { it.reservationId == reservation.id }
 		}
 		roomAssignment

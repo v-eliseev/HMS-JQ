@@ -66,7 +66,7 @@ class ReservationServiceSpec extends Specification {
 			assert license != null
 
 		when:
-			def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
+			def checkinList = reservationService.getCheckouts(license, new Date(), 5)
 
 		then:
 			checkinList.size() == 0

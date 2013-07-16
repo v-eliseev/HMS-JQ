@@ -11,6 +11,7 @@
 
 <div class="row-fluid show-grid">
 <div class="span4">
+<g:form>
     <legend>New Reservation</legend>
     <div>
         <div class="control-group">
@@ -59,17 +60,16 @@
         </div>
 
         <div class="control-group">
-            <g:remoteLink action="checkReservation"
-                params="[from: '2012-07-29', to: '2012-07-31', adults: 2]" onSuccess="alert(data.status)">Check!</g:remoteLink>
-                <!-- \$('#checkReservationStatus').val(data.status) -->
+            <g:submitToRemote class="btn btn-info btn-block" action="checkReservation"
+            onSuccess="alert(data.status)" name="submitCheck" value="Check!"/>
             <div id="checkReservationStatus"></div>
         </div>
 
         <div class="control-group">
-            <button class="btn btn-success btn-block">Make!</button>
+            <g:submitButton class="btn btn-success btn-block" name="submit" value="Make!"/>
         </div>
     </div>
-
+</g:form>
 </div>
 <div class="span4">
     <legend>Check-in</legend>
@@ -96,6 +96,7 @@
 <div class="row-fluid show-grid">
 <div class="span4">
     <legend>Booking plan</legend>
+    <g:link controller="SOAPCall">Show plan...</g:link>
 </div>
 <div class="span4">
     <legend>Statistics</legend>

@@ -15,6 +15,7 @@ td { border: 1px solid gray; }
 		<p>Score: ${plan.getScore().getHard()}/${plan.getScore().getSoft()}</p>
 		
 		<g:link action="newConfiguration">New configuration</g:link>
+		<g:link controller="user">User page</g:link>
 		
 		<table>
 			<thead>

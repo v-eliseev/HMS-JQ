@@ -277,7 +277,7 @@ class DemoDataScript {
 		}
 
 		
-		def reservationStatus = new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
+		def reservationStatus = ReservationStatus.findByCode(ReservationStatus.StatusCode.PLANNED) ?: new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
 		if (reservationStatus == null) {
 			throw new Exception("Reserevation status is null")
 		}

@@ -41,8 +41,8 @@ class UserController extends BaseController {
 
 		log.debug("Modal form parameters: ${params}")
 
-		def fromDate = new Date(params.fromDate)
-		def toDate = new Date(params.toDate)
+		def fromDate = Date.parse("MM/dd/yyyy", params.from)
+		def toDate = Date.parse("MM/dd/yyyy", params.to)
 		def adults = params.int('adults')
 		def roomCategory = RoomCategory.get(params.long('roomCategoryId'))
 
@@ -54,8 +54,11 @@ class UserController extends BaseController {
 	def checkReservation() {
 		License license = getLicense(request)
 
-		def fromDate = new Date(params.fromDate)
-		def toDate = new Date(params.toDate)
+		log.debug("Check reservation with params: $params")
+
+		def dates = params.daterange.split(" - ")
+		def fromDate = Date.parse("MM/dd/yyyy", dates[0])
+		def toDate = Date.parse("MM/dd/yyyy", dates[1])
 		def adults = params.int('adults')
 		def roomCategory = RoomCategory.findById(params.long('roomCategoryId'))
 

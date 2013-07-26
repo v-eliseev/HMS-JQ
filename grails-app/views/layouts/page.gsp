@@ -35,7 +35,7 @@
     </div>
     <div class="row-fluid show-grid">
       <div class="span12" id="copyright">
-        <small>Copyright &copy;2010-2012 Roombix, Ltd.</small>
+        <small>Copyright &copy;2010-2013 Roombix, Ltd.</small>
       </div>
     </div>
   </div>

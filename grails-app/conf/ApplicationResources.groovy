@@ -52,7 +52,7 @@
 
     resource url:'css/daterangepicker/daterangepicker.css'
 
-    resource url:'js/daterangepicker/date.js'
+    resource url:'js/daterangepicker/moment.min.js'
     resource url:'js/daterangepicker/daterangepicker.js'
   }
 

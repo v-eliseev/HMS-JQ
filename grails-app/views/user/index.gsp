@@ -96,7 +96,7 @@
 <div class="row-fluid show-grid">
 <div class="span4">
     <legend>Booking plan</legend>
-    <g:link controller="SOAPCall">Show plan...</g:link>
+    <g:link action="showCurrentPlan">Show plan...</g:link>
 </div>
 <div class="span4">
     <legend>Statistics</legend>
@@ -136,5 +136,3 @@ $('#daterange').daterangepicker();
 </content>
 
 </g:applyLayout>
-
-

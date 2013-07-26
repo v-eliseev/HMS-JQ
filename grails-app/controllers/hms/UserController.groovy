@@ -4,6 +4,11 @@ import hms.Hotel
 import hms.License
 import hms.dto.ReservationRequest
 
+import roomplanner.DateTimeRange
+import roomplanner.Plan
+
+import org.joda.time.DateTime
+
 import grails.converters.JSON
 
 class UserController extends BaseController {
@@ -36,6 +41,51 @@ class UserController extends BaseController {
 			todayCheckinList: checkinList,
 			todayCheckOutList: checkoutList
 		]
+	}
+
+	def showCurrentPlan() {
+		License license = getLicense(request)
+		
+		Plan plan = roomPlannerService.getCurrentPlan(license)
+		
+		def startDate = new DateTime()
+		def endDate = startDate.plusDays(7)
+		
+		def planningWindow = []
+		for (DateTime date : new DateTimeRange(startDate.minusDays(7), endDate.plusDays(2))) {
+			planningWindow << date
+		}
+		
+		def rooms = Room.getAllFor(license)
+		def hotel = license.hotel
+		def roomCategoryList = hotel.roomCategories
+		def reservationList = hotel.reservations
+
+		[
+			licenseInstance: license,
+			hotelInstance: hotel,
+			roomCategoryInstanceList: roomCategoryList,
+			reservationInstanceList: reservationList,
+			planningWindow: planningWindow,
+			rooms: rooms,
+			plan: plan
+		]
+	}
+
+	def newConfiguration() {
+		License license = getLicense(request)
+
+		Plan plan = roomPlannerService.deleteSavedPlan(license)
+
+		def startDate = new DateTime()
+		def endDate = startDate.plusDays(7)
+		
+		def planningWindow = []
+		for (DateTime date : new DateTimeRange(startDate.minusDays(7), endDate.plusDays(2))) {
+			planningWindow << date
+		}
+
+		render(view: 'index', model: [planningWindow: planningWindow, rooms: Room.getAllFor(license), plan: plan])
 	}
 	
 	def addReservation() {

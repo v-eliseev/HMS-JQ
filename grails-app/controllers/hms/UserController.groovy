@@ -2,6 +2,8 @@ package hms
 
 import hms.Hotel
 import hms.License
+import hms.dto.ReservationRequest
+
 import grails.converters.JSON
 
 class UserController extends BaseController {
@@ -54,20 +56,19 @@ class UserController extends BaseController {
 	def checkReservation() {
 		License license = getLicense(request)
 
-		log.debug("Check reservation with params: $params")
+		log.trace("Check reservation with params: $params")
 
 		def dates = params.daterange.split(" - ")
 		def fromDate = Date.parse("MM/dd/yyyy", dates[0])
 		def toDate = Date.parse("MM/dd/yyyy", dates[1])
 		def adults = params.int('adults')
-		def roomCategory = RoomCategory.findById(params.long('roomCategoryId'))
+		def roomCategory = RoomCategory.findById(params.long('roomCategory'))
 
-		def reservation = new Reservation(
+		def reservation = new ReservationRequest(
 			fromDate: fromDate,
 			toDate: toDate,
 			adults: adults,
 			roomCategory: roomCategory,
-			status: reservationStatusService.getStatusNew()
 		)
 
 		def roomAssignment = roomPlannerService.checkReservation(license, reservation)

@@ -4,6 +4,11 @@ import roomplanner.Plan
 import roomplanner.RoomAssignment
 import roomplanner.Score
 
+import hms.dto.ReservationRequest
+import roomplanner.api.Reservation as ReservationDto
+
+import org.joda.time.Interval
+
 class RoomPlannerService {
 
 	def grailsApplication
@@ -57,24 +62,24 @@ class RoomPlannerService {
 	/**
 		Checks if reservation is feasible and returns RoomAssignment data, otherwise returns null
 	*/
-	def RoomAssignment checkReservation(License license, Reservation reservation) {
+	def RoomAssignment checkReservation(License license, ReservationRequest reservationRequest) {
 
 		def roomCategories = RoomCategory.getAllFor(license)
 		def rooms = Room.getAllFor(license)
 		def reservations = Reservation.getAllFor(license)
 		def roomAssignments = []
 
-		log.debug("Hotel data acquired...")
-		log.debug("RoomCategories: " + roomCategories)
-		log.debug("Rooms: " + rooms)
-		log.debug("Reservations: " + reservations)
+		log.trace("Hotel data acquired...")
+		log.trace("RoomCategories: " + roomCategories)
+		log.trace("Rooms: " + rooms)
+		log.trace("Reservations: " + reservations)
 
-		//reservations << reservation
-
-		def plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
+		def plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, reservationRequest)
+		log.debug("RoomAssignments: $plan.roomAssignments")
 		RoomAssignment roomAssignment = null
 		if (plan.score.feasible) {
-			roomAssignment = plan.roomAssignments.find { it.reservationId == reservation.id }
+			roomAssignment = plan.roomAssignments.find { it.reservationId == -1 }
+			log.debug("RoomAssignment found: $roomAssignment")
 		}
 		roomAssignment
 	}
@@ -83,7 +88,7 @@ class RoomPlannerService {
 	/**
 		Creates a new plan on given data
 	*/
-	protected Plan callRoomPlanner(License license, def roomCategories, def rooms, def reservations, def roomAssignments) {
+	protected Plan callRoomPlanner(License license, def roomCategories, def rooms, def reservations, def roomAssignments, def reservationRequest = null) {
 
 		def remoteService = null
 
@@ -99,9 +104,20 @@ class RoomPlannerService {
 				throw new Exception("Unsupported remote type: [${mode}]")
 		}
 
-
 		def (roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto) = 
 			remoteService.convertData(roomCategories, rooms, reservations, roomAssignments)
+
+		if (reservationRequest != null) {
+			log.debug("Reservation to check: $reservationRequest")
+            reservationsDto << new ReservationDto(
+                id: -1,
+                roomCategory: roomCategoriesDto.find { it.id == reservationRequest.roomCategory.id },
+                adults: reservationRequest.adults,
+                bookingInterval: new Interval(reservationRequest.fromDate.getTime(), reservationRequest.toDate.getTime())
+            )
+		}
+
+		log.debug("Reservation to plan: $reservationsDto")
 
 		def planDto = remoteService.callPlanner(roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
 		

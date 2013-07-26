@@ -86,4 +86,7 @@
     resource url:'less/custom-font-awesome.less', attrs:[rel: "stylesheet/less", type:'css']
   }
 
+  chart {
+    resource url:'js/chart/Chart.min.js'
+  }
 }

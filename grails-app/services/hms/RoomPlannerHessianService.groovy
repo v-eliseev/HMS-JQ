@@ -72,7 +72,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 	}
 
 	def convertResponse(def license, def dtoPlan) {
-        log.debug("dtoPlan:" + dtoPlan)
+        log.trace("dtoPlan:" + dtoPlan)
 
         Plan plan = new Plan()
         plan.licenseId = license.id
@@ -90,7 +90,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
                         ).save()
                     )
         }
-        plan.save()
+        //plan.save()
         plan
 	}
 }

@@ -11,7 +11,7 @@
 
 <div class="row-fluid show-grid">
 <div class="span4">
-<g:form>
+<g:form action="addReservation">
     <legend>New Reservation</legend>
     <div>
         <div class="control-group">

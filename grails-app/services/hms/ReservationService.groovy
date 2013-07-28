@@ -47,14 +47,17 @@ class ReservationService {
 		result
 	}
 
-	def createReservation(License license, Date fromDate, Date toDate, int adults, RoomCategory roomCategory) {
+	def createReservation(License license, def params) {
+
+		log.debug("Create reservation for $license from parameters: $params")
+
 		def hotel = license.getHotel()
 		def status = reservationStatusService.getStatusPlanned()
 		def reservation = new Reservation(
-				fromDate: fromDate,
-				toDate: toDate,
-				adults: adults,
-				roomCategory: roomCategory,
+				fromDate: params.fromDate,
+				toDate: params.toDate,
+				adults: params.adults,
+				roomCategory: params.roomCategory,
 				status: status
 			).save()
 		hotel.addToReservations(reservation)

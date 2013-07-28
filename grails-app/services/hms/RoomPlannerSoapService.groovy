@@ -84,7 +84,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 						).save()
 					)
 		}
-		plan.save()
+		//plan.save()
 		plan
 
 	}

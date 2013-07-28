@@ -34,7 +34,13 @@ class ReservationServiceSpec extends Specification {
 
 		when:
 			def r = reservationService.createReservation(
-				license, new Date()-1, new Date()+3, 2, roomCategory) 
+					license, 
+					[
+					fromDate: new Date()-1, 
+					toDate: new Date()+3, 
+					roomCategory: roomCategory, 
+					adults: 2
+					]) 
 
 		then:
 			Reservation.list().size() == count + 1

@@ -32,6 +32,7 @@ class UserController extends BaseController {
 		def reservationList = hotel.reservations
 		def checkinList = reservationService.getCheckins(license, new Date(), 5)
 		def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
+		Plan plan = roomPlannerService.getCurrentPlan(license)
 
 		[
 			licenseInstance: license,
@@ -39,7 +40,8 @@ class UserController extends BaseController {
 			roomCategoryInstanceList: roomCategoryList,
 			reservationInstanceList: reservationList,
 			todayCheckinList: checkinList,
-			todayCheckOutList: checkoutList
+			todayCheckOutList: checkoutList,
+			plan: plan
 		]
 	}
 

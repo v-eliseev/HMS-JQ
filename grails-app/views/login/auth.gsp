@@ -3,16 +3,15 @@
 <meta name="layout" content="blankpage"/>
 <title>Roombix &emdash; Login</title>
 </head>
-<div class="container-fluid">
+<div class="container">
 <div class="navbar">
-  <div class="navbar-inner">
     <div class="container">
-      <span class="brand" uri="/">Roombix</span> 
+      <span class="navbar-brand" uri="/">Roombix</span> 
     </div>
-  </div><!-- /navbar-inner -->
 </div><!-- /navbar -->	
-<div class="row-fluid">
-    <div class="span4 offset4">
+<div class="row">
+    <div class="container">
+    <div class="col-lg-4 col-offset-4">
       <div class="well">
         <legend>Sign in to Roombix App</legend>
         <g:if test='${flash.message}'>
@@ -24,16 +23,22 @@
                 <a class="close" data-dismiss="alert" href="#">x</a>${flash.message}
             </div>      
 			</g:if>
-            <input class="span9" placeholder="Username" type="text" name="j_username" id="username"
+            <div class="col-lg-9">
+            <input class="form-control" placeholder="Username" type="text" name="j_username" id="username"
 				value="admin"
 				%{-- value="${session['SPRING_SECURITY_LAST_USERNAME']}" --}%
             >
-            <input class="span9" placeholder="Password" type="password" name="j_password" id="password"
+            </div>
+            <div class="col-lg-9">
+            <input class="form-control" placeholder="Password" type="password" name="j_password" id="password"
             	value="admin"
             > 
-            <input class="span9" placeholder="License key" type="text" name="j_licenseKey" id="licenseKey"
+            </div>
+            <div class="col-lg-9">
+            <input class="form-control" placeholder="License key" type="text" name="j_licenseKey" id="licenseKey"
 				value="WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6"
             >
+            </div>
 			<div id="license_show">
 				<g:message	code="springSecurity.login.license.label" />:
 				<span id="licenseKey">XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</span> 
@@ -49,6 +54,7 @@
             </button>      
         </form>    
       </div>
+    </div>
     </div>
 </div>
 </div>

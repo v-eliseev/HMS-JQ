@@ -12,7 +12,7 @@
 <div class="row-fluid show-grid">
 <div class="span12">
 	<ul class="breadcrumb">
-	  <li><a href="index">Home</a> <span class="divider">/</span></li>
+	  <li><a href="index">Home</a></li>
 	  <li class="active">Hotel plan</li>
 	</ul>	
     <legend>Hotel plan 

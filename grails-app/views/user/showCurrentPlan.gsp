@@ -12,13 +12,14 @@
 <div class="row-fluid show-grid">
 <div class="span12">
 	<ul class="breadcrumb">
-	  <li><a href="index">Home</a> <span class="divider">/</span></li>
+	  <li><a href="index">Home</a></li>
 	  <li class="active">Hotel plan</li>
 	</ul>	
     <legend>Hotel plan 
      	<small>
     		[Feasible: ${plan.getScore().getFeasible()} 
     		Score: ${plan.getScore().getHard()}/${plan.getScore().getSoft()}]
+    		<g:link action="newConfiguration">New configuration</g:link>
     	</small>
 		<small id="planningrange" class="pull-right">
 			<i class="icon-calendar icon-large"></i>

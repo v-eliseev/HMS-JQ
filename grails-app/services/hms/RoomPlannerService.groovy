@@ -23,7 +23,7 @@ class RoomPlannerService {
 	def getCurrentPlan(License license) {
 		Plan currentPlan = Plan.findByLicenseId(license.id)
 		if (currentPlan) {
-			log.debug("Saved plan found")
+			log.trace("Saved plan found")
 		}
 		else {
 			currentPlan = createNewPlan(license)
@@ -34,7 +34,7 @@ class RoomPlannerService {
 	def deleteSavedPlan(License license) {
 		Plan plan = getSavedPlan(license)
 		if (plan != null) {
-			log.debug("Delete saved plan...")
+			log.trace("Delete saved plan...")
 			
 			plan.delete()
 			Hotel h = license.hotel
@@ -45,18 +45,27 @@ class RoomPlannerService {
 			license.hotel = DemoDataScript.generateRandomData(license)
 			license.save()
 
-			log.debug("...succeed")
+			log.trace("...succeed")
 		}
 		plan = createNewPlan(license)
 	}
 
 	def createNewPlan(License license) {
+		Plan plan = getSavedPlan(license)
+		if (plan != null) {
+			log.trace("Delete saved plan...")
+			
+			plan.delete()
+		}
+
 		def roomCategories = RoomCategory.getAllFor(license)
 		def rooms = Room.getAllFor(license)
 		def reservations = Reservation.getAllFor(license)
 		def roomAssignments = []
 		
-		callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
+		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
+		plan.save()
+		plan
 	}
 
 	/**
@@ -75,11 +84,14 @@ class RoomPlannerService {
 		log.trace("Reservations: " + reservations)
 
 		def plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, reservationRequest)
-		log.debug("RoomAssignments: $plan.roomAssignments")
+		
+		log.trace("RoomAssignments: $plan.roomAssignments")
+		
 		RoomAssignment roomAssignment = null
 		if (plan.score.feasible) {
 			roomAssignment = plan.roomAssignments.find { it.reservationId == -1 }
-			log.debug("RoomAssignment found: $roomAssignment")
+		
+			log.trace("RoomAssignment found: $roomAssignment")
 		}
 		roomAssignment
 	}
@@ -108,7 +120,7 @@ class RoomPlannerService {
 			remoteService.convertData(roomCategories, rooms, reservations, roomAssignments)
 
 		if (reservationRequest != null) {
-			log.debug("Reservation to check: $reservationRequest")
+			log.trace("Reservation to check: $reservationRequest")
             reservationsDto << new ReservationDto(
                 id: -1,
                 roomCategory: roomCategoriesDto.find { it.id == reservationRequest.roomCategory.id },
@@ -117,7 +129,7 @@ class RoomPlannerService {
             )
 		}
 
-		log.debug("Reservation to plan: $reservationsDto")
+		log.trace("Reservation to plan: $reservationsDto")
 
 		def planDto = remoteService.callPlanner(roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
 		

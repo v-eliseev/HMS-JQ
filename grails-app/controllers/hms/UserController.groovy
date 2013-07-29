@@ -32,6 +32,7 @@ class UserController extends BaseController {
 		def reservationList = hotel.reservations
 		def checkinList = reservationService.getCheckins(license, new Date(), 5)
 		def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
+		Plan plan = roomPlannerService.getCurrentPlan(license)
 
 		[
 			licenseInstance: license,
@@ -39,7 +40,8 @@ class UserController extends BaseController {
 			roomCategoryInstanceList: roomCategoryList,
 			reservationInstanceList: reservationList,
 			todayCheckinList: checkinList,
-			todayCheckOutList: checkoutList
+			todayCheckOutList: checkoutList,
+			plan: plan
 		]
 	}
 
@@ -85,20 +87,43 @@ class UserController extends BaseController {
 			planningWindow << date
 		}
 
-		render(view: 'index', model: [planningWindow: planningWindow, rooms: Room.getAllFor(license), plan: plan])
+		def rooms = Room.getAllFor(license)
+		def hotel = license.hotel
+		def roomCategoryList = hotel.roomCategories
+		def reservationList = hotel.reservations
+
+		render(view: 'showCurrentPlan', model: 
+		[
+			licenseInstance: license,
+			hotelInstance: hotel,
+			roomCategoryInstanceList: roomCategoryList,
+			reservationInstanceList: reservationList,
+			planningWindow: planningWindow,
+			rooms: rooms,
+			plan: plan
+		])
 	}
 	
 	def addReservation() {
 		License license = getLicense(request)
 
-		log.debug("Modal form parameters: ${params}")
+		log.debug("Create reservation for $license from parameters: $params")
 
-		def fromDate = Date.parse("MM/dd/yyyy", params.from)
-		def toDate = Date.parse("MM/dd/yyyy", params.to)
+		def dates = params.daterange.split(" - ")
+		def fromDate = Date.parse("MM/dd/yyyy", dates[0])
+		def toDate = Date.parse("MM/dd/yyyy", dates[1])
 		def adults = params.int('adults')
-		def roomCategory = RoomCategory.get(params.long('roomCategoryId'))
+		def roomCategory = RoomCategory.findById(params.long('roomCategory'))
 
-		reservationService.createReservation(license, fromDate, toDate, roomCategory)
+		reservationService.createReservation(license, 
+			[
+				fromDate: fromDate, 
+				toDate: toDate, 
+				roomCategory: roomCategory, 
+				adults: adults
+			])
+
+		roomPlannerService.createNewPlan(license)
 
 		redirect action: 'index'
 	}

@@ -9,21 +9,18 @@
 
 <content tag="main">
 
-<div class="row-fluid show-grid">
-<div class="span4">
-<g:form>
+<div class="row show-grid">
+<div class="col-lg-4">
+<g:form action="addReservation">
     <legend>New Reservation</legend>
     <div>
-        <div class="control-group">
-            <label class="control-label">
-                <g:message code="user.name.label" default="From-To" />:
-            </label>
-            <div class="controls">
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-calendar"></i></span>
-                    <input type="text" name="daterange" id="daterange" />
-                </div>                    
+        <div class="form-group">
+            <label><g:message code="user.name.label" default="From-To" />:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                <input class="form-control" type="text" name="daterange" id="daterange" placeholder="Enter dates from-to"/>
             </div>
+        </div>
 %{--             <div class="control-group">
                 <label class="control-label">
                     <g:message code="user.name.label" default="From" />:
@@ -41,37 +38,34 @@
                 </div>
             </div>
  --}% 
-            <label class="control-label">
-                <g:message code="user.name.label" default="Adults" />:
-            </label>
-            <div class="controls">
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-user"></i></span>
-                    <input name="adults" type="text" placeholder="Enter adults" />
-                </div>
+        <div class="form-group">
+            <label><g:message code="user.name.label" default="Adults" />:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-user"></i></span>
+                <input class="form-control" name="adults" type="text" placeholder="Enter adults" />
             </div>
-
-            <label class="control-label">
-                <g:message code="user.name.label" default="RoomCategory" />:
-            </label>
-            <div class="controls">
-                <g:select name="roomCategory" from="${roomCategoryInstanceList}" optionKey="id" optionValue="name"/>
+        </div>
+        <div class="form-group">
+            <label><g:message code="user.name.label" default="RoomCategory" />:</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-user"></i></span>
+                <g:select class="form-control" name="roomCategory" from="${roomCategoryInstanceList}" optionKey="id" optionValue="name"/>
             </div>
         </div>
 
-        <div class="control-group">
+        <div class="form-group">
             <g:submitToRemote class="btn btn-info btn-block" action="checkReservation"
             onSuccess="alert(data.status)" name="submitCheck" value="Check!"/>
             <div id="checkReservationStatus"></div>
         </div>
 
-        <div class="control-group">
+        <div class="form-group">
             <g:submitButton class="btn btn-success btn-block" name="submit" value="Make!"/>
         </div>
     </div>
 </g:form>
 </div>
-<div class="span4">
+<div class="col-lg-4">
     <legend>Check-in</legend>
     <table class="table table-striped table-condensed">
     <tbody>
@@ -88,20 +82,23 @@
     </tbody>
     </table>
 </div>
-<div class="span4">
+<div class="col-lg-4">
     <legend>Check-out</legend>
 </div>
 </div>
 
-<div class="row-fluid show-grid">
-<div class="span4">
+<div class="row show-grid">
+<div class="col-lg-4">
     <legend>Booking plan</legend>
+        Feasible: ${plan.getScore().getFeasible()} 
+        Score: ${plan.getScore().getHard()}/${plan.getScore().getSoft()}
+
     <g:link action="showCurrentPlan">Show plan...</g:link>
 </div>
-<div class="span4">
+<div class="col-lg-4">
     <legend>Statistics</legend>
 </div>
-<div class="span4">
+<div class="col-lg-4">
     <legend>Additional</legend>
 </div>
 </div>

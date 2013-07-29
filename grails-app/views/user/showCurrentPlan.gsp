@@ -9,8 +9,8 @@
 </content>
 
 <content tag="main">
-<div class="row-fluid show-grid">
-<div class="span12">
+<div class="row show-grid">
+<div class="col-lg-12">
 	<ul class="breadcrumb">
 	  <li><a href="index">Home</a></li>
 	  <li class="active">Hotel plan</li>

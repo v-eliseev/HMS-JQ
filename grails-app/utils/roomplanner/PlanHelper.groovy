@@ -6,6 +6,7 @@ import hms.RoomCategory
 
 import org.joda.time.DateTime
 import org.joda.time.Interval
+import org.joda.time.Duration
 
 class PlanHelper {
 	
@@ -22,6 +23,31 @@ class PlanHelper {
 				//return
 			}
 		}	
+		return result
+	}
+
+	static List<Reservation> getRoomAssignments(Room room, DateTime fromDate, DateTime toDate, List<RoomAssignment> inList) {
+
+		def result = []
+
+		def assignments = inList.findAll { it.roomId == room.id }
+
+		Iterator<DateTime> iterator = new DateTimeRange(fromDate, toDate).iterator()
+		while (iterator.hasNext()) {
+			DateTime date = iterator.next()
+			assignments.each { assignment ->
+				Reservation reservation = Reservation.findById(assignment.reservationId) 
+				if (convertInterval(reservation.fromDate, reservation.toDate).contains(date)) {
+					result << reservation
+					def days = new Duration(fromDate, toDate).toStandardDays().getDays() - 1 
+					days.times() { 
+						if (iterator.hasNext()) { iterator.next() } 
+					}
+				} else {					
+					result << null
+				}
+			}
+		}
 		return result
 	}
 	

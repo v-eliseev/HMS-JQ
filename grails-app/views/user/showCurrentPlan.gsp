@@ -15,23 +15,21 @@
 	  <li><a href="index">Home</a></li>
 	  <li class="active">Hotel plan</li>
 	</ul>	
-    <legend>Hotel plan 
+    <h2>Hotel plan 
      	<small>
-    		[Feasible: ${plan.getScore().getFeasible()} 
-    		Score: ${plan.getScore().getHard()}/${plan.getScore().getSoft()}]
+    		[Feasible: ${score.getFeasible()} 
+    		Score: ${score.getHard()}/${score.getSoft()}]
     		<g:link action="newConfiguration">New configuration</g:link>
     	</small>
 		<small id="planningrange" class="pull-right">
 			<i class="icon-calendar icon-large"></i>
     		<span></span>
 		</small>
-    </legend>
+    </h2>
 	<table class="table table-bordered table-condensed">
 	<thead>
 		<tr>
 			<td>Room</td>
-			<td>Type</td>
-			<td>Size</td>
 			<g:each var="day" in="${planningWindow}">
 				<td>${day.getDayOfMonth()}.${day.getMonthOfYear()}</td>
 			</g:each>
@@ -40,14 +38,25 @@
 	<tbody>
 	<g:each var="room" in="${rooms}" status="i">
 	<tr>
-		<td>${room.getName()} [${room.getId()}]</td>
-		<td>${room.getRoomCategory().getName()} [${room.getRoomCategory().getId()}]</td>
-		<td>${room.getAdults()}
-		<g:each var="day" in="${planningWindow}">
-			<td>
-			<g:each in="${PlanHelper.getReservation(day, room, plan.roomAssignments.asList())}">
-			${it.getId()}&nbsp;
-			</g:each>
+		<td>
+			<span id="po_room${room.getId()}">
+				${room.getName()} [${room.getId()}]
+			</span>
+		</td>
+		<%
+			def roomAssignments = PlanHelper.getRoomAssignments(room, planningWindow.first(), planningWindow.last(), plan.roomAssignments.asList())
+		%>
+		<g:each var="roomAssignment" in="${roomAssignments}">
+		<% 
+			def colspan = 1
+			if (roomAssignment != null) {
+				colspan = roomAssignment.toDate - roomAssignment.fromDate
+			}
+		%>
+			<td colspan="${colspan}">
+				<g:if test="${roomAssignment != null}">
+					${roomAssignment.getId()}
+				</g:if>
 			</td>
 		</g:each>
 	</tr>
@@ -78,6 +87,15 @@ $(document).ready(function() {
     });
 	
 	$('#planningrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+	<g:each var="room" in="${rooms}" status="i">
+	$('#po_room${room.getId()}').popover({
+		trigger: 'hover',
+		html: true,
+		delay: { show: 500, hide: 100 },
+		content: '${room.getRoomCategory().getName()} [${room.getRoomCategory().getId()}] Bed count: ${room.getAdults()}'
+ 	})
+	</g:each>	
 });
 </r:script>
 </content>

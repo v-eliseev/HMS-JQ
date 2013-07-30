@@ -90,9 +90,10 @@
 <div class="row show-grid">
 <div class="col-lg-4">
     <legend>Booking plan</legend>
-        Feasible: ${plan.getScore().getFeasible()} 
-        Score: ${plan.getScore().getHard()}/${plan.getScore().getSoft()}
-
+        <ul class="list-unstyled">
+            <li>Feasible: ${score.getFeasible()}</li>
+            <li>Score: ${score.getHard()}/${score.getSoft()}</li>
+        </ul>
     <g:link action="showCurrentPlan">Show plan...</g:link>
 </div>
 <div class="col-lg-4">

@@ -35,18 +35,19 @@ class PlanHelper {
 		Iterator<DateTime> iterator = new DateTimeRange(fromDate, toDate).iterator()
 		while (iterator.hasNext()) {
 			DateTime date = iterator.next()
+
+			def ra = null
 			assignments.each { assignment ->
 				Reservation reservation = Reservation.findById(assignment.reservationId) 
 				if (convertInterval(reservation.fromDate, reservation.toDate).contains(date)) {
-					result << reservation
+					ra = reservation
 					def days = new Duration(fromDate, toDate).toStandardDays().getDays() - 1 
 					days.times() { 
 						if (iterator.hasNext()) { iterator.next() } 
 					}
-				} else {					
-					result << null
-				}
+				} 
 			}
+			result << ra
 		}
 		return result
 	}

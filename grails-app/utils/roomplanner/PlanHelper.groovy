@@ -44,8 +44,8 @@ class PlanHelper {
 				Reservation reservation = Reservation.findById(assignment.reservationId) 
 				if (convertInterval(reservation.fromDate, reservation.toDate).contains(date)) {
 					ra = reservation
-					def days = new Duration(date, new DateTime(reservation.toDate)).toStandardDays().getDays() - 1 
-					log.debug("date: $date, toDate: $reservation.toDate, days: $days")
+					def days = new Duration(date.withTime(12,0,0,0), new DateTime(reservation.toDate).withTime(12,0,0,0)).toStandardDays().getDays() - 1 
+					log.trace("date: $date, toDate: $reservation.toDate, days: $days")
 					days.times() { 
 						if (iterator.hasNext()) { iterator.next() } 
 					}

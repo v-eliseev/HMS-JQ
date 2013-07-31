@@ -1,4 +1,6 @@
 <%@ page import="roomplanner.PlanHelper" %>
+<%@ page import="org.joda.time.DateTime" %>
+
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
@@ -31,7 +33,7 @@
 		<tr>
 			<td>Room</td>
 			<g:each var="day" in="${planningWindow}">
-				<td>${day.getDayOfMonth()}.${day.getMonthOfYear()}</td>
+				<td colspan="1"><g:formatDate format="dd.MM" date="${day.toDate()}"/></td>
 			</g:each>
 		</tr>
 	</thead>
@@ -53,11 +55,16 @@
 				colspan = roomAssignment.toDate - roomAssignment.fromDate
 			}
 		%>
-			<td colspan="${colspan}">
-				<g:if test="${roomAssignment != null}">
-					${roomAssignment.getId()}
-				</g:if>
-			</td>
+			<g:if test="${roomAssignment != null}">
+				<td colspan="${colspan}">
+					<g:link id="po_ra${roomAssignment.getId()}" style="button" class="btn btn-block btn-primary">
+						${roomAssignment.getId()}
+					</g:link>
+				</td>
+			</g:if>
+			<g:else>
+				<td></td>
+			</g:else>
 		</g:each>
 	</tr>
 	</g:each>
@@ -88,14 +95,23 @@ $(document).ready(function() {
 	
 	$('#planningrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 
-	<g:each var="room" in="${rooms}" status="i">
+	<g:each var="room" in="${rooms}">
 	$('#po_room${room.getId()}').popover({
 		trigger: 'hover',
 		html: true,
 		delay: { show: 500, hide: 100 },
-		content: '${room.getRoomCategory().getName()} [${room.getRoomCategory().getId()}] Bed count: ${room.getAdults()}'
- 	})
+		content: '<ul class="list-unstyled"><li>${room.getRoomCategory().getName()} [${room.getRoomCategory().getId()}]</li><li>Bed count: ${room.getAdults()}</li></ul>'
+ 	});
 	</g:each>	
+
+%{-- 	<g:each var="roomAssignment" in="${roomAssignments}">
+	$('po_ra${roomAssignment.getId()}').popover({
+		trigger: 'hover',
+		html: true,
+		delay: { show: 500, hide: 100 },
+		content: '<ul class="list-unstyled"><li>test</li></ul>'
+	});
+	</g:each> --}%
 });
 </r:script>
 </content>

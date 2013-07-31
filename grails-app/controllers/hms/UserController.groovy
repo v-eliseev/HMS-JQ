@@ -54,7 +54,7 @@ class UserController extends BaseController {
 		def endDate = startDate.plusDays(7)
 		
 		def planningWindow = []
-		for (DateTime date : new DateTimeRange(startDate.minusDays(7), endDate.plusDays(2))) {
+		for (DateTime date : new DateTimeRange(startDate.minusDays(6), endDate.plusDays(2))) {
 			planningWindow << date
 		}
 		
@@ -84,7 +84,7 @@ class UserController extends BaseController {
 		def endDate = startDate.plusDays(7)
 		
 		def planningWindow = []
-		for (DateTime date : new DateTimeRange(startDate.minusDays(7), endDate.plusDays(2))) {
+		for (DateTime date : new DateTimeRange(startDate.minusDays(6), endDate.plusDays(2))) {
 			planningWindow << date
 		}
 

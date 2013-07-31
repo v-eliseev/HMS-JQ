@@ -8,6 +8,9 @@ import org.joda.time.DateTime
 import org.joda.time.Interval
 import org.joda.time.Duration
 
+import groovy.util.logging.*
+
+@Log4j
 class PlanHelper {
 	
 	static List<Reservation> getReservation(DateTime forDate, Room room, List<RoomAssignment> inList) {
@@ -37,15 +40,17 @@ class PlanHelper {
 			DateTime date = iterator.next()
 
 			def ra = null
-			assignments.each { assignment ->
+			assignments.find { assignment ->
 				Reservation reservation = Reservation.findById(assignment.reservationId) 
 				if (convertInterval(reservation.fromDate, reservation.toDate).contains(date)) {
 					ra = reservation
-					def days = new Duration(fromDate, toDate).toStandardDays().getDays() - 1 
+					def days = new Duration(date, new DateTime(reservation.toDate)).toStandardDays().getDays() - 1 
+					log.debug("date: $date, toDate: $reservation.toDate, days: $days")
 					days.times() { 
 						if (iterator.hasNext()) { iterator.next() } 
 					}
-				} 
+					assignments.remove(assignment)
+				}
 			}
 			result << ra
 		}

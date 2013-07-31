@@ -129,6 +129,7 @@ log4j = {
     error  'org.apache.cxf'
 
 
+    debug  'roomplanner'
     debug  'hms.DemoDataScript'
 }
 

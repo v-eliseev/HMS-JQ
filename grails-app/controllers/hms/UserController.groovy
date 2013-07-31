@@ -101,7 +101,8 @@ class UserController extends BaseController {
 			reservationInstanceList: reservationList,
 			planningWindow: planningWindow,
 			rooms: rooms,
-			plan: plan
+			plan: plan,
+			score: plan.score
 		])
 	}
 	

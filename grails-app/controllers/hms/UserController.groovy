@@ -75,6 +75,36 @@ class UserController extends BaseController {
 		]
 	}
 
+	def showCharts() {
+		License license = getLicense(request)
+		
+		Plan plan = roomPlannerService.getCurrentPlan(license)
+		
+		def startDate = new DateTime()
+		def endDate = startDate.plusDays(7)
+		
+		def planningWindow = []
+		for (DateTime date : new DateTimeRange(startDate.minusDays(6), endDate.plusDays(2))) {
+			planningWindow << date
+		}
+		
+		def rooms = Room.getAllFor(license)
+		def hotel = license.hotel
+		def roomCategoryList = hotel.roomCategories
+		def reservationList = hotel.reservations
+
+		[
+			licenseInstance: license,
+			hotelInstance: hotel,
+			roomCategoryInstanceList: roomCategoryList,
+			reservationInstanceList: reservationList,
+			planningWindow: planningWindow,
+			rooms: rooms,
+			score: plan.score,
+			plan: plan
+		]
+	}
+
 	def newConfiguration() {
 		License license = getLicense(request)
 

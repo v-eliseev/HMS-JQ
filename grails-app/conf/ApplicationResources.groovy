@@ -88,4 +88,6 @@
   chart {
     resource url:'js/chart/Chart.min.js'
   }
+
+  
 }

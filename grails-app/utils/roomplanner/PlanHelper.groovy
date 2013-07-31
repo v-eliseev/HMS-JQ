@@ -8,7 +8,7 @@ import org.joda.time.DateTime
 import org.joda.time.Interval
 import org.joda.time.Duration
 
-import groovy.util.logging.*
+import groovy.util.logging.Log4j
 
 @Log4j
 class PlanHelper {

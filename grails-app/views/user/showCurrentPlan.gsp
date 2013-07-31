@@ -33,7 +33,7 @@
 		<tr>
 			<td>Room</td>
 			<g:each var="day" in="${planningWindow}">
-				<td colspan="1"><g:formatDate format="dd.MM" date="${day.toDate()}"/></td>
+				<td colspan="1"><small><g:formatDate format="dd.MM" date="${day.toDate()}"/></small></td>
 			</g:each>
 		</tr>
 	</thead>

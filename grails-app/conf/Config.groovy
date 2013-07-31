@@ -124,12 +124,15 @@ log4j = {
            'grails.app.domain.roomplanner', 
            'grails.app.controllers.hms', 
            'grails.app.controllers.roomplanner',
-           'grails.app.utils'
+           'grails.app.utils',
+           'grails.app.task',     // Quartz
+           'grails.app.filters'   // Filters
     
     error  'org.apache.cxf'
 
 
     debug  'roomplanner'
+    debug  'hms'
     debug  'hms.DemoDataScript'
 }
 

@@ -3,6 +3,7 @@
 <meta name="layout" content="blankpage"/>
 <title>Roombix &emdash; Login</title>
 </head>
+<body>
 <div class="container">
 <div class="navbar">
     <div class="container">
@@ -25,13 +26,13 @@
 			</g:if>
             <div class="col-lg-9">
             <input class="form-control" placeholder="Username" type="text" name="j_username" id="username"
-				value="admin"
+				value="user"
 				%{-- value="${session['SPRING_SECURITY_LAST_USERNAME']}" --}%
             >
             </div>
             <div class="col-lg-9">
             <input class="form-control" placeholder="Password" type="password" name="j_password" id="password"
-            	value="admin"
+            	value="test"
             > 
             </div>
             <div class="col-lg-9">
@@ -56,7 +57,6 @@
       </div>
     </div>
     </div>
-</div>
 </div>
 </div>
 

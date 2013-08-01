@@ -7,12 +7,12 @@ class LicenseFilters {
     def filters = {
         addLicenseToModel(
             //controller:'*',
-            controllerExclude:'(superuser|login|logout)', 
+            controllerExclude:'(superuser|login)', 
             action:'*'
         ) {
 
             before = {
-                log.debug("Before...")
+                log.trace("Before...")
                 def licenseInstance = RequestUtils.getLicense(request)
                 if (!licenseInstance) {
                     log.debug("Redirecting to login page...")
@@ -22,7 +22,7 @@ class LicenseFilters {
             }
 
             after = { Map model ->
-                log.debug("After...")
+                log.trace("After...")
                 if (model) {
                     def licenseInstance = RequestUtils.getLicense(request)
                     if (licenseInstance) {

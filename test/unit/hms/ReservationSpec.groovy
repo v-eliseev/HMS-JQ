@@ -26,6 +26,10 @@ class ReservationSpec extends Specification {
 	def 'Check object creation'() {
 		given:
 			def hotel = new Hotel()
+			def roomCategory = new RoomCategory(name: "RoomCategory")
+			hotel.addToRoomCategories(roomCategory)
+			hotel.save()
+
 			def license = new License(
 					key: licenseService.generateLicenseKey(),
 					issued: new Date(),
@@ -34,10 +38,11 @@ class ReservationSpec extends Specification {
 					hotel: hotel,
 					).save()
 
-			def roomCategory = new RoomCategory(name: "RoomCategory")
+			def reservationStatus = ReservationStatus.findByCode(ReservationStatus.StatusCode.PLANNED) ?: new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
 
 			assert license != null
 			assert roomCategory != null
+			assert reservationStatus != null
 
 		when:
 			def r = reservationService.createReservation(
@@ -46,8 +51,9 @@ class ReservationSpec extends Specification {
 					fromDate: new Date()-1, 
 					toDate: new Date()+3, 
 					roomCategory: roomCategory, 
-					adults: 2
-					]) 
+					adults: 2,
+					status: reservationStatus
+					])
 
 		then:
 			Reservation.list().size() == 1

@@ -7,7 +7,7 @@ class Room extends DomainBaseClass {
 	String description
 	Integer adults = 1
 	
-	static belongsTo = [RoomCategory] //, Reservation]
+	static belongsTo = [roomCategory:RoomCategory] //, Reservation]
 	
 //	static hasMany = [reservations: Reservation]
 		

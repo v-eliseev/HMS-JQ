@@ -9,14 +9,14 @@ class ReservationService {
 	}
 
 	def getReservations(License license, Date fromDate, Date toDate) {
-		Reservation.getAllFor(license)
+		Reservation.getAllFor(license, fromDate, toDate)
 	}
 
 	def getCheckins(License license, Date forDate, Integer maxCount = null) {
-
-		def result = Reservation.createCriteria().list {
-
-			'in'('id', license.hotel.reservations.collect{ it.id })
+		def hotel = license.getHotel()
+		def result = Reservation.withCriteria {
+			
+			eq('hotel', hotel)
 			eq('status', reservationStatusService.getStatusPlanned())
 			ge('fromDate', forDate)
 
@@ -30,14 +30,15 @@ class ReservationService {
 		result
 	}
 
-	def getCheckouts(License license, Date toDate, Integer maxCount = null) {
-		def result = Reservation.createCriteria().list {
+	def getCheckouts(License license, Date forDate, Integer maxCount = null) {
+		def hotel = license.getHotel()
+		def result = Reservation.withCriteria {
 
-			'in'('id', license.hotel.reservations.collect{ it.id })
+			eq('hotel', hotel)
 			eq('status', reservationStatusService.getStatusCheckedIn())
-			ge('toDate', toDate)
+			ge('toDate',forDate)
 
-			order('fromDate')
+			order('toDate')
 
 			if (maxCount != null) {
 				maxResults(maxCount)
@@ -59,7 +60,7 @@ class ReservationService {
 				adults: params.adults,
 				roomCategory: params.roomCategory,
 				status: status
-			).save()
+			)
 		hotel.addToReservations(reservation)
 		hotel.save()
 

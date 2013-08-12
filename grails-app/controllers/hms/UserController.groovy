@@ -29,7 +29,8 @@ class UserController extends BaseController {
 
 		def hotel = license.hotel
 		def roomCategoryList = hotel.roomCategories
-		def reservationList = hotel.reservations
+
+		def reservationList = reservationService.getReservations(license, new Date()-6, new Date()+8)
 		def checkinList = reservationService.getCheckins(license, new Date(), 5)
 		def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
 		Plan plan = roomPlannerService.getCurrentPlan(license)
@@ -61,7 +62,7 @@ class UserController extends BaseController {
 		def rooms = Room.getAllFor(license)
 		def hotel = license.hotel
 		def roomCategoryList = hotel.roomCategories
-		def reservationList = hotel.reservations
+		def reservationList = reservationService.getReservations(license, startDate.toDate(), endDate.toDate())
 
 		[
 			licenseInstance: license,

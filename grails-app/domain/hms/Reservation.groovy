@@ -18,8 +18,8 @@ class Reservation extends DomainBaseClass {
     //CancellationReason cancellationReason
 	String notes
 	
-	//Hotel hotel
-	static belongsTo = Hotel  
+	Hotel hotel
+	static belongsTo = [hotel:Hotel]  
 	
     static constraints = {
 		//distributionChannel(nullable:true)
@@ -46,9 +46,18 @@ class Reservation extends DomainBaseClass {
 
 	static def getAllFor(License license, Date fromDate, Date toDate) {
 		def hotel = license.getHotel()
-		def planningWindow = new Interval(fromDate, toDate)
-		def result = hotel.reservations.findAll { 
-			new Interval(it.fromDate, it.toDate).overlap(planningWindow)
+
+		def c = Reservation.createCriteria()
+		def result = c {
+			eq('hotel', hotel)
+			or {
+				between('fromDate', fromDate, toDate)
+				between('toDate', fromDate, toDate)
+				and {
+					lt('fromDate', fromDate)
+					gt('toDate', toDate)
+				}
+			}
 		}
 		result
 	}

@@ -254,27 +254,25 @@ class DemoDataScript {
 				description: randomString(120),
 				shortDescription: randomString(30),
 				isBookableOnline: true
-			).save()
+			)
 			h.addToRoomCategories(rc)
 		}
 		
 		def rcList = h.roomCategories.asList()
-		
+
 		// generate rooms
 		for (i in 1..NUMBER_OF_ROOMS) {
 			def rc = rcList[seed.nextInt(rcList.size())]
 			Room r = new Room(
 				name: randomString(8),
-				roomCategory: rc,
+				//roomCategory: rc,
 				adults: seed.nextInt(ADULTS_MAX)+1
-			).save()
+			)
 			rc.addToRooms(r)
 		}
 
-		rcList.each() {
-			log.debug("RoomCategory: $it.id[$it.name]")
-			log.debug(it.rooms)
-		}
+		// save hotel configuration
+		h.save()
 
 		
 		def reservationStatus = ReservationStatus.findByCode(ReservationStatus.StatusCode.PLANNED) ?: new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
@@ -301,10 +299,7 @@ class DemoDataScript {
 				roomCategory: rcList[seed.nextInt(rcList.size())],
 				adults: seed.nextInt(ADULTS_MAX)+1,
 				status: reservationStatus
-			).save()
-			if (r == null) {
-				throw new Exception("Reservation is null")
-			}
+			)
 			h.addToReservations(r)
 		}
 		

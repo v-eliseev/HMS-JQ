@@ -9,7 +9,21 @@ class ReservationService {
 	}
 
 	def getReservations(License license, Date fromDate, Date toDate) {
-		Reservation.getAllFor(license, fromDate, toDate)
+		def hotel = license.getHotel()
+		def c = Reservation.createCriteria()
+		def result = c {
+			eq('hotel', hotel)
+			or {
+				between('fromDate', fromDate, toDate)
+				between('toDate', fromDate, toDate)
+				and {
+					lt('fromDate', fromDate)
+					gt('toDate', toDate)
+				}
+			}
+		}
+		log.trace("Found $result.size reservations: $result")
+		result
 	}
 
 	def getCheckins(License license, Date forDate, Integer maxCount = null) {
@@ -35,7 +49,8 @@ class ReservationService {
 		def result = Reservation.withCriteria {
 
 			eq('hotel', hotel)
-			eq('status', reservationStatusService.getStatusCheckedIn())
+			//eq('status', reservationStatusService.getStatusCheckedIn())
+			eq('status', reservationStatusService.getStatusPlanned())  // TODO change
 			ge('toDate',forDate)
 
 			order('toDate')

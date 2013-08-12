@@ -33,6 +33,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
         }
         log.trace("Rooms: " + roomsDto)
         
+        log.trace("Reservations: " + reservations)
         def reservationsDto = reservations.collect { reservation ->
             new ReservationDto(
                 id: reservation.id,
@@ -41,7 +42,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
                 bookingInterval: new Interval(reservation.fromDate.getTime(), reservation.toDate.getTime())
             )
         }
-        log.trace("Reservations: " + reservationsDto)
+        log.trace("ReservationsDto: " + reservationsDto)
         
         def roomAssignmentsDto = roomAssignments.collect { roomAssignment ->
             new RoomAssignmentDto (
@@ -82,15 +83,15 @@ class RoomPlannerHessianService implements IRoomPlannerService {
             soft: dtoPlan.score.softScoreConstraints
         )
         dtoPlan.roomAssignments.each {
-            plan.addToRoomAssignments(
-                    new RoomAssignment(
+            log.trace("dtoRoomAssignment: [roomId: $it.room.id, reservationId: $it.reservation.id, moveable: $it.moveable]")
+            def ra = new RoomAssignment(
                         roomId: it.room.id,
                         reservationId: it.reservation.id,
                         moveable: it.moveable
-                        ).save()
-                    )
+                        )
+            log.trace("RoomAssignment: [roomId: $ra.roomId, reservationId: $ra.reservationId, moveable: $ra.moveable]")
+            plan.addToRoomAssignments(ra)
         }
-        //plan.save()
         plan
 	}
 }

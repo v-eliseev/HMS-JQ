@@ -67,38 +67,49 @@
 </div>
 <div class="col-lg-4">
     <legend><i class="icon-signin"></i> Check-in</legend>
-    <table class="table table-striped table-condensed">
-    <tbody>
+    <div class="list-group">
         <g:each in="${todayCheckinList}" status="i" var="checkinInstance">
-        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-        <td>
-            <ul class="list-unstyled">
-                <li><span class="label">${i+1}</span>&nbsp;
-                    <span>Code: ${checkinInstance.id}</span>
-                <li>
-                    <g:formatDate format="dd-MM-yy" date="${checkinInstance.fromDate}"/>&nbsp;-&nbsp;<g:formatDate format="dd-MM-yy" date="${checkinInstance.toDate}"/>
-                </li>
-                <li>${checkinInstance.roomCategory.name} ${checkinInstance.adults} bed(s)</li>
-            </ul>
-        </td>
-        </tr>
-        </g:each>
-    </tbody>
-    </table>
+            <g:link class="list-group-item" id="${checkinInstance.id}">
+                <h5 class="list-group-item-heading"><span class="label">${i+1}</span>&nbsp;Code: ${checkinInstance.id}</h5>
+                <ul class="list-unstyled list-group-item-text">
+                    <li>
+                        <g:formatDate format="dd-MM-yy" date="${checkinInstance.fromDate}"/>&nbsp;-&nbsp;<g:formatDate format="dd-MM-yy" date="${checkinInstance.toDate}"/>
+                    </li>
+                    <li>${checkinInstance.roomCategory.name} ${checkinInstance.adults} bed(s)</li>
+                </ul>
+            </g:link>
+        </g:each>        
+    </div>
 </div>
 <div class="col-lg-4">
     <legend><i class="icon-signout"></i> Check-out</legend>
+    <div class="list-group">
+        <g:each in="${todayCheckoutList}" status="i" var="checkoutInstance">
+            <g:link class="list-group-item" id="${checkoutInstance.id}">
+                <h5 class="list-group-item-heading"><span class="label">${i+1}</span>&nbsp;Code: ${checkoutInstance.id}</h5>
+                <ul class="list-unstyled list-group-item-text">
+                    <li>
+                        <g:formatDate format="dd-MM-yy" date="${checkoutInstance.fromDate}"/>&nbsp;-&nbsp;<g:formatDate format="dd-MM-yy" date="${checkoutInstance.toDate}"/>
+                    </li>
+                    <li>${checkoutInstance.roomCategory.name} ${checkoutInstance.adults} bed(s)</li>
+                </ul>
+            </g:link>
+        </g:each>        
+    </div>
 </div>
 </div>
 
 <div class="row show-grid">
 <div class="col-lg-4">
     <legend><i class="icon-calendar"></i> Booking plan</legend>
-        <ul class="list-unstyled">
-            <li>Feasible: ${score.getFeasible()}</li>
-            <li>Score: ${score.getHard()}/${score.getSoft()}</li>
-        </ul>
-    <g:link action="showCurrentPlan">Show plan...</g:link>
+    <ul class="list-unstyled">
+        <li>Feasible: ${score.getFeasible()}</li>
+        <li>Score: ${score.getHard()}/${score.getSoft()}</li>
+    </ul>
+    <ul class="list-unstyled">
+        <li><g:link action="showCurrentPlan">Show plan...</g:link></li>
+        <li><g:link action="newConfiguration">New configuration</g:link></li>
+    </ul>
 </div>
 <div class="col-lg-4">
     <legend><i class="icon-bar-chart"></i> Statistics</legend>

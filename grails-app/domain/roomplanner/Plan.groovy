@@ -6,6 +6,9 @@ class Plan {
 		datasource 'cache'
 	} 
 	
+	Date dateCreated
+	Date lastUpdated
+	
 	static hasMany = [roomAssignments: RoomAssignment]
 	
 	Score score

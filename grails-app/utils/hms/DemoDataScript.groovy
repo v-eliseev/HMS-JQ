@@ -272,7 +272,7 @@ class DemoDataScript {
 		}
 
 		// save hotel configuration
-		h.save()
+		h.save(flush:true)
 
 		
 		def reservationStatus = ReservationStatus.findByCode(ReservationStatus.StatusCode.PLANNED) ?: new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
@@ -303,7 +303,7 @@ class DemoDataScript {
 			h.addToReservations(r)
 		}
 		
-		h.save()
+		h.save(flush:true)
 
 		h
 	}

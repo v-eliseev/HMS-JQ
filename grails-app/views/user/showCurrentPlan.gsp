@@ -21,7 +21,6 @@
      	<small>
     		[Feasible: ${score.getFeasible()} 
     		Score: ${score.getHard()}/${score.getSoft()}]
-    		<g:link action="newConfiguration">New configuration</g:link>
     	</small>
 		<small id="planningrange" class="pull-right">
 			<i class="icon-calendar icon-large"></i>

@@ -10,8 +10,10 @@ class RoomAssignment {
 	long roomId
 	boolean moveable
 
-	static belongsTo = Plan
+	Plan plan
+	static belongsTo = [plan:Plan]
 
     static constraints = {
+    	reservationId nullable: true
     }
 }

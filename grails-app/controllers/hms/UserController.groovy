@@ -41,7 +41,7 @@ class UserController extends BaseController {
 			roomCategoryInstanceList: roomCategoryList,
 			reservationInstanceList: reservationList,
 			todayCheckinList: checkinList,
-			todayCheckOutList: checkoutList,
+			todayCheckoutList: checkoutList,
 			score: plan.score
 		]
 	}
@@ -124,17 +124,7 @@ class UserController extends BaseController {
 		def roomCategoryList = hotel.roomCategories
 		def reservationList = hotel.reservations
 
-		render(view: 'showCurrentPlan', model: 
-		[
-			licenseInstance: license,
-			hotelInstance: hotel,
-			roomCategoryInstanceList: roomCategoryList,
-			reservationInstanceList: reservationList,
-			planningWindow: planningWindow,
-			rooms: rooms,
-			plan: plan,
-			score: plan.score
-		])
+		redirect(action: 'index')
 	}
 	
 	def addReservation() {

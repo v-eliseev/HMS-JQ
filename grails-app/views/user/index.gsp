@@ -70,7 +70,7 @@
     <div class="list-group">
         <g:each in="${todayCheckinList}" status="i" var="checkinInstance">
             <g:link class="list-group-item" id="${checkinInstance.id}">
-                <h5 class="list-group-item-heading"><span class="label">${i+1}</span>&nbsp;Code: ${checkinInstance.id}</h5>
+                <h5 class="list-group-item-heading"><span class="label label-default">${i+1}</span>&nbsp;Code: ${checkinInstance.id}</h5>
                 <ul class="list-unstyled list-group-item-text">
                     <li>
                         <g:formatDate format="dd-MM-yy" date="${checkinInstance.fromDate}"/>&nbsp;-&nbsp;<g:formatDate format="dd-MM-yy" date="${checkinInstance.toDate}"/>
@@ -86,7 +86,7 @@
     <div class="list-group">
         <g:each in="${todayCheckoutList}" status="i" var="checkoutInstance">
             <g:link class="list-group-item" id="${checkoutInstance.id}">
-                <h5 class="list-group-item-heading"><span class="label">${i+1}</span>&nbsp;Code: ${checkoutInstance.id}</h5>
+                <h5 class="list-group-item-heading"><span class="label label-default">${i+1}</span>&nbsp;Code: ${checkoutInstance.id}</h5>
                 <ul class="list-unstyled list-group-item-text">
                     <li>
                         <g:formatDate format="dd-MM-yy" date="${checkoutInstance.fromDate}"/>&nbsp;-&nbsp;<g:formatDate format="dd-MM-yy" date="${checkoutInstance.toDate}"/>

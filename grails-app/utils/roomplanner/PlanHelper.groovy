@@ -29,6 +29,16 @@ class PlanHelper {
 		return result
 	}
 
+	static def getRoomAssignments(def rooms, def fromDate, def toDate, def inList) {
+
+		def result = [:]
+
+		rooms.each() { room ->
+			result << [(room) : getRoomAssignments(room, fromDate, toDate, inList)]
+		}
+		result
+	}
+
 	static List<Reservation> getRoomAssignments(Room room, DateTime fromDate, DateTime toDate, List<RoomAssignment> inList) {
 
 		def result = []

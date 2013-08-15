@@ -19,8 +19,8 @@
 	</ul>	
     <h2>Hotel plan 
      	<small>
-    		[Feasible: ${score.getFeasible()} 
-    		Score: ${score.getHard()}/${score.getSoft()}]
+    		[Feasible: ${score.feasible} 
+    		Score: ${score.hard}/${score.soft}]
     	</small>
 		<small id="planningrange" class="pull-right">
 			<i class="icon-calendar icon-large"></i>
@@ -37,17 +37,17 @@
 		</tr>
 	</thead>
 	<tbody>
+		<%
+			def roomAssignments = PlanHelper.getRoomAssignments(rooms, planningWindow.first(), planningWindow.last(), plan.roomAssignments.asList())
+		%>
 	<g:each var="room" in="${rooms}" status="i">
 	<tr>
 		<td>
-			<span id="po_room${room.getId()}">
-				${room.getName()} [${room.getId()}]
+			<span id="po_room${room.id}">
+				${room.name} [${room.id}]
 			</span>
 		</td>
-		<%
-			def roomAssignments = PlanHelper.getRoomAssignments(room, planningWindow.first(), planningWindow.last(), plan.roomAssignments.asList())
-		%>
-		<g:each var="roomAssignment" in="${roomAssignments}">
+		<g:each var="roomAssignment" in="${roomAssignments[room]}">
 		<% 
 			def colspan = 1
 			if (roomAssignment != null) {
@@ -56,8 +56,8 @@
 		%>
 			<g:if test="${roomAssignment != null}">
 				<td colspan="${colspan}">
-					<g:link id="po_ra${roomAssignment.getId()}" style="button" class="btn btn-block btn-primary">
-						${roomAssignment.getId()}
+					<g:link id="po_ra${roomAssignment.id}" elementId="po_ra${roomAssignment.id}" style="button" class="btn btn-block btn-primary">
+						${roomAssignment.id}
 					</g:link>
 				</td>
 			</g:if>
@@ -99,18 +99,22 @@ $(document).ready(function() {
 		trigger: 'hover',
 		html: true,
 		delay: { show: 500, hide: 100 },
-		content: '<ul class="list-unstyled"><li>${room.getRoomCategory().getName()} [${room.getRoomCategory().getId()}]</li><li>Bed count: ${room.getAdults()}</li></ul>'
+		content: '<ul class="list-unstyled"><li>${room.roomCategory.name} [${room.roomCategory.id}]</li><li>Bed count: ${room.adults}</li></ul>'
  	});
 	</g:each>	
 
-%{-- 	<g:each var="roomAssignment" in="${roomAssignments}">
-	$('po_ra${roomAssignment.getId()}').popover({
-		trigger: 'hover',
-		html: true,
-		delay: { show: 500, hide: 100 },
-		content: '<ul class="list-unstyled"><li>test</li></ul>'
-	});
-	</g:each> --}%
+ 	<g:each var="roomAssignmentList" in="${roomAssignments}">
+ 	<g:each var="roomAssignment" in="${roomAssignmentList.value}">
+ 		<g:if test="${roomAssignment != null}">
+			$('#po_ra${roomAssignment.getId()}').popover({
+				trigger: 'hover',
+				html: true,
+				delay: { show: 500, hide: 100 },
+				content: '<ul class="list-unstyled"><li>Guests: ${roomAssignment.adults}</li><li>Room type: ${roomAssignment.roomCategory.name} [${roomAssignment.roomCategory.id}]</li></ul>'
+			});
+		</g:if>
+	</g:each>
+	</g:each>
 });
 </r:script>
 </content>

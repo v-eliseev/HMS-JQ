@@ -44,3 +44,8 @@
 # other
 *.iws
 
+*.sublime-project
+*.sublime-workspace
+cobertura.ser
+*.log
+*.log.1

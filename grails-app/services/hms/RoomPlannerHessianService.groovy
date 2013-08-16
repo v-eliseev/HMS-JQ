@@ -3,6 +3,7 @@ package hms
 import roomplanner.Plan
 import roomplanner.RoomAssignment
 import roomplanner.Score
+import roomplanner.ConstraintMatch
 
 import roomplanner.api.RoomCategory as RoomCategoryDto
 import roomplanner.api.Room as RoomDto
@@ -82,8 +83,9 @@ class RoomPlannerHessianService implements IRoomPlannerService {
             hard: dtoPlan.score.hardScoreConstraints,
             soft: dtoPlan.score.softScoreConstraints
         )
+
         dtoPlan.roomAssignments.each {
-            log.trace("dtoRoomAssignment: [roomId: $it.room.id, reservationId: $it.reservation.id, moveable: $it.moveable]")
+            log.trace("dtoRoomAssignment: [id: $it.id, roomId: $it.room.id, reservationId: $it.reservation.id, moveable: $it.moveable]")
             def ra = new RoomAssignment(
                         roomId: it.room.id,
                         reservationId: it.reservation.id,
@@ -92,6 +94,18 @@ class RoomPlannerHessianService implements IRoomPlannerService {
             log.trace("RoomAssignment: [roomId: $ra.roomId, reservationId: $ra.reservationId, moveable: $ra.moveable]")
             plan.addToRoomAssignments(ra)
         }
+
+        dtoPlan.score.scoreDetails.each { scoreDetail ->
+            log.trace("ScoreDetail: [constraintName: $scoreDetail.constraintName, roomAssignments: $scoreDetail.roomAssignments, weight: $scoreDetail.weight")
+            def c = new ConstraintMatch(
+                rule: scoreDetail.constraintName,
+                roomAssignment: plan.roomAssignments.find { it.reservationId == scoreDetail.roomAssignments[0].reservation.id },
+                weight: scoreDetail.weight
+                )
+            log.trace("Constraint: [rule: \"$c.rule\", roomAssignment: $c.roomAssignment, weight: $c.weight]")
+            plan.addToConstraintMatches(c)
+        }
+
         plan
 	}
 }

@@ -8,8 +8,8 @@ class Plan {
 	
 	Date dateCreated
 	Date lastUpdated
-	
-	static hasMany = [roomAssignments: RoomAssignment]
+
+	static hasMany = [roomAssignments: RoomAssignment, constraintMatches: ConstraintMatch]
 	
 	Score score
 	long licenseId

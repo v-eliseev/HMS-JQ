@@ -109,6 +109,8 @@ class UserController extends BaseController {
 	def newConfiguration() {
 		License license = getLicense(request)
 
+		log.debug("Create new plan")
+
 		Plan plan = roomPlannerService.deleteSavedPlan(license)
 
 		def startDate = new DateTime()

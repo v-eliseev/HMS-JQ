@@ -1,4 +1,4 @@
-<ul class="navbar navbar-right">
+<ul class="nav navbar-nav navbar-right">
 <sec:ifNotGranted roles="ROLE_SUPERUSER">
   <sec:ifLoggedIn>
     <li>

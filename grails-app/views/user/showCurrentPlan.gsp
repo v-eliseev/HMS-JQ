@@ -1,4 +1,5 @@
 <%@ page import="roomplanner.PlanHelper" %>
+<%@ page import="hms.ReservationStatus" %>
 <%@ page import="org.joda.time.DateTime" %>
 
 <g:applyLayout name="threeblocks">
@@ -50,14 +51,34 @@
 		<g:each var="roomAssignment" in="${roomAssignments[room]}">
 		<% 
 			def colspan = 1
+			def color = "btn-success"
+			def constraints = []
 			if (roomAssignment != null) {
 				colspan = roomAssignment.toDate - roomAssignment.fromDate
+				// select color
+				switch(roomAssignment.status.code) {
+					case ReservationStatus.StatusCode.CHECKED_OUT:
+						color = "btn-default"
+						break
+					case ReservationStatus.StatusCode.CHECKED_IN:
+						color = "btn-primary"
+						break
+					case ReservationStatus.StatusCode.PLANNED:
+						
+						break
+				}
+				constraints = plan.constraintMatches.findAll { it.roomAssignment.reservationId == roomAssignment.id }
 			}
+
+
 		%>
 			<g:if test="${roomAssignment != null}">
 				<td colspan="${colspan}">
-					<g:link id="po_ra${roomAssignment.id}" elementId="po_ra${roomAssignment.id}" style="button" class="btn btn-block btn-primary">
-						${roomAssignment.id}
+					<g:link id="po_ra${roomAssignment.id}" elementId="po_ra${roomAssignment.id}" style="button" class="btn btn-block $color">
+						${roomAssignment.id} 
+						<g:if test="${constraints.size()>0}">
+						<span class="label label-warning pull-right">${constraints.size()}</span>
+						</g:if>
 					</g:link>
 				</td>
 			</g:if>

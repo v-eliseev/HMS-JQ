@@ -89,5 +89,9 @@
     resource url:'js/chart/Chart.min.js'
   }
 
+  raphael {
+    resource url:'js/raphael/raphael-min.js'
+  }
+
   
 }

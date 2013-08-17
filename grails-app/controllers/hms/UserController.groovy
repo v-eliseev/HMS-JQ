@@ -42,7 +42,8 @@ class UserController extends BaseController {
 			reservationInstanceList: reservationList,
 			todayCheckinList: checkinList,
 			todayCheckoutList: checkoutList,
-			score: plan.score
+			score: plan.score,
+			plan: plan
 		]
 	}
 
@@ -74,6 +75,10 @@ class UserController extends BaseController {
 			score: plan.score,
 			plan: plan
 		]
+	}
+
+	def showCurrentPlanSvg() {
+		showCurrentPlan()
 	}
 
 	def showCharts() {
@@ -109,7 +114,7 @@ class UserController extends BaseController {
 	def newConfiguration() {
 		License license = getLicense(request)
 
-		log.debug("Create new plan")
+		log.trace("Create new plan")
 
 		Plan plan = roomPlannerService.deleteSavedPlan(license)
 

@@ -275,24 +275,21 @@ class DemoDataScript {
 		h.save(flush:true)
 
 		
-		def reservationStatus = ReservationStatus.findByCode(ReservationStatus.StatusCode.PLANNED) ?: new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
-		if (reservationStatus == null) {
-			throw new Exception("Reserevation status is null")
-		}
 		// generate reservations
 		for (i in 1..NUMBER_OF_RESERVATIONS) {
-			DateTime fromDate = new DateTime().
-									minusDays(MAX_DURATION_DAYS).
-									plusDays(seed.nextInt(MAX_DURATION_DAYS)+3)
-						// years[seed.nextInt(years.size())],
-						// months[seed.nextInt(months.size())],
-						// days[seed.nextInt(days.size())],
-						// 12,
-						// 0,
-						// 0,
-						// 0
-						// )
-			DateTime toDate = fromDate.plusDays(seed.nextInt(MAX_DURATION_DAYS)+1)
+			DateTime nowDate = DateTime.now()
+			DateTime fromDate = nowDate.minusDays(MAX_DURATION_DAYS).plusDays(seed.nextInt(MAX_DURATION_DAYS)+3).withTime(12,0,0,0)
+			DateTime toDate = fromDate.plusDays(seed.nextInt(MAX_DURATION_DAYS)+1).withTime(12,0,0,0)
+			def code = ReservationStatus.StatusCode.PLANNED 
+			if (toDate < nowDate) {
+				code = ReservationStatus.StatusCode.CHECKED_OUT
+			} else if (fromDate < nowDate) {
+				code = ReservationStatus.StatusCode.CHECKED_IN
+			} 
+			def reservationStatus = ReservationStatus.findByCode(code) ?: new ReservationStatus(code: code).save()
+			if (reservationStatus == null) {
+				throw new Exception("Reserevation status is null")
+			}
 			Reservation r = new Reservation(
 				fromDate: fromDate.toDate(),
 				toDate: toDate.toDate(),

@@ -53,17 +53,39 @@ $(document).ready(function() {
 	$('#planningrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 
 	// define base dimensions
+    var headerHeight = 30;
+    rowHeight = 24
 	var width = $('#canvas_container').width();
-	var height = ${rooms.size()}*30 + 30;
+	var height = ${rooms.size()}*rowHeight + headerHeight;
+    var cellWidth = Math.floor((width - 140)/30);
+    var firstColWidth = width - 30*cellWidth;
 	var paper = new Raphael(document.getElementById('canvas_container'), width, height); 
 	paper.rect(0,0,width,height,5).attr(
 	{
         "fill":"#f5f5f5",
         "stroke":"#999999"
 	});
+
+
+    paper.text(10, Math.floor(headerHeight/2), "Rooms").attr(
+    {
+        "font-family":"arial", 
+        "font-size":"14",
+        "text-anchor":"start"
+    });
+    <g:each var="day" in="${planningWindow}" status="i">
+        paper.path("M"+eval(2*${i}*cellWidth+firstColWidth)+" 0L"+eval(2*${i}*cellWidth+firstColWidth)+" "+height+
+            "M"+eval((2*${i}+1)*cellWidth+firstColWidth)+" "+Math.floor(headerHeight/2)+"L"+eval((2*${i}+1)*cellWidth+firstColWidth)+" "+height).attr(
+        {
+            "stroke":"#999999",
+            "stroke-width":"1"
+        });
+        paper.text(eval((2*${i}+1)*cellWidth+firstColWidth), Math.floor(headerHeight/4), "<g:formatDate format="dd.MM" date="${day.toDate()}"/>");
+   </g:each>
 	<g:each var="room" in="${rooms}" status="i">
-		paper.text(10, (30*${i+1}), "${room.name} [${room.id}]").attr(
-            {"font-family":"arial", 
+		paper.text(10, (rowHeight*${i}+Math.floor(rowHeight/2)+headerHeight), "${room.name} [${room.id}]").attr(
+        {
+            "font-family":"arial", 
             "font-size":"14",
             "text-anchor":"start"
         });

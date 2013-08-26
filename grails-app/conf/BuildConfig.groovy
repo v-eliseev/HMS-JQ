@@ -55,6 +55,9 @@ grails.project.dependency.resolution = {
         compile 'joda-time:joda-time:2.2'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
+        test "org.gebish:geb-spock:0.9.0"
+        test "org.seleniumhq.selenium:selenium-firefox-driver:2.35.0"
+        test "org.seleniumhq.selenium:selenium-support:2.35.0"
     }
 
     plugins {
@@ -89,9 +92,8 @@ grails.project.dependency.resolution = {
 
         build   ":tomcat:$grailsVersion"
 
-        test(":spock:0.7") {
-            exclude "spock-grails-support"
-        }
+        test(":spock:0.7") { exclude "spock-grails-support" }
+        test ":geb:0.9.0"
         test ":code-coverage:1.2.6"
 
         compile ":codenarc:0.19"

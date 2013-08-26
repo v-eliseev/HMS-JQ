@@ -5,7 +5,7 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
-<r:require modules="raphael, daterangepicker"/>
+<r:require modules="raphael, daterangepicker, planningboard"/>
 </head>
 
 <content tag="top">
@@ -52,7 +52,13 @@ $(document).ready(function() {
 	
 	$('#planningrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 
-	// define base dimensions
+    $('#canvas_container').planningboard({
+        planningWindow: ${planningWindow},
+        rooms: ${rooms},
+        plan: ${plan}
+    });
+
+%{-- 	// define base dimensions
     var headerHeight = 30;
     rowHeight = 24
 	var width = $('#canvas_container').width();
@@ -89,7 +95,7 @@ $(document).ready(function() {
             "font-size":"14",
             "text-anchor":"start"
         });
-	</g:each>
+	</g:each> --}%
 });
 </r:script>
 </content>

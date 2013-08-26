@@ -93,5 +93,10 @@
     resource url:'js/raphael/raphael-min.js'
   }
 
+  planningboard {
+    dependsOn 'jquery, raphael'
+
+    resource url:'js/planningboard/planningboard.js'
+  }
   
 }

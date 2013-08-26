@@ -57,7 +57,7 @@ class UserController extends BaseController {
 		
 		def planningWindow = []
 		for (DateTime date : new DateTimeRange(startDate.minusDays(6), endDate.plusDays(2))) {
-			planningWindow << date
+			planningWindow << date.toDate()
 		}
 		
 		def rooms = Room.getAllFor(license)
@@ -78,7 +78,17 @@ class UserController extends BaseController {
 	}
 
 	def showCurrentPlanSvg() {
-		showCurrentPlan()
+		def model = showCurrentPlan()
+		[
+			licenseInstance: model.licenseInstance,
+			hotelInstance: model.hotelInstance,
+			roomCategoryInstanceList: model.roomCategoryInstanceList,
+			reservationInstanceList: model.reservationInstanceList,
+			planningWindow: new JSON(model.planningWindow).toString(),
+			rooms: new JSON(model.rooms).toString(),
+			score: model.score,
+			plan: new JSON(model.plan).toString()
+		]
 	}
 
 	def showCharts() {

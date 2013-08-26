@@ -1,4 +1,4 @@
-<nav class="navbar" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <g:link class="navbar-brand" uri="/">Roombix</g:link> 
     <ul class="nav navbar-nav">

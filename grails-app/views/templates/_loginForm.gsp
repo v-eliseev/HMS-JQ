@@ -2,7 +2,7 @@
 <sec:ifNotGranted roles="ROLE_SUPERUSER">
   <sec:ifLoggedIn>
     <li>
-    <g:link url="#" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
+    <g:link url="#" type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
       <i class="icon-user"></i>&nbsp;
       <sec:loggedInUserInfo field="username"></sec:loggedInUserInfo>&nbsp;<b class="caret"></b>
     </g:link>

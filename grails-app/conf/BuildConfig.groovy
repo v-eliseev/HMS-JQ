@@ -97,7 +97,7 @@ grails.project.dependency.resolution = {
         compile ":codenarc:0.19"
 
         if (env == 'jenkins') {
-            runtime "grails-roomplanner-api:grails-roomplanner-api:0.2"
+            runtime "grails-roomplanner-api:grails-roomplanner-api:0.3"
         }
 
     }

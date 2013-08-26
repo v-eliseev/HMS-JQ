@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta name="layout" content="blankpage"/>
-<title>Roombix &emdash; Login</title>
+<title>Roombix -- Login</title>
 </head>
 <body>
 <div class="container">

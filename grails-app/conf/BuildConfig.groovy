@@ -56,8 +56,12 @@ grails.project.dependency.resolution = {
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
         test "org.gebish:geb-spock:0.9.0"
-        test "org.seleniumhq.selenium:selenium-chrome-driver:2.35.0"
-        test "org.seleniumhq.selenium:selenium-support:2.35.0"
+
+        def seleniumVersion = "2.35.0"
+        test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion"
+        test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+        test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+        test "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
     }
 
     plugins {

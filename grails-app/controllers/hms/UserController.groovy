@@ -57,7 +57,7 @@ class UserController extends BaseController {
 		
 		def planningWindow = []
 		for (DateTime date : new DateTimeRange(startDate.minusDays(6), endDate.plusDays(2))) {
-			planningWindow << date.toDate()
+			planningWindow << date
 		}
 		
 		def rooms = Room.getAllFor(license)
@@ -84,7 +84,7 @@ class UserController extends BaseController {
 			hotelInstance: model.hotelInstance,
 			roomCategoryInstanceList: model.roomCategoryInstanceList,
 			reservationInstanceList: model.reservationInstanceList,
-			planningWindow: new JSON(model.planningWindow).toString(),
+			planningWindow: new JSON(model.planningWindow*.toDate()).toString(),
 			rooms: new JSON(model.rooms).toString(),
 			score: model.score,
 			plan: new JSON(model.plan).toString()

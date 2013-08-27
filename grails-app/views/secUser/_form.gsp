@@ -84,13 +84,13 @@
             disabled: 'No'
             }
         });
-    $('#expireAccountDP').datepicker({
+    $('#expireAccountDP').datetimepicker({
         format: 'dd-mm-yyyy',
         weekStart: '1',
         autoclose: 'true',
         todayHighlight: 'true'
     });
-    $('#expirePasswordDP').datepicker({
+    $('#expirePasswordDP').datetimepicker({
         format: 'dd-mm-yyyy',
         weekStart: '1',
         autoclose: 'true',

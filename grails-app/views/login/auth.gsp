@@ -1,18 +1,19 @@
 <html>
 <head>
 <meta name="layout" content="blankpage"/>
-<title>Roombix &emdash; Login</title>
+<title>Roombix -- Login</title>
 </head>
 <body>
 <div class="container">
-<div class="navbar">
-    <div class="container">
-      <span class="navbar-brand" uri="/">Roombix</span> 
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <g:link class="navbar-brand" uri="/">Roombix</g:link> 
     </div>
-</div><!-- /navbar -->	
+</nav>
+</div>
 <div class="row">
     <div class="container">
-    <div class="col-lg-6 col-offset-3">
+    <div class="col-lg-6 col-lg-offset-3">
       <div class="well">
         <legend>Sign in to Roombix App</legend>
 %{--         <g:if test='${flash.message}'>

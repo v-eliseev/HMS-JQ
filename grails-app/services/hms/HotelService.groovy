@@ -42,6 +42,10 @@ class HotelService {
 		RoomCategory.getAllFor(license)
 	}
 
+	def listActiveReservations(License license) {
+		[]
+	}
+
 	def listReservations(License license) {
 		Reservation.getAllFor(license)
 	}

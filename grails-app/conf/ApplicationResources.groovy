@@ -62,12 +62,12 @@
     resource url:'js/togglebuttons/jquery.toggle.buttons.js'
   }
 
-   datepicker {
+   datetimepicker {
      dependsOn 'bootstrap'
 
-     resource url:'less/datepicker/datepicker.less', attrs:[rel: "stylesheet/less", type:'css']
+     resource url:'less/datetimepicker/bootstrap-datetimepicker.less', attrs:[rel: "stylesheet/less", type:'css']
 
-     resource url:'js/datepicker/bootstrap-datepicker.js'
+     resource url:'js/datetimepicker/bootstrap-datetimepicker.js'
   //   // TODO add locales
 
   }

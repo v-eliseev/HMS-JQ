@@ -26,7 +26,7 @@
                     <g:message code="user.name.label" default="From" />:
                 </label>
                 <div class="controls">
-                    <input name="fromDate" type="text" class="datepicker" placeholder="Enter from date" value="${reservationInstance?.fromDate}">
+                    <input name="fromDate" type="text" class="datetimepicker" placeholder="Enter from date" value="${reservationInstance?.fromDate}">
                 </div>
             </div>
             <div class="control-group">
@@ -34,7 +34,7 @@
                     <g:message code="user.name.label" default="To" />:
                 </label>
                 <div class="controls">
-                    <input id="toDate" name="toDate" type="text" class="datepicker" placeholder="Enter to date" value="${reservationInstance?.toDate}">
+                    <input id="toDate" name="toDate" type="text" class="datetimepicker" placeholder="Enter to date" value="${reservationInstance?.toDate}">
                 </div>
             </div>
  --}% 

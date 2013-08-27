@@ -94,7 +94,9 @@
 					return roomAssignment.roomId == item.id;
 				});
 
+				var x = headerHeight + index*rowHeight + 2;
 				thisRoomAssignments.forEach( function(ra) {
+					
 
 				},this);
 

@@ -49,14 +49,20 @@
 		    });
     		
     		// draw grid and dates
+    		this.paper.path("M"+firstColWidth+" 0L"+firstColWidth+" "+height+
+    				"M0 "+headerHeight+"L"+width+" "+headerHeight).attr(
+    			{
+	            	"stroke":"#999999",
+	            	"fill":"none"
+	        	});
     		this.planningWindow.forEach( function(item, index) {
-        		this.paper.path("M"+eval(2*index*cellWidth+firstColWidth)+" 0L"+eval(2*index*cellWidth+firstColWidth)+" "+height+
-            		"M"+eval((2*index+1)*cellWidth+firstColWidth)+" "+Math.floor(headerHeight/2)+"L"+eval((2*index+1)*cellWidth+firstColWidth)+" "+height).attr(
+        		this.paper.path("M"+eval(2*index*cellWidth+firstColWidth)+" 0L"+eval(2*index*cellWidth+firstColWidth)+" "+headerHeight+
+            		"M"+eval((2*index+1)*cellWidth+firstColWidth)+" "+Math.floor(headerHeight*0.75)+"L"+eval((2*index+1)*cellWidth+firstColWidth)+" "+headerHeight).attr(
 	        	{
 	            	"stroke":"#999999",
-	            	"stroke-width":"1"
+	            	"fill":"none"
 	        	});
-		        this.paper.text(eval((2*index+1)*cellWidth+firstColWidth), Math.floor(headerHeight/4), item);
+		        this.paper.text(eval((2*index+1)*cellWidth+firstColWidth), Math.floor(headerHeight*0.375), item);
             },this);
 			
 			// draw room names

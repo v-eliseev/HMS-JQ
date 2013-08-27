@@ -28,10 +28,16 @@ class HotelService {
 		Hotel.get(objectId)
 	}
 
+	/**
+	*	
+	*/
 	def listRooms(License license) {
 		Room.getAllFor(license)
 	}
 
+	/**
+	*	
+	*/
 	def listRoomCategories(License license) {
 		RoomCategory.getAllFor(license)
 	}

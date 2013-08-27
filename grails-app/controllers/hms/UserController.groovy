@@ -23,6 +23,8 @@ class UserController extends BaseController {
 	def roomPlannerService
 	def reservationService
 	def reservationStatusService
+	def hotelService
+	def configurationService
 
 	def index() {
 		License license = getLicense(request)
@@ -78,16 +80,28 @@ class UserController extends BaseController {
 	}
 
 	def showCurrentPlanSvg() {
+		License license = getLicense(request)
+
+		def hotel = license.hotel
+		def allRooms = hotelService.listRooms(license)
+		def allRoomCategories = hotelService.listRoomCategories(license)
+		def activeReservations = hotelService.listActiveReservations(license)
+		def planningWindow = []
+
+		Plan plan = roomPlannerService.getCurrentPlan(license)
+		def displayReservations = []
+		def displayRoomAssignments = []
+
 		def model = showCurrentPlan()
 		[
-			licenseInstance: model.licenseInstance,
-			hotelInstance: model.hotelInstance,
-			roomCategoryInstanceList: model.roomCategoryInstanceList,
-			reservationInstanceList: model.reservationInstanceList,
-			planningWindow: new JSON(model.planningWindow*.toDate()).toString(),
-			rooms: new JSON(model.rooms).toString(),
-			score: model.score,
-			plan: new JSON(model.plan).toString()
+			licenseInstance: license,
+			hotelInstance: hotel,
+			roomCategoryInstanceList: allRoomCategories,
+			reservationInstanceList: activeReservations,
+			allRooms: new JSON(allRooms).toString(),
+			displayReservations: new JSON(displayReservations).toString(),
+			displayRoomAssignments: new JSON(displayRoomAssignments).toString(),
+			planningWindow: new JSON(planningWindow*.toDate()).toString()
 		]
 	}
 

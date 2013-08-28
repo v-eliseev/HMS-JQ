@@ -76,11 +76,7 @@ class UserController extends BaseController {
 			rooms: rooms,
 			score: plan.score,
 			plan: plan
-		]    		// if (typeof options.planningWindow == 'object')
-    		// 	this.planningWindow = options.planningWindow;
-    		// if (typeof options.plan == 'object')
-    		// 	this.plan = options.plan;
-
+		]    	
 	}
 
 	def showCurrentPlanSvg() {
@@ -100,16 +96,23 @@ class UserController extends BaseController {
 		def displayReservations = reservationService.getReservations(license, firstDate.toDate(), lastDate.toDate())
 		def displayRoomAssignments = plan.roomAssignments
 
+		def reservationStatusList = reservationStatusService.listReservationStatus()
+
 		def model = showCurrentPlan()
 		[
 			licenseInstance: license,
 			hotelInstance: hotel,
 			roomCategoryInstanceList: allRoomCategories,
 			reservationInstanceList: activeReservations,
-			allRooms: new JSON(allRooms).toString(),
-			displayReservations: new JSON(displayReservations).toString(),
-			displayRoomAssignments: new JSON(displayRoomAssignments).toString(),
-			//planningWindow: new JSON(planningWindow*.toDate()).toString(),
+			allRooms: allRooms,
+			allRoomsJSON: new JSON(allRooms).toString(),
+			displayReservations: displayReservations,
+			displayReservationsJSON: new JSON(displayReservations).toString(),
+			displayRoomAssignments: displayRoomAssignments,
+			displayRoomAssignmentsJSON: new JSON(displayRoomAssignments).toString(),
+			reservationStatusListJSON: new JSON(reservationStatusList).toString(),
+			constraintMatches: plan.constraintMatches,
+			constraintMatchesJSON: new JSON(plan.constraintMatches).toString(),
 			firstDate: firstDate,
 			lastDate: lastDate,
 			score: plan.score

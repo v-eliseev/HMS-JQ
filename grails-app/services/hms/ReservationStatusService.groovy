@@ -25,8 +25,12 @@ class ReservationStatusService {
 	def getStatusCheckedOut() {
 		getStatus(ReservationStatus.StatusCode.CHECKED_OUT)
 	}
+
 	def getStatusNoShow() {
 		getStatus(ReservationStatus.StatusCode.NO_SHOW)
 	}
 	
+	def listReservationStatus() {
+		ReservationStatus.findAll()
+	}
 }

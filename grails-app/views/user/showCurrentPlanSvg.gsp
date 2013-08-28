@@ -53,12 +53,45 @@ $(document).ready(function() {
 	$('#planningrange span').html(moment('${firstDate}').format('MMMM D, YYYY') + ' - ' + moment('${lastDate}').format('MMMM D, YYYY'));
 
     $('#canvas_container').planningboard({
-        rooms: ${allRooms},
-        reservations: ${displayReservations},
-        roomAssignments: ${displayRoomAssignments},
+        rooms: ${allRoomsJSON},
+        reservations: ${displayReservationsJSON},
+        roomAssignments: ${displayRoomAssignmentsJSON},
+        reservationStatusList: ${reservationStatusListJSON},
+        constraintMatches: ${constraintMatchesJSON},
         firstDate: moment('${firstDate}'),
         lastDate: moment('${lastDate}')
     });
+
+    <g:each var="room" in="${allRooms}">
+    $('#po_room_${room.id}').popover({
+        container: 'body',
+        trigger: 'hover',
+        html: true,
+        delay: { show: 500, hide: 100 },
+        content: '<ul class="list-unstyled"><li>${room.roomCategory.name} [${room.roomCategory.id}]</li><li>Bed count: ${room.adults}</li></ul>'
+    });
+    </g:each>   
+
+    <g:each var="roomAssignment" in="${displayRoomAssignments}">
+    <%
+        def reservation = displayReservations.find { it.id == roomAssignment.reservationId }
+        def constraints = constraintMatches.findAll { it.roomAssignment.id == roomAssignment.id }
+    %>
+    $('#po_ra_${roomAssignment.id}').popover({
+        container: 'body',
+        trigger: 'hover',
+        html: true,
+        delay: { show: 500, hide: 100 },
+        content: '<ul class="list-unstyled"><li>${reservation.roomCategory.name} [${reservation.roomCategory.id}]</li><li>Adults: ${reservation.adults}</li></ul>'
+    });
+    $('#po_cm_${roomAssignment.id}').popover({
+        container: 'body',
+        trigger: 'hover',
+        html: true,
+        delay: { show: 500, hide: 100 },
+        content: '<ul class="list-unstyled"><g:each var="cm" in="${constraints}"><li>${cm.rule} [${cm.weight}]</li></g:each></ul>'
+    });
+    </g:each>
 });
 </r:script>
 </content>

@@ -13,12 +13,10 @@
     			this.reservations = options.reservations;
     		if (typeof options.roomAssignments == 'object')
     			this.roomAssignments = options.roomAssignments;
-
-    		// if (typeof options.planningWindow == 'object')
-    		// 	this.planningWindow = options.planningWindow;
-    		// if (typeof options.plan == 'object')
-    		// 	this.plan = options.plan;
-
+    		if (typeof options.reservationStatusList == 'object')
+    			this.reservationStatusList = options.reservationStatusList;
+    		if (typeof options.constraintMatches == 'object')
+    			this.constraintMatches = options.constraintMatches;
     		if (typeof options.firstDate == 'object')
     			this.firstDate = options.firstDate;
     		if (typeof options.lastDate == 'object')
@@ -34,6 +32,7 @@
         constructor: PlanningBoard,
 
         renderBackground: function() {
+        	var _e
 			// define base dimensions
 			var anchor = this.element[0] ;
 		    var headerHeight = 30;
@@ -67,7 +66,7 @@
 	            	"fill":"none"
 	        	});
 
-    		var currentDate = this.firstDate;
+    		var currentDate = moment(this.firstDate);
     		var index = 0;
     		while (currentDate.diff(this.lastDate) <= 0) {
         		this.paper.path("M"+eval(2*index*cellWidth+firstColWidth)+" 0L"+eval(2*index*cellWidth+firstColWidth)+" "+headerHeight+
@@ -80,28 +79,76 @@
 		        currentDate = currentDate.add('days',1);
 		        index++;
     		}
+
+    		// mark today
+			var x_today = moment().diff(this.firstDate,'days')*2*cellWidth + firstColWidth;
+     		this.paper.rect(x_today,0,2*cellWidth,height,0).attr(
+     		{
+     			"fill":"#ebacee",
+     			"stroke":"#7b2080",
+     			"opacity":"0.3"
+     		});
 			
-			// draw room names
+			// draw room names and roomAssignments
 			this.rooms.forEach( function(item, index) {
-				this.paper.text(10, (rowHeight*index+Math.floor(rowHeight/2)+headerHeight), item.name+'['+item.id+']').attr(
+				_e = this.paper.text(10, (rowHeight*index+Math.floor(rowHeight/2)+headerHeight), item.name+'['+item.id+']').attr(
 		        {
 		            "font-family":"arial", 
 		            "font-size":"14",
 		            "text-anchor":"start"
 		        });
+		        _e.node.id = "po_room_"+item.id;
 
 				var thisRoomAssignments = this.roomAssignments.filter( function(roomAssignment) {
 					return roomAssignment.roomId == item.id;
 				});
 
-				var x = headerHeight + index*rowHeight + 2;
+				var y = headerHeight + index*rowHeight + 2;
 				thisRoomAssignments.forEach( function(ra) {
-					
+					var reservations = this.reservations.filter( function(reservation) {
+						return ra.reservationId == reservation.id;
+					});
+					var x_start
+					var x_end
+					if (reservations.length == 1) {
+						x_start = ((moment(reservations[0].fromDate).diff(this.firstDate,'days')+1)*2+1)*cellWidth + 2 + firstColWidth;
+						x_end = ((moment(reservations[0].toDate).diff(this.firstDate,'days')+1)*2+1)*cellWidth - 2 + firstColWidth;
+					} else {
+						alert('Somethig wrong with reservations')
+					}
+
+					if (x_start < 0) x_start = 0;
+					if (x_end > width) x_end = width;
+	
+					var constraints = this.constraintMatches.filter( function(constraint) {
+						return constraint.roomAssignment.id == ra.id
+					});
+
+					var fillColor = "#5bc0de";
+					var strokeColor = "#000066";
+
+					_e = this.paper.rect(x_start,y,x_end-x_start,rowHeight-4,2).attr(
+					{
+						"fill":fillColor,
+						"stroke":strokeColor
+					});
+					_e.node.id = "po_ra_"+ra.id;
+
+					if (constraints.length > 0) {
+						_e = this.paper.rect(x_start+1,y+1,rowHeight-6,rowHeight-6,2).attr({
+							"fill":"#dd9933",
+							"stroke":"none"
+						});
+						this.paper.text(x_start+rowHeight/2-2,y+rowHeight/2-2,constraints.length).attr({
+				            "font-family":"arial", 
+				            "font-size":"12"
+				        });
+				        _e.node.id = "po_cm_"+ra.id;
+					}
 
 				},this);
 
-            },this);
-
+	        },this);
 	    }
     };
 

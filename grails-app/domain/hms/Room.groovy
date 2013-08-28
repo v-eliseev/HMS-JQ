@@ -19,7 +19,7 @@ class Room extends DomainBaseClass {
     }
 	
 	static mapping = {
-		sort name: 'asc'
+		sort 'name'
 	}
 
 	static def getAllFor(License license) {

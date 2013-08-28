@@ -21,7 +21,8 @@ class RoomCategory extends DomainBaseClass {
 	}
 
 	static mapping = {
-		sort name: 'asc'
+		sort 'name'
+		rooms sort: 'name', order: 'asc'
 	}
 
 //	Set<RoomFeature> getFeatures() {

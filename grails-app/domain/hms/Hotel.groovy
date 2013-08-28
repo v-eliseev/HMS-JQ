@@ -68,7 +68,7 @@ class Hotel extends DomainBaseClass {
 	}
 
 	static mapping = {
-		// sort name: 'asc'
-		// sort roomCategories: 'asc'
+		sort 'name'
+		roomCategories sort: 'name', order: 'asc'
 	}
 }

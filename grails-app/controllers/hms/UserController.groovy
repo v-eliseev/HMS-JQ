@@ -76,7 +76,11 @@ class UserController extends BaseController {
 			rooms: rooms,
 			score: plan.score,
 			plan: plan
-		]
+		]    		// if (typeof options.planningWindow == 'object')
+    		// 	this.planningWindow = options.planningWindow;
+    		// if (typeof options.plan == 'object')
+    		// 	this.plan = options.plan;
+
 	}
 
 	def showCurrentPlanSvg() {
@@ -85,12 +89,16 @@ class UserController extends BaseController {
 		def hotel = license.hotel
 		def allRooms = hotelService.listRooms(license)
 		def allRoomCategories = hotelService.listRoomCategories(license)
+
+		def firstDate = new DateTime().withTime(12,0,0,0).minusDays(3)
+		def lastDate = firstDate.plusDays(14)
+		
 		def activeReservations = hotelService.listActiveReservations(license)
-		def planningWindow = []
+		//def planningWindow = []
 
 		Plan plan = roomPlannerService.getCurrentPlan(license)
-		def displayReservations = []
-		def displayRoomAssignments = []
+		def displayReservations = reservationService.getReservations(license, firstDate.toDate(), lastDate.toDate())
+		def displayRoomAssignments = plan.roomAssignments
 
 		def model = showCurrentPlan()
 		[
@@ -101,7 +109,10 @@ class UserController extends BaseController {
 			allRooms: new JSON(allRooms).toString(),
 			displayReservations: new JSON(displayReservations).toString(),
 			displayRoomAssignments: new JSON(displayRoomAssignments).toString(),
-			planningWindow: new JSON(planningWindow*.toDate()).toString()
+			//planningWindow: new JSON(planningWindow*.toDate()).toString(),
+			firstDate: firstDate,
+			lastDate: lastDate,
+			score: plan.score
 		]
 	}
 

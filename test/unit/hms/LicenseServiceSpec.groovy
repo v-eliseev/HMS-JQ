@@ -19,7 +19,7 @@ class LicenseServiceSpec {
 			def counter = 0
 			def final MAX_COUNT = 100
 			while (!(minDigit && maxDigit && minLetter && maxLetter) && counter < MAX_COUNT) {
-				def key = service.generateLicenseKey()
+				def key = licenseService.generateLicenseKey()
 				if (!minDigit && key.contains(License.digits[0])) minDigit = true
 				if (!maxDigit && key.contains(License.digits[License.digits.size()-1])) maxDigit = true
 				if (!minLetter && key.contains(License.letters[0])) minLetter = true

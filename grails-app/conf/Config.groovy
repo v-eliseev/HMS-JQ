@@ -109,6 +109,7 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
     
+    //debug 'org.codehaus.groovy.grails.orm.hibernate'
     // Enable Hibernate SQL logging with param values
     //trace  'org.hibernate.type'
     //debug  'org.hibernate.SQL'

@@ -65,7 +65,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         runtime 'mysql:mysql-connector-java:5.1.26'
-        build   'org.freemarker:freemarker:2.3.20'
+        compile 'org.freemarker:freemarker:2.3.20'
         compile 'joda-time:joda-time:2.3'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"

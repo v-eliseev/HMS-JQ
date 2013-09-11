@@ -43,7 +43,7 @@ class ReservationServiceSpec extends Specification {
 					]) 
 
 		then:
-			Reservation.list().size() == count + 1
+			Reservation.list().size() == (count + 1)
 
 		cleanup:
 			license.delete()
@@ -72,10 +72,10 @@ class ReservationServiceSpec extends Specification {
 			assert license != null
 
 		when:
-			def checkinList = reservationService.getCheckouts(license, new Date(), 5)
+			def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
 
 		then:
-			checkinList.size() == 0
+			checkoutList.size() != 0
 
 		cleanup:
 			license.delete()

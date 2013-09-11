@@ -1,9 +1,9 @@
 package roomplanner
 
-class RoomAssignment {
+class RoomAssignment implements Serializable {
 	
 	static mapping = {
-		datasource 'cache'
+		datasource 'plancache'
 	}
 	
 	long reservationId

@@ -4,7 +4,7 @@ dataSource {
     username = "sa"
     password = ""
 }
-dataSource_cache {
+dataSource_plancache {
     pooled = true
     driverClassName = "org.h2.Driver"
     username = "sa"
@@ -25,7 +25,7 @@ environments {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
-        dataSource_cache {
+        dataSource_plancache {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
@@ -35,7 +35,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
-        dataSource_cache {
+        dataSource_plancache {
             dbCreate = "create-drop"
             url = "jdbc:h2:mem:testCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
@@ -49,7 +49,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:mysql://localhost:3306/hms"
         }
-        dataSource_cache {
+        dataSource_plancache {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }

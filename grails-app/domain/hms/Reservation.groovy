@@ -34,7 +34,7 @@ class Reservation extends DomainBaseClass {
     }
 
    	static mapping = {
-		sort fromDate: 'asc'
+		sort 'fromDate'
 	}
 
 	

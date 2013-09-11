@@ -1,9 +1,9 @@
 package roomplanner
 
-class Plan {
+class Plan implements Serializable {
 
 	static mapping = {
-		datasource 'cache'
+		datasource 'plancache'
 	} 
 	
 	Date dateCreated

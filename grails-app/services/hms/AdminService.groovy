@@ -10,12 +10,15 @@ class AdminService {
 	def createUser(String username, String password, String email, License license) {
 
 		def hash = new CustomPasswordEncoder().encodePassword(password, license.key)
+		log.trace("Create user: $username, password: $hash, email: $email, license: $license")
 		def newUser = new SecUser(username: username, password: hash, email: email, license: license)
-		if (!newUser.save())
+		if (!newUser.save()) {
+			log.trace("... Failed")
 		 	throw new Exception('User was not created')
-
+		}
 		license.addToUsers(newUser)
 		license.save()
+		log.trace("... Successful")
 			
 		newUser
 	}
@@ -61,7 +64,7 @@ class AdminService {
 		if (!license.demoMode) {
 			throw new Exception("Demo license is required")
 		}
-		SecUser newUser = createUser("admin", "admin", "", license)
+		SecUser newUser = createUser("admin", "admin", "aa@bb.cc", license)
 		newUser
 	}
 

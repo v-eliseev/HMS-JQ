@@ -1,9 +1,9 @@
 package roomplanner
 
-class ConstraintMatch {
+class ConstraintMatch implements Serializable {
 
 	static mapping = {
-		datasource 'cache'
+		datasource 'plancache'
 	} 
 
 	String rule

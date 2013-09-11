@@ -135,6 +135,8 @@ log4j = {
     debug  'roomplanner'
     debug  'hms'
     debug  'hms.DemoDataScript'
+
+    error  'org.hibernate.tool.hbm2ddl'
 }
 
 // Added by the Spring Security Core plugin:

@@ -40,7 +40,7 @@ class ReservationService {
 				maxResults(maxCount)
 			}
 		}
-		log.debug("Checkins: $result")
+		log.trace("Checkins: $result")
 		result
 	}
 
@@ -59,7 +59,7 @@ class ReservationService {
 				maxResults(maxCount)
 			}
 		}
-		log.debug("Checkouts: $result")
+		log.trace("Checkouts: $result")
 		result
 	}
 
@@ -76,8 +76,16 @@ class ReservationService {
 				roomCategory: params.roomCategory,
 				status: status
 			)
+
+		if (!reservation.save()) {
+			log.debug("... Failed")
+		 	throw new Exception('Reservation was not created')
+		}
+
 		hotel.addToReservations(reservation)
 		hotel.save()
+
+		log.debug("... Successful")
 
 		reservation
 	}

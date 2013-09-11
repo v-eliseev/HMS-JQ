@@ -30,9 +30,9 @@ class AdminServiceSpec extends Specification {
 			def license2 = licenseService.createStandardLicense()
 
 		when:
-			adminService.createUser("admin", "admin", "", license1)
-			adminService.createUser("manager", "manager", "", license1)
-			adminService.createUser("admin", "admin", "", license2)
+			adminService.createUser("admin", "admin", "aa@bb.cc", license1)
+			adminService.createUser("manager", "manager", "aa@bb.cc", license1)
+			adminService.createUser("admin", "admin", "aa@bb.cc", license2)
 
 		then:
 			SecUser.list().size() == 3
@@ -50,9 +50,9 @@ class AdminServiceSpec extends Specification {
 			def license2 = licenseService.createStandardLicense()
 
 		when:
-			adminService.createUser("admin", "admin", "", license1)
-			adminService.createUser("manager", "manager", "", license1)
-			adminService.createUser("admin", "admin", "", license2)
+			adminService.createUser("admin", "admin", "aa@bb.cc", license1)
+			adminService.createUser("manager", "manager", "aa@bb.cc", license1)
+			adminService.createUser("admin", "admin", "aa@bb.cc", license2)
 
 		then:
 			adminService.checkUser("admin", "admin", license1) == true

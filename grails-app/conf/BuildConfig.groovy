@@ -47,7 +47,7 @@ grails.project.dependency.resolution = {
         grailsHome()
         grailsCentral()
 
-        //mavenLocal()
+        mavenLocal()
         mavenCentral()
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
@@ -57,8 +57,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
 
         if (env == 'jenkins') {
-            mavenRepo name: 'HMS',
-              root: 'http://192.168.0.35:8080/artifactory/HMS'
+            mavenRepo 'http://192.168.0.35:8080/artifactory/HMS'
         }
     }
     dependencies {
@@ -119,7 +118,7 @@ grails.project.dependency.resolution = {
         compile ":codenarc:0.19"
 
         if (env == 'jenkins') {
-            runtime "grails-roomplanner-api:grails-roomplanner-api:0.3"
+            runtime "grails-roomplanner-api:grails-roomplanner-api:0.4"
         }
 
     }

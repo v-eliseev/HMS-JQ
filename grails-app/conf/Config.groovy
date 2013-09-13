@@ -112,7 +112,7 @@ log4j = {
     //debug 'org.codehaus.groovy.grails.orm.hibernate'
     // Enable Hibernate SQL logging with param values
     //trace  'org.hibernate.type'
-    //debug  'org.hibernate.SQL'
+    //trace  'org.hibernate'
 
     error  'grails.app'
 

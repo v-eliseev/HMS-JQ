@@ -77,13 +77,14 @@ class ReservationService {
 				status: status
 			)
 
-		if (!reservation.save()) {
-			log.debug("... Failed")
-		 	throw new Exception('Reservation was not created')
-		}
-
 		hotel.addToReservations(reservation)
-		hotel.save()
+		if(!hotel.save(flush: true)) {
+			log.debug("Saving hotel reservations failed")
+ 			hotel.errors.each {
+        		log.error(it)
+    		}			
+		 	throw new Exception('Reservation was not created')
+		 }
 
 		log.debug("... Successful")
 

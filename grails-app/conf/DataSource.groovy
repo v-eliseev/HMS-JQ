@@ -32,11 +32,11 @@ environments {
     }
     test {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "create"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
         dataSource_plancache {
-            dbCreate = "create-drop"
+            dbCreate = "create"
             url = "jdbc:h2:mem:testCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }

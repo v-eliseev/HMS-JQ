@@ -47,7 +47,7 @@ class LicenseService {
 
 	def createDemoLicense(String licenseKey = null) {
 		Hotel h = DemoDataScript.generateRandomData()
-		log.debug("Hotel with demo data created: " + h)
+		log.trace("Hotel with demo data created: " + h)
 		License newLicense = new License(
 				key: licenseKey ? licenseKey : generateLicenseKey(),
 				issued: new Date(),
@@ -60,7 +60,7 @@ class LicenseService {
 			newLicense.errors.each { log.error(it) }
 			throw new Exception('License was not created')
 		}
-		log.debug("License created: " + newLicense)
+		log.trace("License created: " + newLicense)
 		newLicense
 	}
 

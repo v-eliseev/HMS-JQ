@@ -16,7 +16,7 @@ grails.project.fork = [
     // configure settings for the test-app JVM, uses the daemon by default
     test: false, //[maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
     // configure settings for the run-app JVM
-    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    run: false, //[maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the run-war JVM
     war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the Console UI JVM
@@ -81,9 +81,9 @@ grails.project.dependency.resolution = {
 
         //runtime ":hibernate:3.6.10.1" 
         runtime ":hibernate4:4.1.11.1"
-        build ":tomcat:7.0.42"
+        runtime ":tomcat:7.0.42"
 
-        compile (":lesscss-resources:1.3.3")
+        compile ":lesscss-resources:1.3.3"
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.5.6"
 
@@ -115,10 +115,10 @@ grails.project.dependency.resolution = {
         test ":geb:0.9.1"
         test ":code-coverage:1.2.6"
 
-        compile ":codenarc:0.19"
+        test ":codenarc:0.19"
 
         if (env == 'jenkins') {
-            runtime "grails-roomplanner-api:grails-roomplanner-api:0.4"
+            runtime "grails-roomplanner-api:grails-roomplanner-api:0.5"
         }
 
     }

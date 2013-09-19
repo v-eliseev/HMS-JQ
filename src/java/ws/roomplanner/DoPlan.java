@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="license" type="{http://roomplanner/}license" minOccurs="0"/>
  *         &lt;element name="roomList" type="{http://roomplanner/}room" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="roomCategoryList" type="{http://roomplanner/}roomCategory" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="reservationList" type="{http://roomplanner/}reservation" maxOccurs="unbounded" minOccurs="0"/>
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "doPlan", propOrder = {
+    "license",
     "roomList",
     "roomCategoryList",
     "reservationList",
@@ -39,10 +41,35 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class DoPlan {
 
+    protected License license;
     protected List<Room> roomList;
     protected List<RoomCategory> roomCategoryList;
     protected List<Reservation> reservationList;
     protected List<RoomAssignment> roomAssignmentList;
+
+    /**
+     * Gets the value of the license property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link License }
+     *     
+     */
+    public License getLicense() {
+        return license;
+    }
+
+    /**
+     * Sets the value of the license property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link License }
+     *     
+     */
+    public void setLicense(License value) {
+        this.license = value;
+    }
 
     /**
      * Gets the value of the roomList property.

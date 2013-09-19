@@ -59,6 +59,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ScoreDetail }
+     * 
+     */
+    public ScoreDetail createScoreDetail() {
+        return new ScoreDetail();
+    }
+
+    /**
      * Create an instance of {@link Reservation }
      * 
      */
@@ -72,6 +80,14 @@ public class ObjectFactory {
      */
     public Score createScore() {
         return new Score();
+    }
+
+    /**
+     * Create an instance of {@link License }
+     * 
+     */
+    public License createLicense() {
+        return new License();
     }
 
     /**

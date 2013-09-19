@@ -15,7 +15,7 @@ class LicenseFilters {
                 log.trace("Before...")
                 def licenseInstance = RequestUtils.getLicense(request)
                 if (!licenseInstance) {
-                    log.debug("Redirecting to login page...")
+                    log.trace("Redirecting to login page...")
                     redirect(controller: 'login')
                     return false
                 }

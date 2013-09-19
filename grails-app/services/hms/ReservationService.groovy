@@ -65,7 +65,7 @@ class ReservationService {
 
 	def createReservation(License license, def params) {
 
-		log.debug("Create reservation for $license from parameters: $params")
+		log.trace("Create reservation for $license from parameters: $params")
 
 		def hotel = license.getHotel()
 		def status = reservationStatusService.getStatusPlanned()
@@ -79,14 +79,14 @@ class ReservationService {
 
 		hotel.addToReservations(reservation)
 		if(!hotel.save(flush: true)) {
-			log.debug("Saving hotel reservations failed")
+			log.error("Saving hotel reservations failed")
  			hotel.errors.each {
         		log.error(it)
     		}			
 		 	throw new Exception('Reservation was not created')
 		 }
 
-		log.debug("... Successful")
+		log.trace("... Successful")
 
 		reservation
 	}

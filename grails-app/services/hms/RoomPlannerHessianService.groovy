@@ -10,6 +10,7 @@ import roomplanner.api.Room as RoomDto
 import roomplanner.api.Reservation as ReservationDto
 import roomplanner.api.RoomAssignment as RoomAssignmentDto
 import roomplanner.api.Plan as PlanDto
+import roomplanner.api.License as LicenseDto
 
 import org.joda.time.Interval
 
@@ -17,7 +18,10 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 
     def roomPlannerRemoteService
 
-	def convertData(def roomCategories, def rooms, def reservations, def roomAssignments) {
+	def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments) {
+
+        def licenseDto = new LicenseDto(key: license.key)
+
         def roomCategoriesDto = roomCategories.collect { roomCategory ->
             new RoomCategoryDto(
                 id: roomCategory.id
@@ -55,15 +59,15 @@ class RoomPlannerHessianService implements IRoomPlannerService {
         }
         log.trace("RoomAssignments: " + roomAssignmentsDto)
 
-        [ roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto ]
+        [ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto ]
 
 	}
 
-	def callPlanner(def roomCategoriesDto, def roomsDto, def reservationsDto, def roomAssignmentsDto) {
+	def callPlanner(def licenseDto, def roomCategoriesDto, def roomsDto, def reservationsDto, def roomAssignmentsDto) {
         def plan
         try {
             log.trace("RoomPlanner call..")
-            plan = roomPlannerRemoteService.doPlan(roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
+            plan = roomPlannerRemoteService.doPlan(licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
             log.trace("...done")
         } 
         catch (Exception e) {

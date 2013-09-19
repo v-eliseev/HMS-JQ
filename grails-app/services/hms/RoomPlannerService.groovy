@@ -116,8 +116,8 @@ class RoomPlannerService {
 				throw new Exception("Unsupported remote type: [${mode}]")
 		}
 
-		def (roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto) = 
-			remoteService.convertData(roomCategories, rooms, reservations, roomAssignments)
+		def (licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto) = 
+			remoteService.convertData(license, roomCategories, rooms, reservations, roomAssignments)
 
 		if (reservationRequest != null) {
 			log.trace("Reservation to check: $reservationRequest")
@@ -131,7 +131,7 @@ class RoomPlannerService {
 
 		log.trace("Reservation to plan: $reservationsDto")
 
-		def planDto = remoteService.callPlanner(roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
+		def planDto = remoteService.callPlanner(licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
 		
 		Plan plan = remoteService.convertResponse(license, planDto)
 		plan

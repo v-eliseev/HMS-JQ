@@ -23,21 +23,21 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
         dataSource_plancache {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
     test {
         dataSource {
             dbCreate = "create"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
         dataSource_plancache {
             dbCreate = "create"
-            url = "jdbc:h2:mem:testCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:testCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
     production {
@@ -51,7 +51,7 @@ environments {
         }
         dataSource_plancache {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
 }

@@ -7,8 +7,6 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-grails.server.port.http = 9090
-
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
@@ -27,6 +25,10 @@ def env = System.getProperty('grails.env')
 
 if (env in ['development', 'test']) {
     grails.plugin.location.'roomplanner-api' = '../roomplanner-api'
+    grails.server.port.http = 9090
+}
+else {
+    grails.server.port.http = 80
 }
 
 grails.project.dependency.resolver = "maven" // or ivy
@@ -97,7 +99,7 @@ grails.project.dependency.resolution = {
         compile ":jquery-ui:1.8.24"
         compile ":jquery-mobile:1.1.0.5"
 
-        runtime ":resources:1.2"
+        runtime ":resources:1.2.1"
 
         compile ":spring-security-core:1.2.7.3"
         //compile ":spring-mobile:0.4"

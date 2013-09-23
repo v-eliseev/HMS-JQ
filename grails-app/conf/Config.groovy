@@ -59,14 +59,15 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     development {
-        grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
+        //grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
         //grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
+        grails.roomplannerURL = "http://planner.roombix.ru"
     }
     test {
         grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
     }
     production {
-        grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
+        grails.roomplannerURL = "http://planner.roombix.ru"
     }
 }
 
@@ -164,14 +165,14 @@ service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoa
 service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
 service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
 
-service.roomplanner.mode = "Hessian"
+service.roomplanner.mode = "SOAP"  // SOAP, Hessian
 
 cxf {
 	client {
 		roomPlannerServiceClient {
 			wsdl = "src/java/roomPlanner.wsdl" //only used for wsdl2java script target
 			//wsdlArgs = "-autoNameResolution"
-			outputDir = "src/java/ws"
+			outputDir = "src/java"
       namespace = "ws.roomplanner"
 
 			clientInterface = ws.roomplanner.RoomPlannerService

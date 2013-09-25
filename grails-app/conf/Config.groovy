@@ -181,7 +181,7 @@ cxf {
 			connectionTimeout = 0 //no timeout
       allowChunking = true
 
-      secured = true
+      secured = false
       username = "184f4c1f-d814-4124-9adb-4bb4d445d0a6"
       password = "qAEX2X2NKXYhvvtz"
 		}

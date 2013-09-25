@@ -16,8 +16,9 @@ class CustomAuthenticationFilter extends RequestHolderAuthenticationFilter {
 	 * @see org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter#attemptAuthentication(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request,
-	HttpServletResponse response) throws AuthenticationException {
+	public Authentication attemptAuthentication(
+		HttpServletRequest request,
+		HttpServletResponse response) throws AuthenticationException {
 
 		final String PARAM_LICENSE_KEY = "j_licenseKey";
 		final String SESSION_LICENSE_KEY = "sessionLicenseKey";

@@ -23,7 +23,7 @@ class RoomPlannerService {
 	def getCurrentPlan(License license) {
 		Plan currentPlan = Plan.findByLicenseId(license.id)
 		if (currentPlan) {
-			log.debug("Saved plan found")
+			log.trace("Saved plan found")
 		}
 		else {
 			currentPlan = createNewPlan(license)
@@ -34,7 +34,7 @@ class RoomPlannerService {
 	def deleteSavedPlan(License license) {
 		Plan plan = getSavedPlan(license)
 		if (plan != null) {
-			log.debug("Delete saved plan...")
+			log.trace("Delete saved plan...")
 			plan.delete()
 			Hotel h = license.hotel
 			license.hotel = null
@@ -54,7 +54,7 @@ class RoomPlannerService {
 	def createNewPlan(License license) {
 		Plan plan = getSavedPlan(license)
 		if (plan != null) {
-			log.debug("Delete saved plan...")
+			log.trace("Delete saved plan...")
 			plan.delete()
 		}
 

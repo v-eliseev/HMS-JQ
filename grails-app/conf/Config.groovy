@@ -59,9 +59,9 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     development {
-        //grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
+        grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
         //grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
-        grails.roomplannerURL = "http://planner.roombix.ru"
+        //grails.roomplannerURL = "http://planner.roombix.ru"
     }
     test {
         grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
@@ -166,6 +166,7 @@ service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerR
 service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
 
 service.roomplanner.mode = "SOAP"  // SOAP, Hessian
+//service.roomplanner.mode = "Hessian" // SOAP, Hessian
 
 cxf {
 	client {
@@ -179,9 +180,9 @@ cxf {
 			serviceEndpointAddress = "${service.roomplanner.soap.url}"
 			receiveTimeout = 0 //no timeout
 			connectionTimeout = 0 //no timeout
-      allowChunking = true
+      allowChunking = false
 
-      secured = false
+      secured = true
       username = "184f4c1f-d814-4124-9adb-4bb4d445d0a6"
       password = "qAEX2X2NKXYhvvtz"
 		}

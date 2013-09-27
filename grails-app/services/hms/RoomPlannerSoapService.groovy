@@ -3,6 +3,7 @@ package hms
 import roomplanner.Plan
 import roomplanner.RoomAssignment
 import roomplanner.Score
+import roomplanner.ConstraintMatch
 
 import ws.roomplanner.Reservation as ReservationDto
 import ws.roomplanner.Room as RoomDto
@@ -68,28 +69,39 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 		Converts SOAP response to domain data
 	*/
 	def convertResponse(def license, def dtoPlan) {
-		
-		log.debug("dtoPlan:" + dtoPlan)
+        log.trace("dtoPlan:" + dtoPlan)
 
-		Plan plan = new Plan()
-		plan.licenseId = license.id
-		plan.score = new Score(
-			feasible: dtoPlan.score.feasible,
-			hard: dtoPlan.score.hardScoreConstraints,
-			soft: dtoPlan.score.softScoreConstraints
-		)
-		dtoPlan.roomAssignments.each {
-			plan.addToRoomAssignments(
-					new RoomAssignment(
-						roomId: it.room.id,
-						reservationId: it.reservation.id,
-						moveable: it.moveable
-						).save()
-					)
-		}
-		//plan.save()
-		plan
+        Plan plan = new Plan()
+        plan.licenseId = license.id
+        plan.score = new Score(
+            feasible: dtoPlan.score.feasible,
+            hard: dtoPlan.score.hardScoreConstraints,
+            soft: dtoPlan.score.softScoreConstraints
+        )
 
+        dtoPlan.roomAssignments.each {
+            log.trace("dtoRoomAssignment: [id: $it.id, roomId: $it.room.id, reservationId: $it.reservation.id, moveable: $it.moveable]")
+            def ra = new RoomAssignment(
+                        roomId: it.room.id,
+                        reservationId: it.reservation.id,
+                        moveable: it.moveable
+                        )
+            log.trace("RoomAssignment: [roomId: $ra.roomId, reservationId: $ra.reservationId, moveable: $ra.moveable]")
+            plan.addToRoomAssignments(ra)
+        }
+
+        dtoPlan.score.scoreDetails.each { scoreDetail ->
+            log.trace("ScoreDetail: [constraintName: $scoreDetail.constraintName, roomAssignments: $scoreDetail.roomAssignments, weight: $scoreDetail.weight")
+            def c = new ConstraintMatch(
+                rule: scoreDetail.constraintName,
+                roomAssignment: plan.roomAssignments.find { it.reservationId == scoreDetail.roomAssignments[0].reservation.id },
+                weight: scoreDetail.weight
+                )
+            log.trace("Constraint: [rule: \"$c.rule\", roomAssignment: $c.roomAssignment, weight: $c.weight]")
+            plan.addToConstraintMatches(c)
+        }
+
+        plan
 	}
 
 	/**

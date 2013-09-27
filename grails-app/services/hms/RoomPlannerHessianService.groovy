@@ -18,7 +18,10 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 
     def roomPlannerRemoteService
 
-	def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments) {
+	/**
+        Converts domain data to service DTO
+    */
+    def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments) {
 
         def licenseDto = new LicenseDto(key: license.key)
 
@@ -63,6 +66,9 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 
 	}
 
+    /**
+        Calls the planner via Hessian
+    */
 	def callPlanner(def licenseDto, def roomCategoriesDto, def roomsDto, def reservationsDto, def roomAssignmentsDto) {
         def plan
         try {
@@ -77,6 +83,9 @@ class RoomPlannerHessianService implements IRoomPlannerService {
         plan
 	}
 
+    /**
+        Converts service response to domain data
+    */
 	def convertResponse(def license, def dtoPlan) {
         log.trace("dtoPlan:" + dtoPlan)
 

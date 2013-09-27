@@ -114,13 +114,13 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.1'
 
         test(":spock:0.7") { exclude "spock-grails-support" }
-        test ":geb:0.9.1"
+        test ":geb:0.9.2-SNAPSHOT"
         test ":code-coverage:1.2.6"
 
         test ":codenarc:0.19"
 
         if (env == 'jenkins') {
-            runtime "grails-roomplanner-api:grails-roomplanner-api:0.5"
+            runtime "grails-roomplanner-api:grails-roomplanner-api:0.5.20"
         }
 
     }

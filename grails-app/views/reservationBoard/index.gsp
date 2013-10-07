@@ -42,7 +42,7 @@
     </tbody>
     </table>
 
-<r:script>
+<script type='text/javascript'>
 $('#reportrange').daterangepicker(
     {
         ranges: {
@@ -67,7 +67,7 @@ $('#reportrange').daterangepicker(
         });        
     }
 );
-</r:script>    
+</script>    
 </content>
 
 <content tag="sidemenu">

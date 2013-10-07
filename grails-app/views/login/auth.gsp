@@ -81,7 +81,7 @@
 </div>
 </div>
 
-<r:script>	
+<script type='text/javascript'>	
 (function() {
 	document.forms['loginForm'].elements['j_username'].focus();
 })();
@@ -119,7 +119,7 @@ $("#changeLicenseKey").click(function() {
 	return true;
 });
 
-</r:script>
+</script>
 
 </body>
 </html>

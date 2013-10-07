@@ -7,7 +7,7 @@ class LicenseFilters {
     def filters = {
         addLicenseToModel(
             //controller:'*',
-            controllerExclude:'(superuser|login)', 
+            controllerExclude:'(superuser|login|assets)', 
             action:'*'
         ) {
 

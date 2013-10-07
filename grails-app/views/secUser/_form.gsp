@@ -71,7 +71,7 @@
     </div>
 </div>
 
-<r:script>
+<script type='text/javascript'>
     $('#enabledTB').toggleButtons({
         label: {
             enabled: 'Yes',
@@ -96,4 +96,4 @@
         autoclose: 'true',
         todayHighlight: 'true'
     });
-</r:script>
+</script>

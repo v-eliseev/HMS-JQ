@@ -33,7 +33,9 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 //grails.urlmapping.cache.maxsize = 1000
 
 // DBConsole resources
-grails.resources.adhoc.patterns = ['/dbconsole/images/*', '/dbconsole/css/*', '/dbconsole/js/*'] 
+//grails.resources.adhoc.patterns = ['/dbconsole/images/*', '/dbconsole/css/*', '/dbconsole/js/*'] 
+
+grails.assets.excludes = ["bootstrap/*.less"]
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64

@@ -5,7 +5,6 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
-<r:require modules="raphael, daterangepicker, planningboard"/>
 </head>
 
 <content tag="top">
@@ -33,7 +32,9 @@
 </div>
 </div>
 
-<r:script>
+<asset:javascript src="planningboard/planningboard.js"/>
+
+<script type='text/javascript'>
 $(document).ready(function() {
 	$('#planningrange').daterangepicker(
 	{
@@ -93,7 +94,7 @@ $(document).ready(function() {
     });
     </g:each>
 });
-</r:script>
+</script>
 </content>
 
 <content tag="sidemenu">

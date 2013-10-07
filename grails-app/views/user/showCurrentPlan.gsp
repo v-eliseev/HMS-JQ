@@ -96,7 +96,7 @@
 </div>
 </div>
 
-<r:script>
+<script type='text/javascript'>
 $(document).ready(function() {
 	$('#planningrange').daterangepicker(
 	{
@@ -137,7 +137,7 @@ $(document).ready(function() {
 	</g:each>
 	</g:each>
 });
-</r:script>
+</script>
 </content>
 
 <content tag="sidemenu">

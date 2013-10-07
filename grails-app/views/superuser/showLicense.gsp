@@ -26,14 +26,14 @@
                             action="delete" id="${licenseInstance.id}" elementId="deleteBtn">
                             <i class="icon-remove"></i>&nbsp;Delete
                         </g:link>
-                        <r:script>
+                        <script type='text/javascript'>
                             $("#deleteBtn").click(function(e) {
                                 e.preventDefault();
                                 bootbox.confirm("Are you sure?", function(confirmed) {
                                     console.log("Confirmed: "+confirmed);
                                 });
                             });        
-                        </r:script>
+                        </script>
                     </div>
                 </div>
             </g:if>

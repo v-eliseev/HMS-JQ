@@ -24,7 +24,6 @@ grails.project.fork = [
 def env = System.getProperty('grails.env')
 
 if (env in ['development', 'test']) {
-    grails.plugin.location.'roomplanner-api' = '../roomplanner-api'
     grails.server.port.http = 9090
 }
 else {
@@ -45,6 +44,8 @@ grails.project.dependency.resolution = {
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
 
+        mavenRepo 'http://192.168.0.35:8080/artifactory/HMS'
+
         grailsPlugins()
         grailsHome()
         grailsCentral()
@@ -57,10 +58,6 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-
-        if (env == 'jenkins') {
-            mavenRepo 'http://192.168.0.35:8080/artifactory/HMS'
-        }
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -85,21 +82,21 @@ grails.project.dependency.resolution = {
         runtime ":hibernate4:4.1.11.1"
         runtime ":tomcat:7.0.42"
 
-        compile ":lesscss-resources:1.3.3"
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.5.6"
-
         compile ":remoting:1.3"
         
         runtime ":mail:1.0.1"
-        //compile ":quartz:1.0-RC9"
         compile ":quartz2:2.1.6.2"
 
-        runtime ":jquery:1.10.2"
-        compile ":jquery-ui:1.8.24"
-        compile ":jquery-mobile:1.1.0.5"
+        compile ":asset-pipeline:0.9.0"
+        compile ":less-asset-pipeline:0.8.2"
 
-        runtime ":resources:1.2.1"
+        // runtime ":jquery:1.10.2"
+        // compile ":jquery-ui:1.8.24"
+        // compile ":jquery-mobile:1.1.0.5"
+
+        // runtime ":resources:1.2.1"
 
         compile ":spring-security-core:1.2.7.3"
         //compile ":spring-mobile:0.4"
@@ -113,16 +110,26 @@ grails.project.dependency.resolution = {
 
         compile ':cache:1.1.1'
 
-        test(":spock:0.7") { exclude "spock-grails-support" }
-        test ":geb:0.9.2-SNAPSHOT"
-        test ":code-coverage:1.2.6"
-
-        test ":codenarc:0.19"
-
-        if (env == 'jenkins') {
-            runtime "grails-roomplanner-api:grails-roomplanner-api:0.5.20"
+        test(":spock:0.7") { 
+            exclude "spock-grails-support" 
+            export = false
+        }
+        test (":geb:0.9.2-SNAPSHOT") {
+            export = false
         }
 
+        if (env == 'jenkins') {
+            test (":code-coverage:1.2.6") {
+                export = false
+            }
+        }
+
+        test (":codenarc:0.19") {
+            export = false
+        }
+
+       runtime ":roomplanner-api:0.5.24"
+       runtime ":roombix-ui:0.1.11"
     }
 }
 

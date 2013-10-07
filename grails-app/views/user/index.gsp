@@ -1,7 +1,7 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
-<r:require module="daterangepicker"/>
+<!-- r:require module="daterangepicker"/-->
 </head>
 
 <content tag="top">
@@ -54,8 +54,8 @@
         </div>
 
         <div class="form-group">
-            <g:submitToRemote class="btn btn-info btn-block" action="checkReservation"
-            onSuccess="alert(data.status)" name="submitCheck" value="Check!"/>
+            <!--g:submitToRemote class="btn btn-info btn-block" action="checkReservation"
+            onSuccess="alert(data.status)" name="submitCheck" value="Check!"/-->
             <div id="checkReservationStatus"></div>
         </div>
 
@@ -121,9 +121,9 @@
 </div>
 </div>
 
-<r:script>
+<script type='text/javascript'>
 $('#daterange').daterangepicker();
-</r:script>
+</script>
 </content>
 
 <content tag="sidemenu">

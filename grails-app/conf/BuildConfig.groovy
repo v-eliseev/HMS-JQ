@@ -128,8 +128,8 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-       runtime ":roomplanner-api:0.5.24"
-       runtime ":roombix-ui:0.1.11"
+       runtime ":roomplanner-api:0.5.26"
+       runtime ":roombix-ui:0.1.12"
     }
 }
 

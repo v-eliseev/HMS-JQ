@@ -35,7 +35,10 @@ grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
 // DBConsole resources
 //grails.resources.adhoc.patterns = ['/dbconsole/images/*', '/dbconsole/css/*', '/dbconsole/js/*'] 
 
-grails.assets.excludes = ["bootstrap/*.less"]
+grails.assets.excludes = [
+  "bootstrap/*.less",
+  "font-awesome/*.less"
+]
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64

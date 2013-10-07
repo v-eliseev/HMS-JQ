@@ -1,4 +1,4 @@
-//=require raphael/raphael-min.js
+//=require raphael/raphael.js
 
 !function ($) {
 

@@ -38,7 +38,16 @@
 
 # "temporary" build files
 /target
+/target-eclipse
+/sql
 
 # other
 *.iws
 
+*.sublime-project
+*.sublime-workspace
+cobertura.ser
+*.log
+*.log.1
+
+/.gradle

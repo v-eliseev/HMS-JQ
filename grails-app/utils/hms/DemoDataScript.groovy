@@ -254,50 +254,53 @@ class DemoDataScript {
 				description: randomString(120),
 				shortDescription: randomString(30),
 				isBookableOnline: true
-			).save()
+			)
 			h.addToRoomCategories(rc)
 		}
 		
 		def rcList = h.roomCategories.asList()
-		
+
 		// generate rooms
 		for (i in 1..NUMBER_OF_ROOMS) {
 			def rc = rcList[seed.nextInt(rcList.size())]
 			Room r = new Room(
 				name: randomString(8),
-				roomCategory: rc,
+				//roomCategory: rc,
 				adults: seed.nextInt(ADULTS_MAX)+1
-			).save()
+			)
 			rc.addToRooms(r)
 		}
 
-		rcList.each() {
-			log.debug("RoomCategory: $it.id[$it.name]")
-			log.debug(it.rooms)
-		}
+		// save hotel configuration
+		h.save(flush:true)
+
 		
 		// generate reservations
 		for (i in 1..NUMBER_OF_RESERVATIONS) {
-			DateTime fromDate = new DateTime().minusDays(seed.nextInt(MAX_DURATION_DAYS))
-						// years[seed.nextInt(years.size())],
-						// months[seed.nextInt(months.size())],
-						// days[seed.nextInt(days.size())],
-						// 12,
-						// 0,
-						// 0,
-						// 0
-						// )
-			DateTime toDate = fromDate.plusDays(seed.nextInt(MAX_DURATION_DAYS)+1)
+			DateTime nowDate = DateTime.now()
+			DateTime fromDate = nowDate.minusDays(MAX_DURATION_DAYS).plusDays(seed.nextInt(MAX_DURATION_DAYS)+3).withTime(12,0,0,0)
+			DateTime toDate = fromDate.plusDays(seed.nextInt(MAX_DURATION_DAYS)+1).withTime(12,0,0,0)
+			def code = ReservationStatus.StatusCode.PLANNED 
+			if (toDate < nowDate) {
+				code = ReservationStatus.StatusCode.CHECKED_OUT
+			} else if (fromDate < nowDate) {
+				code = ReservationStatus.StatusCode.CHECKED_IN
+			} 
+			def reservationStatus = ReservationStatus.findByCode(code) ?: new ReservationStatus(code: code).save()
+			if (reservationStatus == null) {
+				throw new Exception("Reserevation status is null")
+			}
 			Reservation r = new Reservation(
 				fromDate: fromDate.toDate(),
 				toDate: toDate.toDate(),
 				roomCategory: rcList[seed.nextInt(rcList.size())],
-				adults: seed.nextInt(ADULTS_MAX)+1
-			).save()
+				adults: seed.nextInt(ADULTS_MAX)+1,
+				status: reservationStatus
+			)
 			h.addToReservations(r)
 		}
 		
-		h.save()
+		h.save(flush:true)
 
 		h
 	}

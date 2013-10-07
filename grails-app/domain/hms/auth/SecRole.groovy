@@ -13,4 +13,10 @@ class SecRole extends DomainBaseClass {
 	static constraints = {
 		authority blank: false, unique: true
 	}
+
+	def beforeDelete = {
+		SecUserRole.withNewSession {
+			SecUserRole.findAllByRole(this)*.delete(flush:true)
+		}
+	}
 }

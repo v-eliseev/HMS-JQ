@@ -1,7 +1,7 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
-<r:require modules="togglebuttons, datepicker, bootbox"/>
+<r:require modules="togglebuttons, datetimepicker, bootbox"/>
 </head>
 
 <content tag="top">

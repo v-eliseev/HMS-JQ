@@ -37,4 +37,9 @@ class License extends DomainBaseClass {
 	String toString() {
 		key
 	}
+
+	static mapping = {
+		sort 'key'
+		sort users: 'username', order: 'asc'
+	}
 }

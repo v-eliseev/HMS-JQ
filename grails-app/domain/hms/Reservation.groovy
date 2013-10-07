@@ -11,27 +11,32 @@ class Reservation extends DomainBaseClass {
 	Integer adults
 	RoomCategory roomCategory
 	
-	//ReservationStatus reservationStatus
+	ReservationStatus status
  	//DistributionChannel distributionChannel
     //ReservationMotive reservationMotive
     //ReservationType reservationType
     //CancellationReason cancellationReason
 	String notes
 	
-	//Hotel hotel
-	static belongsTo = Hotel  
+	Hotel hotel
+	static belongsTo = [hotel:Hotel]  
 	
     static constraints = {
 		//distributionChannel(nullable:true)
 		//reservationMotive(nullable:true)
 		//reservationType(nullable:true) // TODO
-		//reservationStatus(nullable:true) // TODO
+		status nullable: false
 		//cancellationReason(nullable:true)
-		notes(nullable: true)
+		notes nullable: true
 		//hotel(nullable: false)
-		adults(nullable: false)
-		roomCategory(nullable: false)
+		adults nullable: false
+		roomCategory nullable: false
     }
+
+   	static mapping = {
+		sort 'fromDate'
+	}
+
 	
 	static def getAllFor(License license) {
 		def hotel = license.getHotel()
@@ -41,9 +46,18 @@ class Reservation extends DomainBaseClass {
 
 	static def getAllFor(License license, Date fromDate, Date toDate) {
 		def hotel = license.getHotel()
-		def planningWindow = new Interval(fromDate, toDate)
-		def result = hotel.reservations.findAll { 
-			new Interval(it.fromDate, itToDate).overlap(planningWindow)
+
+		def c = Reservation.createCriteria()
+		def result = c {
+			eq('hotel', hotel)
+			or {
+				between('fromDate', fromDate, toDate)
+				between('toDate', fromDate, toDate)
+				and {
+					lt('fromDate', fromDate)
+					gt('toDate', toDate)
+				}
+			}
 		}
 		result
 	}

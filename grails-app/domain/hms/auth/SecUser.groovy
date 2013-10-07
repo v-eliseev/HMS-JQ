@@ -10,8 +10,7 @@ class SecUser extends DomainBaseClass {
 	String username
 	String password // hashed
 
-	License license
-	static belongsTo = License
+	static belongsTo = [license: License]
 	
 	boolean enabled = true
 	boolean accountExpired = false
@@ -38,7 +37,13 @@ class SecUser extends DomainBaseClass {
 	Set<SecRole> getAuthorities() {
 		SecUserRole.findAllByUser(this).collect { it.role } as Set
 	}
-	
+
+	def beforeDelete = {
+		SecUserRole.withNewSession {
+			SecUserRole.findAllByUser(this)*.delete(flush:true)
+		}
+	}
+
 	@Override
 	String toString() {
 		username + "@" + license?.key

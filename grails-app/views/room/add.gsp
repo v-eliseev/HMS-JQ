@@ -1,7 +1,7 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.admin.rooms" /></title>
-<r:require modules="togglebuttons, datepicker"/>
+<r:require modules="togglebuttons, datetimepicker"/>
 </head>
 
 <content tag="top"> 

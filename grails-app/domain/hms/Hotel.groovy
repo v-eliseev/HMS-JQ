@@ -66,4 +66,9 @@ class Hotel extends DomainBaseClass {
 	String toString() {
 		name 
 	}
+
+	static mapping = {
+		sort 'name'
+		roomCategories sort: 'name', order: 'asc'
+	}
 }

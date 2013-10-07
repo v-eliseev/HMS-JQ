@@ -6,8 +6,7 @@ class SecUserRole implements Serializable {
 
 	SecUser user
 	SecRole role
-
-	static belongsTo = [SecUser, SecRole]
+	//static belongsTo = [user: SecUser, role: SecRole]
 
 	boolean equals(other) {
 		if (!(other instanceof SecUserRole)) {

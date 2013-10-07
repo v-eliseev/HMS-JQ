@@ -7,7 +7,7 @@ class Room extends DomainBaseClass {
 	String description
 	Integer adults = 1
 	
-	static belongsTo = [RoomCategory] //, Reservation]
+	static belongsTo = [roomCategory:RoomCategory] //, Reservation]
 	
 //	static hasMany = [reservations: Reservation]
 		
@@ -18,6 +18,10 @@ class Room extends DomainBaseClass {
 		adults(min:0)
     }
 	
+	static mapping = {
+		sort 'name'
+	}
+
 	static def getAllFor(License license) {
 		def hotel = license.getHotel()
 		def result = hotel.roomCategories*.rooms

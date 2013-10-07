@@ -59,14 +59,15 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     development {
-        grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
+        //grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
         //grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
+        grails.roomplannerURL = "http://planner.roombix.ru"
     }
     test {
         grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
     }
     production {
-        grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
+        grails.roomplannerURL = "http://planner.roombix.ru"
     }
 }
 
@@ -109,6 +110,11 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
     
+    //debug 'org.codehaus.groovy.grails.orm.hibernate'
+    // Enable Hibernate SQL logging with param values
+    //trace  'org.hibernate.type'
+    //trace  'org.hibernate'
+
     error  'grails.app'
 
     warn   'org.mortbay.log'
@@ -120,42 +126,65 @@ log4j = {
            'grails.app.domain.roomplanner', 
            'grails.app.controllers.hms', 
            'grails.app.controllers.roomplanner',
-           'grails.app.utils'
+           'grails.app.utils',
+           'grails.app.task',     // Quartz
+           'grails.app.filters'   // Filters
     
     error  'org.apache.cxf'
 
+
+    debug  'roomplanner'
+    debug  'hms'
     debug  'hms.DemoDataScript'
+
+    off    'org.hibernate.tool.hbm2ddl'
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'hms.auth.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.UserRole'
-grails.plugins.springsecurity.authority.className = 'hms.auth.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
+grails.plugins.springsecurity.authority.className = 'hms.auth.SecRole'
 grails.plugins.springsecurity.useSecurityEventListener = true
 grails.plugins.springsecurity.logout.handlerNames =
 	['rememberMeServices',
 	 'securityContextLogoutHandler',
 	 'securityEventListener']
-	
-//grails.gorm.default.mapping = {
-//	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentDateTime, class: org.joda.time.DateTime
-//	"user-type" type: org.jadira.usertype.dateandtime.joda.PersistentInterval, class: org.joda.time.Interval
-//}	
 
-service.roomplanner.url = "${grails.roomplannerURL}/services/roomPlanner"
+// environments {
+//   development {
+//     grails.plugins.springsecurity.mock.active = true
+//     grails.plugins.springsecurity.mock.fullName = "Administrator"
+//     grails.plugins.springsecurity.mock.email = "admin@email.com"
+//     grails.plugins.springsecurity.mock.username =  "admin"
+//     grails.plugins.springsecurity.mock.roles = [ 'ROLE_USER', 'ROLE_ADMIN' ]
+//     grails.plugins.springsecurity.ipRestrictions = [ '/**': ['127.0.0.0/8', '::1/128'] ]
+//   }
+// }   
+	
+service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoap"
+service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
+service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
+
+service.roomplanner.mode = "SOAP"  // SOAP, Hessian
+//service.roomplanner.mode = "Hessian" // SOAP, Hessian
+
 cxf {
 	client {
 		roomPlannerServiceClient {
 			wsdl = "src/java/roomPlanner.wsdl" //only used for wsdl2java script target
 			//wsdlArgs = "-autoNameResolution"
-			outputDir = "src/java/ws"
+			outputDir = "src/java"
       namespace = "ws.roomplanner"
 
-			clientInterface = ws.roomplanner.RoomPlannerService
-			serviceEndpointAddress = "${service.roomplanner.url}"
+			clientInterface = ws.roomplanner.RoomPlannerSoapService
+			serviceEndpointAddress = "${service.roomplanner.soap.url}"
 			receiveTimeout = 0 //no timeout
 			connectionTimeout = 0 //no timeout
-      allowChunking = true
+      allowChunking = false
+
+      secured = true
+      username = "184f4c1f-d814-4124-9adb-4bb4d445d0a6"
+      password = "qAEX2X2NKXYhvvtz"
 		}
 	}
 }
@@ -177,3 +206,26 @@ grails {
 //   sources = "jquery"
 //   version = "2.0.2"
 // }
+// Uncomment and edit the following lines to start using Grails encoding & escaping improvements
+
+/* remove this line 
+// GSP settings
+grails {
+    views {
+        gsp {
+            encoding = 'UTF-8'
+            htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
+            codecs {
+                expression = 'html' // escapes values inside null
+                scriptlet = 'none' // escapes output from scriptlets in GSPs
+                taglib = 'none' // escapes output from taglibs
+                staticparts = 'none' // escapes output from static template parts
+            }
+        }
+        // escapes all not-encoded output at final stage of outputting
+        filteringCodecForContentType {
+            //'text/html' = 'html'
+        }
+    }
+}
+remove this line */

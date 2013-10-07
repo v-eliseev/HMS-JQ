@@ -20,22 +20,22 @@
   <r:layoutResources />
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container">
     <g:render template="/templates/navigationBar"/> 
-    <div class="row-fluid show-grid">
-      <div class="span12" id="main_body">
+    <div class="row show-grid">
+      <div class="col-lg-12" id="main_body">
         <g:layoutBody/>
       </div>
     </div>  
 
-    <div class="row-fluid show-grid">
-      <div class="span12" id="footer">
+    <div class="row show-grid">
+      <div class="col-lg-12" id="footer">
         Footer
       </div>
     </div>
-    <div class="row-fluid show-grid">
-      <div class="span12" id="copyright">
-        <small>Copyright &copy;2010-2012 Roombix, Ltd.</small>
+    <div class="row show-grid">
+      <div class="col-lg-12" id="copyright">
+        <small>Copyright &copy;2010-2013 Roombix, Ltd.</small>
       </div>
     </div>
   </div>

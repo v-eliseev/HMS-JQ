@@ -1,17 +1,19 @@
 package roomplanner
 
-class RoomAssignment {
+class RoomAssignment implements Serializable {
 	
 	static mapping = {
-		datasource 'cache'
+		datasource 'plancache'
 	}
 	
 	long reservationId
 	long roomId
 	boolean moveable
 
-	static belongsTo = Plan
+	Plan plan
+	static belongsTo = [plan:Plan]
 
     static constraints = {
+    	reservationId nullable: true
     }
 }

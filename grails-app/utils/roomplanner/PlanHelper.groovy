@@ -6,7 +6,11 @@ import hms.RoomCategory
 
 import org.joda.time.DateTime
 import org.joda.time.Interval
+import org.joda.time.Duration
 
+import groovy.util.logging.Log4j
+
+@Log4j
 class PlanHelper {
 	
 	static List<Reservation> getReservation(DateTime forDate, Room room, List<RoomAssignment> inList) {
@@ -22,6 +26,44 @@ class PlanHelper {
 				//return
 			}
 		}	
+		return result
+	}
+
+	static def getRoomAssignments(def rooms, def fromDate, def toDate, def inList) {
+
+		def result = [:]
+
+		rooms.each() { room ->
+			result << [(room) : getRoomAssignments(room, fromDate, toDate, inList)]
+		}
+		result
+	}
+	
+	static List<Reservation> getRoomAssignments(Room room, DateTime fromDate, DateTime toDate, List<RoomAssignment> inList) {
+
+		def result = []
+
+		def assignments = inList.findAll { it.roomId == room.id }
+
+		Iterator<DateTime> iterator = new DateTimeRange(fromDate, toDate).iterator()
+		while (iterator.hasNext()) {
+			DateTime date = iterator.next()
+
+			def ra = null
+			assignments.find { assignment ->
+				Reservation reservation = Reservation.findById(assignment.reservationId) 
+				if (convertInterval(reservation.fromDate, reservation.toDate).contains(date)) {
+					ra = reservation
+					def days = new Duration(date.withTime(12,0,0,0), new DateTime(reservation.toDate)).toStandardDays().getDays()
+					log.trace("date: $date, toDate: $reservation.toDate, days: $days")
+					days.times() { 
+						if (iterator.hasNext()) { iterator.next() } 
+					}
+					assignments.remove(assignment)
+				}
+			}
+			result << ra
+		}
 		return result
 	}
 	

@@ -1,15 +1,36 @@
 package hms
 
-import hms.ReservationStatus
+class ReservationStatusService {
 
-class ReservationStatusService extends CRUDService {
-
-	def getDomainClass() {
-		ReservationStatus.class
+	private def getStatus(ReservationStatus.StatusCode statusCode) {
+		ReservationStatus.findByCode(statusCode) ?: new ReservationStatus(code: statusCode).save()
 	}
-	
+
 	def getStatusNew() {
-		getDomainClass().findByName("New")
+		getStatus(ReservationStatus.StatusCode.NEW)
+	}
+
+	def getStatusCancelled() {
+		getStatus(ReservationStatus.StatusCode.CANCELLED)
+	}
+
+	def getStatusPlanned() {
+		getStatus(ReservationStatus.StatusCode.PLANNED)
+	}
+
+	def getStatusCheckedIn() {
+		getStatus(ReservationStatus.StatusCode.CHECKED_IN)
+	}
+
+	def getStatusCheckedOut() {
+		getStatus(ReservationStatus.StatusCode.CHECKED_OUT)
+	}
+
+	def getStatusNoShow() {
+		getStatus(ReservationStatus.StatusCode.NO_SHOW)
 	}
 	
+	def listReservationStatus() {
+		ReservationStatus.findAll()
+	}
 }

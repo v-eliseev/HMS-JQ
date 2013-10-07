@@ -1,12 +1,15 @@
 package roomplanner
 
-class Plan {
+class Plan implements Serializable {
 
 	static mapping = {
-		datasource 'cache'
+		datasource 'plancache'
 	} 
 	
-	static hasMany = [roomAssignments: RoomAssignment]
+	Date dateCreated
+	Date lastUpdated
+
+	static hasMany = [roomAssignments: RoomAssignment, constraintMatches: ConstraintMatch]
 	
 	Score score
 	long licenseId

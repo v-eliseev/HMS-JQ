@@ -6,9 +6,9 @@ class RoomCategory extends DomainBaseClass {
 	String shortDescription
 	String description
 	Boolean isBookableOnline = true
-	//Hotel hotel
 	
-	static belongsTo = Hotel
+	Hotel hotel
+	static belongsTo = [hotel:Hotel]
 	
 	static hasMany = [rooms: Room, roomFeatures: RoomFeature]
 
@@ -18,6 +18,11 @@ class RoomCategory extends DomainBaseClass {
 		description(nullable: true)
 		isBookableOnline()
 		//hotel(nullable: false)
+	}
+
+	static mapping = {
+		sort 'name'
+		rooms sort: 'name', order: 'asc'
 	}
 
 //	Set<RoomFeature> getFeatures() {

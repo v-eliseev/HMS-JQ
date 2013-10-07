@@ -47,7 +47,7 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
 
 			if (!user) {
 				// TODO customize 'springSecurity.errors.login.fail' i18n message in app's messages.properties with org name
-				log.warn "User not found: $username for license $licenseKey"
+				log.error "User not found: $username for license $licenseKey"
 				throw new UsernameNotFoundException('User not found', username)
 			}
 
@@ -75,14 +75,13 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
 		def salt = saltSource.getSalt(userDetails)
 
 		if (authentication.credentials == null) {
-			log.debug 'Authentication failed: no credentials provided'
+			log.error 'Authentication failed: no credentials provided'
 			throw new BadCredentialsException('Bad credentials', userDetails)
 		}
 
 		String presentedPassword = authentication.credentials
 		if (!passwordEncoder.isPasswordValid(userDetails.password, presentedPassword, salt)) {
-			log.debug 'Authentication failed: password does not match stored value'
-
+			log.error 'Authentication failed: password does not match stored value'
 			throw new BadCredentialsException('Bad credentials', userDetails)
 		}
 	}

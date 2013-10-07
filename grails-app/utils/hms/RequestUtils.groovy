@@ -9,16 +9,17 @@ import org.apache.commons.logging.LogFactory
 
 import hms.auth.SecUser
 
+import groovy.util.logging.Log4j
+
+@Log4j
 class RequestUtils {
 
-	private static final log = LogFactory.getLog(this.getClass())
-	
 	public static License getLicense(javax.servlet.http.HttpServletRequest request) {
         License license = null
         HttpSession sess = request.session
         SecurityContext ctx = sess.getAttribute("SPRING_SECURITY_CONTEXT")
         String licenseKey = ctx?.authentication?.principal?.licenseKey
-        log.debug("License Key: ${licenseKey}")
+        log.trace("License Key: ${licenseKey}")
         if (licenseKey) {
             license = License.findByKey(licenseKey)
         }

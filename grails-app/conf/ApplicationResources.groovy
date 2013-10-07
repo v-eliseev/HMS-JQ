@@ -26,19 +26,18 @@
 
     resource url:'less/custom-bootstrap.less', attrs:[rel: "stylesheet/less", type:'css']
 
-    resource url:'js/bootstrap/bootstrap-transition.js'
-    resource url:'js/bootstrap/bootstrap-alert.js'
-    resource url:'js/bootstrap/bootstrap-modal.js'
-    resource url:'js/bootstrap/bootstrap-dropdown.js'
-    resource url:'js/bootstrap/bootstrap-scrollspy.js'
-    resource url:'js/bootstrap/bootstrap-tab.js'
-    resource url:'js/bootstrap/bootstrap-tooltip.js'
-    resource url:'js/bootstrap/bootstrap-popover.js'
-    resource url:'js/bootstrap/bootstrap-button.js'
-    resource url:'js/bootstrap/bootstrap-collapse.js'
-    resource url:'js/bootstrap/bootstrap-carousel.js'
-    resource url:'js/bootstrap/bootstrap-typeahead.js'
-    resource url:'js/bootstrap/bootstrap-affix.js'
+    resource url:'js/bootstrap/transition.js'
+    resource url:'js/bootstrap/alert.js'
+    resource url:'js/bootstrap/button.js'
+    resource url:'js/bootstrap/carousel.js'
+    resource url:'js/bootstrap/collapse.js'
+    resource url:'js/bootstrap/dropdown.js'
+    resource url:'js/bootstrap/modal.js'
+    resource url:'js/bootstrap/tooltip.js'
+    resource url:'js/bootstrap/popover.js'
+    resource url:'js/bootstrap/scrollspy.js'
+    resource url:'js/bootstrap/tab.js'
+    resource url:'js/bootstrap/affix.js'
   }
 
   bootbox {
@@ -50,9 +49,9 @@
   daterangepicker {
     dependsOn 'bootstrap'
 
-    resource url:'css/daterangepicker/daterangepicker.css'
+    resource url:'css/daterangepicker/daterangepicker-bs3.css'
 
-    resource url:'js/daterangepicker/date.js'
+    resource url:'js/daterangepicker/moment.min.js'
     resource url:'js/daterangepicker/daterangepicker.js'
   }
 
@@ -63,12 +62,12 @@
     resource url:'js/togglebuttons/jquery.toggle.buttons.js'
   }
 
-   datepicker {
+   datetimepicker {
      dependsOn 'bootstrap'
 
-     resource url:'less/datepicker/datepicker.less', attrs:[rel: "stylesheet/less", type:'css']
+     resource url:'less/datetimepicker/bootstrap-datetimepicker.less', attrs:[rel: "stylesheet/less", type:'css']
 
-     resource url:'js/datepicker/bootstrap-datepicker.js'
+     resource url:'js/datetimepicker/bootstrap-datetimepicker.js'
   //   // TODO add locales
 
   }
@@ -86,4 +85,18 @@
     resource url:'less/custom-font-awesome.less', attrs:[rel: "stylesheet/less", type:'css']
   }
 
+  chart {
+    resource url:'js/chart/Chart.min.js'
+  }
+
+  raphael {
+    resource url:'js/raphael/raphael-min.js'
+  }
+
+  planningboard {
+    dependsOn 'jquery, raphael'
+
+    resource url:'js/planningboard/planningboard.js'
+  }
+  
 }

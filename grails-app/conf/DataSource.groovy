@@ -40,18 +40,19 @@ environments {
             url = "jdbc:h2:mem:testCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
-    production {
+    dbschema {
         dataSource {
-			pooled = true
-			driverClassName = "com.mysql.jdbc.Driver"
-			username = "hms"
-			password = "hms"
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "root"
+            password = ""
             dbCreate = "update"
             url = "jdbc:mysql://localhost:3306/hms"
         }
-        dataSource_plancache {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+    }
+    production {
+        dataSource {
+            jndiName = "java:comp/env/jdbc/MysqlDS"
         }
     }
 }

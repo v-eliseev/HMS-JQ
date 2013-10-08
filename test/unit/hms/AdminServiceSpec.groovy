@@ -3,11 +3,13 @@ package hms
 import grails.test.mixin.*
 import spock.lang.*
 
+import hms.security.SystemUser
+
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
 @TestFor(AdminService)
-@Mock([Partner, SystemUser])
+@Mock([SystemUser])
 class AdminServiceSpec extends Specification {
 
 	def adminService

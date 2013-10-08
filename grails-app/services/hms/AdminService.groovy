@@ -5,6 +5,8 @@ import hms.auth.SecRole
 import hms.auth.SecUser
 import hms.auth.SecUserRole
 
+import hms.security.SystemUser
+
 class AdminService {
 
 	def createUser(String username, String password, String email, License license) {
@@ -90,4 +92,19 @@ class AdminService {
 		SecRole.findAll()
 	}
 
+    def createSystemUser(def username, def password) {
+
+		log.trace("Creating system user: [$username]:[$password]...")
+    	def systemUser = new SystemUser(
+    		username: username,
+    		password: password
+    		)
+		if(!systemUser.save(flush:true)) {
+			log.error("SystemUser [$username] was not created")
+			throw new Exception("SystemUser was not created")
+		}
+
+		log.trace("...done.")
+		systemUser
+	}
 }

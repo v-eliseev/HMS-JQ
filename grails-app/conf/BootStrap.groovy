@@ -1,9 +1,6 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory
 
 import grails.util.GrailsUtil
 import hms.AdminService
-import hms.DemoDataScript
 import hms.License
 import hms.LicenseService
 import hms.auth.SecUser
@@ -11,10 +8,15 @@ import hms.auth.SecUserRole
 
 class BootStrap {
 
-	//protected final Logger log = LoggerFactory.getLogger(getClass())
-	
+	def grailsApplication
+
 	def init = {  servletContext ->
 
+		grailsApplication.config.startNanoTime = System.nanoTime()	
+
+        /**
+		*	Environment dependent config
+        */
 		switch (GrailsUtil.environment) {
 
 			case "development":
@@ -27,23 +29,21 @@ class BootStrap {
 
 				def adminRole = adminService.getAdminRole()
 				def userRole = adminService.getUserRole()
-				//def superuserRole = adminService.getRole('ROLE_SUPERUSER')
 				log.info("Roles created")
 				
 				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license)
 				SecUserRole.create(adminUser, adminRole)
-				// adminUser.addToAuthorities(adminRole)
-				// adminUser.save()
 				log.info("Admin user for license " + license.key + " created")
 
 				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license)
 				SecUserRole.create(userUser, userRole)
-				// userUser.addToAuthorities(userRole)
-				// userUser.save()
 				log.info("Normal user for license " + license.key + " created")
 
-				// DemoDataScript.generateRandomData(license)
-				
+				adminService.createSystemUser(
+					"superuser",
+					"password"
+				)
+
 				break
 			} catch (Exception e) {
 				log.error("Error executing BootStrap", e)

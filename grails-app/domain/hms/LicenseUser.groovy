@@ -3,7 +3,7 @@ package hms
 import java.security.SecureRandom
 import java.util.Date;
 
-class SystemUser {
+class LicenseUser {
 	def springSecurityService
 
 	String username

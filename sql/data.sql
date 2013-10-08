@@ -1,0 +1,1 @@
+insert into system_user (version,`password`,username) values (0,"password","superuser");

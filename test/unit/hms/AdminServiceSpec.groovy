@@ -1,4 +1,4 @@
-package roomplanner
+package hms
 
 import grails.test.mixin.*
 import spock.lang.*

@@ -4,18 +4,24 @@ import grails.test.mixin.*
 import spock.lang.*
 
 import hms.security.SystemUser
+import hms.auth.SecUser
+import hms.auth.SecRole
+import hms.auth.SecUserRole
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
 @TestFor(AdminService)
-@Mock([SystemUser])
+@Mock([SystemUser, License, SecUser, SecRole, SecUserRole, 
+	Hotel, RoomCategory, Room, Reservation, ReservationStatus])
 class AdminServiceSpec extends Specification {
 
 	def adminService
+	def licenseService
 
 	def setup() {
 		adminService = new AdminService()
+		licenseService = new LicenseService()
 	}
 
 	def 'Check systemUser creation' () {
@@ -47,6 +53,20 @@ class AdminServiceSpec extends Specification {
 		cleanup:
 			su1.delete(flush:true)
 
+	}
+
+	def 'Demo license creation check' () {
+		when:
+			def demoLicense = licenseService.createDemoLicense()
+			def adminUser = adminService.createDemoUser(demoLicense)
+
+		then:
+			demoLicense != null
+			adminService.checkUser("admin", "admin", demoLicense) == true
+			adminUser.getAuthorities().size() == 1
+
+		cleanup:
+			demoLicense.delete(flush:true)
 	}
 
 }

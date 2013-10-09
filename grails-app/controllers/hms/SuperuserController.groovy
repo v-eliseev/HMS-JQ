@@ -24,8 +24,8 @@ class SuperuserController extends BaseController {
 	def createStandardLicense() {
 		License licenseInstance = licenseService.createStandardLicense()
 		SecRole adminRole = adminService.getAdminRole()
-		SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance)
-		SecUserRole.create(adminUser, adminRole)
+		SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
+		//SecUserRole.create(adminUser, adminRole)
 		
 		redirect(action: "showLicense", id: licenseInstance.id)
 	}
@@ -33,8 +33,8 @@ class SuperuserController extends BaseController {
 	def createDemoLicense() {
 		License licenseInstance = licenseService.createDemoLicense()
 		SecRole adminRole = adminService.getAdminRole()
-		SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance)
-		SecUserRole.create(adminUser, adminRole)
+		SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
+		//SecUserRole.create(adminUser, adminRole)
 		
 		redirect(action: "showLicense", id: licenseInstance.id)
 	}

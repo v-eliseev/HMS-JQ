@@ -9,7 +9,12 @@ import hms.security.SystemUser
 
 class AdminService {
 
-	def createUser(String username, String password, String email, License license) {
+	def createUser(String username, String password, String email, License license, def roles) {
+
+		if (roles == null || roles.size() == 0) {
+			log.error("User must have at least one role")
+			throw new IllegalArgumentException()
+		}
 
 		def hash = new CustomPasswordEncoder().encodePassword(password, license.key)
 		log.trace("Create user: $username, password: $hash, email: $email, license: $license")
@@ -21,6 +26,10 @@ class AdminService {
 		license.addToUsers(newUser)
 		license.save()
 		log.trace("... Successful")
+
+		roles.each() {
+			SecUserRole.create(newUser, it)
+		}
 			
 		newUser
 	}
@@ -64,9 +73,13 @@ class AdminService {
 
 	def createDemoUser(License license) {
 		if (!license.demoMode) {
-			throw new Exception("Demo license is required")
+			log.error("Demo license is required")
+			throw new IllegalArgumentException("Demo license is required")
 		}
-		SecUser newUser = createUser("admin", "admin", "aa@bb.cc", license)
+
+		def adminRole = getAdminRole()
+		SecUser newUser = createUser("admin", "admin", "aa@bb.cc", license, [adminRole])
+
 		newUser
 	}
 

@@ -31,12 +31,10 @@ class BootStrap {
 				def userRole = adminService.getUserRole()
 				log.info("Roles created")
 				
-				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license)
-				SecUserRole.create(adminUser, adminRole)
+				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license, [adminRole])
 				log.info("Admin user for license " + license.key + " created")
 
-				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license)
-				SecUserRole.create(userUser, userRole)
+				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license, [userRole])
 				log.info("Normal user for license " + license.key + " created")
 
 				adminService.createSystemUser(

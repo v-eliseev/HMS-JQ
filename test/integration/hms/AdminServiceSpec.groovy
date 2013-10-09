@@ -74,6 +74,7 @@ class AdminServiceSpec extends Specification {
 		then:
 			demoLicense != null
 			adminService.checkUser("admin", "admin", demoLicense) == true
+			adminUser.getAuthorities().size() == 1
 
 		cleanup:
 			demoLicense.delete(flush:true)

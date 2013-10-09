@@ -8,6 +8,10 @@ class TaxCode extends DomainBaseClass {
 	Double value
 	String units
 
-  static constraints = {
+    static constraints = {
+	}
+
+  	static mapping = {
+		value column: '`value`'
 	}
 }

@@ -10,6 +10,7 @@ class SecUser extends DomainBaseClass {
 	String username
 	String password // hashed
 
+	License license
 	static belongsTo = [license: License]
 	
 	boolean enabled = true
@@ -22,7 +23,7 @@ class SecUser extends DomainBaseClass {
 	Date expireAccount = null // never
 
 	static constraints = {
-		username blank: false, unique: 'license'
+		username unique: 'license'
 		password blank: false
 		license nullable: false
 		email nullable: false

@@ -39,6 +39,7 @@ class License extends DomainBaseClass {
 	}
 
 	static mapping = {
+		key column: '`key`'
 		sort 'key'
 		sort users: 'username', order: 'asc'
 	}

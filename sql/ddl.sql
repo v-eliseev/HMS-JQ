@@ -197,9 +197,9 @@
     create table configuration (
         id bigint not null auto_increment,
         version bigint not null,
-        key varchar(255) not null,
+        `key` varchar(255) not null,
         user_id bigint not null,
-        value varchar(255) not null,
+        `value` varchar(255),
         primary key (id)
     );
 
@@ -303,7 +303,7 @@
         expires datetime,
         hotel_id bigint,
         issued datetime,
-        key varchar(255) not null,
+        `key` varchar(255) not null,
         last_updated datetime not null,
         owner_id bigint,
         primary key (id)
@@ -496,7 +496,7 @@
         last_updated datetime not null,
         name varchar(255) not null,
         units varchar(255) not null,
-        value double precision not null,
+        `value` double precision not null,
         primary key (id)
     );
 
@@ -615,7 +615,7 @@
         add constraint uc_sec_role_1 unique (authority);
 
     alter table sec_user 
-        add constraint unique-username unique (license_id, username);
+        add constraint `unique-username` unique (license_id, username);
 
     alter table sec_user 
         add index FK375DF2F9DEBACC1A (license_id), 

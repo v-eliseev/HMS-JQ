@@ -15,24 +15,26 @@ class AdminServiceSpec extends Specification {
 
 	def licenseService
 	def adminService
+	def adminRole
 
 	def  setup() {
 		licenseService = new LicenseService()
 		adminService = new AdminService()
+		adminRole = adminService.getAdminRole()
 
 		assert licenseService != null
 		assert adminService != null
+		assert adminRole != null
 	}
 
 	def 'Create users' () {
 		given:
 			def license1 = licenseService.createStandardLicense()
 			def license2 = licenseService.createStandardLicense()
-
 		when:
-			adminService.createUser("admin", "admin", "aa@bb.cc", license1)
-			adminService.createUser("manager", "manager", "aa@bb.cc", license1)
-			adminService.createUser("admin", "admin", "aa@bb.cc", license2)
+			adminService.createUser("admin", "admin", "aa@bb.cc", license1, [adminRole])
+			adminService.createUser("manager", "manager", "aa@bb.cc", license1, [adminRole])
+			adminService.createUser("admin", "admin", "aa@bb.cc", license2, [adminRole])
 
 		then:
 			SecUser.list().size() == 3
@@ -50,14 +52,14 @@ class AdminServiceSpec extends Specification {
 			def license2 = licenseService.createStandardLicense()
 
 		when:
-			adminService.createUser("admin", "admin", "aa@bb.cc", license1)
-			adminService.createUser("manager", "manager", "aa@bb.cc", license1)
-			adminService.createUser("admin", "admin", "aa@bb.cc", license2)
+			adminService.createUser("admin", "admin", "aa@bb.cc", license1, [adminRole])
+			adminService.createUser("manager", "manager", "aa@bb.cc", license1, [adminRole])
+			adminService.createUser("admin", "admin", "aa@bb.cc", license2, [adminRole])
 
 		then:
 			adminService.checkUser("admin", "admin", license1) == true
 			adminService.checkUser("admin", "manager", license1) == false
-			adminService.checkUser("supervisor", "manager", license1) == false
+			adminService.checkUser("manager", "supervisor", license1) == false
 			adminService.checkUser("admin", "admin", license2) == true
 
 		cleanup:
@@ -67,12 +69,15 @@ class AdminServiceSpec extends Specification {
 	}
 
 	def 'Demo license creation check' () {
-		when:
+		given:
 			def demoLicense = licenseService.createDemoLicense()
+			assert demoLicense != null
+
+		when:
 			def adminUser = adminService.createDemoUser(demoLicense)
 
 		then:
-			demoLicense != null
+			adminUser != null
 			adminService.checkUser("admin", "admin", demoLicense) == true
 			adminUser.getAuthorities().size() == 1
 

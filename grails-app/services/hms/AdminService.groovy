@@ -19,7 +19,7 @@ class AdminService {
 		def hash = new CustomPasswordEncoder().encodePassword(password, license.key)
 		log.trace("Create user: $username, password: $hash, email: $email, license: $license")
 		def newUser = new SecUser(username: username, password: hash, email: email, license: license)
-		if (!newUser.save()) {
+		if (!newUser.save(flush:true)) {
 			log.trace("... Failed")
 		 	throw new Exception('User was not created')
 		}
@@ -72,7 +72,7 @@ class AdminService {
 	}
 
 	def createDemoUser(License license) {
-		if (!license.demoMode) {
+		if (!license?.demoMode) {
 			log.error("Demo license is required")
 			throw new IllegalArgumentException("Demo license is required")
 		}
@@ -98,7 +98,7 @@ class AdminService {
 	}
 	
 	def getRole(String roleCode) {
-		SecRole.findByAuthority(roleCode) ?: new SecRole(authority: roleCode).save()
+		SecRole.findByAuthority(roleCode) ?: new SecRole(authority: roleCode).save(flush:true)
 	}
 
 	def getAllRoles() {

@@ -7,8 +7,6 @@ import spock.lang.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-//@TestFor(License)
-//@Mock([License, SecUser, Hotel, Room, RoomCategory, Reservation])
 class LicenseSpec extends Specification {
 
 	def licenseService
@@ -25,7 +23,7 @@ class LicenseSpec extends Specification {
 	def 'License must delete related Hotel and SecUsers'() {
 		given:
 			def license = licenseService.createDemoLicense()
-			def user = adminService.createUser("admin", "admin", "admin@email.com", license)
+			def user = adminService.createDemoUser(license)
 
 			assert license != null
 			assert user != null

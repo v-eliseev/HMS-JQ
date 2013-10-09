@@ -1,8 +1,11 @@
 package hms
 
 import grails.test.mixin.*
-import hms.auth.*
 import spock.lang.*
+
+import hms.auth.SecUser
+import hms.auth.SecRole
+import hms.auth.SecUserRole
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -25,13 +28,10 @@ class SecUserSpec extends Specification {
 	def 'Cascade deletion of SecUserRole'() {
 		given:
 			def license = licenseService.createDemoLicense()
-			def adminUser = adminService.createUser("admin", "admin", "admin@email.com", license)
-			def adminRole = adminService.getAdminRole()
-			SecUserRole.create(adminUser, adminRole, true)
+			def adminUser = adminService.createDemoUser(license)
 
 			assert license != null
 			assert adminUser != null
-			assert adminRole != null
 
 			//assert License.list().size() == 1
 			assert Hotel.list().size() == 1

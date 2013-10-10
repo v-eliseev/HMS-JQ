@@ -1,55 +1,32 @@
-<g:applyLayout name="threeblocks">
-
+<g:applyLayout name="twoblocks">
 <head>
-<title><g:message code="title.admin.users" /></title>
+<title><g:message code="title.admin.rooms" /></title>
+%{-- <r:require modules="togglebuttons, datetimepicker"/> --}%
 </head>
 
-<content tag="top">
-<ul>
-    <li><g:link action="resetPassword" id="${userInstance.id}">Reset password</g:link></li>
-    <li><g:link action="deleteUser" id="${userInstance.id}">Delete user</g:link></li>
-</ul>
+<content tag="top"> 
 </content>
 
-<content tag="main">
-<form class="form-horizontal">
+<content tag="main"> 
+<legend>User data</legend>
+<g:form class="form-horizontal" action="update" method="POST">
     <fieldset>
-        <legend>User data</legend>
-        <g:if test="${userInstance?.username}">
-            <div class="control-group">
-                <label class="control-label">
-                    <g:message code="user.name.label" default="Username" />:
-                </label>
-                <div class="controls">
-                    <span class="input-xlarge uneditable-input">
-                        <g:fieldValue bean="${userInstance}" field="username"/>
-                    </span>
-                </div>
+        <div class="control-group">
+            <label class="control-label">
+                <g:message code="user.name.label" default="Username" />:
+            </label>
+            <div class="controls">
+                <input type="text" placeholder="Enter username" readonly>
             </div>
-        </g:if>
-        <g:if test="${userInstance?.enabled}">
-            <div class="control-group">
-                <label class="control-label">
-                    <g:message code="user.enabled.label" default="Enabled" />:
-                </label>
-                <div class="controls">
-                    <span class="input-xlarge uneditable-input">
-                        <g:fieldValue bean="${userInstance}" field="enabled"/>
-                    </span>
-                    <g:link class="btn btn-primary btn-small" 
-                        action="changeEmail" id="${userInstance.id}">
-                        Change
-                    </g:link>
-                </div>
-            </div>
-        </g:if>
-
+        </div>
+        <g:render template="userform"/>
     </fieldset>
-</form>
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-primary" href="#">Update</button>
+        </div>
+    </div>
+</g:form>
 </content>
 
-<content tag="sidemenu">
-<g:render template="/templates/adminNavigation"/>
-</content>
-
-</g:applyLayout>
+</g:applyLayout

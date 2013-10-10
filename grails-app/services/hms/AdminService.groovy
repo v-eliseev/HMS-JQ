@@ -28,7 +28,7 @@ class AdminService {
 		log.trace("... Successful")
 
 		roles.each() {
-			SecUserRole.create(newUser, it)
+			SecUserRole.create(newUser, it, true)
 		}
 			
 		newUser

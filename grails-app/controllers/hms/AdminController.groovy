@@ -17,20 +17,28 @@ class AdminController extends BaseController {
 	def index() {
 		
 		License license = getLicense(request)
-		log.debug("License: ${license}")
-		// def hotel = license.hotel
-		// def usersList = license.users
+		def hotel = license.hotel
+		def usersList = license.users
 		// def roomCategoryList = hotel.roomCategories
 		// def reservationList = hotel.reservations
 		
 		[
-			licenseInstance: license
-			// hotelInstance: hotel, 
-			// userInstanceList: usersList, 
+			licenseInstance: license,
+			hotelInstance: hotel, 
+			userInstanceList: usersList, 
 			// roomCategoryInstanceList: roomCategoryList,
 			// reservationInstanceList: reservationList
 		]
 	}
+
+	def addUser() {
+
+	}
+
+	def showUser() {
+		
+	}
+
 
 	def resetPassword() {
 		def user = SecUser.get(params.id)		

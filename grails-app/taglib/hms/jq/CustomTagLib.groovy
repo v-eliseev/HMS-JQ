@@ -5,7 +5,7 @@ class CustomTagLib {
 	static namespace = "hms"
 
 	/**
-		<hms:booleanIcon value = "${userInstance.enabled}" inverse/>
+	* <hms:booleanIcon value = "${userInstance.enabled}"/>
 	*/
 	def booleanIcon = { attrs, body ->
 		def colorCode = ""
@@ -19,17 +19,15 @@ class CustomTagLib {
 		}
 		
 		if (value) {
-			colorCode = "badge-success"
+			colorCode = "label-success"
 			iconCode = "icon-ok"
-			iconColorCode = "icon-white"
 		}  
 		else {
-			colorCode = "badge-important"
+			colorCode = "label-danger"
 			iconCode = "icon-remove"
-			iconColorCode = "icon-white"
 		}
 
-		out << "<span class=\"badge " + colorCode + "\"><i class=\"" + iconCode + " " + iconColorCode + "\"></i></span>"
+		out << "<span class=\"label " + colorCode + "\"><i class=\"" + iconCode + "\"></i></span>"
 	}
 
 }

@@ -82,32 +82,29 @@
 </div>
 
 <script type='text/javascript'>	
-(function() {
-	document.forms['loginForm'].elements['j_username'].focus();
-})();
 
 var LICENSE_KEY = 'hms.license.key'; 
+var saveInput = true;
 	
 function isLocalStorageAvailable() {
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
+    try { return 'localStorage' in window && window['localStorage'] !== null; } catch (e) { return false; }
 };
 
 $(document).ready(function() {
+    $("input#username").focus();
 	if(!isLocalStorageAvailable()) {
 		alert('Local storage is not supported');
 	} else {
 		var licenseKey = localStorage.getItem(LICENSE_KEY);
 		if (licenseKey != null) {
-			$(this).find("#licenseKey").text(licenseKey);
+			$("span#licenseKey").text(licenseKey);
 			$("#license_show").show();
 			$("#license_input").hide();
+            saveInput = false;
 		} else {
 			$("#license_input").show();
 			$("#license_show").hide();
+            saveInput = true;
 		}
 	}
 });
@@ -116,7 +113,16 @@ $("#changeLicenseKey").click(function() {
 	localStorage.removeItem(LICENSE_KEY);
     $("#license_input").show();
     $("#license_show").hide();
+    saveInput = true;
+    $("input#licenseKey").focus();
 	return true;
+});
+
+$("#loginForm").submit(function() {
+    if (saveInput) {
+        var licenseKey = $("input#licenseKey").val();
+        localStorage.setItem(LICENSE_KEY, licenseKey);
+    }
 });
 
 </script>

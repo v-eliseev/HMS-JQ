@@ -39,6 +39,10 @@ class AdminController extends BaseController {
 		
 	}
 
+	def saveUser() {
+		
+	}
+
 
 	def resetPassword() {
 		def user = SecUser.get(params.id)		

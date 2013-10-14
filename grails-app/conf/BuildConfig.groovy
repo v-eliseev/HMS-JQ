@@ -23,7 +23,7 @@ grails.project.fork = [
 
 def env = System.getProperty('grails.env')
 
-if (env in ['development', 'test']) {
+if (env in ['development', 'test', 'jenkins', 'test_mysql']) {
     grails.server.port.http = 9090
 }
 else {

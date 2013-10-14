@@ -3,16 +3,16 @@ package hms
 class ReservationStatus extends DomainBaseClass {
 
 	enum StatusCode {
-		NEW,
-		CANCELLED,
-		PLANNED,
-		CHECKED_IN,
-		CHECKED_OUT,
-		NO_SHOW
+		NEW(1),
+		CANCELLED(2),
+		PLANNED(3),
+		CHECKED_IN(4),
+		CHECKED_OUT(5),
+		NO_SHOW(6)
 
-		// StatusCode(String value) { this.value = value }
-		// private final String value
-		// public String value() { return value }		
+		StatusCode(int value) { this.value = value }
+		private final int value
+		public int value() { return value }		
 	}
 
 	StatusCode code
@@ -30,7 +30,7 @@ class ReservationStatus extends DomainBaseClass {
 	}
 
 	static mapping = {
-		code sqlType: 'varchar(12)'	
+		code sqlType: 'integer'	
 	}
 	
 }

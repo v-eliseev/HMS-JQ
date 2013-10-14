@@ -71,6 +71,9 @@ environments {
     test {
         grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
     }
+    test_mysql {
+        grails.roomplannerURL = "http://planner.roombix.ru"
+    }
     production {
         grails.roomplannerURL = "http://planner.roombix.ru"
     }

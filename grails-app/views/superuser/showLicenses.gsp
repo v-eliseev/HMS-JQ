@@ -43,12 +43,13 @@
 
     <div class="btn-group">
         <g:link action="createStandardLicense" class="btn btn-primary">Create license</g:link>
-        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-        <ul class="dropdown-menu">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
             <li><g:link action="createStandardLicense">Create standard license</g:link></li>
             <li><g:link action="createDemoLicense">Create demo license</g:link></li>
         </ul>
     </div>
+
 </content>
 
 <content tag="sidemenu">

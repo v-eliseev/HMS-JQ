@@ -19,8 +19,13 @@ class SecUser extends DomainBaseClass {
 	boolean passwordExpired = false
 
 	String email
-	Date expirePassword = null  // never
-	Date expireAccount = null // never
+	Date expirePassword = null 
+	Integer expirePasswordType = 0 // never
+	Integer expirePasswordEveryCode = 1 // 1 month
+
+	Date expireAccount = null
+	Integer expireAccountType = 0 // never
+	Integer expireAccountEveryCode = 1 // 1 month
 
 	static constraints = {
 		username unique: 'license'

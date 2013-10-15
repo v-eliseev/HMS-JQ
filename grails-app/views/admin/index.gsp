@@ -97,8 +97,4 @@
 
 </content>
 
-<content tag="sidemenu">
-<g:render template="/templates/adminNavigation"/>
-</content>
-
 </g:applyLayout>

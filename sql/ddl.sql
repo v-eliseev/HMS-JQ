@@ -65,11 +65,11 @@
 
     alter table room_category_room_features 
         drop 
-        foreign key FK3EC2ED845A101C83;
+        foreign key FK3EC2ED846E652391;
 
     alter table room_category_room_features 
         drop 
-        foreign key FK3EC2ED846E652391;
+        foreign key FK3EC2ED845A101C83;
 
     alter table sec_user 
         drop 
@@ -381,7 +381,7 @@
     create table reservation_status (
         id bigint not null auto_increment,
         version bigint not null,
-        code varchar(12) not null,
+        code integer not null,
         color_code varchar(255),
         date_created datetime not null,
         description varchar(255),
@@ -429,8 +429,8 @@
     );
 
     create table room_category_room_features (
-        room_category_id bigint not null,
         room_feature_id bigint not null,
+        room_category_id bigint not null,
         primary key (room_category_id, room_feature_id)
     );
 
@@ -463,7 +463,11 @@
         email varchar(255) not null,
         enabled boolean not null,
         expire_account datetime,
+        expire_account_every_code integer not null,
+        expire_account_type integer not null,
         expire_password datetime,
+        expire_password_every_code integer not null,
+        expire_password_type integer not null,
         last_updated datetime not null,
         license_id bigint not null,
         `password` varchar(255) not null,
@@ -600,22 +604,22 @@
         references hotel (id);
 
     alter table room_category_room_features 
-        add index FK3EC2ED845A101C83 (room_feature_id), 
-        add constraint FK3EC2ED845A101C83 
-        foreign key (room_feature_id) 
-        references room_feature (id);
-
-    alter table room_category_room_features 
         add index FK3EC2ED846E652391 (room_category_id), 
         add constraint FK3EC2ED846E652391 
         foreign key (room_category_id) 
         references room_category (id);
 
+    alter table room_category_room_features 
+        add index FK3EC2ED845A101C83 (room_feature_id), 
+        add constraint FK3EC2ED845A101C83 
+        foreign key (room_feature_id) 
+        references room_feature (id);
+
     alter table sec_role 
         add constraint uc_sec_role_1 unique (authority);
 
     alter table sec_user 
-        add constraint `unique-username` unique (license_id, username);
+        add constraint unique-username unique (license_id, username);
 
     alter table sec_user 
         add index FK375DF2F9DEBACC1A (license_id), 

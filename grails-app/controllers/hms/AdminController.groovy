@@ -32,7 +32,12 @@ class AdminController extends BaseController {
 	}
 
 	def addUser() {
-
+		License license = getLicense(request)
+		def allRoles = adminService.getAllRoles()
+		
+		[
+			roleInstanceList: allRoles
+		]
 	}
 
 	def showUser() {
@@ -40,7 +45,9 @@ class AdminController extends BaseController {
 	}
 
 	def saveUser() {
-		
+		License license = getLicense(request)
+
+		log.debug(params)
 	}
 
 

@@ -47,7 +47,7 @@
     			
                 <!-- show text -->
                 <div class="col-lg-9" id="license_show" style="display:none;">
-    				<span class="form-control" id="licenseKey">XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</span> 
+    				<span class="form-control" id="licenseKey" disabled>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</span> 
     				<a href="#" id="changeLicenseKey">Change...</a>
     			</div>
             </div>

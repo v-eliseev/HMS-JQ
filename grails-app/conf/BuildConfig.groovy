@@ -79,7 +79,7 @@ grails.project.dependency.resolution = {
     plugins {
 
         //runtime ":hibernate:3.6.10.1" 
-        runtime ":hibernate4:4.1.11.1"
+        runtime ":hibernate4:4.1.11.2"
         runtime ":tomcat:7.0.42"
 
         compile ":cxf:1.1.1"
@@ -98,6 +98,7 @@ grails.project.dependency.resolution = {
 
         // runtime ":resources:1.2.1"
 
+//        compile ":spring-security-core:2.0-RC2"
         compile ":spring-security-core:1.2.7.3"
         //compile ":spring-mobile:0.4"
 

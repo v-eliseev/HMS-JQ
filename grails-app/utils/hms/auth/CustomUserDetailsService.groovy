@@ -26,7 +26,7 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
 
 			SecUser user = SecUser.findByUsernameAndLicense(username, licenseKey)
 			if (!user) {
-				lor.error("User $username not found")
+				log.error("User $username not found")
 				throw new UsernameNotFoundException('User not found', username)
 			}
 			def authorities = user.authorities.collect {

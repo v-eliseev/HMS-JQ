@@ -41,7 +41,12 @@ class AdminController extends BaseController {
 	}
 
 	def showUser() {
+		License license = getLicense(request)
 		
+		def user = adminService.getUser(params.id)
+		def allRoles = adminService.getAllRoles()
+
+		render(view: "addUser", model: [ user: user, roleInstanceList: allRoles	])
 	}
 
 	def saveUser() {
@@ -63,16 +68,14 @@ class AdminController extends BaseController {
 	}
 
 	
-	def createHotel() {
+	def editHotel() {
+		License license = getLicense(request)
+		def hotel = license.hotel
+		[
+			hotelInstance: hotel
+		]
 	}
 
-	def doCreateHotel() {
-		HotelService hotelService = getServiceFactory().getServiceByName("hotelService")
-		License license = getLicense(request)
-		def newHotel = hotelService.createHotel(params.name, license)
-				
-		redirect action: 'index'
-	}
 
 	def changePassword() {	
 		//AdminService adminService = getServiceFactory().getServiceByName("adminService")

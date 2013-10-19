@@ -1,7 +1,8 @@
 <g:applyLayout name="twoblocks">
 <head>
 <title><g:message code="title.admin.rooms" /></title>
-%{-- <r:require modules="togglebuttons, datetimepicker"/> --}%
+<asset:stylesheet src="datetimepicker/bootstrap-datetimepicker.min.css"/>
+<asset:javascript src="datetimepicker/bootstrap-datetimepicker.min.js"/>
 </head>
 
 <content tag="top"> 
@@ -16,7 +17,7 @@
         <div class="form-group">
             <label for="inputUsername" class="col-lg-2 control-label"><g:message code="user.name.label" default="Username" /></label>
             <div class="col-lg-8">
-                <input type="text"class="form-control" id="inputUsername" name="username" placeholder="Enter username">
+                <input type="text"class="form-control" id="inputUsername" name="username" placeholder="Enter username" value="${user.username}">
             </div>
             <div class="col-lg-2">
                 <span class="label label-success">OK!</span>
@@ -26,7 +27,7 @@
         <div class="form-group">
             <label for="inputEmail" class="col-lg-2 control-label"><g:message code="user.email.label" default="E-Mail" /></label>
             <div class="col-lg-8">
-                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter e-mail">
+                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter e-mail" value="${user.email}">
             </div>
         </div>
 
@@ -69,10 +70,10 @@
             <div class="panel-heading">Account status</div>
             <div class="panel-body">
                 <div class="checkbox">
-                    <label><input type="checkbox" name="accountEnabled" checked>Enabled</label>
+                    <label><g:checkBox name="accountEnabled" checked="${user.enabled}"/>Enabled</label>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" name="accountLocked">Locked</label>
+                    <label><g:checkBox name="accountLocked" checked="${user.accountLocked}"/>Locked</label>
                 </div>
             </div>
         </div>
@@ -83,18 +84,18 @@
     <div class="col-lg-9">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="col-lg-6">
+                <div class="checkbox">
+                    <label><g:checkBox name="expirePassword" checked="${user.expirePassword}"/> Expire password</label>
+                <button type="button" class="btn btn-primary btn-xs pull-right">Now</button>
+                </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Password expires</div>
                 <div class="panel-body">
-                    <button type="button" class="btn btn-primary btn-xs">Expire now</button>
-                    <div class="radio">
-                        <label><input type="radio" name="passwordExpiresType" id="po1" value="1" checked>Never</label>
-                    </div>
                     <div class="radio">
                         <label><input type="radio" name="passwordExpiresType" id="po2" value="2">On</label>
                     </div>
-                    <div>
-                        <input type="text" class="form-control" id="passwordExpiresOn"/>
+                    <div class="input-group" id="passwordExpiresOn">
+                        <input type="text" class="form-control" name="passwordExpiresOn"/>
+                        <span class="input-group-addon">...</span>
                     </div>
                     <div class="radio">
                         <label><input type="radio" name="passwordExpiresType" id="po3" value="3">Every</label>
@@ -163,6 +164,13 @@
     </div>
 </div>
 </g:form>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#passwordExpiresOn').datetimepicker(
+    {
+    })
+});
+</script>
 </content>
 
-</g:applyLayout
+</g:applyLayout>

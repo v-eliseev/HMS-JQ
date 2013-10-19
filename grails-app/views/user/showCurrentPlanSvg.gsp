@@ -5,6 +5,8 @@
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
+<asset:stylesheet src="daterangepicker/daterangepicker-bs3.css"/>
+<asset:javascript src="daterangepicker.js"/>
 </head>
 
 <content tag="top">

@@ -18,7 +18,7 @@
         <li><i class="icon-envelope"> </i>${fieldValue(bean: hotelInstance, field: "eMail")}</li> 
         <li><i class="icon-globe"> </i>${fieldValue(bean: hotelInstance, field: "webSite")}</li> 
     </ul>
-    <g:link controller="admin" action="hotelInfo">More &hellip;</g:link>
+    <g:link controller="admin" action="editHotel">More &hellip;</g:link>
 
 </div>
 <div class="col-lg-8">
@@ -61,11 +61,11 @@
 		<g:sortableColumn property="enabled"
 			title="${message(code: 'license.demoMode.label', default: 'Enabled')}" />
 		<g:sortableColumn property="accountExpired"
-			title="${message(code: 'license.expires.label', default: 'Expired')}" />
+			title="${message(code: 'license.expires.label', default: 'NonExpired')}" />
 		<g:sortableColumn property="accountLocked"
-			title="${message(code: 'license.demoMode.label', default: 'Locked')}" />
+			title="${message(code: 'license.demoMode.label', default: 'NonLocked')}" />
 		<g:sortableColumn property="passwordExpired"
-			title="${message(code: 'license.expires.label', default: 'Password Expired')}" />
+			title="${message(code: 'license.expires.label', default: 'Password NonExpired')}" />
 		<g:sortableColumn property="authorities"
 			title="${message(code: 'license.expires.label', default: 'Authorities')}" />
 	</tr>

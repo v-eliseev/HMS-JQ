@@ -19,21 +19,34 @@ class SuperuserController extends BaseController {
 	def afterInterceptor = [action: this.&handleMobile]
 
 	def index() {
+		def list = licenseService.getAllLicenses()
+
+		[
+			licenseInstanceList: list
+		]
 	}
 
-	def createStandardLicense() {
-		License licenseInstance = licenseService.createStandardLicense()
-		SecRole adminRole = adminService.getAdminRole()
-		SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
-		
-		redirect(action: "showLicense", id: licenseInstance.id)
-	}
+	def createLicense() {
 
-	def createDemoLicense() {
-		License licenseInstance = licenseService.createDemoLicense()
-		SecRole adminRole = adminService.getAdminRole()
-		SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
-		
+		def licenseInstance
+		switch (params.licenseType) {
+		case "demo": 
+			licenseInstance = licenseService.createDemoLicense()
+			SecRole adminRole = adminService.getAdminRole()
+			SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
+			break
+
+		case "production": 
+			licenseInstance = licenseService.createStandardLicense()
+			SecRole adminRole = adminService.getAdminRole()
+			SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
+			break
+
+		default:
+			log.error("Wrong license type")
+			throw new IllegalArgumentException("Wrong license type")
+		} 
+
 		redirect(action: "showLicense", id: licenseInstance.id)
 	}
 
@@ -111,8 +124,10 @@ class SuperuserController extends BaseController {
 	}
 	
 	def showLicenses() {
-		def list = License.findAll({});
-		[licenseInstanceList: list]
+		def list = licenseService.getAllLicenses()
+		[
+			licenseInstanceList: list
+		]
 	}
 
 	def showApplicationStatus() {

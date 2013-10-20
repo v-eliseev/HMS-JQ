@@ -1,12 +1,10 @@
-<g:applyLayout name="threeblocks">
+<g:applyLayout name="twoblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
-<r:require modules="togglebuttons, datetimepicker, bootbox"/>
+<asset:javascript src="bootbox/bootbox.js" />
 </head>
 
 <content tag="top">
-    <li><g:link action="resetAdminPassword" id="${licenseInstance.id}">Reset Admin Password</g:link></li>
-    <li><g:link action="deleteLicense" id="${licenseInstance.id}">Delete License</g:link></li>
 </content>
 
 <content tag="main">
@@ -23,7 +21,7 @@
                             <g:fieldValue bean="${licenseInstance}" field="key"/>
                         </span>
                         <g:link class="btn btn-danger btn-small" 
-                            action="delete" id="${licenseInstance.id}" elementId="deleteBtn">
+                            action="deleteLicense" id="${licenseInstance.id}" elementId="deleteBtn">
                             <i class="icon-remove"></i>&nbsp;Delete
                         </g:link>
                         <script type='text/javascript'>
@@ -115,13 +113,6 @@
         </div>
     </div>
 
-</content>
-
-<content tag="sidemenu">
-    <li><g:link action="showLicenses">Show licences</g:link></li>
-    <li><g:link action="showApplicationStatus">Show application status</g:link></li>
-    <li><g:link action="showStatistics">Show statistics</g:link></li>
-    <li><g:link action="cleanup">Cleanup</g:link></li>
 </content>
 
 </g:applyLayout>

@@ -84,11 +84,16 @@ class LicenseService {
 	def deleteLicense(id) {
 		def licenseInstance = License.get(id)
 
-		licenseInstance.users.each {
-			SecUserRole.removeAll(it)
-		}
+		// licenseInstance.users.each {
+		// 	SecUserRole.removeAll(it)
+		// }
 			
 		licenseInstance.delete()
+	}
+
+	def getAllLicenses() {
+		def list = License.findAll({});
+		list
 	}
 
 	def changeEmail(String email, License license) {

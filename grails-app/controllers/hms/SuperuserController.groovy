@@ -57,7 +57,7 @@ class SuperuserController extends BaseController {
 				message(code: 'license.label', default: 'License'),
 				params.id
 			])
-			redirect(action: "showLicenses")
+			redirect(action: "index")
 			return
 		}
 
@@ -66,7 +66,7 @@ class SuperuserController extends BaseController {
 
 	def deleteLicense() {
 		licenseService.deleteLicense(params.id)		
-		redirect(action: "showLicenses")
+		redirect(action: "index")
 	}
 
 	def changeDemoToProduction() {

@@ -13,8 +13,8 @@ class Owner extends DomainBaseClass {
 	String address1
 	String address2
 
-	License License
-	static belongsTo = License
+	License license
+	static belongsTo = [license:License]
 
     static constraints = {
     }

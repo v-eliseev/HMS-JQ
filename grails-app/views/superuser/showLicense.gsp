@@ -8,111 +8,92 @@
 </content>
 
 <content tag="main">
-    <g:form class="form-horizontal" action="#" method="POST">
-        <fieldset>
+    <div class="row">
+        <div class="col-lg-6">
             <legend>License data</legend>
-            <g:if test="${licenseInstance?.key}">
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="license.key.label" default="Key" />:
+            <g:form class="form-horizontal" action="#" method="POST">
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="License key" />
                     </label>
-                    <div class="controls">
-                        <span class="input-xlarge uneditable-input">
-                            <g:fieldValue bean="${licenseInstance}" field="key"/>
-                        </span>
-                        <g:link class="btn btn-danger btn-small" 
-                            action="deleteLicense" id="${licenseInstance.id}" elementId="deleteBtn">
-                            <i class="icon-remove"></i>&nbsp;Delete
-                        </g:link>
-                        <script type='text/javascript'>
-                            $("#deleteBtn").click(function(e) {
-                                e.preventDefault();
-                                bootbox.confirm("Are you sure?", function(confirmed) {
-                                    console.log("Confirmed: "+confirmed);
-                                });
-                            });        
-                        </script>
+                    <div class="col-lg-9">
+                        <p class="form-control-static">${licenseInstance.key}</p>
                     </div>
                 </div>
-            </g:if>
-            <g:if test="${licenseInstance?.dateCreated}">
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="license.key.label" default="Date created" />:
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="License type" />
                     </label>
-                    <div class="controls">
-                        <span class="input-xlarge uneditable-input">
-                            <g:fieldValue bean="${licenseInstance}" field="dateCreated"/>
-                        </span>
+                    <div class="col-lg-9">
+                        <p class="form-control-static">
+                            <g:if test="${licenseInstance.demoMode}">
+                                Demo
+                            </g:if>
+                            <g:else>
+                                Production
+                            </g:else>
+                        </p>
                     </div>
                 </div>
-            </g:if>
-            <g:if test="${licenseInstance?.email}">
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="license.key.label" default="Admin e-mail" />:
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="Admin e-mail" />
                     </label>
-                    <div class="controls">
-                        <span class="input-xlarge uneditable-input">
-                            <g:fieldValue bean="${licenseInstance}" field="email"/>
-                        </span>
-                        <g:link class="btn btn-primary btn-small" 
-                            action="changeEmail" id="${licenseInstance.id}">
-                            Change admin e-mail
-                        </g:link>
+                    <div class="col-lg-9">
+                        <p class="form-control-static">${licenseInstance.email}</p>
                     </div>
                 </div>
-            </g:if>
-            <g:if test="${licenseInstance?.demoMode != null}">
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="license.key.label" default="Demo mode" />:
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="Enabled" />
                     </label>
-                    <div class="controls">
-                        <span class="input-xlarge uneditable-input">
-                            <g:fieldValue bean="${licenseInstance}" field="demoMode"/>
-                        </span>
-                        <g:link class="btn btn-primary btn-small ${(licenseInstance?.demoMode)?:'disabled'}" 
-                            action="changeDemoToProduction" id="${licenseInstance.id}">
-                            Change Demo To Production
-                        </g:link>
+                    <div class="col-lg-9">
+                        <p class="form-control-static">${licenseInstance.enabled}</p>
                     </div>
                 </div>
-            </g:if>
-            <g:if test="${licenseInstance?.expires}">
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="license.key.label" default="Expires" />:
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="Issued" />
                     </label>
-                    <div class="controls">
-                        <span class="input-xlarge uneditable-input">
-                            <g:fieldValue bean="${licenseInstance}" field="expires"/>
-                        </span>
-                        <g:link class="btn btn-primary btn-small" action="prolongateLicense" id="${licenseInstance.id}">Prolongate license
-                        </g:link>
+                    <div class="col-lg-9">
+                        <p class="form-control-static"><g:formatDate format="yyyy-MM-dd" date="${licenseInstance.issued}"/></p>
                     </div>
                 </div>
-            </g:if>
-            <g:if test="${licenseInstance?.lastUpdated}">
-                <div class="control-group">
-                    <label class="control-label">
-                        <g:message code="license.key.label" default="Last updated" />:
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="Expires" />
                     </label>
-                    <div class="controls">
-                        <span class="input-xlarge uneditable-input">
-                            <g:fieldValue bean="${licenseInstance}" field="lastUpdated"/>
-                        </span>
+                    <div class="col-lg-9">
+                        <p class="form-control-static"><g:formatDate format="yyyy-MM-dd" date="${licenseInstance.expires}"/></p>
                     </div>
                 </div>
-            </g:if>
-        </fieldset>
-    </g:form>
-    <div class="control-group">
-        <div class="controls">
-            <button class="btn btn-primary" href="#">Update</button>
+            </g:form>    
+
+            <g:link action="disableLicense" class="btn btn-danger" id="${licenseInstance.id}" elementId="deleteBtn">Disable license</g:link>
+            
+            <g:link action="disableLicense" class="btn btn-danger" id="${licenseInstance.id}" elementId="prolongateBtn">Prolongate license</g:link>
+
+        </div>
+        <div class="col-lg-6">
+            <legend>Owner data</legend>
+
         </div>
     </div>
 
+<script type='text/javascript'>
+    // $("#deleteBtn").click(function(e) {
+    //     e.preventDefault();
+    //     bootbox.confirm("Are you sure?", function(confirmed) {
+    //         console.log("Confirmed: "+confirmed);
+    //     });
+    // });        
+</script>
 </content>
 
 </g:applyLayout>

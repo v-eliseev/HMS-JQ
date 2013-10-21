@@ -19,7 +19,7 @@ class SuperuserController extends BaseController {
 	def afterInterceptor = [action: this.&handleMobile]
 
 	def index() {
-		def list = licenseService.getAllLicenses()
+		def list = licenseService.getAllEnabledLicenses()
 
 		[
 			licenseInstanceList: list
@@ -29,17 +29,18 @@ class SuperuserController extends BaseController {
 	def createLicense() {
 
 		def licenseInstance
+		def email = params.email
 		switch (params.licenseType) {
 		case "demo": 
-			licenseInstance = licenseService.createDemoLicense()
+			licenseInstance = licenseService.createDemoLicense(email)
 			SecRole adminRole = adminService.getAdminRole()
-			SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
+			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
 			break
 
 		case "production": 
-			licenseInstance = licenseService.createStandardLicense()
+			licenseInstance = licenseService.createStandardLicense(email)
 			SecRole adminRole = adminService.getAdminRole()
-			SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", licenseInstance, [adminRole])
+			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
 			break
 
 		default:
@@ -62,6 +63,11 @@ class SuperuserController extends BaseController {
 		}
 
 		[licenseInstance: licenseInstance]
+	}
+
+	def disableLicense() {
+		licenseService.disableLicense(params.id)
+		redirect(action: "index")
 	}
 
 	def deleteLicense() {

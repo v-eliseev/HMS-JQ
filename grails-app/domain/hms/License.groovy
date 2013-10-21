@@ -22,11 +22,12 @@ class License extends DomainBaseClass {
 		hotel nullable: true
     }
 	
+	Boolean enabled = true
 	String key
 	String email
 	Date expires
 	Date issued
-	boolean demoMode
+	Boolean demoMode
 	Owner owner
 
 	Hotel hotel

@@ -1,4 +1,4 @@
-package hms.jq
+package hms
 
 
 
@@ -9,5 +9,6 @@ class ExpireLicenseJob {
 
     def execute() {
         // execute job
+        log.debug("Expire license job started")
     }
 }

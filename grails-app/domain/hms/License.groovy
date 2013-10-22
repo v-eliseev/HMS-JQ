@@ -2,6 +2,8 @@ package hms
 
 import hms.auth.SecUser
 
+enum LicenseType { PRODUCTION, DEMO }
+
 class License extends DomainBaseClass {
 
 	static String digits = "2346789"
@@ -44,13 +46,4 @@ class License extends DomainBaseClass {
 		sort 'key'
 		sort users: 'username', order: 'asc'
 	}
-}
-
-enum LicenseType {
-	PRODUCTION("production"), 
-	DEMO("demo")
-
-	LicenseType(String value) { this.value = value }
-	private final String value
-	public String value() { return value }		
 }

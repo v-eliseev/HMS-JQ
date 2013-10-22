@@ -7,7 +7,7 @@ class LicenseController extends BaseController {
     def licenseService
 
     def create() {
-        def licenseInstance = licenseService.createLicense("demo", params.email)
+        def licenseInstance = licenseService.createLicense(LicenseType.DEMO, params.email)
         [ licenseInstance: licenseInstance ]
     }
 }

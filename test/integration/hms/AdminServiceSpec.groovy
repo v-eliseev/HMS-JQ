@@ -29,8 +29,8 @@ class AdminServiceSpec extends Specification {
 
 	def 'Create users' () {
 		given:
-			def license1 = licenseService.createStandardLicense()
-			def license2 = licenseService.createStandardLicense()
+			def license1 = licenseService.createStandardLicense("aa@bb.cc")
+			def license2 = licenseService.createStandardLicense("aa@bb.cc")
 		when:
 			adminService.createUser("admin", "admin", "aa@bb.cc", license1, [adminRole])
 			adminService.createUser("manager", "manager", "aa@bb.cc", license1, [adminRole])
@@ -48,8 +48,8 @@ class AdminServiceSpec extends Specification {
 
 	def 'Check users' () {
 		given:
-			def license1 = licenseService.createStandardLicense()
-			def license2 = licenseService.createStandardLicense()
+			def license1 = licenseService.createStandardLicense("aa@bb.cc")
+			def license2 = licenseService.createStandardLicense("aa@bb.cc")
 
 		when:
 			adminService.createUser("admin", "admin", "aa@bb.cc", license1, [adminRole])
@@ -70,7 +70,7 @@ class AdminServiceSpec extends Specification {
 
 	def 'Demo license creation check' () {
 		given:
-			def demoLicense = licenseService.createDemoLicense()
+			def demoLicense = licenseService.createDemoLicense("aa@bb.cc")
 			assert demoLicense != null
 
 		when:

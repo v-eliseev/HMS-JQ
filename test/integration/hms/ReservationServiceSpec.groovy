@@ -25,7 +25,7 @@ class ReservationServiceSpec extends Specification {
 
 	def 'Check object creation'() {
 		given:
-			def license = licenseService.createDemoLicense()
+			def license = licenseService.createDemoLicense("aa@bb.cc")
 			def roomCategory = license.hotel.roomCategories.asType(List)[0]
 			def count = Reservation.list().size()
 
@@ -51,7 +51,7 @@ class ReservationServiceSpec extends Specification {
 
 	def 'Get checkins for the date' () {
 		given:
-			def license = licenseService.createDemoLicense()
+			def license = licenseService.createDemoLicense("aa@bb.cc")
 
 			assert license != null
 
@@ -67,7 +67,7 @@ class ReservationServiceSpec extends Specification {
 
 	def 'Get checkouts for the date' () {
 		given:
-			def license = licenseService.createDemoLicense()
+			def license = licenseService.createDemoLicense("aa@bb.cc")
 
 			assert license != null
 

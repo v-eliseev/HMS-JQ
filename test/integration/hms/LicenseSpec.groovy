@@ -22,7 +22,7 @@ class LicenseSpec extends Specification {
 
 	def 'License must delete related Hotel and SecUsers'() {
 		given:
-			def license = licenseService.createDemoLicense()
+			def license = licenseService.createDemoLicense("aa@bb.cc")
 			def user = adminService.createDemoUser(license)
 
 			assert license != null

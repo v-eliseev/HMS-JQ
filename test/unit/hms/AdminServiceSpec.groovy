@@ -57,7 +57,7 @@ class AdminServiceSpec extends Specification {
 
 	def 'Demo license creation check' () {
 		when:
-			def demoLicense = licenseService.createDemoLicense()
+			def demoLicense = licenseService.createDemoLicense("aa@bb.cc")
 			def adminUser = adminService.createDemoUser(demoLicense)
 
 		then:

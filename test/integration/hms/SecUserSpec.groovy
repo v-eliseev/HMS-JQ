@@ -27,7 +27,7 @@ class SecUserSpec extends Specification {
 
 	def 'Cascade deletion of SecUserRole'() {
 		given:
-			def license = licenseService.createDemoLicense()
+			def license = licenseService.createDemoLicense("aa@bb.cc")
 			def adminUser = adminService.createDemoUser(license)
 
 			assert license != null

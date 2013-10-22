@@ -13,7 +13,7 @@ class ReservationServiceSpec extends Specification {
 	def reservationService
 	def reservationStatusService
 
-	def  setup() {
+	def setup() {
 		licenseService = new LicenseService()
 		reservationStatusService = new ReservationStatusService()
 		reservationService = new ReservationService(reservationStatusService: reservationStatusService)

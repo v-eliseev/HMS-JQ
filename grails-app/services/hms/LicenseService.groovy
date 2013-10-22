@@ -123,7 +123,7 @@ class LicenseService {
 
 	def prolongateLicense(def id, def iso8601PeriodOrDate) {
 		def licenseInstance = License.get(id)
-		
+
 		def dateFrom = new DateTime().withTimeAtStartOfDay()
 
 		try {
@@ -141,6 +141,13 @@ class LicenseService {
 				throw new IllegalArgumentException("License was not prolongated due to wrong data/period format")
 			}
 		}
+		licenseInstance.save(flush:true)
+	}
+
+	def setProductionMode(def id) {
+		def licenseInstance = License.get(id)
+
+		licenseInstance.demoMode = false
 		licenseInstance.save(flush:true)
 	}
 

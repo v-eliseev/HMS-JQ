@@ -119,7 +119,7 @@ class LicenseServiceSpec extends Specification {
 
 	def 'Check demo license creation' () {
 		when:
-			def license = licenseService.createDemoLicense()
+			def license = licenseService.createDemoLicense("aa@bb.cc")
 
 		then:
 			license != null
@@ -133,7 +133,7 @@ class LicenseServiceSpec extends Specification {
 			def licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
 
 		when:
-			def license = licenseService.createDemoLicense(licenseKey)
+			def license = licenseService.createDemoLicense("aa@bb.cc", licenseKey)
 
 		then:
 			license != null
@@ -141,6 +141,64 @@ class LicenseServiceSpec extends Specification {
 
 		cleanup:
 			license.delete(flush:true)
+	}
+
+	def 'Check production license creation' () {
+		when:
+			def license = licenseService.createStandardLicense("aa@bb.cc")
+
+		then:
+			license != null
+
+		cleanup:
+			license.delete(flush:true)
+	}
+
+	def 'Check license disabling' () {
+		given:
+			def license = licenseService.createStandardLicense("aa@bb.cc")
+			assert license.enabled == true
+		
+		when:
+			licenseService.disableLicense(license.id)
+
+		then:
+			license.enabled == false
+	}
+
+	def 'Check license prolongation via date' () {
+		given:
+			def license = licenseService.createStandardLicense("aa@bb.cc")
+			def expires = license.expires
+		
+		when:
+			licenseService.prolongateLicense(license.id, "2013-12-31")
+
+		then:
+			license.expires
+	}
+
+	def 'Check license prolongation via period' () {
+		given:
+			def license = licenseService.createStandardLicense("aa@bb.cc")
+			def expires = license.expires
+		
+		when:
+			licenseService.prolongateLicense(license.id, "P1M")
+
+		then:
+			license.expires
+	}
+
+	def 'Check license set production mode' () {
+		given:
+			def license = licenseService.createDemoLicense("aa@bb.cc")
+			assert license.demoMode == true
+		when:
+			licenseService.setProductionMode(license.id)
+
+		then:
+			license.demoMode == false
 	}
 
 }

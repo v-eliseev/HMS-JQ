@@ -34,6 +34,7 @@ class CustomAuthenticationProvider implements AuthenticationProvider {
 		String hql = '''\
 			from SecUser u
 			where u.license.key=:licenseKey
+			and u.license.enabled=true
 			and u.username=:username'''
 
 		CustomUserDetails userDetails

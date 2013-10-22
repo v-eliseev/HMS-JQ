@@ -76,21 +76,13 @@ class SuperuserController extends BaseController {
 	}
 
 	def changeDemoToProduction() {
-		def licenseInstance = License.get(params.id)
-
-		licenseInstance.demoMode = false
-		licenseInstance.save()
-
-		redirect(action: "showLicense", id: licenseInstance.id)
+		licenseService.setProductionMode(params.id)
+		redirect(action: "showLicense", id: params.id)
 	}
 
 	def prolongateLicense() {
-		def licenseInstance = License.get(params.id)
-
-		licenseInstance.expires = licenseInstance.expires + 365
-		licenseInstance.save()
-
-		redirect(action: "showLicense", id: licenseInstance.id)
+		licenseService.prolongateLicense(params.id, params.period)
+		redirect(action: "showLicense", id: params.id)
 	}
 
 	def resetAdminPassword() {

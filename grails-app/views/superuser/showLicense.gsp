@@ -77,7 +77,16 @@
 
             <g:link action="disableLicense" class="btn btn-danger" id="${licenseInstance.id}" elementId="deleteBtn">Disable license</g:link>
             
-            <g:link action="disableLicense" class="btn btn-danger" id="${licenseInstance.id}" elementId="prolongateBtn">Prolongate license</g:link>
+            <g:form action="prolongateLicense" class="form-inline">
+                <div class="form-group">
+                    <label for="period" class="col-lg-3 control-label"><g:message code="user.name.label" default="Period/Date" /></label>
+                    <div class="col-lg-9">
+                        <input type="text"class="form-control" id="period" name="period" placeholder="Enter date/period">
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="${licenseInstance.id}"/>
+                <g:submitButton class="btn btn-danger" name="prolongate" value="Prolongate license" />
+            </g:form>
 
         </div>
         <div class="col-lg-6">

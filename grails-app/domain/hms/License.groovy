@@ -7,7 +7,7 @@ class License extends DomainBaseClass {
 	static String digits = "2346789"
 	static String letters = "BCDFGHJKMPQRTVWXY"
 	static digitPosition = [3, 2, 1, 4, 5]
-	
+
 	/**
 	 * Key format: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 	 * Used characters: BCDFGHJKMPQRTVWXY2346789	
@@ -44,4 +44,13 @@ class License extends DomainBaseClass {
 		sort 'key'
 		sort users: 'username', order: 'asc'
 	}
+}
+
+enum LicenseType {
+	PRODUCTION("production"), 
+	DEMO("demo")
+
+	LicenseType(String value) { this.value = value }
+	private final String value
+	public String value() { return value }		
 }

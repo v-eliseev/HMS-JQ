@@ -1,15 +1,10 @@
 package hms
 
-import hms.auth.SecRole
-import hms.auth.SecUser
-import hms.auth.SecUserRole
-
 class SuperuserController extends BaseController {
 	
 	static defaultAction = "index"
 
 	def licenseService
-	def adminService
 	def confirmationRequestService
 	def mailerService
 
@@ -27,27 +22,7 @@ class SuperuserController extends BaseController {
 	}
 
 	def createLicense() {
-
-		def licenseInstance
-		def email = params.email
-		switch (params.licenseType) {
-		case "demo": 
-			licenseInstance = licenseService.createDemoLicense(email)
-			SecRole adminRole = adminService.getAdminRole()
-			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
-			break
-
-		case "production": 
-			licenseInstance = licenseService.createStandardLicense(email)
-			SecRole adminRole = adminService.getAdminRole()
-			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
-			break
-
-		default:
-			log.error("Wrong license type")
-			throw new IllegalArgumentException("Wrong license type")
-		} 
-
+		def licenseInstance = licenseService.createLicense(params.licenseType, params.email)
 		redirect(action: "showLicense", id: licenseInstance.id)
 	}
 

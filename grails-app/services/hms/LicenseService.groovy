@@ -1,5 +1,7 @@
 package hms
 
+import hms.auth.SecRole
+import hms.auth.SecUser
 import hms.auth.SecUserRole
 
 import org.joda.time.DateTime
@@ -10,6 +12,8 @@ import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
 class LicenseService {
+
+	def adminService
 
 	def generateLicenseKey() {
 
@@ -52,6 +56,29 @@ class LicenseService {
 		valid
 	}
 
+	def createLicense(def licenseType, def email) {
+		def licenseInstance
+		switch (licenseType) {
+		case "demo": 
+			licenseInstance = createDemoLicense(email)
+			SecRole adminRole = adminService.getAdminRole()
+			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
+			break
+
+		case "production": 
+			licenseInstance = createStandardLicense(email)
+			SecRole adminRole = adminService.getAdminRole()
+			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
+			break
+
+		default:
+			log.error("Wrong license type")
+			throw new IllegalArgumentException("Wrong license type")
+		} 
+		licenseInstance
+	}
+
+	// private
 	def createDemoLicense(def email, String licenseKey = null) {
 		Hotel h = DemoDataScript.generateRandomData()
 		log.trace("Hotel with demo data created: " + h)
@@ -72,6 +99,7 @@ class LicenseService {
 		newLicense
 	}
 
+	// private 
 	def createStandardLicense(def email) {
 		Hotel h = new Hotel()
 		DateTime now = new DateTime().withTimeAtStartOfDay()

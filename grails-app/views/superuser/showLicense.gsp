@@ -75,17 +75,48 @@
                 </div>
             </g:form>    
 
-            <g:link action="disableLicense" class="btn btn-danger" id="${licenseInstance.id}" elementId="deleteBtn">Disable license</g:link>
-            
-            <g:form action="prolongateLicense" class="form-inline">
+            <g:form action="disableLicense" class="form-horizontal">
                 <div class="form-group">
-                    <label for="period" class="col-lg-3 control-label"><g:message code="user.name.label" default="Period/Date" /></label>
-                    <div class="col-lg-9">
-                        <input type="text"class="form-control" id="period" name="period" placeholder="Enter date/period">
+                    <div class="col-lg-4 col-lg-offset-8">
+                        <input type="hidden" name="id" value="${licenseInstance.id}"/>
+                        <g:submitButton class="btn btn-danger" name="disable" value="Disable license" />
                     </div>
                 </div>
-                <input type="hidden" name="id" value="${licenseInstance.id}"/>
-                <g:submitButton class="btn btn-danger" name="prolongate" value="Prolongate license" />
+            </g:form>
+
+            <g:form action="resetAdminPassword" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-lg-4 col-lg-offset-8">
+                        <input type="hidden" name="id" value="${licenseInstance.id}"/>
+                        <g:submitButton class="btn btn-warning" name="resetPassword" value="Reset password" />
+                    </div>
+                </div>
+            </g:form>
+
+            <g:form action="prolongateLicense" class="form-horizontal">
+                <div class="form-group">
+                    <label for="period" class="col-lg-3 control-label"><g:message code="user.name.label" default="Period/Date" /></label>
+                    <div class="col-lg-5">
+                        <input type="text"class="form-control" id="period" name="period" placeholder="Enter date/period">
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="hidden" name="id" value="${licenseInstance.id}"/>
+                        <g:submitButton class="btn btn-primary" name="prolongate" value="Prolongate license" />
+                    </div>
+                </div>
+            </g:form>
+
+            <g:form action="changeEmail" class="form-horizontal">
+                <div class="form-group">
+                    <label for="email" class="col-lg-3 control-label"><g:message code="user.name.label" default="Email" /></label>
+                    <div class="col-lg-5">
+                        <input type="text"class="form-control" id="email" name="email" placeholder="Enter email">
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="hidden" name="id" value="${licenseInstance.id}"/>
+                        <g:submitButton class="btn btn-primary" name="changeEmail" value="Change email" />
+                    </div>
+                </div>
             </g:form>
 
         </div>

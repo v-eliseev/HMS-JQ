@@ -129,6 +129,12 @@ class LicenseService {
 		licenseInstance.save(flush:true)
 	}
 
+	def enableLicense(def id) {
+		def licenseInstance = License.get(id)
+		licenseInstance.enabled = true
+		licenseInstance.save(flush:true)
+	}
+
 	def getAllLicenses() {
 		def list = License.findAll({})
 		list

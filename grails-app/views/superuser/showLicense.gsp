@@ -129,7 +129,7 @@
                         <g:message code="user.name.label" default="Name" />
                     </label>
                     <div class="col-lg-9">
-                        <p class="form-control-static">${licenseInstance.owner.name}</p>
+                        <p class="form-control-static">${licenseInstance.owner?.name}</p>
                     </div>
                 </div>
 
@@ -138,7 +138,7 @@
                         <g:message code="user.email.label" default="EMail" />
                     </label>
                     <div class="col-lg-9">
-                        <p class="form-control-static">${licenseInstance.owner.email}</p>
+                        <p class="form-control-static">${licenseInstance.owner?.email}</p>
                     </div>
                 </div>
 

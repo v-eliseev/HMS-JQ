@@ -14,10 +14,11 @@ class SuperuserController extends BaseController {
 	def afterInterceptor = [action: this.&handleMobile]
 
 	def index() {
-		def list = licenseService.getAllEnabledLicenses()
-
+		def activeLicenses = licenseService.getAllEnabledLicenses()
+		def disabledLicenses = licenseService.getAllDisabledLicenses()
 		[
-			licenseInstanceList: list
+			activeLicenseInstanceList: activeLicenses,
+			disabledLicenseInstanceList: disabledLicenses
 		]
 	}
 

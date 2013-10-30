@@ -9,43 +9,81 @@
 <content tag="main"> 
 	<div class="row">
 		<div class="col-lg-8">
-		    <legend>Active Licenses</legend>
-		    <table class="table table-striped table-condensed">
-		    <thead>
-		        <tr>
-		            <g:sortableColumn property="key"
-		                title="${message(code: 'license.key.label', default: 'Key')}" />
-		            <g:sortableColumn property="demoMode"
-		                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
-		            <g:sortableColumn property="expires"
-		                title="${message(code: 'license.expires.label', default: 'Expires')}" />
-		            <g:sortableColumn property="enabled"
-		                title="${message(code: 'license.enabled.label', default: 'Enabled')}" />
-		        </tr>
-		    </thead>
-		    <tbody>
-		    <g:each in="${licenseInstanceList}" status="i" var="licenseInstance">
-		        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-		            <td>
-		                <g:link action="showLicense" id="${licenseInstance.id}">
-		                    <code>${fieldValue(bean: licenseInstance, field: "key")}</code>
-		                </g:link>
-		            </td>
-		            <td>
-		                <g:if test="${licenseInstance.demoMode}">
-		                    <span class="label label-warning">Demo</span>
-		                </g:if>
-		                <g:else>
-		                    <span class="label label-success">Production</span>
-		                </g:else>
-		            </td>
-		            <td><g:formatDate format="yyyy-MM-dd" date="${licenseInstance.expires}" /></td>
-		            <td>${licenseInstance.enabled}</td>
-		        </tr>
-		    </g:each>
-		    </tbody>
-		    </table>
-
+		    <legend>Licenses</legend>
+		    <ul class="nav nav-tabs">
+		    	<li class="active"><a href="#active" data-toggle="tab">Active</a></li>
+		    	<li><a href="#inactive" data-toggle="tab">Inactive</a></li>
+		    </ul>
+			<div id="tabsContent" class="tab-content">
+				<div class="tab-pane fade in active" id="active">
+				    <table class="table table-striped table-condensed">
+				    <thead>
+				        <tr>
+				            <g:sortableColumn property="key"
+				                title="${message(code: 'license.key.label', default: 'Key')}" />
+				            <g:sortableColumn property="demoMode"
+				                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
+				            <g:sortableColumn property="expires"
+				                title="${message(code: 'license.expires.label', default: 'Expires')}" />
+				        </tr>
+				    </thead>
+				    <tbody>
+				    <g:each in="${activeLicenseInstanceList}" status="i" var="licenseInstance">
+				        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+				            <td>
+				                <g:link action="showLicense" id="${licenseInstance.id}">
+				                    <code>${fieldValue(bean: licenseInstance, field: "key")}</code>
+				                </g:link>
+				            </td>
+				            <td>
+				                <g:if test="${licenseInstance.demoMode}">
+				                    <span class="label label-warning">Demo</span>
+				                </g:if>
+				                <g:else>
+				                    <span class="label label-success">Production</span>
+				                </g:else>
+				            </td>
+				            <td><g:formatDate format="yyyy-MM-dd" date="${licenseInstance.expires}" /></td>
+				        </tr>
+				    </g:each>
+				    </tbody>
+				    </table>
+				</div>
+				<div class="tab-pane fade" id="inactive">
+				    <table class="table table-striped table-condensed">
+				    <thead>
+				        <tr>
+				            <g:sortableColumn property="key"
+				                title="${message(code: 'license.key.label', default: 'Key')}" />
+				            <g:sortableColumn property="demoMode"
+				                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
+				            <g:sortableColumn property="expires"
+				                title="${message(code: 'license.expires.label', default: 'Expires')}" />
+				        </tr>
+				    </thead>
+				    <tbody>
+				    <g:each in="${disabledLicenseInstanceList}" status="i" var="licenseInstance">
+				        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+				            <td>
+				                <g:link action="showLicense" id="${licenseInstance.id}">
+				                    <code>${fieldValue(bean: licenseInstance, field: "key")}</code>
+				                </g:link>
+				            </td>
+				            <td>
+				                <g:if test="${licenseInstance.demoMode}">
+				                    <span class="label label-warning">Demo</span>
+				                </g:if>
+				                <g:else>
+				                    <span class="label label-success">Production</span>
+				                </g:else>
+				            </td>
+				            <td><g:formatDate format="yyyy-MM-dd" date="${licenseInstance.expires}" /></td>
+				        </tr>
+				    </g:each>
+				    </tbody>
+				    </table>
+				</div>
+			</div>
 		</div>
 		<div class="col-lg-4">
 		    <legend>New License</legend>

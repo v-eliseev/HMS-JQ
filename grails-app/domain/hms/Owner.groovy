@@ -3,8 +3,8 @@ package hms
 
 class Owner extends DomainBaseClass {
 
-	String firstname
-	String lastname
+	String name
+	String email
 	String phone
 	String country
 	String zip
@@ -13,9 +13,17 @@ class Owner extends DomainBaseClass {
 	String address1
 	String address2
 
-	License license
-	static belongsTo = [license:License]
+	static belongsTo = License
 
     static constraints = {
+    	name nullable: true
+    	email nullable: true
+    	phone nullable: true
+		country nullable: true
+		zip nullable: true
+		city nullable: true
+		state nullable: true
+		address1 nullable: true
+		address2 nullable: true
     }
 }

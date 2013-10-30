@@ -52,6 +52,16 @@
 			<div class="panel panel-default">
 		  		<div class="panel-body">
 					<g:form class="form-horizontal" role="form" action="createLicense" method="POST">
+
+				        <div class="form-group">
+				            <label for="inputName" class="col-lg-3 control-label"><g:message code="license.name.label" default="Name" /></label>
+				            <div class="col-lg-7">
+				                <input type="text"class="form-control" id="inputName" name="name" placeholder="Enter owner name" value="Vladislav Eliseev">
+				            </div>
+				            <div class="col-lg-2">
+				            </div>
+				        </div>
+
 				        <div class="form-group">
 				            <label for="inputEmail" class="col-lg-3 control-label"><g:message code="license.email.label" default="E-mail" /></label>
 				            <div class="col-lg-7">
@@ -67,12 +77,12 @@
 							<div class="col-lg-9">
 						        <div class="radio">
 				  					<label>
-				  						<input type="radio" name="licenseType" id="licenseTypeProduction" value="production" checked />Production
+				  						<input type="radio" name="licenseType" id="licenseTypeProduction" value="PRODUCTION" checked />Production
 				  					</label>
 				  				</div>
 						        <div class="radio">
 				  					<label>
-				  						<input type="radio" name="licenseType" id="licenseTypeDemo" value="demo"/>Demo
+				  						<input type="radio" name="licenseType" id="licenseTypeDemo" value="DEMO"/>Demo
 				  					</label>
 								</div>
 			  				</div>

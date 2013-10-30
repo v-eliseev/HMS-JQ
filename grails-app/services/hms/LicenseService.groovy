@@ -56,7 +56,7 @@ class LicenseService {
 		valid
 	}
 
-	def createLicense(def licenseType, def email) {
+	def createLicense(def licenseType, def ownerName, def email) {
 		def licenseInstance
 		switch (licenseType) {
 		case "DEMO" : 
@@ -75,6 +75,22 @@ class LicenseService {
 			log.error("Wrong license type")
 			throw new IllegalArgumentException("Wrong license type")
 		} 
+
+		def owner = new Owner(
+			name: ownerName,
+			email: email
+			)
+		if (!owner.save(flush:true)) {
+			owner.errors.each { log.error(it) }
+			throw new Exception('License owner was not created')
+		}
+
+		licenseInstance.owner = owner
+		if (!licenseInstance.save(flush:true)) {
+			licenseInstance.errors.each { log.error(it) }
+			throw new Exception('License owner was not created')
+		}
+
 		licenseInstance
 	}
 

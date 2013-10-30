@@ -122,7 +122,27 @@
         </div>
         <div class="col-lg-6">
             <legend>Owner data</legend>
+            <g:form class="form-horizontal" action="#" method="POST">
 
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.name.label" default="Name" />
+                    </label>
+                    <div class="col-lg-9">
+                        <p class="form-control-static">${licenseInstance.owner.name}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">
+                        <g:message code="user.email.label" default="EMail" />
+                    </label>
+                    <div class="col-lg-9">
+                        <p class="form-control-static">${licenseInstance.owner.email}</p>
+                    </div>
+                </div>
+
+            </g:form>
         </div>
     </div>
 

@@ -22,7 +22,7 @@ class SuperuserController extends BaseController {
 	}
 
 	def createLicense() {
-		def licenseInstance = licenseService.createLicense(params.licenseType, params.email)
+		def licenseInstance = licenseService.createLicense(params.licenseType, params.name, params.email)
 		redirect(action: "showLicense", id: licenseInstance.id)
 	}
 

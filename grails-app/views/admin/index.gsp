@@ -9,7 +9,7 @@
 <content tag="main">
 
 <div class="row show-grid">
-<div class="col-lg-4">
+<div class="col-lg-6">
     <legend><i class="icon-building"></i> Hotel</legend>
     <ul class="list-unstyled">
         <li>${fieldValue(bean: hotelInstance, field: "name")}</li> 
@@ -21,14 +21,14 @@
     <g:link controller="admin" action="editHotel">More &hellip;</g:link>
 
 </div>
-<div class="col-lg-8">
+<div class="col-lg-6">
     <legend><i class="icon-dashboard"></i> Dashboard</legend>
 
 </div>
 </div>
 
 <div class="row show-grid">
-<div class="col-lg-4">
+<div class="col-lg-6">
     <legend><i class="icon-key"></i> License</legend>
     <ul class="list-unstyled">
         <li>${fieldValue(bean: licenseInstance, field: "key")}</li> 
@@ -37,7 +37,7 @@
         <li>(${licenseInstance.expires-licenseInstance.issued} day(s) left)</li>
     </ul>
 </div>
-<div class="col-lg-8">
+<div class="col-lg-6">
     <legend>Users</legend>
 %{--     <div class="list-group">
         <g:each in="${userInstanceList}" status="i" var="userInstance">
@@ -59,13 +59,13 @@
 		<g:sortableColumn property="username"
 			title="${message(code: 'license.key.label', default: 'Name')}" />
 		<g:sortableColumn property="enabled"
-			title="${message(code: 'license.demoMode.label', default: 'Enabled')}" />
+			title="${message(code: 'license.demoMode.label', default: 'En')}" />
 		<g:sortableColumn property="accountExpired"
-			title="${message(code: 'license.expires.label', default: 'NonExpired')}" />
+			title="${message(code: 'license.expires.label', default: 'NEx')}" />
 		<g:sortableColumn property="accountLocked"
-			title="${message(code: 'license.demoMode.label', default: 'NonLocked')}" />
+			title="${message(code: 'license.demoMode.label', default: 'NLo')}" />
 		<g:sortableColumn property="passwordExpired"
-			title="${message(code: 'license.expires.label', default: 'Password NonExpired')}" />
+			title="${message(code: 'license.expires.label', default: 'PNEx')}" />
 		<g:sortableColumn property="authorities"
 			title="${message(code: 'license.expires.label', default: 'Authorities')}" />
 	</tr>

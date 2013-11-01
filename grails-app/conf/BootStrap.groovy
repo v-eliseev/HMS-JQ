@@ -48,6 +48,9 @@ class BootStrap {
 			}
 				
 		}
+
+		// PricelistService pricelistService = new PricelistService()
+		// pricelistService.getPricelist(license)
 		
 		log.info("Application started...")
 	}

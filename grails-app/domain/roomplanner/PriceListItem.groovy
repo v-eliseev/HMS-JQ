@@ -1,19 +1,19 @@
 package roomplanner
 
-class PricelistItem {
+class PricelistItem implements Serializable {
 
 	static mapping = {
 		datasource 'plancache'
 	} 
 
-	Date moment
-	BigDecimal rate
+	Pricelist pricelist
+	static belongsTo = [pricelist:Pricelist]
 
-	RoomCategory roomCategory
-	Room room
+	Date onDate
+	BigDecimal rate
+	long roomId
 
     static constraints = {
-    	roomCategory nullable: true
-    	room nullable: true
     }
 }
+

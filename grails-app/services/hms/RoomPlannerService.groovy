@@ -15,6 +15,7 @@ class RoomPlannerService {
 
 	def roomPlannerSoapService
 	def roomPlannerHessianService
+	def pricelistService
 
 	def getSavedPlan(License license) {
 		Plan.findByLicenseId(license.id)
@@ -62,6 +63,8 @@ class RoomPlannerService {
 		def rooms = Room.getAllFor(license)
 		def reservations = Reservation.getAllFor(license)
 		def roomAssignments = []
+
+		def pricelist = pricelistService.getPricelist(license)
 		
 		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
 		plan.save()

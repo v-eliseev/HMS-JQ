@@ -51,7 +51,7 @@ class ReservationService {
 			eq('hotel', hotel)
 			//eq('status', reservationStatusService.getStatusCheckedIn())
 			eq('status', reservationStatusService.getStatusPlanned())  // TODO change
-			ge('toDate',forDate)
+			ge('toDate', forDate)
 
 			order('toDate')
 
@@ -90,4 +90,29 @@ class ReservationService {
 
 		reservation
 	}
+
+	def getFirstReservation(License license) {
+		def hotel = license.getHotel()
+		def result = Reservation.withCriteria {
+
+			eq('hotel', hotel)
+			eq('status', reservationStatusService.getStatusPlanned())  // TODO change
+
+			order('fromDate')
+		}
+		result?.getAt(0)
+	}
+
+	def getLastReservation(License license) {
+		def hotel = license.getHotel()
+		def result = Reservation.withCriteria {
+
+			eq('hotel', hotel)
+			eq('status', reservationStatusService.getStatusPlanned())  // TODO change
+
+			order('toDate', 'desc')
+		}
+		result?.getAt(0)
+	}
+
 }

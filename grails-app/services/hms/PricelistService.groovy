@@ -11,16 +11,28 @@ class PricelistService {
 	def reservationService
 
 	def getPricelist(def license) {
+		def pricelist = getSavedPricelist(license)
+		if (pricelist == null) {
+			log.trace("Building new pricelist...")
+			pricelist = buildPricelist(license)
+		}
+		pricelist
+	}
 
-		def pricelist = Pricelist.findByLicenseId(license.id)
+	def rebuildPricelist(def license) {
+		def pricelist = getSavedPricelist(license)
 		if (pricelist != null) {
 			log.trace("Delete saved pricelist...")
 			pricelist.delete()
 		}
 		buildPricelist(license)
+	}
+
+	private def getSavedPricelist(def license) {
+		Pricelist.findByLicenseId(license.id)
 	}	
 
-    def buildPricelist(def license) {
+    private def buildPricelist(def license) {
 
 		def fromDate = reservationService.getFirstReservation(license).fromDate
     	def toDate = reservationService.getLastReservation(license).toDate

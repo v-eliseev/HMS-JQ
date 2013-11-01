@@ -64,7 +64,7 @@ class RoomPlannerService {
 		def reservations = Reservation.getAllFor(license)
 		def roomAssignments = []
 
-		def pricelist = pricelistService.getPricelist(license)
+		def pricelist = pricelistService.rebuildPricelist(license)
 		
 		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
 		plan.save()

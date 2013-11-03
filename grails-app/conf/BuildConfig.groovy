@@ -44,7 +44,7 @@ grails.project.dependency.resolution = {
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
 
-        mavenRepo 'http://192.168.0.35:8080/artifactory/HMS'
+        mavenRepo 'http://192.168.0.37:8080/artifactory/HMS'
 
         grailsPlugins()
         grailsHome()
@@ -67,7 +67,7 @@ grails.project.dependency.resolution = {
         compile 'joda-time:joda-time:2.3'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-        test "org.gebish:geb-spock:0.9.0"
+        test "org.gebish:geb-spock:0.9.2"
 
         def seleniumVersion = "2.35.0"
         test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion"
@@ -89,7 +89,7 @@ grails.project.dependency.resolution = {
         runtime ":mail:1.0.1"
         compile ":quartz2:2.1.6.2"
 
-        compile ":asset-pipeline:1.0.1"
+        compile ":asset-pipeline:1.0.4"
         compile ":less-asset-pipeline:0.8.2"
 
         // runtime ":jquery:1.10.2"
@@ -107,7 +107,7 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        runtime ":database-migration:1.3.6"
+        runtime ":database-migration:1.3.8"
 
         compile ':cache:1.1.1'
 
@@ -115,7 +115,7 @@ grails.project.dependency.resolution = {
             exclude "spock-grails-support" 
             export = false
         }
-        test (":geb:0.9.2-SNAPSHOT") {
+        test (":geb:0.9.3-SNAPSHOT") {
             export = false
         }
 

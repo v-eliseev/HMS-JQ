@@ -21,7 +21,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 	/**
         Converts domain data to service DTO
     */
-    def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments) {
+    def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments, def pricelist) {
 
         def licenseDto = new LicenseDto(key: license.key)
 
@@ -62,18 +62,20 @@ class RoomPlannerHessianService implements IRoomPlannerService {
         }
         log.trace("RoomAssignments: " + roomAssignmentsDto)
 
-        [ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto ]
+        def pricelistDto = null
+        
+        [ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto ]
 
 	}
 
     /**
         Calls the planner via Hessian
     */
-	def callPlanner(def licenseDto, def roomCategoriesDto, def roomsDto, def reservationsDto, def roomAssignmentsDto) {
+	def callPlanner(def licenseDto, def roomCategoriesDto, def roomsDto, def reservationsDto, def roomAssignmentsDto, def pricelistDto) {
         def plan
         try {
             log.trace("RoomPlanner call..")
-            plan = roomPlannerRemoteService.doPlan(licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
+            plan = roomPlannerRemoteService.doPlan(licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto)
             log.trace("...done")
         } 
         catch (Exception e) {

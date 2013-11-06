@@ -66,7 +66,7 @@ class RoomPlannerService {
 
 		def pricelist = pricelistService.rebuildPricelist(license)
 		
-		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments)
+		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, pricelist)
 		plan.save()
 		plan
 	}
@@ -81,12 +81,14 @@ class RoomPlannerService {
 		def reservations = Reservation.getAllFor(license)
 		def roomAssignments = []
 
+		def pricelist = pricelistService.rebuildPricelist(license)
+
 		log.trace("Hotel data acquired...")
 		log.trace("RoomCategories: " + roomCategories)
 		log.trace("Rooms: " + rooms)
 		log.trace("Reservations: " + reservations)
 
-		def plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, reservationRequest)
+		def plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, reservationRequest, pricelist)
 		
 		log.trace("RoomAssignments: $plan.roomAssignments")
 		
@@ -103,7 +105,7 @@ class RoomPlannerService {
 	/**
 		Creates a new plan on given data
 	*/
-	protected Plan callRoomPlanner(License license, def roomCategories, def rooms, def reservations, def roomAssignments, def reservationRequest = null) {
+	protected Plan callRoomPlanner(License license, def roomCategories, def rooms, def reservations, def roomAssignments, def reservationRequest, def pricelist) {
 
 		def remoteService = null
 
@@ -119,8 +121,8 @@ class RoomPlannerService {
 				throw new Exception("Unsupported remote type: [${mode}]")
 		}
 
-		def (licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto) = 
-			remoteService.convertData(license, roomCategories, rooms, reservations, roomAssignments)
+		def (licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto) = 
+			remoteService.convertData(license, roomCategories, rooms, reservations, roomAssignments, pricelist)
 
 		if (reservationRequest != null) {
 			log.trace("Reservation to check: $reservationRequest")
@@ -134,7 +136,7 @@ class RoomPlannerService {
 
 		log.trace("Reservation to plan: $reservationsDto")
 
-		def planDto = remoteService.callPlanner(licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto)
+		def planDto = remoteService.callPlanner(licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto)
 		
 		Plan plan = remoteService.convertResponse(license, planDto)
 		plan

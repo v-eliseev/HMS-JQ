@@ -10,6 +10,7 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roomCategoryList" type="tns:roomCategory"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="reservationList" type="tns:reservation"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roomAssignmentList" type="tns:roomAssignment"/>
+      <xs:element minOccurs="0" name="priceList" type="tns:pricelist"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="license">
@@ -48,6 +49,21 @@
       <xs:element minOccurs="0" name="moveable" type="xs:boolean"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:long"/>
+  </xs:complexType>
+<xs:complexType name="pricelist">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="licenseId" type="xs:long"/>
+      <xs:element minOccurs="0" name="fromDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="toDate" type="xs:dateTime"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="items" type="tns:pricelistItem"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="pricelistItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="onDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="rate" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="roomId" type="xs:long"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="doPlanResponse">
     <xs:sequence>

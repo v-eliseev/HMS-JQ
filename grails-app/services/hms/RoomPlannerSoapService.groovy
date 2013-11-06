@@ -11,6 +11,8 @@ import ws.roomplanner.RoomCategory as RoomCategoryDto
 import ws.roomplanner.RoomAssignment as RoomAssignmentDto
 import ws.roomplanner.Plan as PlanDto
 import ws.roomplanner.License as LicenseDto
+import ws.roomplanner.Pricelist as PricelistDto
+import ws.roomplanner.PricelistItem as PricelistItem
 
 import javax.xml.ws.soap.SOAPFaultException
 
@@ -23,7 +25,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 	/**
 		Converts domain data to SOAP DTO
 	*/
-	def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments) {
+	def convertData(def license, def roomCategories, def rooms, def reservations, def roomAssignments, def pricelist) {
 
         def licenseDto = new LicenseDto(key: license.key)
 
@@ -62,7 +64,9 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 			)
 		}
 
-		[ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto ]
+		def pricelistDto = null
+
+		[ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto ]
 	}
 
 	/**
@@ -107,11 +111,11 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 	/**
 		Calls the planner via SOAP
 	*/
-	def callPlanner(def license, def dtoRoomCategories, def dtoRooms, def dtoReservations, def dtoRoomAssignments) {
+	def callPlanner(def license, def dtoRoomCategories, def dtoRooms, def dtoReservations, def dtoRoomAssignments, def dtoPricelist) {
 		def plan
 		try {
 			log.trace("RoomPlanner call..")
-			plan = roomPlannerServiceClient.doPlan(license, dtoRooms, dtoRoomCategories, dtoReservations, dtoRoomAssignments)
+			plan = roomPlannerServiceClient.doPlan(license, dtoRooms, dtoRoomCategories, dtoReservations, dtoRoomAssignments, dtoPricelist)
 			log.trace("...done")
 		} 
 		catch (SOAPFaultException se) {

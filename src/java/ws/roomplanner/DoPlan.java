@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="roomCategoryList" type="{http://roomplanner/}roomCategory" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="reservationList" type="{http://roomplanner/}reservation" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="roomAssignmentList" type="{http://roomplanner/}roomAssignment" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="priceList" type="{http://roomplanner/}pricelist" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +38,8 @@ import javax.xml.bind.annotation.XmlType;
     "roomList",
     "roomCategoryList",
     "reservationList",
-    "roomAssignmentList"
+    "roomAssignmentList",
+    "priceList"
 })
 public class DoPlan {
 
@@ -46,6 +48,7 @@ public class DoPlan {
     protected List<RoomCategory> roomCategoryList;
     protected List<Reservation> reservationList;
     protected List<RoomAssignment> roomAssignmentList;
+    protected Pricelist priceList;
 
     /**
      * Gets the value of the license property.
@@ -185,6 +188,30 @@ public class DoPlan {
             roomAssignmentList = new ArrayList<RoomAssignment>();
         }
         return this.roomAssignmentList;
+    }
+
+    /**
+     * Gets the value of the priceList property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Pricelist }
+     *     
+     */
+    public Pricelist getPriceList() {
+        return priceList;
+    }
+
+    /**
+     * Sets the value of the priceList property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Pricelist }
+     *     
+     */
+    public void setPriceList(Pricelist value) {
+        this.priceList = value;
     }
 
 }

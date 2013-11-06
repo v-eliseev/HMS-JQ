@@ -67,6 +67,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PricelistItem }
+     * 
+     */
+    public PricelistItem createPricelistItem() {
+        return new PricelistItem();
+    }
+
+    /**
      * Create an instance of {@link Reservation }
      * 
      */
@@ -80,6 +88,14 @@ public class ObjectFactory {
      */
     public Score createScore() {
         return new Score();
+    }
+
+    /**
+     * Create an instance of {@link Pricelist }
+     * 
+     */
+    public Pricelist createPricelist() {
+        return new Pricelist();
     }
 
     /**

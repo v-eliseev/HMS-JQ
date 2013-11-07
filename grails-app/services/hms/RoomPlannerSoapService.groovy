@@ -63,8 +63,20 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 				moveable: false
 			)
 		}
-
-		def pricelistDto = null
+ 		
+ 		def pricelistDto = new PricelistDto(
+            licenseId: pricelist.licenseId,
+            dateFrom: pricelist.dateFrom,
+            dateToi: pricelist.dateTo
+            )
+        pricelist.items.each {
+            item = new PricelistItem(
+                onDate: it.onDate,
+                roomId: it.roomId,
+                rate: it.rate
+                )
+            pricelistDto.addToItems(item)
+        }
 
 		[ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto ]
 	}

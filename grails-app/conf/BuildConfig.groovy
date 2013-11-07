@@ -83,7 +83,7 @@ grails.project.dependency.resolution = {
         runtime ":tomcat:7.0.42"
 
         compile ":cxf:1.1.1"
-        compile ":cxf-client:1.5.6"
+        compile ":cxf-client:1.5.7"
         compile ":remoting:1.3"
         
         runtime ":mail:1.0.1"

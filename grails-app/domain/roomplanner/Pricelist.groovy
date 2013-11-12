@@ -7,8 +7,8 @@ class Pricelist implements Serializable {
 	} 
 
 	long licenseId
-	Date fromDate
-	Date toDate
+	Date dateFrom
+	Date dateTo
 
 	Date dateCreated
 	Date lastUpdated

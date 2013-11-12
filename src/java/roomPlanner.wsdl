@@ -53,8 +53,8 @@
 <xs:complexType name="pricelist">
     <xs:sequence>
       <xs:element minOccurs="0" name="licenseId" type="xs:long"/>
-      <xs:element minOccurs="0" name="fromDate" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="toDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="dateFrom" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="dateTo" type="xs:dateTime"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="items" type="tns:pricelistItem"/>
     </xs:sequence>
   </xs:complexType>

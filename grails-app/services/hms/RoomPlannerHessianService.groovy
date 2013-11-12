@@ -67,7 +67,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
         def pricelistDto = new PricelistDto(
             licenseId: pricelist.licenseId,
             dateFrom: pricelist.dateFrom,
-            dateToi: pricelist.dateTo
+            dateTo: pricelist.dateTo
             )
         pricelist.items.each {
             item = new PricelistItem(

@@ -66,7 +66,7 @@ class RoomPlannerService {
 
 		def pricelist = pricelistService.rebuildPricelist(license)
 		
-		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, pricelist)
+		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, null, pricelist)
 		plan.save()
 		plan
 	}

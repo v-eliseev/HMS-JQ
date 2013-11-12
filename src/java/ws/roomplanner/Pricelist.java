@@ -21,8 +21,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="licenseId" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="fromDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="toDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="dateFrom" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="dateTo" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="items" type="{http://roomplanner/}pricelistItem" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -35,17 +35,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pricelist", propOrder = {
     "licenseId",
-    "fromDate",
-    "toDate",
+    "dateFrom",
+    "dateTo",
     "items"
 })
 public class Pricelist {
 
     protected Long licenseId;
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar fromDate;
+    protected XMLGregorianCalendar dateFrom;
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar toDate;
+    protected XMLGregorianCalendar dateTo;
     protected List<PricelistItem> items;
 
     /**
@@ -73,51 +73,51 @@ public class Pricelist {
     }
 
     /**
-     * Gets the value of the fromDate property.
+     * Gets the value of the dateFrom property.
      * 
      * @return
      *     possible object is
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getFromDate() {
-        return fromDate;
+    public XMLGregorianCalendar getDateFrom() {
+        return dateFrom;
     }
 
     /**
-     * Sets the value of the fromDate property.
+     * Sets the value of the dateFrom property.
      * 
      * @param value
      *     allowed object is
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setFromDate(XMLGregorianCalendar value) {
-        this.fromDate = value;
+    public void setDateFrom(XMLGregorianCalendar value) {
+        this.dateFrom = value;
     }
 
     /**
-     * Gets the value of the toDate property.
+     * Gets the value of the dateTo property.
      * 
      * @return
      *     possible object is
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getToDate() {
-        return toDate;
+    public XMLGregorianCalendar getDateTo() {
+        return dateTo;
     }
 
     /**
-     * Sets the value of the toDate property.
+     * Sets the value of the dateTo property.
      * 
      * @param value
      *     allowed object is
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setToDate(XMLGregorianCalendar value) {
-        this.toDate = value;
+    public void setDateTo(XMLGregorianCalendar value) {
+        this.dateTo = value;
     }
 
     /**

@@ -4,6 +4,9 @@ import grails.transaction.Transactional
 
 import roomplanner.Pricelist
 import roomplanner.PricelistItem
+import roomplanner.DateTimeRange
+
+import org.joda.time.DateTime
 
 @Transactional
 class PricelistService {
@@ -34,8 +37,8 @@ class PricelistService {
 
     private def buildPricelist(def license) {
 
-		def fromDate = reservationService.getFirstReservation(license).fromDate
-    	def toDate = reservationService.getLastReservation(license).toDate
+		def fromDate = new DateTime(reservationService.getFirstReservation(license).fromDate.getTime())
+    	def toDate = new DateTime(reservationService.getLastReservation(license).toDate.getTime())
 
     	def pricelist = new Pricelist(
     		licenseId: license.id,
@@ -45,10 +48,13 @@ class PricelistService {
 
     	log.debug("Building pricelist from [$fromDate] to [$toDate]...")
 
-    	(fromDate..toDate).each { date ->
+		Iterator<DateTime> iterator = new DateTimeRange(fromDate, toDate).iterator()
+		while (iterator.hasNext()) {
+			DateTime date = iterator.next()
+
     		def rooms = Room.getAllFor(license)
 
-    		log.debug("Rooms: $rooms")
+    		log.debug("Date: $date; Rooms: $rooms")
 
     		rooms.each { room ->
 				def item = new PricelistItem(

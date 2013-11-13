@@ -43,6 +43,14 @@
         drop 
         foreign key FK9F08441F04B5EDA;
 
+    alter table permanent_room_assignment 
+        drop 
+        foreign key FKDFA3632049769C3A;
+
+    alter table permanent_room_assignment 
+        drop 
+        foreign key FKDFA36320D2AD71DA;
+
     alter table reservation 
         drop 
         foreign key FKA2D543CC7BC5733A;
@@ -112,6 +120,8 @@
     drop table if exists license_user;
 
     drop table if exists owner;
+
+    drop table if exists permanent_room_assignment;
 
     drop table if exists rate_code;
 
@@ -300,6 +310,7 @@
         date_created datetime not null,
         demo_mode boolean not null,
         email varchar(255),
+        enabled boolean not null,
         expires datetime,
         hotel_id bigint,
         issued datetime,
@@ -327,17 +338,25 @@
     create table owner (
         id bigint not null auto_increment,
         version bigint not null,
-        address1 varchar(255) not null,
-        address2 varchar(255) not null,
-        city varchar(255) not null,
-        country varchar(255) not null,
+        address1 varchar(255),
+        address2 varchar(255),
+        city varchar(255),
+        country varchar(255),
         date_created datetime not null,
-        firstname varchar(255) not null,
+        email varchar(255),
         last_updated datetime not null,
-        lastname varchar(255) not null,
-        phone varchar(255) not null,
-        state varchar(255) not null,
-        zip varchar(255) not null,
+        name varchar(255),
+        phone varchar(255),
+        state varchar(255),
+        zip varchar(255),
+        primary key (id)
+    );
+
+    create table permanent_room_assignment (
+        id bigint not null auto_increment,
+        version bigint not null,
+        reservation_id bigint not null,
+        room_id bigint not null,
         primary key (id)
     );
 
@@ -572,6 +591,18 @@
 
     alter table license_user 
         add constraint uc_license_user_1 unique (username);
+
+    alter table permanent_room_assignment 
+        add index FKDFA3632049769C3A (reservation_id), 
+        add constraint FKDFA3632049769C3A 
+        foreign key (reservation_id) 
+        references reservation (id);
+
+    alter table permanent_room_assignment 
+        add index FKDFA36320D2AD71DA (room_id), 
+        add constraint FKDFA36320D2AD71DA 
+        foreign key (room_id) 
+        references room (id);
 
     alter table reservation 
         add index FKA2D543CC7BC5733A (hotel_id), 

@@ -11,8 +11,8 @@ import roomplanner.api.Reservation as ReservationDto
 import roomplanner.api.RoomAssignment as RoomAssignmentDto
 import roomplanner.api.Plan as PlanDto
 import roomplanner.api.License as LicenseDto
-import ws.roomplanner.Pricelist as PricelistDto
-import ws.roomplanner.PricelistItem as PricelistItemDto
+import roomplanner.api.Pricelist as PricelistDto
+import roomplanner.api.PricelistItem as PricelistItemDto
 
 import org.joda.time.Interval
 
@@ -66,8 +66,8 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 
         def pricelistDto = new PricelistDto(
             licenseId: pricelist.licenseId,
-            dateFrom: pricelist.dateFrom,
-            dateTo: pricelist.dateTo
+            fromDate: pricelist.fromDate,
+            toDate: pricelist.toDate
             )
         log.debug("PriceList: $pricelistDto")
         pricelist.items.each {

@@ -64,10 +64,12 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 			)
 		}
  		
+
+ 		log.debug("Pricelist: $pricelist")
  		def pricelistDto = new PricelistDto(
             licenseId: pricelist.licenseId,
-            dateFrom: pricelist.dateFrom,
-            dateTo: pricelist.dateTo
+            fromDate: pricelist.fromDate,
+            toDate: pricelist.toDate
             )
         pricelist.items.each {
             def item = new PricelistItemDto(
@@ -75,6 +77,7 @@ class RoomPlannerSoapService implements IRoomPlannerService {
                 roomId: it.roomId,
                 rate: it.rate
                 )
+            //log.debug("  Item: $item")
             pricelistDto.items.add(item)
         }
 

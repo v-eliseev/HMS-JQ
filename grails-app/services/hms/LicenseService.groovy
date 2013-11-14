@@ -174,11 +174,11 @@ class LicenseService {
 	def prolongateLicense(def id, def iso8601PeriodOrDate) {
 		def licenseInstance = License.get(id)
 
-		def dateFrom = new DateTime().withTimeAtStartOfDay()
+		def fromDate = new DateTime().withTimeAtStartOfDay()
 
 		try {
 			Period period = parseISOPeriod(iso8601PeriodOrDate)
-			licenseInstance.expires = dateFrom.plus(period).toDate()
+			licenseInstance.expires = fromDate.plus(period).toDate()
 		} 
 		catch (Exception e1) {
 			log.info("Period parse failed, try Date")

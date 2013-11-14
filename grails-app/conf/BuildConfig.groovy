@@ -65,6 +65,7 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.27'
         compile 'org.freemarker:freemarker:2.3.20'
         compile 'joda-time:joda-time:2.3'
+        //compile 'joda-time:joda-time-hibernate:1.3'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
         test "org.gebish:geb-spock:0.9.2"

@@ -1,9 +1,12 @@
-<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="RoomPlannerSoapServiceService" targetNamespace="http://roomplanner/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://roomplanner/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://roomplanner/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="RoomPlannerSoapServiceService" targetNamespace="http://roomplanner/">
   <wsdl:types>
-<xs:schema elementFormDefault="unqualified" targetNamespace="http://roomplanner/" version="1.0" xmlns:tns="http://roomplanner/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:element name="doPlan" type="tns:doPlan"/>
-<xs:element name="doPlanResponse" type="tns:doPlanResponse"/>
-<xs:complexType name="doPlan">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://roomplanner/" elementFormDefault="unqualified" targetNamespace="http://roomplanner/" version="1.0">
+
+  <xs:element name="doPlan" type="tns:doPlan"/>
+
+  <xs:element name="doPlanResponse" type="tns:doPlanResponse"/>
+
+  <xs:complexType name="doPlan">
     <xs:sequence>
       <xs:element minOccurs="0" name="license" type="tns:license"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roomList" type="tns:room"/>
@@ -13,12 +16,14 @@
       <xs:element minOccurs="0" name="priceList" type="tns:pricelist"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="license">
+
+  <xs:complexType name="license">
     <xs:sequence>
       <xs:element minOccurs="0" name="key" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="room">
+
+  <xs:complexType name="room">
     <xs:sequence>
       <xs:element minOccurs="0" name="roomCategory" type="tns:roomCategory"/>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
@@ -27,13 +32,15 @@
     </xs:sequence>
     <xs:attribute name="id" type="xs:long"/>
   </xs:complexType>
-<xs:complexType name="roomCategory">
+
+  <xs:complexType name="roomCategory">
     <xs:sequence>
       <xs:element minOccurs="0" name="name" type="xs:string"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:long"/>
   </xs:complexType>
-<xs:complexType name="reservation">
+
+  <xs:complexType name="reservation">
     <xs:sequence>
       <xs:element minOccurs="0" name="roomCategory" type="tns:roomCategory"/>
       <xs:element minOccurs="0" name="bookingInterval" type="xs:string"/>
@@ -42,7 +49,8 @@
     </xs:sequence>
     <xs:attribute name="id" type="xs:long"/>
   </xs:complexType>
-<xs:complexType name="roomAssignment">
+
+  <xs:complexType name="roomAssignment">
     <xs:sequence>
       <xs:element minOccurs="0" name="room" type="tns:room"/>
       <xs:element minOccurs="0" name="reservation" type="tns:reservation"/>
@@ -50,33 +58,38 @@
     </xs:sequence>
     <xs:attribute name="id" type="xs:long"/>
   </xs:complexType>
-<xs:complexType name="pricelist">
+
+  <xs:complexType name="pricelist">
     <xs:sequence>
       <xs:element minOccurs="0" name="licenseId" type="xs:long"/>
-      <xs:element minOccurs="0" name="dateFrom" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="dateTo" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fromDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="toDate" type="xs:string"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="items" type="tns:pricelistItem"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="pricelistItem">
+
+  <xs:complexType name="pricelistItem">
     <xs:sequence>
-      <xs:element minOccurs="0" name="onDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="onDate" type="xs:string"/>
       <xs:element minOccurs="0" name="rate" type="xs:decimal"/>
       <xs:element minOccurs="0" name="roomId" type="xs:long"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="doPlanResponse">
+
+  <xs:complexType name="doPlanResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="plan" type="tns:plan"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="plan">
+
+  <xs:complexType name="plan">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roomAssignments" type="tns:roomAssignment"/>
       <xs:element minOccurs="0" name="score" type="tns:score"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="score">
+
+  <xs:complexType name="score">
     <xs:sequence>
       <xs:element minOccurs="0" name="feasible" type="xs:boolean"/>
       <xs:element minOccurs="0" name="hardScoreConstraints" type="xs:double"/>
@@ -84,13 +97,15 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" name="scoreDetails" type="tns:scoreDetail"/>
     </xs:sequence>
   </xs:complexType>
-<xs:complexType name="scoreDetail">
+
+  <xs:complexType name="scoreDetail">
     <xs:sequence>
       <xs:element minOccurs="0" name="constraintName" type="xs:string"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roomAssignments" type="tns:roomAssignment"/>
       <xs:element minOccurs="0" name="weight" type="xs:double"/>
     </xs:sequence>
   </xs:complexType>
+
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="doPlan">

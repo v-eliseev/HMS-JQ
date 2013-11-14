@@ -37,8 +37,8 @@ class PricelistService {
 
     private def buildPricelist(def license) {
 
-		def fromDate = new DateTime(reservationService.getFirstReservation(license).fromDate.getTime())
-    	def toDate = new DateTime(reservationService.getLastReservation(license).toDate.getTime())
+		def fromDate = new Date(reservationService.getFirstReservation(license).fromDate.getTime())
+    	def toDate = new Date(reservationService.getLastReservation(license).toDate.getTime())
 
     	def pricelist = new Pricelist(
     		licenseId: license.id,
@@ -48,7 +48,10 @@ class PricelistService {
 
     	log.debug("Building pricelist from [$fromDate] to [$toDate]...")
 
-		Iterator<DateTime> iterator = new DateTimeRange(fromDate, toDate).iterator()
+		Iterator<DateTime> iterator = new DateTimeRange(
+											new DateTime(fromDate.getTime()), 
+											new DateTime(toDate.getTime()))
+										.iterator()
 		while (iterator.hasNext()) {
 			DateTime date = iterator.next()
 
@@ -58,14 +61,17 @@ class PricelistService {
 
     		rooms.each { room ->
 				def item = new PricelistItem(
-    				onDate: date,
+    				onDate: new Date(date.getMillis()),
     				roomId: room.id,
     				rate: 45g  // TODO change
     			)
 				pricelist.addToItems(item)
     		}
     	}
-    	pricelist.save(flush:true)
+    	if (!pricelist.save(flush:true)) {
+    		log.error("Error generating pricelist: $pricelist")
+    		throw new Exception("Error generating pricelist")
+    	}
     	log.debug("...Done")
     	pricelist
 	}

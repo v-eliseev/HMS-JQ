@@ -4,9 +4,7 @@ package ws.roomplanner;
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -19,7 +17,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="onDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="onDate" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="rate" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *         &lt;element name="roomId" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *       &lt;/sequence>
@@ -38,8 +36,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class PricelistItem {
 
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar onDate;
+    protected String onDate;
     protected BigDecimal rate;
     protected Long roomId;
 
@@ -48,10 +45,10 @@ public class PricelistItem {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getOnDate() {
+    public String getOnDate() {
         return onDate;
     }
 
@@ -60,10 +57,10 @@ public class PricelistItem {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setOnDate(XMLGregorianCalendar value) {
+    public void setOnDate(String value) {
         this.onDate = value;
     }
 

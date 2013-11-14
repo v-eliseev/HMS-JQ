@@ -64,9 +64,9 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     development {
-        grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
+        //grails.roomplannerURL = "http://localhost:8080/RoomPlanner"
         //grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"
-        //grails.roomplannerURL = "http://planner.roombix.ru"
+        grails.roomplannerURL = "http://planner.roombix.ru"
     }
     test {
         grails.roomplannerURL = "http://192.168.0.35/tomcat/RoomPlanner"

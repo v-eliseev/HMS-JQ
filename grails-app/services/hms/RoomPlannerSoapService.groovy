@@ -16,6 +16,8 @@ import ws.roomplanner.PricelistItem as PricelistItemDto
 
 import javax.xml.ws.soap.SOAPFaultException
 
+import org.joda.time.DateTime
+
 class RoomPlannerSoapService implements IRoomPlannerService {
 
 	// SOAP client
@@ -68,12 +70,12 @@ class RoomPlannerSoapService implements IRoomPlannerService {
  		log.debug("Pricelist: $pricelist")
  		def pricelistDto = new PricelistDto(
             licenseId: pricelist.licenseId,
-            fromDate: pricelist.fromDate,
-            toDate: pricelist.toDate
+            fromDate: new DateTime(pricelist.fromDate.getTime()),
+            toDate: new DateTime(pricelist.toDate.getTime())
             )
         pricelist.items.each {
             def item = new PricelistItemDto(
-                onDate: it.onDate,
+                onDate: new DateTime(it.onDate.getTime()),
                 roomId: it.roomId,
                 rate: it.rate
                 )

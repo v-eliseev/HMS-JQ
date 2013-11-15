@@ -11,10 +11,8 @@ class LoginPage extends Page {
 	}
 
 	static content = {
-		userName { $("input", name : "j_username") }
-    	password { $("input", name : "j_password") }
-		loginButton() { $("input", value: "Login") }
-		// deleteButton(to: ListPage) { $("input", value: "Delete") }
+		loginForm { $("form#loginForm") }
+		loginButton() { $("button#submit") }
 	}
 
 }

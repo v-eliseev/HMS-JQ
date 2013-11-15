@@ -122,6 +122,8 @@ $("#loginForm").submit(function() {
     if (saveInput) {
         var licenseKey = $("input#licenseKey").val();
         localStorage.setItem(LICENSE_KEY, licenseKey);
+    } else {
+        $("input#licenseKey").val($("span#licenseKey").text())
     }
 });
 

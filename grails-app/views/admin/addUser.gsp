@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="inputUsername" class="col-lg-2 control-label"><g:message code="user.name.label" default="Username" /></label>
             <div class="col-lg-8">
-                <input type="text"class="form-control" id="inputUsername" name="username" placeholder="Enter username" value="${user.username}">
+                <input type="text"class="form-control" id="inputUsername" name="username" placeholder="Enter username" value="${user?.username}">
             </div>
             <div class="col-lg-2">
                 <span class="label label-success">OK!</span>
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label for="inputEmail" class="col-lg-2 control-label"><g:message code="user.email.label" default="E-Mail" /></label>
             <div class="col-lg-8">
-                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter e-mail" value="${user.email}">
+                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter e-mail" value="${user?.email}">
             </div>
         </div>
 
@@ -70,10 +70,10 @@
             <div class="panel-heading">Account status</div>
             <div class="panel-body">
                 <div class="checkbox">
-                    <label><g:checkBox name="accountEnabled" checked="${user.enabled}"/>Enabled</label>
+                    <label><g:checkBox name="accountEnabled" checked="${user?.enabled}"/>Enabled</label>
                 </div>
                 <div class="checkbox">
-                    <label><g:checkBox name="accountLocked" checked="${user.accountLocked}"/>Locked</label>
+                    <label><g:checkBox name="accountLocked" checked="${user?.accountLocked}"/>Locked</label>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
         <div class="col-lg-8 col-lg-offset-2">
             <div class="col-lg-6">
                 <div class="checkbox">
-                    <label><g:checkBox name="expirePassword" checked="${user.expirePassword}"/> Expire password</label>
+                    <label><g:checkBox name="expirePassword" checked="${user?.expirePassword}"/> Expire password</label>
                 <button type="button" class="btn btn-primary btn-xs pull-right">Now</button>
                 </div>
             <div class="panel panel-default">

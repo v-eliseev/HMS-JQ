@@ -4,7 +4,7 @@ import geb.spock.GebSpec
 
 import hms.pages.*
  
-class LoginSpec extends GebSpec {
+class AdminLoginSpec extends GebSpec {
  
     def "Show login page"() {
         given:
@@ -13,11 +13,14 @@ class LoginSpec extends GebSpec {
         expect:
         at LoginPage
  
-        // when:
-        // search.field.value("wikipedia")
+        when:
+            loginForm.j_username = "admin"
+            loginForm.j_password = "admin"
+            //loginForm.j_licenseKey = ""
+            loginButton.click()
  
-        // then:
-        // waitFor { at GoogleResultsPage }
+        then:
+        at AdminStartPage
  
         // and:
         // firstResultLink.text() == "Wikipedia"

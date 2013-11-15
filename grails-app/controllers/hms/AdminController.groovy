@@ -52,19 +52,26 @@ class AdminController extends BaseController {
 	def saveUser() {
 		License license = getLicense(request)
 
-		log.debug(params)
+		def roles = params.list('accountRole').collect { adminService.getRole(it) }
+
+		adminService.createUser(
+			params.username, 
+			params.password, 
+			params.email, 
+			license, 
+			roles)
+
+		redirect action: 'index'
 	}
 
 
 	def resetPassword() {
-		def user = SecUser.get(params.id)		
-
-		//AdminService adminService = getServiceFactory().getServiceByName("adminService")
 		License license = getLicense(request)
-		
+
+		def user = SecUser.get(params.id)		
 		adminService.resetPassword(user, license)
 
-		redirect action: 'showUsers'
+		redirect action: 'index'
 	}
 
 	
@@ -78,9 +85,8 @@ class AdminController extends BaseController {
 
 
 	def changePassword() {	
-		//AdminService adminService = getServiceFactory().getServiceByName("adminService")
-		SecUser user = getCurrentUser(request)
 		License license = getLicense(request)
+		SecUser user = getCurrentUser(request)
 		
 		[
 			hotelInstance: license.hotel,
@@ -89,7 +95,6 @@ class AdminController extends BaseController {
 	}
 
 	def doChangePassword() {
-		//AdminService adminService = getServiceFactory().getServiceByName("adminService")
 		License license = getLicense(request)
 		
 		adminService.changePassword(params.username, params.currentPassword, params.newPassword, license)

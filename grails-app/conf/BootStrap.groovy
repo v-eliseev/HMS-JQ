@@ -19,7 +19,7 @@ class BootStrap {
         */
 		switch (GrailsUtil.environment) {
 
-			case "development":
+			case ["development", "jenkins"]:
 			try {
 				LicenseService licenseService = new LicenseService()
 				License license = licenseService.createDemoLicense("v-eliseev@yandex.ru", "WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6")

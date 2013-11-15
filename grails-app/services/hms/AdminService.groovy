@@ -13,7 +13,7 @@ class AdminService {
 
 		if (roles == null || roles.size() == 0) {
 			log.error("User must have at least one role")
-			throw new IllegalArgumentException()
+			throw new IllegalArgumentException("User must have at least one role")
 		}
 
 		def hash = new CustomPasswordEncoder().encodePassword(password, license.key)

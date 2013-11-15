@@ -650,7 +650,7 @@
         add constraint uc_sec_role_1 unique (authority);
 
     alter table sec_user 
-        add constraint unique-username unique (license_id, username);
+        add constraint uc_username unique (license_id, username);
 
     alter table sec_user 
         add index FK375DF2F9DEBACC1A (license_id), 

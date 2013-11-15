@@ -24,23 +24,24 @@ class BootStrap {
 
 			case "development":
 			try {
-				License license = licenseService.createDemoLicense("v-eliseev@yandex.ru", "WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6")
-				log.info("Demo license created: " + license.key)
-				
 				def adminRole = adminService.getAdminRole()
 				def userRole = adminService.getUserRole()
 				log.info("Roles created")
+
+
+				adminService.createSystemUser(
+					"superuser",
+					"password"
+				)
+
+				License license = licenseService.createDemoLicense("v-eliseev@yandex.ru", "WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6")
+				log.info("Demo license created: " + license.key)
 				
 				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license, [adminRole])
 				log.info("Admin user for license " + license.key + " created")
 
 				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license, [userRole])
 				log.info("Normal user for license " + license.key + " created")
-
-				adminService.createSystemUser(
-					"superuser",
-					"password"
-				)
 
 				break
 			} catch (Exception e) {
@@ -49,6 +50,11 @@ class BootStrap {
 
 			case "jenkins":
 			try {
+
+				def adminRole = adminService.getAdminRole()
+				def userRole = adminService.getUserRole()
+				log.info("Roles created")
+
 
 				adminService.createSystemUser(
 					"superuser",

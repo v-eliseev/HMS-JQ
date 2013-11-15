@@ -36,7 +36,7 @@ class SecUserSpec extends Specification {
 			//assert License.list().size() == 1
 			assert Hotel.list().size() == 1
 			assert SecUser.list().size() == 1
-			assert SecRole.list().size() == 1
+			assert SecRole.list().size() == 2
 			assert SecUserRole.list().size() == 1
 
 		when:
@@ -48,7 +48,7 @@ class SecUserSpec extends Specification {
 			//License.list().size() == 1
 			Hotel.list().size() == 1
 			SecUser.list().size() == 0
-			SecRole.list().size() == 1
+			SecRole.list().size() == 2
 			SecUserRole.list().size() == 0
 
 		cleanup:

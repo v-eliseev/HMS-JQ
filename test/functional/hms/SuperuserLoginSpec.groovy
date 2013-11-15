@@ -10,8 +10,8 @@ class SuperuserLoginSpec extends GebSpec {
         given:
         to SuperuserPage
  
-        // expect:
-        // at LoginPage
+        expect:
+        at SuperuserPage
  
         // when:
         // search.field.value("wikipedia")
@@ -27,5 +27,21 @@ class SuperuserLoginSpec extends GebSpec {
  
         // then:
         // waitFor { at WikipediaPage }
+    }
+
+    def "Create demo license"() {
+        given:
+        to SuperuserPage
+
+        expect:
+        at SuperuserPage
+
+        when:
+        createLicenseForm.name = "Vladislav Eliseev"
+        createLicenseForm.email = "v-eliseev@yandex.ru"
+        submitButton.click()
+
+        then:
+        at LicensePage
     }
 }

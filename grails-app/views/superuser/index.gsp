@@ -89,7 +89,7 @@
 		    <legend>New License</legend>
 			<div class="panel panel-default">
 		  		<div class="panel-body">
-					<g:form class="form-horizontal" role="form" action="createLicense" method="POST">
+					<g:form class="form-horizontal" role="form" action="createLicense" method="POST" name="createLicenseForm">
 
 				        <div class="form-group">
 				            <label for="inputName" class="col-lg-3 control-label"><g:message code="license.name.label" default="Name" /></label>
@@ -128,7 +128,7 @@
 
 						<div class="form-group">
 		        			<div class="col-lg-offset-3 col-lg-9">
-		            			<button type="submit" class="btn btn-primary" href="#">Create license</button>
+		            			<button type="submit" class="btn btn-primary" href="#" id="submit">Create license</button>
 		        			</div>
 		    			</div>
 

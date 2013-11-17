@@ -308,7 +308,6 @@
         id bigint not null auto_increment,
         version bigint not null,
         date_created datetime not null,
-        demo_mode boolean not null,
         email varchar(255),
         enabled boolean not null,
         expires datetime,
@@ -316,6 +315,7 @@
         issued datetime,
         `key` varchar(255) not null,
         last_updated datetime not null,
+        mode integer not null,
         owner_id bigint,
         primary key (id)
     );
@@ -650,7 +650,7 @@
         add constraint uc_sec_role_1 unique (authority);
 
     alter table sec_user 
-        add constraint uc_username unique (license_id, username);
+        add constraint unique-username unique (license_id, username);
 
     alter table sec_user 
         add index FK375DF2F9DEBACC1A (license_id), 

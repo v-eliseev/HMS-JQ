@@ -80,28 +80,28 @@ class LicenseServiceSpec extends Specification {
 					key: service.generateLicenseKey(),
 					issued: new Date(),
 					expires: new Date() + 30,
-					demoMode: true
+					mode: License.LicenseMode.DEMO
 					).save()
 
 			License licenseExpired = new License(
 					key: service.generateLicenseKey(),
 					issued: new Date() - 40,
 					expires: new Date() - 10,
-					demoMode: true
+					mode: License.LicenseMode.DEMO
 					).save()
 
 			License licenseNotActive = new License(
 					key: service.generateLicenseKey(),
 					issued: new Date() + 10,
 					expires: new Date() + 40,
-					demoMode: true
+					mode: License.LicenseMode.DEMO
 					).save()
 
 			License licenseWrongKey = new License(
 					key: "This is a wrong key format",
 					issued: new Date(),
 					expires: new Date() + 30,
-					demoMode: true
+					mode: License.LicenseMode.DEMO
 					).save()
 
 		then:
@@ -193,12 +193,12 @@ class LicenseServiceSpec extends Specification {
 	def 'Check license set production mode' () {
 		given:
 			def license = licenseService.createDemoLicense("aa@bb.cc")
-			assert license.demoMode == true
+			assert license.mode == License.LicenseMode.DEMO 
 		when:
 			licenseService.setProductionMode(license.id)
 
 		then:
-			license.demoMode == false
+			license.mode == License.LicenseMode.PRODUCTION
 	}
 
 }

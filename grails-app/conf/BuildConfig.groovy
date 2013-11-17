@@ -90,7 +90,7 @@ grails.project.dependency.resolution = {
         runtime ":mail:1.0.1"
         compile ":quartz2:2.1.6.2"
 
-        compile ":asset-pipeline:1.0.4"
+        compile ":asset-pipeline:1.1.1"
         compile ":less-asset-pipeline:0.8.2"
 
         // runtime ":jquery:1.10.2"

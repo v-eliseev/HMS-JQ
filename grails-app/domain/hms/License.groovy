@@ -6,6 +6,16 @@ enum LicenseType { PRODUCTION, DEMO }
 
 class License extends DomainBaseClass {
 
+	enum LicenseMode {
+		DEMO(1),
+		PRODUCTION(2),
+		TEST(3)
+
+		LicenseMode(int value) { this.value = value }
+		private final int value
+		public int value() { return value }		
+	}
+
 	static String digits = "2346789"
 	static String letters = "BCDFGHJKMPQRTVWXY"
 	static digitPosition = [3, 2, 1, 4, 5]
@@ -29,7 +39,7 @@ class License extends DomainBaseClass {
 	String email
 	Date expires
 	Date issued
-	Boolean demoMode
+	LicenseMode mode
 	Owner owner
 
 	Hotel hotel
@@ -45,5 +55,7 @@ class License extends DomainBaseClass {
 		key column: '`key`'
 		sort 'key'
 		sort users: 'username', order: 'asc'
+		mode sqlType: 'integer'	
 	}
+
 }

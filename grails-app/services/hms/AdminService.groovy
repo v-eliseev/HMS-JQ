@@ -72,7 +72,7 @@ class AdminService {
 	}
 
 	def createDemoUser(License license) {
-		if (!license?.demoMode) {
+		if (license?.mode != License.LicenseMode.DEMO) {
 			log.error("Demo license is required")
 			throw new IllegalArgumentException("Demo license is required")
 		}

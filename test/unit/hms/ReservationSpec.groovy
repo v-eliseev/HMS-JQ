@@ -34,7 +34,7 @@ class ReservationSpec extends Specification {
 					key: licenseService.generateLicenseKey(),
 					issued: new Date(),
 					expires: new Date() + 30,
-					demoMode: true,
+					mode: License.LicenseMode.DEMO,
 					hotel: hotel,
 					).save()
 

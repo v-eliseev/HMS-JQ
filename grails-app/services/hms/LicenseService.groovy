@@ -71,6 +71,12 @@ class LicenseService {
 			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
 			break
 
+		case "TEST" :
+			licenseInstance = createTestLicense(email)
+			SecRole adminRole = adminService.getAdminRole()
+			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
+			break
+
 		default:
 			log.error("Wrong license type")
 			throw new IllegalArgumentException("Wrong license type")
@@ -103,7 +109,7 @@ class LicenseService {
 				key: licenseKey ? licenseKey : generateLicenseKey(),
 				issued: now.toDate(),
 				expires: now.plusMonths(1).toDate(),
-				demoMode: true,
+				mode: License.LicenseMode.DEMO,
 				email: email,
 				hotel: h
 				)
@@ -123,7 +129,7 @@ class LicenseService {
 				key: generateLicenseKey(),
 				issued: now.toDate(),
 				expires: now.plusYears(1).toDate(),
-				demoMode: false,
+				mode: License.LicenseMode.PRODUCTION,
 				email: email,
 				hotel: h
 				)
@@ -132,6 +138,10 @@ class LicenseService {
 			throw new Exception('License was not created')
 		}
 		newLicense
+	}
+
+	def createTestLicense(def email) {
+		createDemoLicense(email, "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX")
 	}
 
 	def deleteLicense(def id) {
@@ -197,7 +207,7 @@ class LicenseService {
 	def setProductionMode(def id) {
 		def licenseInstance = License.get(id)
 
-		licenseInstance.demoMode = false
+		licenseInstance.mode = License.LicenseMode.PRODUCTION
 		licenseInstance.save(flush:true)
 	}
 

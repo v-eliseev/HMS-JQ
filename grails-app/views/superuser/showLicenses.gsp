@@ -15,7 +15,7 @@
         <tr>
             <g:sortableColumn property="key"
                 title="${message(code: 'license.key.label', default: 'Key')}" />
-            <g:sortableColumn property="demoMode"
+            <g:sortableColumn property="mode"
                 title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
             <g:sortableColumn property="expires"
                 title="${message(code: 'license.expires.label', default: 'Expires')}" />

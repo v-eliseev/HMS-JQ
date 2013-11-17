@@ -13,7 +13,7 @@
         <tr>
             <g:sortableColumn property="name"
                 title="${message(code: 'license.key.label', default: 'Name')}" />
-            <g:sortableColumn property="demoMode"
+            <g:sortableColumn property="mode"
                 title="${message(code: 'license.demoMode.label', default: 'Category')}" />
             <g:sortableColumn property="expires"
                 title="${message(code: 'license.expires.label', default: 'Adults')}" />

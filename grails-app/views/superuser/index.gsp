@@ -1,3 +1,5 @@
+<%@ page import="hms.License" %>
+
 <g:applyLayout name="twoblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
@@ -21,7 +23,7 @@
 				        <tr>
 				            <g:sortableColumn property="key"
 				                title="${message(code: 'license.key.label', default: 'Key')}" />
-				            <g:sortableColumn property="demoMode"
+				            <g:sortableColumn property="mode"
 				                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
 				            <g:sortableColumn property="expires"
 				                title="${message(code: 'license.expires.label', default: 'Expires')}" />
@@ -36,7 +38,7 @@
 				                </g:link>
 				            </td>
 				            <td>
-				                <g:if test="${licenseInstance.demoMode}">
+				                <g:if test="${licenseInstance. mode == License.LicenseMode.DEMO}">
 				                    <span class="label label-warning">Demo</span>
 				                </g:if>
 				                <g:else>
@@ -55,7 +57,7 @@
 				        <tr>
 				            <g:sortableColumn property="key"
 				                title="${message(code: 'license.key.label', default: 'Key')}" />
-				            <g:sortableColumn property="demoMode"
+				            <g:sortableColumn property="mode"
 				                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
 				            <g:sortableColumn property="expires"
 				                title="${message(code: 'license.expires.label', default: 'Expires')}" />
@@ -70,7 +72,7 @@
 				                </g:link>
 				            </td>
 				            <td>
-				                <g:if test="${licenseInstance.demoMode}">
+				                <g:if test="${licenseInstance.mode == License.LicenseMode.DEMO}">
 				                    <span class="label label-warning">Demo</span>
 				                </g:if>
 				                <g:else>

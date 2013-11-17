@@ -12,6 +12,7 @@ class LoginPage extends Page {
 
 	static content = {
 		loginForm { $("form#loginForm") }
+		changeLicenseKey { $("a#changeLicenseKey") }
 		loginButton() { $("button#submit") }
 	}
 

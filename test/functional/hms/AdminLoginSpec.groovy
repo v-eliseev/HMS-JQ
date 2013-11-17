@@ -16,7 +16,8 @@ class AdminLoginSpec extends GebSpec {
         when:
             loginForm.j_username = "admin"
             loginForm.j_password = "admin"
-            //loginForm.j_licenseKey = ""
+            changeLicenseKey.click()
+            loginForm.j_licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
             loginButton.click()
  
         then:

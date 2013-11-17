@@ -27,6 +27,14 @@ class SuperuserController extends BaseController {
 		redirect(action: "showLicense", id: licenseInstance.id)
 	}
 
+	/**
+	*	Private method to perform testing of web interface
+	*/
+	def createTestLicense() {
+		def licenseInstance = licenseService.createLicense(License.LicenseMode.TEST, "Test Test", "test@test.test")
+		redirect(action: "showLicense", id: licenseInstance.id)
+	}
+
 	def showLicense() {
 		def licenseInstance = License.get(params.id)
 		if (!licenseInstance) {

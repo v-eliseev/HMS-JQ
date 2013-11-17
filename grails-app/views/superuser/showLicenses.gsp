@@ -1,3 +1,5 @@
+<%@ page import="hms.License" %>
+
 <g:applyLayout name="threeblocks">
 <head>
 <title><g:message code="title.superuser.licenses" /></title>
@@ -28,7 +30,7 @@
                 </g:link>
             </td>
             <td>
-                <g:if test="${licenseInstance.demoMode}">
+                <g:if test="${licenseInstance.mode == License.LicenseMode.DEMO}">
                     <span class="label label-warning">Demo</span>
                 </g:if>
                 <g:else>

@@ -44,4 +44,13 @@ class SuperuserLoginSpec extends GebSpec {
         then:
         at LicensePage
     }
+
+    def "Create test license" () {
+        given:
+        to SuperuserCreateTestLicensePage
+
+        expect:
+        at LicensePage
+
+    }
 }

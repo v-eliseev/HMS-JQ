@@ -14,6 +14,7 @@ class LoginPage extends Page {
 		loginForm { $("form#loginForm") }
 		changeLicenseKey { $("a#changeLicenseKey") }
 		loginButton() { $("button#submit") }
+		licenseKeyInputDiv(required: false) { $("div#license_input") }
 	}
 
 }

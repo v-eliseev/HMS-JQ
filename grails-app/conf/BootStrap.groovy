@@ -61,6 +61,16 @@ class BootStrap {
 					"password"
 				)
 
+				License license = licenseService.createDemoLicense("v-eliseev@yandex.ru", "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX")
+				log.info("Demo license created: " + license.key)
+
+				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license, [adminRole])
+				log.info("Admin user for license " + license.key + " created")
+
+				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license, [userRole])
+				log.info("Normal user for license " + license.key + " created")
+
+
 			} catch (Exception e) {
 				log.error("Error executing BootStrap", e)
 			}

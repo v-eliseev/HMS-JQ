@@ -31,13 +31,14 @@ class AdminServiceSpec extends Specification {
 		given:
 			def license1 = licenseService.createStandardLicense("aa@bb.cc")
 			def license2 = licenseService.createStandardLicense("aa@bb.cc")
+			def secUserCountBefore = SecUser.list().size()
 		when:
 			adminService.createUser("admin", "admin", "aa@bb.cc", license1, [adminRole])
 			adminService.createUser("manager", "manager", "aa@bb.cc", license1, [adminRole])
 			adminService.createUser("admin", "admin", "aa@bb.cc", license2, [adminRole])
 
 		then:
-			SecUser.list().size() == 3
+			SecUser.list().size() == secUserCountBefore + 3
 			license1.users.size() == 2
 			license2.users.size() == 1
 

@@ -7,7 +7,7 @@ class AdminStartPage extends Page {
 	static url = "http://localhost:9090/HMS-JQ/"
 
 	static at = {
-		title ==~ /.*Admin/
+		title ==~ /.*/   // TODO change
 	}
 
 	static content = {

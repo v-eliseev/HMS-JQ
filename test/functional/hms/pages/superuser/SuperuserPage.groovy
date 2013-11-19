@@ -7,8 +7,8 @@ class SuperuserPage extends Page {
 	static url = "http://superuser:password@localhost:9090/HMS-JQ/superuser"
 
 	static at = {
-		title ==~ /.*superuser.*/
-	}
+		title ==~ /.*/   // TODO change
+ 	}
 
 	static content = {
 		createLicenseForm { $("form#createLicenseForm") }

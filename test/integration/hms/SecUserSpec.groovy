@@ -34,10 +34,10 @@ class SecUserSpec extends Specification {
 			assert adminUser != null
 
 			//assert License.list().size() == 1
-			assert Hotel.list().size() == 1
-			assert SecUser.list().size() == 1
-			assert SecRole.list().size() == 2
-			assert SecUserRole.list().size() == 1
+			def hotelCountBefore = Hotel.list().size()
+			def secUserCountBefore = SecUser.list().size()
+			def secRoleCountBefore = SecRole.list().size()
+			def secUserRoleCountBefore = SecUserRole.list().size()
 
 		when:
 			license.removeFromUsers(adminUser)
@@ -46,10 +46,10 @@ class SecUserSpec extends Specification {
 		then:
 
 			//License.list().size() == 1
-			Hotel.list().size() == 1
-			SecUser.list().size() == 0
-			SecRole.list().size() == 2
-			SecUserRole.list().size() == 0
+			Hotel.list().size() == hotelCountBefore
+			SecUser.list().size() == secUserCountBefore - 1
+			SecRole.list().size() == secRoleCountBefore
+			SecUserRole.list().size() == secUserRoleCountBefore - 1
 
 		cleanup:
 			license.delete(flush:true)

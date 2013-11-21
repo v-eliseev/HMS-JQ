@@ -24,7 +24,7 @@ class AdminService {
 		 	throw new Exception('User was not created')
 		}
 		license.addToUsers(newUser)
-		license.save()
+		license.save(flush:true)
 		log.trace("... Successful")
 
 		roles.each() {
@@ -57,7 +57,7 @@ class AdminService {
 		
 		hash = new CustomPasswordEncoder().encodePassword(newPassword, license.key)
 		user.password = hash
-		user.save()
+		user.save(flush:true)
 		
 		user
 	}
@@ -66,7 +66,7 @@ class AdminService {
 
 		def hash = new CustomPasswordEncoder().encodePassword("", license.key)
 		user.password = hash
-		user.save()
+		user.save(flush:true)
 		
 		user
 	}

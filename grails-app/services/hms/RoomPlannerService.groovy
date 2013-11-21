@@ -39,12 +39,12 @@ class RoomPlannerService {
 			plan.delete()
 			Hotel h = license.hotel
 			license.hotel = null
-			license.save()
+			license.save(flush:true)
 			h.delete()
 
 			log.trace("Create new hotel data...")
 			license.hotel = DemoDataScript.generateRandomData(license)
-			license.save()
+			license.save(flush:true)
 
 			log.trace("...succeed")
 			log.trace("New hotel reservations: $license.hotel.reservations")
@@ -67,7 +67,7 @@ class RoomPlannerService {
 		def pricelist = pricelistService.rebuildPricelist(license)
 		
 		plan = callRoomPlanner(license, roomCategories, rooms, reservations, roomAssignments, null, pricelist)
-		plan.save()
+		plan.save(flush:true)
 		plan
 	}
 

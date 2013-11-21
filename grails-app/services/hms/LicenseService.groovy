@@ -113,7 +113,7 @@ class LicenseService {
 				email: email,
 				hotel: h
 				)
-		if (!newLicense.save()) {
+		if (!newLicense.save(flush:true)) {
 			newLicense.errors.each { log.error(it) }
 			throw new Exception('License was not created')
 		}
@@ -133,7 +133,7 @@ class LicenseService {
 				email: email,
 				hotel: h
 				)
-		if (!newLicense.save()) {
+		if (!newLicense.save(flush:true)) {
 			newLicense.errors.each { log.error(it) }
 			throw new Exception('License was not created')
 		}
@@ -178,7 +178,7 @@ class LicenseService {
 
 	def changeEmail(String email, License license) {
 		license.email = email
-		license.save()
+		license.save(flush:true)
 	}
 
 	def prolongateLicense(def id, def iso8601PeriodOrDate) {

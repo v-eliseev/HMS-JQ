@@ -17,7 +17,7 @@ class ConfirmationRequestService {
 			expires: calendar.getTime()
 		)
 		
-		if (!cr.save()) {
+		if (!cr.save(flush:true)) {
 			cr.errors.each { log.error(it) }
 			throw new Exception("Error creating ConfirmationRequest")
 		}
@@ -38,7 +38,7 @@ class ConfirmationRequestService {
 			expires: calendar.getTime()
 		)
 		
-		if (!cr.save()) {
+		if (!cr.save(flush:true)) {
 			cr.errors.each { log.error(it) }
 			throw new Exception("Error creating ConfirmationRequest")
 		}

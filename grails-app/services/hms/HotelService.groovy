@@ -4,18 +4,18 @@ class HotelService {
 
 	def createRandomHotelData(License license) {
 		license.hotel = DemoDataScript.generateRandomData(license)
-		license.save()
+		license.save(flush:true)
 	}
 	
 	def createHotel(String name, License license) {
 		def newHotel = new Hotel(name: name)
-		if (!newHotel.save()) {
+		if (!newHotel.save(flush:true)) {
 			newHotel.errors.each { log.error(it) }
 			throw Exception('Hotel was not created')
 		}
 
 		license.addToHotels(newHotel)
-		license.save()
+		license.save(flush:true)
 			
 		newHotel
 	}

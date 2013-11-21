@@ -82,7 +82,7 @@ class DemoDataScript {
 			} else if (fromDate < nowDate) {
 				code = ReservationStatus.StatusCode.CHECKED_IN
 			} 
-			def reservationStatus = ReservationStatus.findByCode(code) ?: new ReservationStatus(code: code).save()
+			def reservationStatus = ReservationStatus.findByCode(code) ?: new ReservationStatus(code: code).save(flush:true)
 			if (reservationStatus == null) {
 				throw new Exception("Reserevation status is null")
 			}

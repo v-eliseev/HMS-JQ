@@ -68,8 +68,10 @@ class DemoDataScript {
 		}
 
 		// save hotel configuration
-		h.save(flush:true)
-
+		if (!h.save(flush:true)) {
+			h.errors.each { log.error(it) }
+			throw new Exception('Hotel data were not generated')
+		}
 		
 		// generate reservations
 		for (i in 1..NUMBER_OF_RESERVATIONS) {
@@ -96,7 +98,10 @@ class DemoDataScript {
 			h.addToReservations(r)
 		}
 		
-		h.save(flush:true)
+		if (!h.save(flush:true)) {
+			h.errors.each { log.error(it) }
+			throw new Exception('Reservation data were not generated')
+		}
 
 		h
 	}

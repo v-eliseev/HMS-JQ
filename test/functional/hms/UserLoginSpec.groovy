@@ -28,7 +28,7 @@ class UserLoginSpec extends GebSpec {
             loginButton.click()
  
         then:
-        at UserStartPage
+        waitFor { at UserStartPage }
         // waitFor { at GoogleResultsPage }
  
         // and:

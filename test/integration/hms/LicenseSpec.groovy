@@ -20,6 +20,21 @@ class LicenseSpec extends Specification {
 		assert adminService != null
 	}
 
+	def 'Check demo license creation' () {
+		given:
+			def hotelCountBefore = Hotel.list().size()
+
+		when:
+			def license = licenseService.createDemoLicense("aa@bb.cc")
+
+		then:
+			license != null
+			Hotel.list().size() == hotelCountBefore + 1
+
+		cleanup:
+			license.delete(flush:true)
+	}
+
 	def 'License must delete related Hotel and SecUsers'() {
 		given:
 			def hotelCountBefore = Hotel.list().size()

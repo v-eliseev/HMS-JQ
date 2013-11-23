@@ -46,7 +46,7 @@ class ReservationServiceSpec extends Specification {
 			Reservation.list().size() == (count + 1)
 
 		cleanup:
-			license.delete()
+			license.delete(flush:true)
 	}
 
 	def 'Get checkins for the date' () {
@@ -62,7 +62,7 @@ class ReservationServiceSpec extends Specification {
 			checkinList.size() != 0
 
 		cleanup:
-			license.delete()
+			license.delete(flush:true)
 	}
 
 	def 'Get checkouts for the date' () {
@@ -78,7 +78,6 @@ class ReservationServiceSpec extends Specification {
 			checkoutList.size() != 0
 
 		cleanup:
-			license.delete()
+			license.delete(flush:true)
 	}
-
 }

@@ -128,6 +128,18 @@ class LicenseServiceSpec extends Specification {
 			license.delete(flush:true)
 	}
 
+	def 'Check hotel creation within demo license' () {
+		given:
+			def hotelCountBefore = Hotel.list().size()
+
+		when:
+			def license = licenseService.createDemoLicense("aa@bb.cc")
+
+		then:
+			license != null
+			Hotel.list().size() == hotelCountBefore + 1
+	}
+
 	def 'Check predefined demo license creation' () {
 		given:
 			def licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"

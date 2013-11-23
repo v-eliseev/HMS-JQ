@@ -138,8 +138,9 @@ grails.project.dependency.resolution = {
 codenarc {
     extraIncludeDirs = ['grails-app/jobs']
     reports = {
-    Jenkins('xml') {                    
-        outputFile = 'target/analysis-reports/CodeNarcReport.xml'
-        title = 'CodeNarc Analysis Report'
+        Jenkins('xml') {                    
+            outputFile = 'target/analysis-reports/CodeNarcReport.xml'
+            title = 'CodeNarc Analysis Report'
+        }
     }
 }

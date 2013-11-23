@@ -80,8 +80,8 @@ grails.project.dependency.resolution = {
     plugins {
 
         //runtime ":hibernate:3.6.10.1" 
-        runtime ":hibernate4:4.1.11.3"
-        runtime ":tomcat:7.0.42"
+        runtime ":hibernate4:4.1.11.4"
+        runtime ":tomcat:7.0.47"
 
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.5.7"
@@ -135,9 +135,11 @@ grails.project.dependency.resolution = {
     }
 }
 
-codenarc.reports = {
+codenarc {
+    extraIncludeDirs = ['grails-app/jobs']
+    reports = {
     Jenkins('xml') {                    
         outputFile = 'target/analysis-reports/CodeNarcReport.xml'
-        title = 'CodeNarc Analysis Report'             
+        title = 'CodeNarc Analysis Report'
     }
 }

@@ -57,7 +57,7 @@ class PricelistService {
 
     		def rooms = Room.getAllFor(license)
 
-    		log.debug("Date: $date; Rooms: $rooms")
+    		log.trace("Date: $date; Rooms: $rooms")
 
     		rooms.each { room ->
 				def item = new PricelistItem(

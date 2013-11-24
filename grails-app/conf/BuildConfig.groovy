@@ -81,7 +81,7 @@ grails.project.dependency.resolution = {
 
         //runtime ":hibernate:3.6.10.1" 
         runtime ":hibernate4:4.1.11.4"
-        runtime ":tomcat:7.0.42"
+        build ":tomcat:7.0.47"
 
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.5.7"

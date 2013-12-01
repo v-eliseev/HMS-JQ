@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for license complex type.
+ * <p>Java class for getStatusResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="license">
+ * &lt;complexType name="getStatusResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="key" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="status" type="{http://roomplanner/}status" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "license", propOrder = {
-    "key"
+@XmlType(name = "getStatusResponse", propOrder = {
+    "status"
 })
-public class License {
+public class GetStatusResponse {
 
-    protected String key;
+    protected Status status;
 
     /**
-     * Gets the value of the key property.
+     * Gets the value of the status property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Status }
      *     
      */
-    public String getKey() {
-        return key;
+    public Status getStatus() {
+        return status;
     }
 
     /**
-     * Sets the value of the key property.
+     * Sets the value of the status property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Status }
      *     
      */
-    public void setKey(String value) {
-        this.key = value;
+    public void setStatus(Status value) {
+        this.status = value;
     }
 
 }

@@ -25,6 +25,8 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _DoPlan_QNAME = new QName("http://roomplanner/", "doPlan");
+    private final static QName _GetStatusResponse_QNAME = new QName("http://roomplanner/", "getStatusResponse");
+    private final static QName _GetStatus_QNAME = new QName("http://roomplanner/", "getStatus");
     private final static QName _DoPlanResponse_QNAME = new QName("http://roomplanner/", "doPlanResponse");
 
     /**
@@ -32,6 +34,22 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetStatus }
+     * 
+     */
+    public GetStatus createGetStatus() {
+        return new GetStatus();
+    }
+
+    /**
+     * Create an instance of {@link GetStatusResponse }
+     * 
+     */
+    public GetStatusResponse createGetStatusResponse() {
+        return new GetStatusResponse();
     }
 
     /**
@@ -51,35 +69,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Plan }
+     * Create an instance of {@link Status }
      * 
      */
-    public Plan createPlan() {
-        return new Plan();
-    }
-
-    /**
-     * Create an instance of {@link ScoreDetail }
-     * 
-     */
-    public ScoreDetail createScoreDetail() {
-        return new ScoreDetail();
-    }
-
-    /**
-     * Create an instance of {@link PricelistItem }
-     * 
-     */
-    public PricelistItem createPricelistItem() {
-        return new PricelistItem();
-    }
-
-    /**
-     * Create an instance of {@link Reservation }
-     * 
-     */
-    public Reservation createReservation() {
-        return new Reservation();
+    public Status createStatus() {
+        return new Status();
     }
 
     /**
@@ -99,14 +93,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link License }
-     * 
-     */
-    public License createLicense() {
-        return new License();
-    }
-
-    /**
      * Create an instance of {@link RoomAssignment }
      * 
      */
@@ -120,6 +106,46 @@ public class ObjectFactory {
      */
     public RoomCategory createRoomCategory() {
         return new RoomCategory();
+    }
+
+    /**
+     * Create an instance of {@link Plan }
+     * 
+     */
+    public Plan createPlan() {
+        return new Plan();
+    }
+
+    /**
+     * Create an instance of {@link ScoreDetail }
+     * 
+     */
+    public ScoreDetail createScoreDetail() {
+        return new ScoreDetail();
+    }
+
+    /**
+     * Create an instance of {@link Reservation }
+     * 
+     */
+    public Reservation createReservation() {
+        return new Reservation();
+    }
+
+    /**
+     * Create an instance of {@link PricelistItem }
+     * 
+     */
+    public PricelistItem createPricelistItem() {
+        return new PricelistItem();
+    }
+
+    /**
+     * Create an instance of {@link License }
+     * 
+     */
+    public License createLicense() {
+        return new License();
     }
 
     /**
@@ -137,6 +163,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://roomplanner/", name = "doPlan")
     public JAXBElement<DoPlan> createDoPlan(DoPlan value) {
         return new JAXBElement<DoPlan>(_DoPlan_QNAME, DoPlan.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStatusResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://roomplanner/", name = "getStatusResponse")
+    public JAXBElement<GetStatusResponse> createGetStatusResponse(GetStatusResponse value) {
+        return new JAXBElement<GetStatusResponse>(_GetStatusResponse_QNAME, GetStatusResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStatus }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://roomplanner/", name = "getStatus")
+    public JAXBElement<GetStatus> createGetStatus(GetStatus value) {
+        return new JAXBElement<GetStatus>(_GetStatus_QNAME, GetStatus.class, null, value);
     }
 
     /**

@@ -101,6 +101,21 @@ class RoomPlannerHessianService implements IRoomPlannerService {
 	}
 
     /**
+        Calls status
+    */
+    def getStatus() {
+        def status
+        try {
+            status = roomPlannerRemoteService.getStatus()
+        }
+        catch (Exception e) {
+            log.error("Exception calling RoomPlanner" + e.message)
+            throw new Exception(e)
+        }
+        status
+    }
+
+    /**
         Converts service response to domain data
     */
 	def convertResponse(def license, def dtoPlan) {

@@ -141,4 +141,18 @@ class RoomPlannerSoapService implements IRoomPlannerService {
 		}
 		plan
 	}
+
+	/**
+		Calls status
+	*/
+	def getStatus() {
+		def status
+		try {
+			status = roomPlannerServiceClient.getStatus()
+		}
+		catch (SOAPFaultException se) {
+			log.error("SOAPException calling RoomPlanner" + se.message)
+			throw new Exception(se)
+		}
+	}
 }

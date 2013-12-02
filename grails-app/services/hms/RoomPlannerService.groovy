@@ -11,10 +11,6 @@ import org.joda.time.Interval
 
 class RoomPlannerService {
 
-	def grailsApplication
-
-	def roomPlannerSoapService
-	def roomPlannerHessianService
 	def pricelistService
 
 	def getSavedPlan(License license) {
@@ -107,19 +103,7 @@ class RoomPlannerService {
 	*/
 	protected Plan callRoomPlanner(License license, def roomCategories, def rooms, def reservations, def roomAssignments, def reservationRequest, def pricelist) {
 
-		def remoteService = null
-
-		def mode = grailsApplication.config.service.roomplanner.mode
-		switch (mode) {
-			case "SOAP":
-				remoteService = roomPlannerSoapService
-				break
-			case "Hessian":
-				remoteService = roomPlannerHessianService
-				break
-			default:
-				throw new Exception("Unsupported remote type: [${mode}]")
-		}
+		def remoteService = RoomPlannerServiceFactory.getService()
 
 		def (licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto) = 
 			remoteService.convertData(license, roomCategories, rooms, reservations, roomAssignments, pricelist)

@@ -147,6 +147,8 @@
 
     drop table if exists sec_user_role;
 
+    drop table if exists setting;
+
     drop table if exists system_user;
 
     drop table if exists tax_code;
@@ -501,6 +503,14 @@
         primary key (role_id, user_id)
     );
 
+    create table setting (
+        id bigint not null auto_increment,
+        version bigint not null,
+        `key` varchar(255) not null,
+        `value` varchar(255),
+        primary key (id)
+    );
+
     create table system_user (
         id bigint not null auto_increment,
         version bigint not null,
@@ -650,7 +660,7 @@
         add constraint uc_sec_role_1 unique (authority);
 
     alter table sec_user 
-        add constraint unique-username unique (license_id, username);
+        add constraint `unique-username` unique (license_id, username);
 
     alter table sec_user 
         add index FK375DF2F9DEBACC1A (license_id), 

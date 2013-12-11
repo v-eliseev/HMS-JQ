@@ -14,18 +14,84 @@ import org.codehaus.groovy.grails.plugins.codecs.HexCodec
 @TestMixin(GrailsUnitTestMixin)
 class LicenseCodeGeneratorSpec extends Specification {
 
-	def 'test license code generation' () {
+	def licenseService
+
+	def setup() {
+		licenseService = new LicenseService()
+
 		mockCodec SHA1Codec
 		mockCodec HexCodec
 		mockCodec Base32BytesCodec
-
-		def source = 'Vladislav Eliseev|v-eliseev@yandex.ru|' + new DateTime()
-		def shaCode = source.encodeAsSHA1()
-		def shortCode = shaCode.substring(0,32)
-		def licenseKey = shortCode.decodeHex().encodeAsBase32Bytes()
-		println licenseKey
-		def restoredCode = licenseKey.decodeBase32Bytes().encodeAsHex()
-
-		assert restoredCode == shortCode
 	}
+
+	def 'test license code generation' () {
+		given: 
+			def source = 'Vladislav Eliseev|v-eliseev@yandex.ru|' + new DateTime()
+
+		when:			
+			def shaCode = source.encodeAsSHA1()
+			def shortCode = shaCode.substring(0,32)
+			def licenseKey = shortCode.decodeHex().encodeAsBase32Bytes()
+		then:
+			def restoredCode = licenseKey.decodeBase32Bytes().encodeAsHex()
+			restoredCode == shortCode
+	}
+
+	def 'test generating license code' () {
+		given:
+			def source = [
+				ownerName: "Vladislav Eliseev",
+				ownerEmail: "v-eliseev@yandex.ru",
+				timestamp: System.currentTimeMillis()
+			]
+
+		when:
+			def licenseKey = licenseService.generateLicenseKey(source)
+
+		then:
+			licenseKey != null
+	}
+
+	def 'test empty ownerName' () {
+		given:
+			def source = [
+				ownerEmail: "v-eliseev@yandex.ru",
+				timestamp: System.currentTimeMillis()
+			]
+
+		when:
+			def licenseKey = licenseService.generateLicenseKey(source)
+
+		then:
+			thrown IllegalArgumentException
+	}
+
+	def 'test empty email' () {
+		given:
+			def source = [
+				ownerName: "Vladislav Eliseev",
+				timestamp: System.currentTimeMillis()
+			]
+
+		when:
+			def licenseKey = licenseService.generateLicenseKey(source)
+
+		then:
+			thrown IllegalArgumentException
+	}
+	
+	def 'test empty timestamp' () {
+		given:
+			def source = [
+				ownerName: "Vladislav Eliseev",
+				email: "v-eliseev@yandex.ru"
+			]
+
+		when:
+			def licenseKey = licenseService.generateLicenseKey(source)
+
+		then:
+			thrown IllegalArgumentException
+	}
+
 }

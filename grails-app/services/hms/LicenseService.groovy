@@ -32,6 +32,37 @@ class LicenseService {
 		key
 	}
 
+	def generateLicenseKey(def keyData) {
+
+		def name = keyData.ownerName
+		def email = keyData.ownerEmail
+		def timestamp = keyData.timestamp
+
+		if (!name || !email || !timestamp) {
+			log.error("Empty value for mandatory argument")
+			throw new IllegalArgumentException("Empty value for mandatory argument")
+		}
+
+		def source = "$name|$email|$timestamp"
+
+		log.debug("Creating license for [$source] ...")
+
+		def licenseKeyRaw = source.encodeAsSHA1().substring(0,32).decodeHex().encodeAsBase32Bytes()
+
+		log.debug("Raw key: $licenseKeyRaw")
+
+		def licenseKey = 
+			licenseKeyRaw.substring(0,5) + '-' +
+			licenseKeyRaw.substring(5,10) + '-' +
+			licenseKeyRaw.substring(10,15) + '-' +
+			licenseKeyRaw.substring(15,20) + '-' +
+			licenseKeyRaw.substring(20,26)
+
+		log.debug("... done. Key: [$licenseKey]")
+
+		licenseKey
+	}
+
 	def checkLicense(License license) {
 
 		// Key pattern

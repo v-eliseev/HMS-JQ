@@ -4,7 +4,7 @@ package hms
 
 class ExpireLicenseJob {
     static triggers = {
-      simple repeatInterval: 5000l // execute job once in 5 seconds
+      cron name: 'expire', startDelay:600000, cronExpression: "0 0 0 * * ?"  // daily at 12 a.m.
     }
 
     def execute() {

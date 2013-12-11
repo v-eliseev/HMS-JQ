@@ -135,7 +135,7 @@ log4j = {
            'grails.app.controllers.hms', 
            'grails.app.controllers.roomplanner',
            'grails.app.utils',
-           'grails.app.task',     // Quartz
+           'grails.app.jobs',     // Quartz
            'grails.app.filters'   // Filters
     
     error  'org.apache.cxf'

@@ -5,6 +5,7 @@ import hms.License
 import hms.LicenseService
 import hms.auth.SecUser
 import hms.auth.SecUserRole
+import hms.Setting
 
 class BootStrap {
 
@@ -12,7 +13,9 @@ class BootStrap {
 
 	def init = {  servletContext ->
 
-		grailsApplication.config.startNanoTime = System.nanoTime()	
+		def startTimeInstance = Setting.findOrCreateByKey('startTime')
+		startTimeInstance.value = System.currentTimeMillis()
+		startTimeInstance.save()
 
 		LicenseService licenseService = new LicenseService()
 		AdminService adminService = new AdminService()

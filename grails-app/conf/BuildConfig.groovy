@@ -91,7 +91,7 @@ grails.project.dependency.resolution = {
         compile ":quartz2:2.1.6.2"
 
         //compile ":asset-pipeline:1.0.4"
-        compile ":less-asset-pipeline:1.2.0"
+        compile ":less-asset-pipeline:1.2.1"
 
         // runtime ":jquery:1.10.2"
         // compile ":jquery-ui:1.8.24"

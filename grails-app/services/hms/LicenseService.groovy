@@ -11,26 +11,12 @@ import org.joda.time.format.PeriodFormatter
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
+import org.codehaus.groovy.grails.plugins.codecs.SHA1Codec
+import org.codehaus.groovy.grails.plugins.codecs.HexCodec
+
 class LicenseService {
 
 	def adminService
-
-	def generateLicenseKey() {
-
-		def key = ""
-
-		for (i in 1..5) {
-			// Groups
-			def digitPos = License.digitPosition[i-1]
-			for (j in 1..5) { // Positions
-				def nextValue = ((j == digitPos) ? generateDigit() : generateLetter())
-				key = key + nextValue
-			}
-			if (i != 5) key = key + "-"
-		}
-		
-		key
-	}
 
 	def generateLicenseKey(def keyData) {
 
@@ -49,7 +35,7 @@ class LicenseService {
 
 		def licenseKeyRaw = source.encodeAsSHA1().substring(0,32).decodeHex().encodeAsBase32Bytes()
 
-		log.debug("Raw key: $licenseKeyRaw")
+		log.trace("Raw key: $licenseKeyRaw")
 
 		def licenseKey = 
 			licenseKeyRaw.substring(0,5) + '-' +
@@ -65,17 +51,10 @@ class LicenseService {
 
 	def checkLicense(License license) {
 
+		def base32Alphabet = "A-Z2-7"
+
 		// Key pattern
-		def keyPattern = ""
-		for (i in 1..5) {
-			// Groups
-			def digitPos = License.digitPosition[i-1]
-			for (j in 1..5) { // Positions
-				def nextValue = ((j == digitPos) ? "["+ License.digits + "]" : "["+ License.letters + "]")
-				keyPattern = keyPattern + nextValue
-			}
-			if (i != 5) keyPattern = keyPattern + "-"
-		}
+		def keyPattern = "^[$base32Alphabet]{5}-[$base32Alphabet]{5}-[$base32Alphabet]{5}-[$base32Alphabet]{5}-[$base32Alphabet]{6}\$"
 
 		def today = new Date()
 		def valid = (
@@ -132,16 +111,17 @@ class LicenseService {
 	}
 
 	// private
-	def createDemoLicense(def email, String licenseKey = null) {
+	def createDemoLicense(def ownerName, def ownerEmail, String licenseKey = null) {
 		Hotel h = DemoDataScript.generateRandomData()
 		log.trace("Hotel with demo data created: " + h)
 		DateTime now = new DateTime().withTimeAtStartOfDay()
+		def key = licenseKey ? licenseKey : generateLicenseKey([ownerName: ownerName, ownerEmail: ownerEmail, timestamp: System.currentTimeMillis()])
 		License newLicense = new License(
-				key: licenseKey ? licenseKey : generateLicenseKey(),
+				key: key,
 				issued: now.toDate(),
 				expires: now.plusMonths(1).toDate(),
 				mode: License.LicenseMode.DEMO,
-				email: email,
+				email: ownerEmail,
 				hotel: h
 				)
 		if (!newLicense.save(flush:true)) {
@@ -153,15 +133,16 @@ class LicenseService {
 	}
 
 	// private 
-	def createStandardLicense(def email) {
+	def createStandardLicense(def ownerName, def ownerEmail) {
 		Hotel h = new Hotel()
 		DateTime now = new DateTime().withTimeAtStartOfDay()
+		def key = generateLicenseKey([ownerName: ownerName, ownerEmail: ownerEmail, timestamp: System.currentTimeMillis()])
 		License newLicense = new License(
-				key: generateLicenseKey(),
+				key: key,
 				issued: now.toDate(),
 				expires: now.plusYears(1).toDate(),
 				mode: License.LicenseMode.PRODUCTION,
-				email: email,
+				email: ownerEmail,
 				hotel: h
 				)
 		if (!newLicense.save(flush:true)) {
@@ -172,7 +153,7 @@ class LicenseService {
 	}
 
 	def createTestLicense(def email) {
-		createDemoLicense(email, "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX")
+		createDemoLicense("John Dow", email, "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX")
 	}
 
 	def deleteLicense(def id) {

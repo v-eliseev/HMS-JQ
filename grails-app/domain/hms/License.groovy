@@ -16,13 +16,9 @@ class License extends DomainBaseClass {
 		public int value() { return value }		
 	}
 
-	static String digits = "2346789"
-	static String letters = "BCDFGHJKMPQRTVWXY"
-	static digitPosition = [3, 2, 1, 4, 5]
-
 	/**
-	 * Key format: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
-	 * Used characters: BCDFGHJKMPQRTVWXY2346789	
+	 * Key format: XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX
+	 * Used characters: [A-Z2-7]
 	 */
 
     static constraints = {

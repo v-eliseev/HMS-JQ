@@ -37,7 +37,7 @@ class BootStrap {
 					"password"
 				)
 
-				License license = licenseService.createDemoLicense("v-eliseev@yandex.ru", "WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6")
+				License license = licenseService.createDemoLicense("Vladislav Eliseev", "v-eliseev@yandex.ru", "WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6A")
 				log.info("Demo license created: " + license.key)
 				
 				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license, [adminRole])
@@ -64,7 +64,7 @@ class BootStrap {
 					"password"
 				)
 
-				License license = licenseService.createDemoLicense("v-eliseev@yandex.ru", "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX")
+				License license = licenseService.createDemoLicense("Vladislav Eliseev", "v-eliseev@yandex.ru", "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX")
 				log.info("Demo license created: " + license.key)
 
 				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license, [adminRole])

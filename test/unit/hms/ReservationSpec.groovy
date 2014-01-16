@@ -3,6 +3,9 @@ package hms
 import grails.test.mixin.*
 import spock.lang.*
 
+import org.codehaus.groovy.grails.plugins.codecs.SHA1Codec
+import org.codehaus.groovy.grails.plugins.codecs.HexCodec
+
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
@@ -18,6 +21,10 @@ class ReservationSpec extends Specification {
 		reservationStatusService = new ReservationStatusService()
 		reservationService = new ReservationService(reservationStatusService: reservationStatusService)
 
+		mockCodec SHA1Codec
+		mockCodec HexCodec
+		mockCodec Base32BytesCodec
+
 		assert licenseService != null
 		assert reservationService != null
 		assert reservationStatusService != null
@@ -30,8 +37,10 @@ class ReservationSpec extends Specification {
 			hotel.addToRoomCategories(roomCategory)
 			hotel.save()
 
+			def keyData = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: System.currentTimeMillis()]
+
 			def license = new License(
-					key: licenseService.generateLicenseKey(),
+					key: licenseService.generateLicenseKey(keyData),
 					issued: new Date(),
 					expires: new Date() + 30,
 					mode: License.LicenseMode.DEMO,

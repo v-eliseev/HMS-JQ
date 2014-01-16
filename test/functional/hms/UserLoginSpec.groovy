@@ -24,7 +24,7 @@ class UserLoginSpec extends GebSpec {
                 }
             }
             
-            loginForm.j_licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+            loginForm.j_licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX"
             loginButton.click()
  
         then:

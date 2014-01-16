@@ -25,7 +25,7 @@ class LicenseSpec extends Specification {
 			def hotelCountBefore = Hotel.list().size()
 
 		when:
-			def license = licenseService.createDemoLicense("aa@bb.cc")
+			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
 
 		then:
 			license != null
@@ -43,7 +43,7 @@ class LicenseSpec extends Specification {
 			def roomCountBefore = Room.list().size()
 			def reservationCountBefore = Reservation.list().size()
 
-			def license = licenseService.createDemoLicense("aa@bb.cc")
+			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
 			def user = adminService.createDemoUser(license)
 
 			assert license != null

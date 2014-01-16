@@ -8,6 +8,9 @@ import hms.auth.SecUser
 import hms.auth.SecRole
 import hms.auth.SecUserRole
 
+import org.codehaus.groovy.grails.plugins.codecs.SHA1Codec
+import org.codehaus.groovy.grails.plugins.codecs.HexCodec
+
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
@@ -22,6 +25,10 @@ class AdminServiceSpec extends Specification {
 	def setup() {
 		adminService = new AdminService()
 		licenseService = new LicenseService()
+
+		mockCodec SHA1Codec
+		mockCodec HexCodec
+		mockCodec Base32BytesCodec
 	}
 
 	def 'Check systemUser creation' () {
@@ -57,7 +64,7 @@ class AdminServiceSpec extends Specification {
 
 	def 'Demo license creation check' () {
 		when:
-			def demoLicense = licenseService.createDemoLicense("aa@bb.cc")
+			def demoLicense = licenseService.createDemoLicense("Vladislav Eliseev", "aa@bb.cc")
 			def adminUser = adminService.createDemoUser(demoLicense)
 
 		then:

@@ -26,7 +26,7 @@ class LicenseCodeGeneratorSpec extends Specification {
 
 	def 'test license code generation' () {
 		given: 
-			def source = 'Vladislav Eliseev|v-eliseev@yandex.ru|' + new DateTime()
+			def source = 'Vladislav Eliseev|v-eliseev@yandex.ru|' + System.currentTimeMillis()
 
 		when:			
 			def shaCode = source.encodeAsSHA1()

@@ -83,9 +83,10 @@ class LicenseServiceSpec extends Specification {
 
 	def 'Check licenses' () {
 		given:
-			def keyData1 = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: System.currentTimeMillis()]
-			def keyData2 = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: System.currentTimeMillis()]
-			def keyData3 = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: System.currentTimeMillis()]
+			def timestamp = System.currentTimeMillis()
+			def keyData1 = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: timestamp]
+			def keyData2 = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: timestamp+1]
+			def keyData3 = [ownerName: "John Dow", ownerEmail: "john.dow@aa.cc", timestamp: timestamp+2]
 
 		when:
 			License licenseOK = new License(

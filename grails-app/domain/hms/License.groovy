@@ -22,7 +22,7 @@ class License extends DomainBaseClass {
 	 */
 
     static constraints = {
-		key nullable: false, empty: false
+		key nullable: false, empty: false, unique: true
 		email nullable: true
 		expires nullable: true
 		issued nullable: true

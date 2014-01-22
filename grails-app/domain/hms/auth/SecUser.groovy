@@ -37,7 +37,7 @@ class SecUser extends DomainBaseClass {
 	}
 
 	static mapping = {
-		password column: '`password`'
+		password column: '`PASSWORD`'
 	}
 
 	Set<SecRole> getAuthorities() {

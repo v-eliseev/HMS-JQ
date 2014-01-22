@@ -13,7 +13,7 @@ class Setting {
     static mapping = {
 		datasource 'plancache'
 
-		key column: '`key`'
-		value column: '`value`'
+		key column: '`KEY`'
+		value column: '`VALUE`'
 	}
 }

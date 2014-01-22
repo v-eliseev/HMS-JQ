@@ -10,9 +10,9 @@ class ReservationStatus extends DomainBaseClass {
 		CHECKED_OUT(5),
 		NO_SHOW(6)
 
-		StatusCode(int value) { this.value = value }
+		public StatusCode(int value) { this.value = value }
 		private final int value
-		public int value() { return value }		
+		public int getId() { return value }		
 	}
 
 	StatusCode code

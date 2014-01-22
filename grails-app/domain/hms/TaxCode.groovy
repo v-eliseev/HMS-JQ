@@ -12,6 +12,6 @@ class TaxCode extends DomainBaseClass {
 	}
 
   	static mapping = {
-		value column: '`value`'
+		value column: '`VALUE`'
 	}
 }

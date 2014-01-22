@@ -42,7 +42,7 @@
 
                 <!-- show input field -->
                 <div class="col-lg-9" id="license_input" style="display:none;">
-                    <input class="form-control" placeholder="License key" type="text" name="j_licenseKey" id="licenseKey" value="WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6">
+                    <input class="form-control" placeholder="License key" type="text" name="j_licenseKey" id="licenseKey" value="WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6A">
                 </div>
     			
                 <!-- show text -->

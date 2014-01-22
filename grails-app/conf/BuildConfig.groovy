@@ -63,6 +63,8 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         runtime 'mysql:mysql-connector-java:5.1.28'
+        // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+
         compile 'org.freemarker:freemarker:2.3.20'
         compile 'joda-time:joda-time:2.3'
         //compile 'joda-time:joda-time-hibernate:1.3'
@@ -79,8 +81,8 @@ grails.project.dependency.resolution = {
 
     plugins {
 
-        //runtime ":hibernate:3.6.10.1" 
-        runtime ":hibernate4:4.1.11.7"
+        runtime ":hibernate:3.6.10.7" 
+        //runtime ":hibernate4:4.1.11.7"
         build ":tomcat:7.0.50"
 
         compile ":cxf:1.1.1"

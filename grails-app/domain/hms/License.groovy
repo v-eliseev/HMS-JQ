@@ -13,7 +13,7 @@ class License extends DomainBaseClass {
 
 		LicenseMode(int value) { this.value = value }
 		private final int value
-		public int value() { return value }		
+		public int getId() { return value }		
 	}
 
 	/**
@@ -48,7 +48,7 @@ class License extends DomainBaseClass {
 	}
 
 	static mapping = {
-		key column: '`key`'
+		key column: '`KEY`'
 		sort 'key'
 		sort users: 'username', order: 'asc'
 		mode sqlType: 'integer'	

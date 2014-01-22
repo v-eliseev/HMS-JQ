@@ -70,19 +70,19 @@ class LicenseService {
 		def licenseInstance
 		switch (licenseType) {
 		case "DEMO" : 
-			licenseInstance = createDemoLicense(email)
+			licenseInstance = createDemoLicense(ownerName, email)
 			SecRole adminRole = adminService.getAdminRole()
 			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
 			break
 
 		case "PRODUCTION" : 
-			licenseInstance = createStandardLicense(email)
+			licenseInstance = createStandardLicense(ownerName, email)
 			SecRole adminRole = adminService.getAdminRole()
 			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
 			break
 
 		case "TEST" :
-			licenseInstance = createTestLicense(email)
+			licenseInstance = createTestLicense(ownerName, email)
 			SecRole adminRole = adminService.getAdminRole()
 			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
 			break

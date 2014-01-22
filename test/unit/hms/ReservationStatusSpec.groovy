@@ -9,9 +9,19 @@ import spock.lang.*
 @Mock(ReservationStatus)
 class ReservationStatusSpec extends Specification {
 
-	def 'Check object creation'() {
+	def 'Check object creation with value'() {
 		when:
 			ReservationStatus rs = new ReservationStatus(code: ReservationStatus.StatusCode.PLANNED).save()
+		then:
+			ReservationStatus.list().size() == 1
+			ReservationStatus.list()[0].code == ReservationStatus.StatusCode.PLANNED
+		cleanup:
+			rs.delete(flush:true)
+	}
+
+	def 'Check object creation with String'() {
+		when:
+			ReservationStatus rs = new ReservationStatus(code: "PLANNED").save()
 		then:
 			ReservationStatus.list().size() == 1
 			ReservationStatus.list()[0].code == ReservationStatus.StatusCode.PLANNED

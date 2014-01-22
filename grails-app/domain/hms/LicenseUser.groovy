@@ -21,7 +21,7 @@ class LicenseUser {
 	static mapping = {
 		// password is a keyword in some sql dialects, so quote with backticks
 		// password is stored as 44-char base64 hashed value
-		password column: '`password`', length: 44
+		password column: '`PASSWORD`', length: 44
 		sort 'username'
 	}
 	static constraints = {

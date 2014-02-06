@@ -30,6 +30,20 @@ else {
     grails.server.port.http = 80
 }
 
+/**
+    Define versions
+*/
+
+def directory = new File(getClass().protectionDomain.codeSource.location.path).parent
+def systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(directory + File.separator + "SystemConfig.groovy").toURI().toURL())
+
+def mysqlConnectorVersion = systemConfig.roomplanner.mysql.connector.version
+def roombixUiVersion = systemConfig.roomplanner.roombixUi.version
+def roomplannerApiVersion = systemConfig.roomplanner.roomplannerApi.version
+
+/**
+
+*/
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -62,7 +76,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'mysql:mysql-connector-java:5.1.28'
+        runtime "mysql:mysql-connector-java:$mysqlConnectorVersion"
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
 
         compile 'org.freemarker:freemarker:2.3.20'
@@ -129,8 +143,8 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        runtime ":roomplanner-api:0.5-SNAPSHOT"
-        runtime ":roombix-ui:0.1-SNAPSHOT"
+        runtime ":roomplanner-api:$roomplannerApiVersion"
+        runtime ":roombix-ui:$roombixUiVersion"
     }
 }
 

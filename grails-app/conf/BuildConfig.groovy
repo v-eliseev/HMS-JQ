@@ -34,13 +34,19 @@ else {
     Define versions
 */
 
-def directory = new File(getClass().protectionDomain.codeSource.location.path).parent
-def systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(directory + File.separator + "SystemConfig.groovy").toURI().toURL())
+def configName
+def systemConfig = new ConfigObject()
+// try {
+//     def directory = new File(getClass().protectionDomain.codeSource.location.path).parent
+//     systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(new File(directory + File.separator + "SystemConfig.groovy").toURI().toURL())
+// } catch (Exception e) {
+//     def myClassLoader = new URLClassLoader([ classesDir.toURI().toURL()] as URL[], rootLoader) 
+//     systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(myClassLoader.loadClass("SystemConfig"))
+// }
 
-def mysqlConnectorVersion = systemConfig.roomplanner.mysql.connector.version
-def roombixUiVersion = systemConfig.roomplanner.roombixUi.version
-def roomplannerApiVersion = systemConfig.roomplanner.roomplannerApi.version
-
+def mysqlConnectorVersion = "5.1.29" //systemConfig.roomplanner.mysql.connector.version
+def roombixUiVersion = "0.1-SNAPSHOT" //systemConfig.roomplanner.roombixUi.version
+def roomplannerApiVersion = "0.5-SNAPSHOT" //systemConfig.roomplanner.roomplannerApi.version
 /**
 
 */

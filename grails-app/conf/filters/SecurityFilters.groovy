@@ -6,7 +6,7 @@ class SecurityFilters {
 
     def filters = {  
     
-        basicAuth(controller:'admin', action:'*') {  
+        basicAuth(controller:'superuser', action:'*') {  
             before = {  
                 try {
                     def authString = request.getHeader('Authorization')   

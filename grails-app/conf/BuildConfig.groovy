@@ -101,9 +101,9 @@ grails.project.dependency.resolution = {
 
     plugins {
 
-        runtime ":hibernate:3.6.10.7" 
+        runtime ":hibernate:3.6.10.8" 
         //runtime ":hibernate4:4.1.11.7"
-        build ":tomcat:7.0.50"
+        build ":tomcat:7.0.50.1"
 
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.6.0"
@@ -111,8 +111,6 @@ grails.project.dependency.resolution = {
         
         runtime ":mail:1.0.1"
         compile ":quartz2:2.1.6.2"
-
-        compile ":less-asset-pipeline:1.5.0"
 
         // runtime ":jquery:1.10.2"
         // compile ":jquery-ui:1.8.24"

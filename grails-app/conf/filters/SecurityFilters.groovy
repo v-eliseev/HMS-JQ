@@ -1,6 +1,6 @@
 package filters
 
-import roomplanner.SystemUser
+import hms.security.SystemUser
 
 class SecurityFilters {  
 

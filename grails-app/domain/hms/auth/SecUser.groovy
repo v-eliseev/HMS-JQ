@@ -30,7 +30,7 @@ class SecUser extends DomainBaseClass {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username unique: 'license'
+		username blank: false, unique: 'license'
 		password blank: false
 		license nullable: false
 		email nullable: false

@@ -1,4 +1,3 @@
-
 import grails.util.GrailsUtil
 import hms.AdminService
 import hms.License
@@ -21,31 +20,31 @@ class BootStrap {
 		LicenseService licenseService = new LicenseService()
 		AdminService adminService = new AdminService()
 
-		log.info("Adding Spring Security RequestMaps...")
-
-		for (String url in [
-		      '/', '/index', '/index.gsp', '/**/favicon.ico', '/**/assets/**',
-		      '/login', '/login.*', '/login/*',
-		      '/logout', '/logout.*', '/logout/*']) {
-		   new SecRequestMap(url: url, configAttribute: 'permitAll').save()
-		}
-		new SecRequestMap(url: '/superuser/**', configAttribute: 'permitAll').save()
-		new SecRequestMap(url: '/admin/**', configAttribute: 'ROLE_ADMIN').save()
-		new SecRequestMap(url: '/user/**', configAttribute: 'ROLE_USER').save()
-		// new Requestmap(url: '/admin/role/**', configAttribute: 'ROLE_SUPERVISOR').save()
-		// new Requestmap(url: '/admin/user/**', configAttribute: 'ROLE_ADMIN,ROLE_SUPERVISOR').save()
-		// new Requestmap(url: '/j_spring_security_switch_user',
-		//                configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()').save()
-
-		log.info("...done")
-
         /**
 		*	Environment dependent config
         */
 		switch (GrailsUtil.environment) {
 
-			case "development":
+			case ["development", "jenkins"]:
 			try {
+
+				log.info("Adding Spring Security RequestMaps...")
+				for (String url in [
+				      '/', '/index', '/index.gsp', '/**/favicon.ico', '/**/assets/**',
+				      '/login', '/login.*', '/login/*',
+				      '/logout', '/logout.*', '/logout/*']) {
+				   new SecRequestMap(url: url, configAttribute: 'permitAll').save()
+				}
+				new SecRequestMap(url: '/superuser/**', configAttribute: 'permitAll').save()
+				new SecRequestMap(url: '/admin/**', configAttribute: 'ROLE_ADMIN').save()
+				new SecRequestMap(url: '/user/**', configAttribute: 'ROLE_USER').save()
+				// new Requestmap(url: '/admin/role/**', configAttribute: 'ROLE_SUPERVISOR').save()
+				// new Requestmap(url: '/admin/user/**', configAttribute: 'ROLE_ADMIN,ROLE_SUPERVISOR').save()
+				// new Requestmap(url: '/j_spring_security_switch_user',
+				//                configAttribute: 'ROLE_SWITCH_USER,isFullyAuthenticated()').save()
+
+				log.info("...done")
+
 				def adminRole = adminService.getAdminRole()
 				def userRole = adminService.getUserRole()
 				log.info("Roles created")
@@ -69,34 +68,6 @@ class BootStrap {
 			} catch (Exception e) {
 				log.error("Error executing BootStrap", e)
 			}
-
-			case "jenkins":
-			try {
-
-				def adminRole = adminService.getAdminRole()
-				def userRole = adminService.getUserRole()
-				log.info("Roles created")
-
-
-				adminService.createSystemUser(
-					"superuser",
-					"password"
-				)
-
-				License license = licenseService.createDemoLicense("Vladislav Eliseev", "v-eliseev@yandex.ru", "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX")
-				log.info("Demo license created: " + license.key)
-
-				SecUser adminUser = adminService.createUser("admin", "admin", "v-eliseev@yandex.ru", license, [adminRole])
-				log.info("Admin user for license " + license.key + " created")
-
-				SecUser userUser = adminService.createUser("user", "test", "v-eliseev@yandex.ru", license, [userRole])
-				log.info("Normal user for license " + license.key + " created")
-
-
-			} catch (Exception e) {
-				log.error("Error executing BootStrap", e)
-			}
-				
 		}
 
 		// PricelistService pricelistService = new PricelistService()

@@ -110,7 +110,8 @@ grails.project.dependency.resolution = {
         compile ":remoting:1.3"
         
         runtime ":mail:1.0.3"
-        compile ":quartz2:2.1.6.2"
+        compile ":quartz:1.0.1"
+        //compile ":quartz2:2.1.6.2"
 
         // runtime ":jquery:1.10.2"
         // compile ":jquery-ui:1.8.24"

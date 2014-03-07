@@ -149,11 +149,11 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
-grails.plugins.springsecurity.authority.className = 'hms.auth.SecRole'
-grails.plugins.springsecurity.useSecurityEventListener = true
-grails.plugins.springsecurity.logout.handlerNames =
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
+grails.plugin.springsecurity.authority.className = 'hms.auth.SecRole'
+grails.plugin.springsecurity.useSecurityEventListener = true
+grails.plugin.springsecurity.logout.handlerNames =
 	['rememberMeServices',
 	 'securityContextLogoutHandler',
 	 'securityEventListener']

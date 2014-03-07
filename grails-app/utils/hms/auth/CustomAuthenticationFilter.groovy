@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession
 
-import org.codehaus.groovy.grails.plugins.springsecurity.RequestHolderAuthenticationFilter
+import grails.plugin.springsecurity.web.authentication.RequestHolderAuthenticationFilter
+
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

@@ -27,6 +27,8 @@ class SecUser extends DomainBaseClass {
 	Integer expireAccountType = 0 // never
 	Integer expireAccountEveryCode = 1 // 1 month
 
+	static transients = ['springSecurityService']
+
 	static constraints = {
 		username unique: 'license'
 		password blank: false

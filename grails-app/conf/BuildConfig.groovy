@@ -77,7 +77,8 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
 
-        mavenRepo 'http://192.168.0.37:8080/artifactory/HMS'
+        mavenRepo 'http://repo.spring.io/milestone'
+        //mavenRepo 'http://192.168.0.37:8080/artifactory/HMS'
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -92,7 +93,7 @@ grails.project.dependency.resolution = {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
         test "org.gebish:geb-spock:0.9.2"
 
-        def seleniumVersion = "2.39.0"
+        def seleniumVersion = "2.40.0"
         test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
@@ -109,7 +110,7 @@ grails.project.dependency.resolution = {
         compile ":cxf-client:1.6.0"
         compile ":remoting:1.3"
         
-        runtime ":mail:1.0.3"
+        runtime ":mail:1.0.4-SNAPSHOT"
         compile ":quartz:1.0.1"
         //compile ":quartz2:2.1.6.2"
 
@@ -117,8 +118,8 @@ grails.project.dependency.resolution = {
         // compile ":jquery-ui:1.8.24"
         // compile ":jquery-mobile:1.1.0.5"
 
-//        compile ":spring-security-core:2.0-RC2"
-        compile ":spring-security-core:1.2.7.3"
+        compile ":spring-security-core:2.0-RC2"
+        //compile ":spring-security-core:1.2.7.3"
         //compile ":spring-mobile:0.4"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities

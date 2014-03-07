@@ -14,7 +14,7 @@ class BaseController {
 
 	def mobileService
 	def grailsApplication
-	
+	def springSecurityService
 	
 	/**
 	 * Handle mobile views
@@ -29,11 +29,13 @@ class BaseController {
 	 }
 	
 	protected License getLicense(HttpServletRequest request) {
-		RequestUtils.getLicense(request)
+		//RequestUtils.getLicense(request)
+		springSecurityService.currentUser.license
 	}
 	
 	protected SecUser getCurrentUser(HttpServletRequest request) {
-		RequestUtils.getCurrentUser(request)
+		//RequestUtils.getCurrentUser(request)
+		springSecurityService.currentUser
 	}
 
 }

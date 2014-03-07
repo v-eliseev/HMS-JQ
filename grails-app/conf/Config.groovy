@@ -152,6 +152,8 @@ log4j = {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
 grails.plugin.springsecurity.authority.className = 'hms.auth.SecRole'
+grails.plugin.springsecurity.securityConfigType = 'Requestmap'
+grails.plugin.springsecurity.requestMap.className = 'hms.auth.SecRequestMap'
 grails.plugin.springsecurity.useSecurityEventListener = true
 grails.plugin.springsecurity.logout.handlerNames =
 	['rememberMeServices',

@@ -177,9 +177,12 @@ grails.plugin.springsecurity.logout.handlerNames =
 /**
     Database migration
 */  
-grails.plugin.databasemigration.updateOnStart = true
-grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
-
+environments {
+  production {
+    grails.plugin.databasemigration.updateOnStart = true
+    grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+  }
+}
 /**
     Roomplanner config
 */

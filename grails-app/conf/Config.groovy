@@ -148,6 +148,9 @@ log4j = {
     off    'org.hibernate.tool.hbm2ddl'
 }
 
+/**
+    Spring Security configuration
+*/
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
@@ -171,13 +174,24 @@ grails.plugin.springsecurity.logout.handlerNames =
 //   }
 // }   
 	
+/**
+    Database migration
+*/  
+grails.plugin.databasemigration.updateOnStart = true
+grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+
+/**
+    Roomplanner config
+*/
 service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoap"
 service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
 service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
-
 service.roomplanner.mode = "SOAP"  // SOAP, Hessian
 //service.roomplanner.mode = "Hessian" // SOAP, Hessian
 
+/**
+    CXF client configuration
+*/
 cxf {
 	client {
 		roomPlannerServiceClient {

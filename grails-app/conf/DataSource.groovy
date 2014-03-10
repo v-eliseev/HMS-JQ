@@ -74,6 +74,22 @@ environments {
             url = "jdbc:mysql://localhost:3306/hms"
         }
     }
+    migration {
+        dataSource {
+            //dbCreate = "create"
+            url = "jdbc:h2:file:migrationDb;MVCC=TRUE"
+        }
+    }
+    staging {
+        dataSource {
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "hms"
+            password = "hms"
+            //dbCreate = "update"
+            url = "jdbc:mysql://srv:3306/hms"
+        }
+    }
     production {
         dataSource {
             jndiName = "java:comp/env/jdbc/MysqlDS"

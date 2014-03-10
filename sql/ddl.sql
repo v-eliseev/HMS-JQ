@@ -1,11 +1,11 @@
 
     alter table article 
         drop 
-        foreign key FKD458CCF61FC6652D;
+        foreign key FKD458CCF6196A4E51;
 
     alter table article 
         drop 
-        foreign key FKD458CCF6196A4E51;
+        foreign key FKD458CCF61FC6652D;
 
     alter table article_package 
         drop 
@@ -45,11 +45,11 @@
 
     alter table permanent_room_assignment 
         drop 
-        foreign key FKDFA3632049769C3A;
+        foreign key FKDFA36320D2AD71DA;
 
     alter table permanent_room_assignment 
         drop 
-        foreign key FKDFA36320D2AD71DA;
+        foreign key FKDFA3632049769C3A;
 
     alter table reservation 
         drop 
@@ -73,11 +73,11 @@
 
     alter table room_category_room_features 
         drop 
-        foreign key FK3EC2ED846E652391;
+        foreign key FK3EC2ED845A101C83;
 
     alter table room_category_room_features 
         drop 
-        foreign key FK3EC2ED845A101C83;
+        foreign key FK3EC2ED846E652391;
 
     alter table sec_user 
         drop 
@@ -141,13 +141,13 @@
 
     drop table if exists room_feature;
 
+    drop table if exists sec_request_map;
+
     drop table if exists sec_role;
 
     drop table if exists sec_user;
 
     drop table if exists sec_user_role;
-
-    drop table if exists setting;
 
     drop table if exists system_user;
 
@@ -159,7 +159,7 @@
         article_group_id bigint,
         date_created datetime not null,
         description varchar(255),
-        is_bookable_online boolean not null,
+        is_bookable_online bit not null,
         last_updated datetime not null,
         name varchar(255) not null,
         number varchar(255) not null,
@@ -183,7 +183,7 @@
         article_group_id bigint not null,
         date_created datetime not null,
         description varchar(255),
-        is_bookable_online boolean not null,
+        is_bookable_online bit not null,
         last_updated datetime not null,
         name varchar(255) not null,
         number varchar(255) not null,
@@ -209,9 +209,9 @@
     create table configuration (
         id bigint not null auto_increment,
         version bigint not null,
-        `key` varchar(255) not null,
+        `KEY` varchar(255) not null,
         user_id bigint not null,
-        `value` varchar(255),
+        `VALUE` varchar(255),
         primary key (id)
     );
 
@@ -311,11 +311,11 @@
         version bigint not null,
         date_created datetime not null,
         email varchar(255),
-        enabled boolean not null,
+        enabled bit not null,
         expires datetime,
         hotel_id bigint,
         issued datetime,
-        `key` varchar(255) not null,
+        `KEY` varchar(255) not null unique,
         last_updated datetime not null,
         mode integer not null,
         owner_id bigint,
@@ -325,15 +325,15 @@
     create table license_user (
         id bigint not null auto_increment,
         version bigint not null,
-        account_expired boolean not null,
-        account_locked boolean not null,
+        account_expired bit not null,
+        account_locked bit not null,
         date_created datetime not null,
-        enabled boolean not null,
+        enabled bit not null,
         last_updated datetime not null,
-        `password` varchar(44) not null,
-        password_expired boolean not null,
+        `PASSWORD` varchar(100) not null,
+        password_expired bit not null,
         salt varchar(64) not null,
-        username varchar(50) not null,
+        username varchar(50) not null unique,
         primary key (id)
     );
 
@@ -406,7 +406,7 @@
         color_code varchar(255),
         date_created datetime not null,
         description varchar(255),
-        is_active boolean,
+        is_active bit,
         last_updated datetime not null,
         short_description varchar(255),
         primary key (id)
@@ -417,7 +417,7 @@
         version bigint not null,
         date_created datetime not null,
         description varchar(255) not null,
-        is_active boolean not null,
+        is_active bit not null,
         last_updated datetime not null,
         name varchar(255) not null,
         short_name varchar(255) not null,
@@ -442,7 +442,7 @@
         date_created datetime not null,
         description varchar(255),
         hotel_id bigint not null,
-        is_bookable_online boolean not null,
+        is_bookable_online bit not null,
         last_updated datetime not null,
         name varchar(255) not null,
         short_description varchar(255),
@@ -450,8 +450,8 @@
     );
 
     create table room_category_room_features (
-        room_feature_id bigint not null,
         room_category_id bigint not null,
+        room_feature_id bigint not null,
         primary key (room_category_id, room_feature_id)
     );
 
@@ -466,10 +466,22 @@
         primary key (id)
     );
 
+    create table sec_request_map (
+        id bigint not null auto_increment,
+        version bigint not null,
+        config_attribute varchar(255) not null,
+        date_created datetime not null,
+        http_method varchar(255),
+        last_updated datetime not null,
+        url varchar(255) not null,
+        primary key (id),
+        unique (http_method, url)
+    );
+
     create table sec_role (
         id bigint not null auto_increment,
         version bigint not null,
-        authority varchar(255) not null,
+        authority varchar(255) not null unique,
         date_created datetime not null,
         last_updated datetime not null,
         primary key (id)
@@ -478,11 +490,11 @@
     create table sec_user (
         id bigint not null auto_increment,
         version bigint not null,
-        account_expired boolean not null,
-        account_locked boolean not null,
+        account_expired bit not null,
+        account_locked bit not null,
         date_created datetime not null,
         email varchar(255) not null,
-        enabled boolean not null,
+        enabled bit not null,
         expire_account datetime,
         expire_account_every_code integer not null,
         expire_account_type integer not null,
@@ -491,10 +503,11 @@
         expire_password_type integer not null,
         last_updated datetime not null,
         license_id bigint not null,
-        `password` varchar(255) not null,
-        password_expired boolean not null,
+        `PASSWORD` varchar(255) not null,
+        password_expired bit not null,
         username varchar(255) not null,
-        primary key (id)
+        primary key (id),
+        unique (license_id, username)
     );
 
     create table sec_user_role (
@@ -503,20 +516,12 @@
         primary key (role_id, user_id)
     );
 
-    create table setting (
-        id bigint not null auto_increment,
-        version bigint not null,
-        `key` varchar(255) not null,
-        `value` varchar(255),
-        primary key (id)
-    );
-
     create table system_user (
         id bigint not null auto_increment,
         version bigint not null,
-        `password` varchar(255) not null,
+        `PASSWORD` varchar(255) not null,
         realm_code bigint,
-        username varchar(255) not null,
+        username varchar(255) not null unique,
         primary key (id)
     );
 
@@ -529,21 +534,21 @@
         last_updated datetime not null,
         name varchar(255) not null,
         units varchar(255) not null,
-        `value` double precision not null,
+        `VALUE` double precision not null,
         primary key (id)
     );
-
-    alter table article 
-        add index FKD458CCF61FC6652D (article_group_id), 
-        add constraint FKD458CCF61FC6652D 
-        foreign key (article_group_id) 
-        references article_group (id);
 
     alter table article 
         add index FKD458CCF6196A4E51 (tax_code_id), 
         add constraint FKD458CCF6196A4E51 
         foreign key (tax_code_id) 
         references tax_code (id);
+
+    alter table article 
+        add index FKD458CCF61FC6652D (article_group_id), 
+        add constraint FKD458CCF61FC6652D 
+        foreign key (article_group_id) 
+        references article_group (id);
 
     alter table article_package 
         add index FK5B0451FD1FC6652D (article_group_id), 
@@ -599,20 +604,17 @@
         foreign key (owner_id) 
         references owner (id);
 
-    alter table license_user 
-        add constraint uc_license_user_1 unique (username);
+    alter table permanent_room_assignment 
+        add index FKDFA36320D2AD71DA (room_id), 
+        add constraint FKDFA36320D2AD71DA 
+        foreign key (room_id) 
+        references room (id);
 
     alter table permanent_room_assignment 
         add index FKDFA3632049769C3A (reservation_id), 
         add constraint FKDFA3632049769C3A 
         foreign key (reservation_id) 
         references reservation (id);
-
-    alter table permanent_room_assignment 
-        add index FKDFA36320D2AD71DA (room_id), 
-        add constraint FKDFA36320D2AD71DA 
-        foreign key (room_id) 
-        references room (id);
 
     alter table reservation 
         add index FKA2D543CC7BC5733A (hotel_id), 
@@ -645,22 +647,16 @@
         references hotel (id);
 
     alter table room_category_room_features 
-        add index FK3EC2ED846E652391 (room_category_id), 
-        add constraint FK3EC2ED846E652391 
-        foreign key (room_category_id) 
-        references room_category (id);
-
-    alter table room_category_room_features 
         add index FK3EC2ED845A101C83 (room_feature_id), 
         add constraint FK3EC2ED845A101C83 
         foreign key (room_feature_id) 
         references room_feature (id);
 
-    alter table sec_role 
-        add constraint uc_sec_role_1 unique (authority);
-
-    alter table sec_user 
-        add constraint `unique-username` unique (license_id, username);
+    alter table room_category_room_features 
+        add index FK3EC2ED846E652391 (room_category_id), 
+        add constraint FK3EC2ED846E652391 
+        foreign key (room_category_id) 
+        references room_category (id);
 
     alter table sec_user 
         add index FK375DF2F9DEBACC1A (license_id), 
@@ -679,6 +675,3 @@
         add constraint FK7DE039FC960FF545 
         foreign key (user_id) 
         references sec_user (id);
-
-    alter table system_user 
-        add constraint uc_system_user_1 unique (username);

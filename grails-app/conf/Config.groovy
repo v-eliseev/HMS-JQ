@@ -178,6 +178,10 @@ grails.plugin.springsecurity.logout.handlerNames =
     Database migration
 */  
 environments {
+  prestaging {
+    grails.plugin.databasemigration.updateOnStart = true
+    grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+  }
   production {
     grails.plugin.databasemigration.updateOnStart = true
     grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']

@@ -80,6 +80,20 @@ environments {
             url = "jdbc:h2:file:migrationDb;MVCC=TRUE"
         }
     }
+    prestaging {
+        dataSource {
+            pooled = true
+            driverClassName = "com.mysql.jdbc.Driver"
+            username = "root"
+            password = ""
+            //dbCreate = "update"
+            url = "jdbc:mysql://localhost:3306/hms"
+        }
+        dataSource_plancache {
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+        }
+    }
     staging {
         dataSource {
             pooled = true
@@ -88,6 +102,10 @@ environments {
             password = "hms"
             //dbCreate = "update"
             url = "jdbc:mysql://srv:3306/hms"
+        }
+        dataSource_plancache {
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:h2:mem:devCacheDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
     production {

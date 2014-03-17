@@ -35,7 +35,7 @@ class UserController extends BaseController {
 		def reservationList = reservationService.getReservations(license, new Date()-6, new Date()+8)
 		def checkinList = reservationService.getCheckins(license, new Date(), 5)
 		def checkoutList = reservationService.getCheckouts(license, new Date(), 5)
-		Plan plan = roomPlannerService.getCurrentPlan(license)
+		Plan plan = roomPlannerService.getCurrentPlan(license, false)
 
 		[
 			licenseInstance: license,
@@ -44,9 +44,16 @@ class UserController extends BaseController {
 			reservationInstanceList: reservationList,
 			todayCheckinList: checkinList,
 			todayCheckoutList: checkoutList,
-			score: plan.score,
+			score: plan?.score,
 			plan: plan
 		]
+	}
+
+	def getCurrentPlan() {
+		License license = getLicense(request)
+		Plan plan = roomPlannerService.getCurentPlan(license, true)
+		
+		render plan as JSON
 	}
 
 	def showCurrentPlan() {

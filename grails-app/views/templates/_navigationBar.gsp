@@ -4,7 +4,7 @@
   </div>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
-      <li><g:link controller="partner">Partners</g:link></li>
+      <li><g:link controller="superuser" action="index">Licenses</g:link></li>
       <li><g:link controller="charts">Charts</g:link></li>
     </ul>
 

@@ -17,13 +17,15 @@ class RoomPlannerService {
 		Plan.findByLicenseId(license.id)
 	}
 
-	def getCurrentPlan(License license) {
+	def getCurrentPlan(License license, boolean create = false) {
 		Plan currentPlan = Plan.findByLicenseId(license.id)
 		if (currentPlan) {
 			log.trace("Saved plan found")
 		}
 		else {
-			currentPlan = createNewPlan(license)
+			if (create) {
+				currentPlan = createNewPlan(license)
+			}
 		}
 		currentPlan
 	}

@@ -145,6 +145,8 @@ log4j = {
     debug  'hms'
     debug  'hms.DemoDataScript'
 
+    info   'liquibase'
+
     off    'org.hibernate.tool.hbm2ddl'
 }
 

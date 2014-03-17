@@ -103,15 +103,20 @@
 <div class="row show-grid">
 <div class="col-lg-4">
     <legend><i class="icon-calendar"></i> Booking plan</legend>
+    <g:if test='${plan}'>
     <ul class="list-unstyled">
-        <li>Feasible: ${score.getFeasible()}</li>
-        <li>Score: ${score.getHard()}/${score.getSoft()}</li>
+        <li>Feasible: ${score?.getFeasible()}</li>
+        <li>Score: ${score?.getHard()}/${score?.getSoft()}</li>
     </ul>
     <ul class="list-unstyled">
         <li><g:link action="showCurrentPlan">Show plan...</g:link></li>
         <li><g:link action="showCurrentPlanSvg">Show plan SVG...</g:link></li>
         <li><g:link action="newConfiguration">New configuration</g:link></li>
     </ul>
+    </g:if>
+    <g:else>
+        <g:link class="btn btn-success btn-block" name="submit" value="Make!"/>
+    </g:else>
 </div>
 <div class="col-lg-4">
     <legend><i class="icon-bar-chart"></i> Statistics</legend>

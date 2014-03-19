@@ -53,7 +53,7 @@ class UserController extends BaseController {
 		License license = getLicense(request)
 		Plan plan = roomPlannerService.getCurentPlan(license, true)
 		
-		render plan as JSON
+		render(template: 'plandetails', model: plan)
 	}
 
 	def showCurrentPlan() {

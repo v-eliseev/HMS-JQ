@@ -30,7 +30,7 @@ class BootStrap {
 
 				log.info("Adding Spring Security RequestMaps...")
 				for (String url in [
-				      '/', '/index', '/index.gsp', '/**/favicon.ico', '/**/assets/**',
+				      '/', '/index', '/index.gsp', '/**/favicon.ico', '/**/assets/**', '/**/js/**',
 				      '/login', '/login.*', '/login/*',
 				      '/logout', '/logout.*', '/logout/*']) {
 				   new SecRequestMap(url: url, configAttribute: 'permitAll').save()

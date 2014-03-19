@@ -9,13 +9,15 @@ class RoomPlannerWatchdogJob {
     def execute() {
         // execute job
         log.debug("Roomplanner Watchdog job started...")
-
-		def remoteService = RoomPlannerServiceFactory.getService()
-		def status = remoteService.getStatus()
-		def uptime = MillisToSpanConverter.getDurationBreakdown(status.uptime)
-		def requestsServed = status.requestsServed
-		log.debug("Uptime: $uptime RequestsServed: $requestsServed")
-
-		log.debug("...done.")
+        try {
+    		def remoteService = RoomPlannerServiceFactory.getService()
+    		def status = remoteService.getStatus()
+    		def uptime = MillisToSpanConverter.getDurationBreakdown(status.uptime)
+    		def requestsServed = status.requestsServed
+    		log.debug("Uptime: $uptime RequestsServed: $requestsServed")
+            log.debug("...done.")
+        } catch (Exception e) {
+            log.error("Failed to execute watchdog job")
+        }
     }
 }

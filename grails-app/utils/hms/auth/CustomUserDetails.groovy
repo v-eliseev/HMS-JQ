@@ -1,9 +1,12 @@
 package hms.auth
 
+import groovy.transform.ToString
+
 import grails.plugin.springsecurity.userdetails.GrailsUser
 
 import org.springframework.security.core.GrantedAuthority
 
+@ToString(includeNames = true, includeFields = true, includeSuper = true)
 class CustomUserDetails extends GrailsUser {
 
    String licenseKey

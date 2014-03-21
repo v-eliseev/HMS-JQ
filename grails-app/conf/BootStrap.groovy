@@ -32,7 +32,8 @@ class BootStrap {
 				for (String url in [
 				      '/', '/index', '/index.gsp', '/**/favicon.ico', '/**/assets/**', '/**/js/**',
 				      '/login', '/login.*', '/login/*',
-				      '/logout', '/logout.*', '/logout/*']) {
+				      '/logout', '/logout.*', '/logout/*',
+				      '/dbconsole', '/dbconsole.*', '/dbconsole/*']) {
 				   new SecRequestMap(url: url, configAttribute: 'permitAll').save()
 				}
 				new SecRequestMap(url: '/superuser/**', configAttribute: 'permitAll').save()

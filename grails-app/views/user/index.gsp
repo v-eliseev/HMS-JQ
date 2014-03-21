@@ -115,8 +115,8 @@
         </ul>
     </g:if>
     <g:else>
-        <div id="plandetails"></div>
-        <g:remoteLink class="btn btn-success btn-block" action="getCurrentPlan" oncomplete="ajaxStop();" onloading="ajaxStart();" update="plandetails">Create plan!</g:remoteLink>
+    <div id="plandetails">No plan</div>
+    <g:remoteLink class="btn btn-success btn-block" action="getCurrentPlan" oncomplete="ajaxStop();" onloading="ajaxStart();" update="plandetails">Create plan!</g:remoteLink>
     </g:else>
 </div>
 <div class="col-lg-4">

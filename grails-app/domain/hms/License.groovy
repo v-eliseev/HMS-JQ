@@ -2,8 +2,11 @@ package hms
 
 import hms.auth.SecUser
 
+import groovy.transform.ToString
+
 enum LicenseType { PRODUCTION, DEMO }
 
+@ToString(includeNames = true, includeFields = true, includes = "key")
 class License extends DomainBaseClass {
 
 	enum LicenseMode {
@@ -42,11 +45,6 @@ class License extends DomainBaseClass {
 
 	static hasMany = [users: SecUser]
 	
-	@Override
-	String toString() {
-		key
-	}
-
 	static mapping = {
 		key column: '`KEY`'
 		sort 'key'

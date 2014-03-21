@@ -1,5 +1,8 @@
 package roomplanner
 
+import groovy.transform.ToString
+
+@ToString(includeNames = true, includeFields = true, includes = "licenseId, score")
 class Plan implements Serializable {
 
 	static mapping = {
@@ -21,6 +24,7 @@ class Plan implements Serializable {
 
 }
 
+@ToString(includeNames = true, includeFields = true)
 class Score {
 	Boolean feasible
 	Double hard

@@ -24,7 +24,9 @@ class RoomPlannerService {
 		}
 		else {
 			if (create) {
+				log.trace("Creating new plan ...")
 				currentPlan = createNewPlan(license)
+				log.trace("... done")
 			}
 		}
 		currentPlan

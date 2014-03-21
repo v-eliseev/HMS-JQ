@@ -51,9 +51,10 @@ class UserController extends BaseController {
 
 	def getCurrentPlan() {
 		License license = getLicense(request)
-		Plan plan = roomPlannerService.getCurentPlan(license, true)
+		Plan plan = roomPlannerService.getCurrentPlan(license, true)
+		log.trace("$plan")
 		
-		render(template: 'plandetails', model: plan)
+		render(template: 'plandetails', model: [plan: plan])
 	}
 
 	def showCurrentPlan() {

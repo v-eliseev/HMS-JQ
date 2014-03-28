@@ -46,5 +46,4 @@ class RoomCategoryController extends BaseController {
 
 		redirect action: 'index'
 	}
-
 }

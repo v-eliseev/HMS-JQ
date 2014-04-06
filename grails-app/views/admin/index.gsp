@@ -9,36 +9,63 @@
 <content tag="main">
 
 <div class="row show-grid">
-<div class="col-lg-6">
-    <legend><i class="icon-building"></i> Hotel</legend>
-    <ul class="list-unstyled">
-        <li>${fieldValue(bean: hotelInstance, field: "name")}</li> 
-        <li><i class="icon-phone"> </i>${fieldValue(bean: hotelInstance, field: "phone")}</li> 
-        <li><i class="icon-print"> </i>${fieldValue(bean: hotelInstance, field: "fax")}</li> 
-        <li><i class="icon-envelope"> </i>${fieldValue(bean: hotelInstance, field: "eMail")}</li> 
-        <li><i class="icon-globe"> </i>${fieldValue(bean: hotelInstance, field: "webSite")}</li> 
+<div class="col-lg-4">
+    <legend><i class="fa fa-building-o"></i> Hotel</legend>
+    <ul class="fa-ul">
+        <li><i class="fa fa-li fa-home"></i> ${hotelInstance.name}</li> 
+        <li><i class="fa fa-li fa-phone"></i> ${hotelInstance.phone}</li> 
+        <li><i class="fa fa-li fa-print"></i> ${hotelInstance.fax}</li> 
+        <li><i class="fa fa-li fa-envelope"></i> ${hotelInstance.eMail}</li> 
+        <li><i class="fa fa-li fa-globe"></i> ${hotelInstance.webSite}</li> 
     </ul>
+    <div class="list-group">
+        <g:link class="list-group-item">Room categories <span class="badge">${hotelRoomCategoriesCount}</span></g:link>
+        <g:link class="list-group-item">Rooms <span class="badge">${hotelRoomsCount}</span></g:link>
+    </div>
     <g:link controller="admin" action="editHotel">More &hellip;</g:link>
 
 </div>
-<div class="col-lg-6">
-    <legend><i class="icon-dashboard"></i> Dashboard</legend>
-
+<div class="col-lg-8">
+    <legend><i class="fa fa-dashboard"></i> Dashboard</legend>
+    <div class="row">
+    <div class="col-lg-6">
+    <div class="col-lg-4">
+        <span>Guests:</span>
+    </div>
+    <div class="col-lg-8">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-6">
+    <div class="col-lg-4">
+        <span>Rooms:</span>
+    </div>
+    <div class="col-lg-8">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div>
+    </div>
+    </div>
+    </div>
+    </div>
 </div>
 </div>
 
 <div class="row show-grid">
-<div class="col-lg-6">
-    <legend><i class="icon-key"></i> License</legend>
+<div class="col-lg-4">
+    <legend><i class="fa fa-key"></i> License</legend>
     <ul class="list-unstyled">
-        <li>${fieldValue(bean: licenseInstance, field: "key")}</li> 
-        <li><g:formatDate date="${licenseInstance.issued}" /></li> 
-        <li><g:formatDate date="${licenseInstance.expires}" /></li> 
+        <li><strong>${licenseInstance.key}</strong></li> 
+        <li>Issued: <g:formatDate date="${licenseInstance.issued}" /></li> 
+        <li>Expires: <g:formatDate date="${licenseInstance.expires}" /></li> 
         <li>(${licenseInstance.expires-licenseInstance.issued} day(s) left)</li>
     </ul>
 </div>
-<div class="col-lg-6">
-    <legend>Users</legend>
+<div class="col-lg-8">
+    <legend><i class="fa fa-user"></i> Users</legend>
 %{--     <div class="list-group">
         <g:each in="${userInstanceList}" status="i" var="userInstance">
             <g:link class="list-group-item" id="${userInstance.id}">
@@ -91,7 +118,7 @@
 	</g:each>
 </tbody>
 </table>
-<g:link controller="admin" action="addUser" class="btn btn-primary"><i class="icon-plus-sign-alt"> </i>Add user</g:link>
+<g:link controller="admin" action="addUser" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add user</g:link>
 </div>
 </div>
 

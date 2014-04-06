@@ -6,6 +6,7 @@ import hms.auth.SecUserRole
 class AdminController extends BaseController {
 
 	def adminService
+	def hotelService
 
 	static defaultAction = "index"
 	
@@ -19,15 +20,15 @@ class AdminController extends BaseController {
 		License license = getLicense(request)
 		def hotel = license.hotel
 		def usersList = license.users
-		// def roomCategoryList = hotel.roomCategories
-		// def reservationList = hotel.reservations
+		def roomCategoryList = hotel.roomCategories
+		def roomList = hotelService.listRooms(license)
 		
 		[
 			licenseInstance: license,
 			hotelInstance: hotel, 
 			userInstanceList: usersList, 
-			// roomCategoryInstanceList: roomCategoryList,
-			// reservationInstanceList: reservationList
+			hotelRoomCategoriesCount: roomCategoryList.size(),
+			hotelRoomsCount: roomList.size(),
 		]
 	}
 
@@ -78,8 +79,11 @@ class AdminController extends BaseController {
 	def editHotel() {
 		License license = getLicense(request)
 		def hotel = license.hotel
+		def roomCategoryList = hotel.roomCategories
+
 		[
-			hotelInstance: hotel
+			hotelInstance: hotel,
+			roomCategoryInstanceList: roomCategoryList
 		]
 	}
 

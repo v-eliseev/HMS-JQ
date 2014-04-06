@@ -5,6 +5,8 @@ import org.joda.time.Duration
 import org.joda.time.Interval
 import org.apache.commons.logging.LogFactory
 
+import xeger.Xeger
+
 class DemoDataScript {
 
 	private static final log = LogFactory.getLog(this.getClass())
@@ -25,11 +27,11 @@ class DemoDataScript {
 		def seed = new Random()
 		
 		Hotel h = new Hotel(
-				name: randomString(8),
-				phone: randomString(8),
-				fax: randomString(8),
-				eMail: randomString(20),
-				webSite: randomString(20),
+				name: randomString("[A-Z][a-z]{6,12}"),
+				phone: randomString("+[1-9][0-9]{0,1}-[0-9]{3}-[0-9]{3}-[0-9]{4}"),
+				fax: randomString("+[1-9][0-9]{0,1}-[0-9]{3}-[0-9]{3}-[0-9]{4}"),
+				eMail: randomString("[a-z]{3,16}\\@[a-z]{5,12}\\.com"),
+				webSite: randomString("http://www\\.[a-z]{5,12}\\.com"),
 				registrationNr: randomString(20),
 				taxNr: randomString(20),
 				bankName: randomString(20),
@@ -106,13 +108,19 @@ class DemoDataScript {
 		h
 	}
 
-private static String randomString(long max_length) {
-	def seed = new Random()
-	def alphabet = 'A'..'z'
-	def result = ""
-	(1..max_length).each {
-		result = result + alphabet[seed.nextInt(alphabet.size())]
-	}	
-	result
-}
+	private static String randomString(long max_length) {
+		def seed = new Random()
+		def alphabet = 'A'..'z'
+		def result = ""
+		(1..max_length).each {
+			result = result + alphabet[seed.nextInt(alphabet.size())]
+		}	
+		result
+	}
+
+	private static String randomString(String regex) {
+    	Xeger generator = new Xeger(regex)
+    	String result = generator.generate()
+    	result
+	}
 }

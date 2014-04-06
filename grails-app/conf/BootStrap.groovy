@@ -30,7 +30,8 @@ class BootStrap {
 
 				log.info("Adding Spring Security RequestMaps...")
 				for (String url in [
-				      '/', '/index', '/index.gsp', '/**/favicon.ico', '/**/assets/**', '/**/js/**',
+				      '/', '/index', '/index.gsp', '/**/favicon.ico', 
+				      '/**/assets/**', '/**/js/**', '/**/fonts/**',
 				      '/login', '/login.*', '/login/*',
 				      '/logout', '/logout.*', '/logout/*',
 				      '/dbconsole', '/dbconsole.*', '/dbconsole/*']) {

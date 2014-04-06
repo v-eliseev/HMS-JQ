@@ -7,6 +7,8 @@ insert into sec_request_map(url, config_attribute, http_method, date_created, la
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/index.gsp', 'permitAll', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/index', 'permitAll', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/**/assets/**', 'permitAll', null, now(), now(), 0);
+insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/**/fonts/**', 'permitAll', null, now(), now(), 0);
+insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/**/js/**', 'permitAll', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/**/favicon.ico', 'permitAll', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/login', 'permitAll', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/login.*', 'permitAll', null, now(), now(), 0);

@@ -172,6 +172,16 @@
 
 	        <div class="col-lg-6">
 				<legend>Property</legend>
+				<div class="col-lg-12">
+				    <legend><i class="icon-signin"></i> Room categories</legend>
+				    <div class="list-group">
+				        <g:each in="${roomCategoryInstanceList}" status="i" var="roomCategoryInstance">
+				            <g:link class="list-group-item" id="${roomCategoryInstance.id}">
+				                <h5 class="list-group-item-heading"><span class="label label-default">${i+1}</span>&nbsp;Code: ${roomCategoryInstance.name}</h5>
+				            </g:link>
+				        </g:each>        
+				    </div>
+				</div>
 			</div>		
 </content>
 

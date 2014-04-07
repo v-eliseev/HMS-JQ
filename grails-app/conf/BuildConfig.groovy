@@ -79,9 +79,9 @@ grails.project.dependency.resolution = {
 
         mavenRepo 'http://repo.spring.io/milestone'
         
-        if (env in ['jenkins', 'prod']) {
+        //if (env in ['jenkins', 'prod']) {
           mavenRepo 'http://192.168.0.37:8080/artifactory/HMS'
-        }
+        //}
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.

@@ -20,11 +20,11 @@ class CustomTagLib {
 		
 		if (value) {
 			colorCode = "label-success"
-			iconCode = "icon-ok"
+			iconCode = "fa fa-check"
 		}  
 		else {
 			colorCode = "label-danger"
-			iconCode = "icon-remove"
+			iconCode = "fa fa-times"
 		}
 
 		out << "<span class=\"label " + colorCode + "\"><i class=\"" + iconCode + "\"></i></span>"

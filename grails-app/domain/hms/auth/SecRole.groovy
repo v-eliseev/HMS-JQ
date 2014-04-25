@@ -14,7 +14,7 @@ class SecRole extends DomainBaseClass {
 		authority blank: false, unique: true
 	}
 
-	def beforeDelete = {
+	def beforeDelete() {
 		SecUserRole.withNewSession {
 			SecUserRole.findAllByRole(this)*.delete(flush:true)
 		}

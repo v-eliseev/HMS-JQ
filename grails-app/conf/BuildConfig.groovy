@@ -107,10 +107,9 @@ grails.project.dependency.resolution = {
 
         compile ":scaffolding:2.0.3"
 
-        compile ":hibernate:3.6.10.13" 
-        //runtime ":hibernate4:4.1.11.7"
+        //compile ":hibernate:3.6.10.13" 
+        compile ":hibernate4:4.3.5.1"
         build ":tomcat:7.0.52.1"
-	    //build ":tomcat:7.0.47"
 
         compile ":cxf:1.1.1"
         compile ":cxf-client:1.6.1"
@@ -121,12 +120,10 @@ grails.project.dependency.resolution = {
         //compile ":quartz2:2.1.6.2"
 
         runtime ":jquery:1.11.0.2"
-        // runtime ":jquery:1.10.2"
         // compile ":jquery-ui:1.8.24"
         // compile ":jquery-mobile:1.1.0.5"
 
         compile ":spring-security-core:2.0-RC2"
-        //compile ":spring-security-core:1.2.7.3"
         //compile ":spring-mobile:0.4"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities

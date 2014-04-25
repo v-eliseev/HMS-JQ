@@ -44,7 +44,7 @@ def systemConfig = new ConfigObject()
 //     systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(myClassLoader.loadClass("SystemConfig"))
 // }
 
-def mysqlConnectorVersion = "5.1.29" //systemConfig.roomplanner.mysql.connector.version
+def mysqlConnectorVersion = "5.1.30" //systemConfig.roomplanner.mysql.connector.version
 def roombixUiVersion = "0.1-SNAPSHOT" //systemConfig.roomplanner.roombixUi.version
 def roomplannerApiVersion = "0.5-SNAPSHOT" //systemConfig.roomplanner.roomplannerApi.version
 /**
@@ -59,16 +59,15 @@ grails.project.dependency.resolution = {
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    //legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
 
         grailsPlugins()
         grailsHome()
-        grailsCentral()
-
         mavenLocal()
+        grailsCentral()
         mavenCentral()
 
         // uncomment these to enable remote dependency resolution from public Maven repositories
@@ -79,9 +78,9 @@ grails.project.dependency.resolution = {
 
         mavenRepo 'http://repo.spring.io/milestone'
         
-        //if (env in ['jenkins', 'prod']) {
+        if (env in ['jenkins', 'prod']) {
           mavenRepo 'http://192.168.0.37:8080/artifactory/HMS'
-        //}
+        }
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -96,7 +95,7 @@ grails.project.dependency.resolution = {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
         test "org.gebish:geb-spock:0.9.2"
 
-        def seleniumVersion = "2.40.0"
+        def seleniumVersion = "2.41.0"
         test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"

@@ -1,6 +1,13 @@
 package hms.security
 
-class SystemUser {
+import hms.DomainBaseClass
+
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true, includes = "username, realmCode")
+@EqualsAndHashCode
+class SystemUser extends DomainBaseClass {
 
 	Long realmCode
 	String username

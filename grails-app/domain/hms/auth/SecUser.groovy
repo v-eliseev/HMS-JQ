@@ -3,6 +3,11 @@ package hms.auth
 import hms.DomainBaseClass
 import hms.License
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true, includes = "username, license")
+@EqualsAndHashCode
 class SecUser extends DomainBaseClass {
 
 	transient springSecurityService
@@ -51,10 +56,4 @@ class SecUser extends DomainBaseClass {
 			SecUserRole.findAllByUser(this)*.delete(flush:true)
 		}
 	}
-
-	@Override
-	String toString() {
-		username + "@" + license?.key
-	}
-
 }

@@ -3,10 +3,12 @@ package hms
 import hms.auth.SecUser
 
 import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
 
 enum LicenseType { PRODUCTION, DEMO }
 
 @ToString(includeNames = true, includeFields = true, includes = "key")
+@EqualsAndHashCode
 class License extends DomainBaseClass {
 
 	enum LicenseMode {

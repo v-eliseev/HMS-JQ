@@ -1,5 +1,10 @@
 package roomplanner
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode
 class ConstraintMatch implements Serializable {
 
 	static mapping = {

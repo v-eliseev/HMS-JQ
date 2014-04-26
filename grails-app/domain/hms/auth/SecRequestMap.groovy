@@ -2,7 +2,11 @@ package hms.auth
 
 import hms.DomainBaseClass
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
 import org.springframework.http.HttpMethod
+
 
 class SecRequestMap extends DomainBaseClass {
 

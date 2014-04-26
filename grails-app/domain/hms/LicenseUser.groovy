@@ -3,7 +3,12 @@ package hms
 import java.security.SecureRandom
 import java.util.Date;
 
-class LicenseUser {
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode
+class LicenseUser extends DomainBaseClass {
 	def springSecurityService
 
 	String username

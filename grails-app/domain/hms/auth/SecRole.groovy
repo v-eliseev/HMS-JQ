@@ -2,6 +2,11 @@ package hms.auth
 
 import hms.DomainBaseClass
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode
 class SecRole extends DomainBaseClass {
 
 	String authority

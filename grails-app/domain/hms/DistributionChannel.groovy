@@ -1,5 +1,10 @@
 package hms
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode
 class DistributionChannel extends DomainBaseClass {
 
     static constraints = {

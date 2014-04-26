@@ -91,6 +91,36 @@ class ReservationServiceSpec extends Specification {
 
 		cleanup:
 			license.delete(flush:true)
-
 	}
+
+	def "Get first reservation" () {
+		given:
+			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
+			assert license != null
+
+		when:
+			def reservation = reservationService.getFirstReservation(license)
+
+		then:
+			reservation
+
+		cleanup:
+			license.delete(flush:true)
+	}
+
+	def "Get last reservation" () {
+		given:
+			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
+			assert license != null
+
+		when:
+			def reservation = reservationService.getLastReservation(license)
+
+		then:
+			reservation
+
+		cleanup:
+			license.delete(flush:true)
+	}
+
 }

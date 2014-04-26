@@ -4,7 +4,6 @@ import grails.test.mixin.*
 import grails.test.mixin.support.*
 import spock.lang.*
 
-import org.joda.time.DateTime
 import org.codehaus.groovy.grails.plugins.codecs.SHA1Codec
 import org.codehaus.groovy.grails.plugins.codecs.HexCodec
 
@@ -60,7 +59,7 @@ class LicenseCodeGeneratorSpec extends Specification {
 			]
 
 		when:
-			def licenseKey = licenseService.generateLicenseKey(source)
+			licenseService.generateLicenseKey(source)
 
 		then:
 			thrown IllegalArgumentException
@@ -74,7 +73,7 @@ class LicenseCodeGeneratorSpec extends Specification {
 			]
 
 		when:
-			def licenseKey = licenseService.generateLicenseKey(source)
+			licenseService.generateLicenseKey(source)
 
 		then:
 			thrown IllegalArgumentException
@@ -88,7 +87,7 @@ class LicenseCodeGeneratorSpec extends Specification {
 			]
 
 		when:
-			def licenseKey = licenseService.generateLicenseKey(source)
+			licenseService.generateLicenseKey(source)
 
 		then:
 			thrown IllegalArgumentException

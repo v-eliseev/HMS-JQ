@@ -7,7 +7,6 @@ import hms.auth.SecUser
 import hms.auth.SecRole
 import hms.auth.SecUserRole
 
-import org.joda.time.DateTime
 import org.codehaus.groovy.grails.plugins.codecs.SHA1Codec
 import org.codehaus.groovy.grails.plugins.codecs.HexCodec
 

@@ -1,10 +1,5 @@
 package hms
 
-import hms.Hotel
-import hms.HotelService
-import hms.License
-import hms.ServiceFactory
-
 class HotelController extends BaseController {
 	
 	static defaultAction = "index"

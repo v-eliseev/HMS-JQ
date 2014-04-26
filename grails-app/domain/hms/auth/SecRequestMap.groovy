@@ -7,7 +7,8 @@ import groovy.transform.EqualsAndHashCode
 
 import org.springframework.http.HttpMethod
 
-
+@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode
 class SecRequestMap extends DomainBaseClass {
 
    String url

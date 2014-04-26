@@ -26,7 +26,8 @@ class Plan implements Serializable {
 
 }
 
-@ToString(includeNames = true, includeFields = true)
+@ToString(includeNames = true, includeFields = true)\
+@EqualsAndHashCode
 class Score {
 	Boolean feasible
 	Double hard

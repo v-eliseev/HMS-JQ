@@ -9,7 +9,6 @@ import ws.roomplanner.Reservation as ReservationDto
 import ws.roomplanner.Room as RoomDto
 import ws.roomplanner.RoomCategory as RoomCategoryDto
 import ws.roomplanner.RoomAssignment as RoomAssignmentDto
-import ws.roomplanner.Plan as PlanDto
 import ws.roomplanner.License as LicenseDto
 import ws.roomplanner.Pricelist as PricelistDto
 import ws.roomplanner.PricelistItem as PricelistItemDto

@@ -2,6 +2,11 @@ package hms.util
 
 import hms.auth.SecUser
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
+
+@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode
 class Configuration {
 
 	SecUser user

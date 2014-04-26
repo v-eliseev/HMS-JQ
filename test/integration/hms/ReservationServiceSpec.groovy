@@ -1,7 +1,6 @@
 package hms
 
 import grails.test.mixin.*
-import hms.auth.SecUser
 import spock.lang.*
 
 /**
@@ -33,14 +32,14 @@ class ReservationServiceSpec extends Specification {
 			assert roomCategory != null
 
 		when:
-			def r = reservationService.createReservation(
-					license, 
-					[
-					fromDate: new Date()-1, 
-					toDate: new Date()+3, 
-					roomCategory: roomCategory, 
-					adults: 2
-					]) 
+			reservationService.createReservation(
+				license, 
+				[
+				fromDate: new Date()-1, 
+				toDate: new Date()+3, 
+				roomCategory: roomCategory, 
+				adults: 2
+				]) 
 
 		then:
 			Reservation.list().size() == (count + 1)

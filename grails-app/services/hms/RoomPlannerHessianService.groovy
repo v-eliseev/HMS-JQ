@@ -9,7 +9,6 @@ import roomplanner.api.RoomCategory as RoomCategoryDto
 import roomplanner.api.Room as RoomDto
 import roomplanner.api.Reservation as ReservationDto
 import roomplanner.api.RoomAssignment as RoomAssignmentDto
-import roomplanner.api.Plan as PlanDto
 import roomplanner.api.License as LicenseDto
 import roomplanner.api.Pricelist as PricelistDto
 import roomplanner.api.PricelistItem as PricelistItemDto

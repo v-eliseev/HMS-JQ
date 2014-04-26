@@ -1,14 +1,9 @@
 package hms
 
-import hms.License
-import hms.ServiceFactory
 import hms.auth.SecUser
 
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
-
-import org.springframework.security.core.context.SecurityContext
-import org.springframework.security.core.userdetails.UserDetails
 
 class BaseController {
 
@@ -29,12 +24,10 @@ class BaseController {
 	 }
 	
 	protected License getLicense(HttpServletRequest request) {
-		//RequestUtils.getLicense(request)
 		springSecurityService.currentUser.license
 	}
 	
 	protected SecUser getCurrentUser(HttpServletRequest request) {
-		//RequestUtils.getCurrentUser(request)
 		springSecurityService.currentUser
 	}
 

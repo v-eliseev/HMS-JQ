@@ -1,7 +1,5 @@
 package hms
 
-import hms.Hotel
-import hms.License
 import hms.dto.ReservationRequest
 
 import roomplanner.DateTimeRange
@@ -106,7 +104,6 @@ class UserController extends BaseController {
 
 		def reservationStatusList = reservationStatusService.listReservationStatus()
 
-		def model = showCurrentPlan()
 		[
 			licenseInstance: license,
 			hotelInstance: hotel,

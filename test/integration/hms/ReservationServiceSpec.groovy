@@ -51,7 +51,6 @@ class ReservationServiceSpec extends Specification {
 	def 'Get checkins for the date' () {
 		given:
 			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
-
 			assert license != null
 
 		when:
@@ -67,7 +66,6 @@ class ReservationServiceSpec extends Specification {
 	def 'Get checkouts for the date' () {
 		given:
 			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
-
 			assert license != null
 
 		when:
@@ -78,5 +76,21 @@ class ReservationServiceSpec extends Specification {
 
 		cleanup:
 			license.delete(flush:true)
+	}
+
+	def "Get reservations for period" () {
+		given:
+			def license = licenseService.createDemoLicense("John Doe", "aa@bb.cc")
+			assert license != null
+
+		when:
+			def reservationList = reservationService.getReservations(license, new Date()-2, new Date()+2)
+
+		then:
+			reservationList.size() != 0
+
+		cleanup:
+			license.delete(flush:true)
+
 	}
 }

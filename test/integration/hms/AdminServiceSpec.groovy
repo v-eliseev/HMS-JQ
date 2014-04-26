@@ -47,6 +47,26 @@ class AdminServiceSpec extends Specification {
 			license2.delete(flush:true)	
 	}
 
+	def 'Create user with no role exception' () {
+		given:
+			def license1 = licenseService.createStandardLicense("John Doe", "aa@bb.cc")
+
+		when:
+			adminService.createUser("admin", "admin", "aa@bb.cc", license1, null)
+
+		then:
+			thrown IllegalArgumentException
+
+		when:
+			adminService.createUser("admin", "admin", "aa@bb.cc", license1, [])
+
+		then:
+			thrown IllegalArgumentException
+
+		cleanup:
+			license1.delete(flush:true)
+	}
+
 	def 'Check users' () {
 		given:
 			def license1 = licenseService.createStandardLicense("John Doe", "aa@bb.cc")
@@ -84,5 +104,20 @@ class AdminServiceSpec extends Specification {
 
 		cleanup:
 			demoLicense.delete(flush:true)
+	}
+
+	def "Create demo user with non-demo license exception" () {
+		given:
+			def license = licenseService.createStandardLicense("John Doe", "aa@bb.cc")
+			assert license != null
+
+		when:
+			def adminUser = adminService.createDemoUser(license)
+
+		then:
+			thrown IllegalArgumentException
+
+		cleanup:
+			license.delete(flush:true)
 	}
 }

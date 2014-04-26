@@ -2,7 +2,6 @@ package hms
 
 import hms.auth.SecRole
 import hms.auth.SecUser
-import hms.auth.SecUserRole
 
 import org.joda.time.DateTime
 import org.joda.time.Period
@@ -10,9 +9,6 @@ import org.joda.time.format.ISOPeriodFormat
 import org.joda.time.format.PeriodFormatter
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-
-import org.codehaus.groovy.grails.plugins.codecs.SHA1Codec
-import org.codehaus.groovy.grails.plugins.codecs.HexCodec
 
 class LicenseService {
 
@@ -257,15 +253,5 @@ class LicenseService {
     	}
     	result
   	}
-
-	private def generateLetter() {
-		int value = Math.ceil(Math.random() * License.letters.size())
-		License.letters[value-1]
-	}
-
-	private def generateDigit() {
-		int value = Math.ceil(Math.random() * License.digits.size())
-		License.digits[value-1]
-	}
 
 }

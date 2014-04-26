@@ -1,7 +1,6 @@
 package hms
 
 import hms.auth.SecUser
-import hms.auth.SecUserRole
 
 class AdminController extends BaseController {
 

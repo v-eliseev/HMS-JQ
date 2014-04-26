@@ -214,6 +214,23 @@ class LicenseServiceSpec extends Specification {
 			license.expires
 	}
 
+	def 'Check license prolongation wrong format exception' () {
+		given:
+			def license = licenseService.createStandardLicense("Vladislav Eliseev", "aa@bb.cc")
+			def expires = license.expires
+		
+		when:
+			licenseService.prolongateLicense(license.id, "XXXX")
+
+		then:
+			thrown IllegalArgumentException()
+
+		cleanup:
+			su1.delete(flush:true)
+
+
+	}
+
 	def 'Check license set production mode' () {
 		given:
 			def license = licenseService.createDemoLicense("Vladislav Eliseev", "aa@bb.cc")

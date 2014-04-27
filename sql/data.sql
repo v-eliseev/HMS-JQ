@@ -1,4 +1,4 @@
-insert into system_user (`password`,username, version) values ("password", "superuser", 0);
+insert into system_user (`password`, username, date_created, last_updated, version) values ("password", "superuser", now(), now(), 0);
 
 insert into sec_role(authority, date_created, last_updated, version) values('ROLE_ADMIN', now(), now(), 0);
 insert into sec_role(authority, date_created, last_updated, version) values('ROLE_USER', now(), now(), 0);

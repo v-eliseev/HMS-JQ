@@ -158,7 +158,7 @@ grails.project.dependency.resolution = {
 }
 
 coverage {
-   exclusions = ["**/SystemConfig*"]
+   exclusions = ["**/SystemConfig*", "**/changelog*", "**/dbm-changeset*"]
 }
 
 codenarc {

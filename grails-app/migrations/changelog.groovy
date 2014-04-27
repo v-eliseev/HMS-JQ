@@ -1203,4 +1203,6 @@ databaseChangeLog = {
 	changeSet(author: "vlad (generated)", id: "1394475472405-56") {
 		addForeignKeyConstraint(baseColumnNames: "user_id", baseTableName: "sec_user_role", baseTableSchemaName: "hms", constraintName: "FK7DE039FC960FF545", deferrable: "false", initiallyDeferred: "false", onDelete: "NO ACTION", onUpdate: "NO ACTION", referencedColumnNames: "id", referencedTableName: "sec_user", referencedTableSchemaName: "hms", referencesUniqueColumn: "false")
 	}
+
+	include file: 'dbm-changeset001.groovy'
 }

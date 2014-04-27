@@ -50,7 +50,7 @@ class SecurityFilters {
 
                 } catch (Exception e) {
                     log.error("Error processing Basic HTTP Authenication", e)
-                    response.status = 500v
+                    response.status = 500
                     return false
                 }                
             }  

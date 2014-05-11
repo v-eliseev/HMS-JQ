@@ -1,8 +1,9 @@
+grails.project.work.dir = "../../work/HMS-JQ"
+
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
-grails.project.work.dir = "../../work/HMS-JQ"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
@@ -107,14 +108,15 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.0.3"
 
         //compile ":hibernate:3.6.10.13" 
-        compile ":hibernate4:4.3.5.1"
+        compile ":hibernate4:4.3.5.2"
         build ":tomcat:7.0.52.1"
+        //build ":tomcat8:8.0.5"
 
-        compile ":cxf:1.1.1"
+        compile ":cxf:1.1.3"
         compile ":cxf-client:1.6.1"
         compile ":remoting:1.3"
         
-        runtime ":mail:1.0.5-SNAPSHOT"
+        runtime ":mail:1.0.5"
         compile ":quartz:1.0.1"
         //compile ":quartz2:2.1.6.2"
 
@@ -132,7 +134,7 @@ grails.project.dependency.resolution = {
 
         runtime ":database-migration:1.4.0"
 
-        compile ':cache:1.1.5'
+        compile ':cache:1.1.6'
 
         test(":spock:0.7") { 
             exclude "spock-grails-support" 

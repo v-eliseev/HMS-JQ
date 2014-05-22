@@ -14,20 +14,23 @@ import hms.CustomLogAppender
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
-grails.mime.use.accept.header = false
-grails.mime.types = [ html: ['text/html','application/xhtml+xml'],
-                      xml: ['text/xml', 'application/xml'],
-                      text: 'text/plain',
-                      js: 'text/javascript',
-                      rss: 'application/rss+xml',
-                      atom: 'application/atom+xml',
-                      css: 'text/css',
-                      csv: 'text/csv',
-                      all: '*/*',
-                      json: ['application/json','text/json'],
-                      form: 'application/x-www-form-urlencoded',
-                      multipartForm: 'multipart/form-data'
-                    ]
+//grails.mime.use.accept.header = false
+grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
+grails.mime.types = [ // the first one is the default format
+    all:           '*/*', // 'all' maps to '*' or the first available format in withFormat
+    atom:          'application/atom+xml',
+    css:           'text/css',
+    csv:           'text/csv',
+    form:          'application/x-www-form-urlencoded',
+    html:          ['text/html','application/xhtml+xml'],
+    js:            'text/javascript',
+    json:          ['application/json', 'text/json'],
+    multipartForm: 'multipart/form-data',
+    rss:           'application/rss+xml',
+    text:          'text/plain',
+    hal:           ['application/hal+json','application/hal+xml'],
+    xml:           ['text/xml', 'application/xml']
+]
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
@@ -40,12 +43,7 @@ grails.assets.excludes = [
   "font-awesome/*.less"
 ]
 
-// The default codec used to encode data with ${}
-grails.views.default.codec = "none" // none, html, base64
-grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
-// enable Sitemesh preprocessing of GSP pages
-grails.views.gsp.sitemesh.preprocess = true
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
 
@@ -107,13 +105,13 @@ log4j = {
 //	}
 
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
-           'org.codehaus.groovy.grails.web.pages', //  GSP
-           'org.codehaus.groovy.grails.web.sitemesh', //  layouts
+           'org.codehaus.groovy.grails.web.pages',  //  GSP
+           'org.codehaus.groovy.grails.web.sitemesh',  //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping', // URL mapping
-           'org.codehaus.groovy.grails.commons', // core / classloading
-           'org.codehaus.groovy.grails.plugins', // plugins
-           'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
+           'org.codehaus.groovy.grails.web.mapping' // URL mapping
+    error  'org.codehaus.groovy.grails.commons' // core / classloading
+    error  'org.codehaus.groovy.grails.plugins' // plugins
+    error  'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
@@ -195,8 +193,8 @@ environments {
 service.roomplanner.soap.url = "${grails.roomplannerURL}/services/roomPlannerSoap"
 service.roomplanner.hessian.url = "${grails.roomplannerURL}/hessian/roomPlannerRemote"
 service.roomplanner.burlap.url = "${grails.roomplannerURL}/burlap/roomPlannerRemote"
-service.roomplanner.mode = "SOAP"  // SOAP, Hessian
-//service.roomplanner.mode = "Hessian" // SOAP, Hessian
+//service.roomplanner.mode = "SOAP"  // SOAP, Hessian
+service.roomplanner.mode = "Hessian" // SOAP, Hessian
 
 /**
     CXF client configuration
@@ -235,13 +233,6 @@ grails {
    }
 }
 
-// jquery {
-//   sources = "jquery"
-//   version = "2.0.2"
-// }
-// Uncomment and edit the following lines to start using Grails encoding & escaping improvements
-
-/* remove this line 
 // GSP settings
 grails {
     views {
@@ -249,16 +240,16 @@ grails {
             encoding = 'UTF-8'
             htmlcodec = 'xml' // use xml escaping instead of HTML4 escaping
             codecs {
-                expression = 'html' // escapes values inside null
-                scriptlet = 'none' // escapes output from scriptlets in GSPs
+                expression = 'html' // escapes values inside ${}
+                scriptlet = 'html' // escapes output from scriptlets in GSPs
                 taglib = 'none' // escapes output from taglibs
                 staticparts = 'none' // escapes output from static template parts
             }
+            sitemesh {
+              preprocess = true
+            }
         }
         // escapes all not-encoded output at final stage of outputting
-        filteringCodecForContentType {
-            //'text/html' = 'html'
-        }
+        // filteringCodecForContentType.'text/html' = 'html'
     }
 }
-remove this line */

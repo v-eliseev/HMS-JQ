@@ -101,18 +101,17 @@ grails.project.dependency.resolution = {
         test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+
+        compile "org.springframework:spring-orm:$springVersion"
     }
 
     plugins {
-
-        compile ":scaffolding:2.1.0"
-
         //compile ":hibernate:3.6.10.13" 
-        compile ":hibernate4:4.3.5.4-SNAPSHOT"
+        compile ":hibernate4:4.3.5.3"
         build ":tomcat:7.0.53"
         //build ":tomcat8:8.0.5"
 
-        compile ":cxf:1.1.3"
+        // compile ":cxf:1.1.4.1"
         compile ":cxf-client:1.6.1"
         compile ":remoting:1.3"
         
@@ -124,7 +123,7 @@ grails.project.dependency.resolution = {
         // compile ":jquery-ui:1.8.24"
         // compile ":jquery-mobile:1.1.0.5"
 
-        compile ":spring-security-core:2.0-SNAPSHOT"
+        compile ":spring-security-core:2.0-RC3"
         //compile ":spring-mobile:0.4"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
@@ -133,8 +132,9 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.4"
 
         runtime ":database-migration:1.4.0"
+        compile ":scaffolding:2.1.0"
 
-        compile ':cache:1.1.7-SNAPSHOT'
+        compile ':cache:1.1.6'
 
         test(":spock:0.7") { 
             exclude "spock-grails-support" 

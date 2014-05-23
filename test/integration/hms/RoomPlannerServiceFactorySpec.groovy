@@ -1,8 +1,9 @@
 package hms
 
-import grails.plugin.spock.IntegrationSpec
+import grails.test.mixin.*
+import spock.lang.*
 
-class RoomPlannerServiceFactorySpec extends IntegrationSpec {
+class RoomPlannerServiceFactorySpec extends Specification {
 
 	// def 'Check service factory for roomPlanner' () {
 	// 	when:

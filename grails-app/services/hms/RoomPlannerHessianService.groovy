@@ -69,7 +69,6 @@ class RoomPlannerHessianService implements IRoomPlannerService {
             fromDate: new DateTime(pricelist.fromDate.getTime()),
             toDate: new DateTime(pricelist.toDate.getTime())
             )
-        log.debug("PriceList: $pricelistDto")
         pricelist.items?.each {
             def item = new PricelistItemDto(
                 onDate: new DateTime(it.onDate.getTime()),
@@ -78,6 +77,7 @@ class RoomPlannerHessianService implements IRoomPlannerService {
                 )
             pricelistDto.items?.add(item)
         }
+        log.trace("PriceList: $pricelistDto")
 
         [ licenseDto, roomCategoriesDto, roomsDto, reservationsDto, roomAssignmentsDto, pricelistDto ]
 	}

@@ -111,7 +111,6 @@ grails.project.dependency.resolution = {
         build ":tomcat:7.0.53"
         //build ":tomcat8:8.0.5"
 
-        // compile ":cxf:1.1.4.1"
         compile ":cxf-client:1.6.1"
         compile ":remoting:1.3"
         

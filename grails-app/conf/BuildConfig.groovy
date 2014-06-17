@@ -107,14 +107,14 @@ grails.project.dependency.resolution = {
 
     plugins {
         //compile ":hibernate:3.6.10.13" 
-        compile ":hibernate4:4.3.5.3"
-        build ":tomcat:7.0.53"
+        compile ":hibernate4:4.3.5.4"
+        build ":tomcat:7.0.54"
         //build ":tomcat8:8.0.5"
 
-        compile ":cxf-client:1.6.1"
+        compile ":cxf-client:1.6.2"
         compile ":remoting:1.3"
         
-        runtime ":mail:1.0.6-SNAPSHOT"
+        runtime ":mail:1.0.6"
         compile ":quartz:1.0.1"
         //compile ":quartz2:2.1.6.2"
 
@@ -131,7 +131,7 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.4"
 
         runtime ":database-migration:1.4.0"
-        compile ":scaffolding:2.1.0"
+        compile ":scaffolding:2.1.1"
 
         compile ':cache:1.1.6'
 
@@ -139,7 +139,7 @@ grails.project.dependency.resolution = {
             exclude "spock-grails-support" 
             export = false
         }
-        test (":geb:0.9.3-SNAPSHOT") {
+        test (":geb:0.9.3") {
             export = false
         }
 

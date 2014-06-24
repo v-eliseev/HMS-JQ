@@ -45,7 +45,7 @@ def systemConfig = new ConfigObject()
 //     systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(myClassLoader.loadClass("SystemConfig"))
 // }
 
-def mysqlConnectorVersion = "5.1.30" //systemConfig.roomplanner.mysql.connector.version
+def mysqlConnectorVersion = "5.1.31" //systemConfig.roomplanner.mysql.connector.version
 def roombixUiVersion = "0.1-SNAPSHOT" //systemConfig.roomplanner.roombixUi.version
 def roomplannerApiVersion = "0.5-SNAPSHOT" //systemConfig.roomplanner.roomplannerApi.version
 /**
@@ -96,7 +96,7 @@ grails.project.dependency.resolution = {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
         test "org.gebish:geb-spock:0.9.2"
 
-        def seleniumVersion = "2.41.0"
+        def seleniumVersion = "2.42.2"
         test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
@@ -115,7 +115,7 @@ grails.project.dependency.resolution = {
         compile ":remoting:1.3"
         
         runtime ":mail:1.0.6"
-        compile ":quartz:1.0.1"
+        compile ":quartz:1.0.2"
         //compile ":quartz2:2.1.6.2"
 
         runtime ":jquery:1.11.1"

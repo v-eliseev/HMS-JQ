@@ -17,7 +17,7 @@ import org.codehaus.groovy.grails.plugins.codecs.HexCodec
 @TestFor(AdminService)
 @Mock([SystemUser, License, SecUser, SecRole, SecUserRole, 
 	Hotel, RoomCategory, Room, Reservation, ReservationStatus])
-class AdminServiceSpec extends Specification {
+class AdminServiceUnitSpec extends Specification {
 
 	def adminService
 	def licenseService

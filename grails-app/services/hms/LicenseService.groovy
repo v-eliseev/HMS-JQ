@@ -148,8 +148,8 @@ class LicenseService {
 		newLicense
 	}
 
-	def createTestLicense(def email) {
-		createDemoLicense("John Dow", email, "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX")
+	def createTestLicense(def ownerName, def ownerEmail, String licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX") {
+		createDemoLicense(ownerName, ownerEmail, licenseKey)
 	}
 
 	def deleteLicense(def id) {

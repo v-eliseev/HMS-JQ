@@ -97,12 +97,12 @@ grails.project.dependency.resolution = {
         test "org.gebish:geb-spock:0.9.2"
 
         def seleniumVersion = "2.42.2"
-        test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion" {
-            exclude "xml-apis","commons-codec","commons-io"
+        test ("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
+            excludes "xml-apis","commons-codec","commons-io"
         }
         test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
-        test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion" {
-            exclude "commons-io"
+        test ("org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion") {
+            excludes "commons-io"
         }
         test "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
 

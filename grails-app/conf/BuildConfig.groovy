@@ -98,11 +98,11 @@ grails.project.dependency.resolution = {
 
         def seleniumVersion = "2.42.2"
         test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion" {
-            excludes "xml-apis","commons-codec","commons-io"
+            exclude "xml-apis","commons-codec","commons-io"
         }
         test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion" {
-            excludes "commons-io"
+            exclude "commons-io"
         }
         test "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
 

@@ -122,7 +122,7 @@ grails.project.dependency.resolution = {
         // compile ":jquery-ui:1.8.24"
         // compile ":jquery-mobile:1.1.0.5"
 
-        compile ":spring-security-core:2.0-RC3"
+        compile ":spring-security-core:2.0-RC4"
         //compile ":spring-mobile:0.4"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities

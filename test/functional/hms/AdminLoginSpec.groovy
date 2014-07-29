@@ -23,7 +23,7 @@ class AdminLoginSpec extends GebSpec {
                     licenseKeyInputDiv.displayed
                 }
             }
-            loginForm.j_licenseKey = "XXXXX-XXXXX-XXXXX-XXXXX-XXXXXX"
+            loginForm.j_licenseKey = "WR9WX-Q9CTF-2QFCY-YRY9V-PPHK6A"
             loginButton.click()
  
         then:

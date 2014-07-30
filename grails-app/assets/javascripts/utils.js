@@ -1,8 +1,8 @@
 // get date from daterange control
 
 function getDaterangeValues(controlId) {
-	Element dp = document.getElementById(controlId);
-	Date start = dp.startTime();
-	Date end = dp.endTime();
-	return { 'startTime': start, 'endTime': end };
+	var dp = document.getElementById(controlId);
+	var startTime = dp.startTime();
+	var endTime = dp.endTime();
+	return { 'startTime': startTime, 'endTime': endTime };
 };

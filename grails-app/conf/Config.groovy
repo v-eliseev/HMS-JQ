@@ -143,7 +143,7 @@ log4j = {
     debug  'hms'
     debug  'hms.DemoDataScript'
 
-    debug  'asset.pipeline'
+    error  'asset.pipeline'
 
     info   'liquibase'
 

@@ -111,14 +111,14 @@ grails.project.dependency.resolution = {
 
     plugins {
         //compile ":hibernate:3.6.10.13" 
-        compile ":hibernate4:4.3.5.4"
+        compile ":hibernate4:4.3.5.5"
         build ":tomcat:7.0.54"
         //build ":tomcat8:8.0.5"
 
         compile ":cxf-client:2.0"
         compile ":remoting:1.3"
         
-        runtime ":mail:1.0.6"
+        runtime ":mail:1.0.7"
         compile ":quartz:1.0.2"
         //compile ":quartz2:2.1.6.2"
 

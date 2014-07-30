@@ -90,11 +90,11 @@ grails.project.dependency.resolution = {
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
 
         compile 'org.freemarker:freemarker:2.3.20'
-        compile 'joda-time:joda-time:2.3'
+        compile 'joda-time:joda-time:2.4'
         //compile 'joda-time:joda-time-hibernate:1.3'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-        test "org.gebish:geb-spock:0.9.2"
+        test "org.gebish:geb-spock:0.9.3"
 
         def seleniumVersion = "2.42.2"
         test ("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {

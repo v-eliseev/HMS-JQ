@@ -3,6 +3,8 @@
 <g:applyLayout name="twoblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
+<asset:stylesheet src="datatables.css"/>
+<asset:javascript src="datatables.js"/>
 </head>
 
 <content tag="top"> 
@@ -18,20 +20,18 @@
 		    </ul>
 			<div id="tabsContent" class="tab-content">
 				<div class="tab-pane fade in active" id="active">
-				    <table class="table table-striped table-condensed">
+					<p>
+				    <table id="activelicenses" class="table table-striped table-condensed">
 				    <thead>
 				        <tr>
-				            <g:sortableColumn property="key"
-				                title="${message(code: 'license.key.label', default: 'Key')}" />
-				            <g:sortableColumn property="mode"
-				                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
-				            <g:sortableColumn property="expires"
-				                title="${message(code: 'license.expires.label', default: 'Expires')}" />
+				        	<th>Key</th>
+				        	<th>Mode</th>
+				        	<th>Expires
 				        </tr>
 				    </thead>
 				    <tbody>
 				    <g:each in="${activeLicenseInstanceList}" status="i" var="licenseInstance">
-				        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+				        <tr>
 				            <td>
 				                <g:link action="showLicense" id="${licenseInstance.id}">
 				                    <code>${fieldValue(bean: licenseInstance, field: "key")}</code>
@@ -139,6 +139,13 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+$(document).ready(function() {
+    $('#activelicenses').dataTable(
+    {
+    })
+});
+</script>
 </content>
 
 </g:applyLayout>

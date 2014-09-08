@@ -19,3 +19,6 @@ insert into sec_request_map(url, config_attribute, http_method, date_created, la
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/superuser/**', 'permitAll', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/user/**', 'ROLE_USER', null, now(), now(), 0);
 insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/admin/**', 'ROLE_ADMIN', null, now(), now(), 0);
+insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/monitoring', 'permitAll', null, now(), now(), 0);
+insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/monitoring.*', 'permitAll', null, now(), now(), 0);
+insert into sec_request_map(url, config_attribute, http_method, date_created, last_updated, version) values ('/monitoring/*', 'permitAll', null, now(), now(), 0);

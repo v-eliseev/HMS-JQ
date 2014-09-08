@@ -68,7 +68,9 @@ class LicenseService {
 		case "DEMO" : 
 			licenseInstance = createDemoLicense(ownerName, email)
 			SecRole adminRole = adminService.getAdminRole()
+			SecRole userRole = adminService.getUserRole()
 			SecUser adminUser = adminService.createUser("admin", "admin", email, licenseInstance, [adminRole])
+			SecUser userUser = adminService.createUser("user", "test", email, licenseInstance, [userRole])
 			break
 
 		case "PRODUCTION" : 

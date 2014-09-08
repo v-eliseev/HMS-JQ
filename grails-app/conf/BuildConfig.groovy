@@ -45,7 +45,7 @@ def systemConfig = new ConfigObject()
 //     systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(myClassLoader.loadClass("SystemConfig"))
 // }
 
-def mysqlConnectorVersion = "5.1.31" //systemConfig.roomplanner.mysql.connector.version
+def mysqlConnectorVersion = "5.1.32" //systemConfig.roomplanner.mysql.connector.version
 def roombixUiVersion = "0.1-SNAPSHOT" //systemConfig.roomplanner.roombixUi.version
 def roomplannerApiVersion = "0.5-SNAPSHOT" //systemConfig.roomplanner.roomplannerApi.version
 /**
@@ -147,10 +147,8 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        if (env == 'jenkins') {
-            test (":code-coverage:1.2.7") {
-                export = false
-            }
+        test (":code-coverage:2.0.3-2") {
+            export = false
         }
 
         test (":codenarc:0.21") {

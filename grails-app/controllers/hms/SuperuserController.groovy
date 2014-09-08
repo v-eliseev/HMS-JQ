@@ -124,4 +124,9 @@ class SuperuserController extends BaseController {
 	def cleanupNow() {
 
 	}
+
+	def monitor() {
+		
+	}
+
 }

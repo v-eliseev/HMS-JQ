@@ -1,7 +1,7 @@
 roomplanner {
     mysql {
         connector {
-            version = '5.1.29'
+            version = '5.1.32'
         }
     }
     roomplannerApi {

@@ -155,6 +155,8 @@ grails.project.dependency.resolution = {
             export = false
         }
 
+        compile ":grails-melody:1.52.0"
+
         runtime ":roomplanner-api:$roomplannerApiVersion"
         runtime ":roombix-ui:$roombixUiVersion"
     }

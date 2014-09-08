@@ -52,15 +52,14 @@
 				    </table>
 				</div>
 				<div class="tab-pane fade" id="inactive">
-				    <table class="table table-striped table-condensed">
+					<p>
+				    <table id="inactivelicenses" class="table table-striped table-condensed">
 				    <thead>
 				        <tr>
-				            <g:sortableColumn property="key"
-				                title="${message(code: 'license.key.label', default: 'Key')}" />
-				            <g:sortableColumn property="mode"
-				                title="${message(code: 'license.demoMode.label', default: 'Mode')}" />
-				            <g:sortableColumn property="expires"
-				                title="${message(code: 'license.expires.label', default: 'Expires')}" />
+				        	<th>Key</th>
+				        	<th>Mode</th>
+				        	<th>Expires
+				        </tr>
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -139,9 +138,12 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
     $('#activelicenses').dataTable(
+    {
+    });
+    $('#inactivelicenses').dataTable(
     {
     })
 });

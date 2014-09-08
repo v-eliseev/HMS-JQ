@@ -34,7 +34,9 @@ class BootStrap {
 				      '/**/assets/**', '/**/js/**', '/**/fonts/**',
 				      '/login', '/login.*', '/login/*',
 				      '/logout', '/logout.*', '/logout/*',
-				      '/dbconsole', '/dbconsole.*', '/dbconsole/*']) {
+				      '/dbconsole', '/dbconsole.*', '/dbconsole/*',
+				      '/monitoring', '/monitoring.*', '/monitoring/*',
+				      ]) {
 				   new SecRequestMap(url: url, configAttribute: 'permitAll').save()
 				}
 				new SecRequestMap(url: '/superuser/**', configAttribute: 'permitAll').save()

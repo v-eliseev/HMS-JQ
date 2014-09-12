@@ -1,6 +1,8 @@
 <g:applyLayout name="twoblocks">
 <head>
 <title><g:message code="title.superuser.index" /></title>
+<asset:stylesheet src="datatables.css"/>
+<asset:javascript src="datatables.js"/>
 </head>
 
 <content tag="top"> 
@@ -80,7 +82,7 @@
         </g:each>        
     </div>
  --}%
-<table class="table table-striped table-condensed">
+<table id="users" class="table table-striped table-condensed">
 <thead>
 	<tr>
 		<g:sortableColumn property="username"
@@ -121,6 +123,14 @@
 <g:link controller="admin" action="addUser" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add user</g:link>
 </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#users').dataTable(
+    {
+    })
+});
+</script>
 
 </content>
 

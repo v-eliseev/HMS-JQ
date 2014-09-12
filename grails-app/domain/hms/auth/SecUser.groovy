@@ -32,6 +32,8 @@ class SecUser extends DomainBaseClass {
 	Integer expireAccountType = 0 // never
 	Integer expireAccountEveryCode = 1 // 1 month
 
+//	String fullname
+
 	static transients = ['springSecurityService']
 
 	static constraints = {
@@ -41,6 +43,7 @@ class SecUser extends DomainBaseClass {
 		email nullable: false
 		expirePassword nullable: true
 		expireAccount nullable: true
+//		fullname nullable: true
 	}
 
 	static mapping = {

@@ -52,7 +52,7 @@ class AdminController extends BaseController {
 	def saveUser() {
 		License license = getLicense(request)
 
-		def roles = params.list('accountRole').collect { adminService.getRole(it) }
+		def roles = params.list('roles').collect { adminService.getRole(it) }
 
 		adminService.createUser(
 			params.username, 

@@ -96,7 +96,7 @@ grails.project.dependency.resolution = {
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
         test "org.gebish:geb-spock:0.9.3"
 
-        def seleniumVersion = "2.42.2"
+        def seleniumVersion = "2.43.1"
         test ("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
             excludes "xml-apis","commons-codec","commons-io"
         }
@@ -137,7 +137,7 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.4.0"
         compile ":scaffolding:2.1.2"
 
-        compile ':cache:1.1.7'
+        compile ':cache:1.1.8'
 
         test(":spock:0.7") { 
             exclude "spock-grails-support" 
@@ -155,7 +155,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        compile ":grails-melody:1.52.0"
+        compile ":grails-melody:1.53.0"
 
         runtime ":roomplanner-api:$roomplannerApiVersion"
         runtime ":roombix-ui:$roombixUiVersion"

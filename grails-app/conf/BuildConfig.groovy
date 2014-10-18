@@ -112,8 +112,8 @@ grails.project.dependency.resolution = {
     plugins {
         //compile ":hibernate:3.6.10.13" 
         compile ":hibernate4:4.3.5.5"
-        build ":tomcat:7.0.54"
-        //build ":tomcat8:8.0.5"
+        //build ":tomcat:7.0.54"
+        build ":tomcat:8.0.14.1"
 
         compile ":cxf-client:2.0"
         compile ":remoting:1.3"
@@ -151,7 +151,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        test (":codenarc:0.21") {
+        test (":codenarc:0.22") {
             export = false
         }
 

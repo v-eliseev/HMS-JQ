@@ -68,9 +68,9 @@ class UserController extends BaseController {
 			planningWindow << date
 		}
 		
-		def rooms = Room.getAllFor(license)
 		def hotel = license.hotel
-		def roomCategoryList = hotel.roomCategories
+		def rooms = hotelService.listRooms(license) //Room.getAllFor(license)
+		def roomCategoryList = hotelService.listRoomCategories(license) //hotel.roomCategories
 		def reservationList = reservationService.getReservations(license, startDate.toDate(), endDate.toDate())
 
 		[

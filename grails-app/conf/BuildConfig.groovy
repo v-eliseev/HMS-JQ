@@ -94,9 +94,9 @@ grails.project.dependency.resolution = {
         //compile 'joda-time:joda-time-hibernate:1.3'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
-        test "org.gebish:geb-spock:0.9.3"
+        test "org.gebish:geb-spock:0.10.0"
 
-        def seleniumVersion = "2.43.1"
+        def seleniumVersion = "2.44.0"
         test ("org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion") {
             excludes "xml-apis","commons-codec","commons-io"
         }
@@ -143,7 +143,7 @@ grails.project.dependency.resolution = {
             exclude "spock-grails-support" 
             export = false
         }
-        test (":geb:0.9.3") {
+        test (":geb:0.10.0") {
             export = false
         }
 

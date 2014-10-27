@@ -110,7 +110,7 @@ class DemoDataScript {
 
 	private static String randomString(long max_length) {
 		def seed = new Random()
-		def alphabet = 'A'..'z'
+		def alphabet = [*'A'..'Z', *'a'..'z']
 		def result = ""
 		(1..max_length).each {
 			result = result + alphabet[seed.nextInt(alphabet.size())]

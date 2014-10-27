@@ -56,11 +56,11 @@ $(document).ready(function() {
 	$('#planningrange span').html(moment('${firstDate}').format('MMMM D, YYYY') + ' - ' + moment('${lastDate}').format('MMMM D, YYYY'));
 
     $('#canvas_container').planningboard({
-        rooms: '${raw(allRoomsJSON)}',
-        reservations: '${raw(displayReservationsJSON)}',
-        roomAssignments: '${raw(displayRoomAssignmentsJSON)}',
-        reservationStatusList: '${raw(reservationStatusListJSON)}',
-        constraintMatches: '${raw(constraintMatchesJSON)}',
+        rooms: eval(${raw(allRoomsJSON)}),
+        reservations: eval(${raw(displayReservationsJSON)}),
+        roomAssignments: eval(${raw(displayRoomAssignmentsJSON)}),
+        reservationStatusList: eval(${raw(reservationStatusListJSON)}),
+        constraintMatches: eval(${raw(constraintMatchesJSON)}),
         firstDate: moment('${firstDate}'),
         lastDate: moment('${lastDate}')
     });

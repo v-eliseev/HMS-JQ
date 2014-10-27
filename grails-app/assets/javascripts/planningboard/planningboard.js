@@ -78,7 +78,7 @@
 	            	"fill":"none"
 	        	});
 		        this.paper.text(eval((2*index+1)*cellWidth+firstColWidth), Math.floor(headerHeight*0.375), currentDate.format("DD.MM"));
-		        currentDate = currentDate.add('days',1);
+		        currentDate = currentDate.add(1, 'days');
 		        index++;
     		}
 

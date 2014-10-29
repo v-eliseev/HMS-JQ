@@ -5,40 +5,30 @@ import hms.auth.SecUser
 
 class RenderingFilters {
 
+    def mobileService
+
     def filters = {
 
         /**
             Rendering mobile version
         */
-        mobileAware(controller:'Test', action:'*') {
-            before = {
-
-            }
+        mobileAware(controller:'test', action:'*') {
             after = { Map model ->
-
                 log.debug("mobileAware rendering")
-
-            }
-            afterView = { Exception e ->
-
+                //MobileService mobileService = new MobileService()
+                String viewPrefix = mobileService.isMobileUser(request) ? "/m/" : ""
+                
             }
         }
 
         /**
             Rendering views according to given authorities
         */
-        roleAware(controller:'Test', action:'*') {
-            before = {
-
-            }
+        roleAware(controller:'test', action:'*') {
             after = { Map model ->
-
                 log.debug("roleAware rendering")
                 def user = RequestUtils.getCurrentUser(request)
                 def roles = user?.getAuthorities()
-
-            }
-            afterView = { Exception e ->
 
             }
         }

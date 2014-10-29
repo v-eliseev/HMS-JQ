@@ -1,8 +1,11 @@
 package filters
 
-import grails.test.mixin.Mock
-import spock.lang.Specification
+import grails.test.mixin.*
+import spock.lang.*
 
+import hms.TestController
+
+@TestFor(TestController)
 @Mock(RenderingFilters)
 class RenderingFiltersSpec extends Specification {
 
@@ -12,6 +15,20 @@ class RenderingFiltersSpec extends Specification {
     def cleanup() {
     }
 
-    void "test something"() {
+    def "Test rendering filters"() {
+    	when:
+        withFilters(controller: "test", action:"index") {
+            controller.index()
+        }
+
+        then:
+        response.redirectedUrl == result
+
+        where:
+        role    || mobile || result
+        'admin' || true   || '/admin'
+        'user'  || true   || '/user'
+        'admin' || false  || '/admin'
+        'user'  || false  || '/user'
     }
 }

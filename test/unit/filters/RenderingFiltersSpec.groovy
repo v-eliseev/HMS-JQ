@@ -4,9 +4,10 @@ import grails.test.mixin.*
 import spock.lang.*
 
 import hms.TestController
+import hms.MobileService
 
 @TestFor(TestController)
-@Mock(RenderingFilters)
+@Mock([RenderingFilters, MobileService])
 class RenderingFiltersSpec extends Specification {
 
     def setup() {
@@ -16,6 +17,11 @@ class RenderingFiltersSpec extends Specification {
     }
 
     def "Test rendering filters"() {
+    	given:
+    	defineBeans {
+    		mobileService(MobileService)
+    	}
+
     	when:
         withFilters(controller: "test", action:"index") {
             controller.index()

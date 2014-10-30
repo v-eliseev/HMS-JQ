@@ -15,7 +15,6 @@ class RenderingFilters {
         mobileAware(controller:'test', action:'*') {
             after = { Map model ->
                 log.debug("mobileAware rendering")
-                //MobileService mobileService = new MobileService()
                 String viewPrefix = mobileService.isMobileUser(request) ? "/m/" : ""
                 
             }

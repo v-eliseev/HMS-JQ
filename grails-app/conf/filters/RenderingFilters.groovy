@@ -1,5 +1,7 @@
 package filters
 
+import org.springframework.web.servlet.ModelAndView 
+
 import hms.RequestUtils 
 import hms.auth.SecUser
 
@@ -12,22 +14,29 @@ class RenderingFilters {
         /**
             Rendering mobile version
         */
-        mobileAware(controller:'test', action:'*') {
+        renderView(controller:'test', action:'*') {
             after = { Map model ->
-                log.debug("mobileAware rendering")
-                String viewPrefix = mobileService.isMobileUser(request) ? "/m/" : ""
-                
-            }
-        }
+                def viewName = new StringBuilder()
 
-        /**
-            Rendering views according to given authorities
-        */
-        roleAware(controller:'test', action:'*') {
-            after = { Map model ->
-                log.debug("roleAware rendering")
+                viewName << "/"
+                viewName << (mobileService.isMobileUser(request) ? "mobile/" : "")
+                
                 def user = RequestUtils.getCurrentUser(request)
                 def roles = user?.getAuthorities()
+
+                def namespace = "admin" // TODO change
+
+                viewName << namespace
+                if (namespace != null)
+                    viewName << "/"
+
+                viewName << controllerName
+                if (actionName != null) 
+                    viewName << "/"
+                viewName << actionName
+
+                log.debug(viewName)
+                modelAndView = new ModelAndView(viewName.toString(), model)
 
             }
         }

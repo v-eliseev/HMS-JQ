@@ -69,7 +69,8 @@ class AdminServiceUnitSpec extends Specification {
 
 		then:
 			demoLicense != null
-			adminService.checkUser("admin", "admin", demoLicense) == true
+			adminService.checkUser("admin", "admin", demoLicense) != null
+			//adminService.checkUser("user", "test", demoLicense) != null
 			adminUser.getAuthorities().size() == 1
 
 		cleanup:

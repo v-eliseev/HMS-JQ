@@ -78,10 +78,10 @@ class AdminServiceSpec extends Specification {
 			adminService.createUser("admin", "admin", "aa@bb.cc", license2, [adminRole])
 
 		then:
-			adminService.checkUser("admin", "admin", license1) == true
-			adminService.checkUser("admin", "manager", license1) == false
-			adminService.checkUser("manager", "supervisor", license1) == false
-			adminService.checkUser("admin", "admin", license2) == true
+			adminService.checkUser("admin", "admin", license1) != null
+			adminService.checkUser("admin", "manager", license1) == null
+			adminService.checkUser("manager", "supervisor", license1) == null
+			adminService.checkUser("admin", "admin", license2) != null
 
 		cleanup:
 			license1.delete(flush:true)
@@ -99,7 +99,7 @@ class AdminServiceSpec extends Specification {
 
 		then:
 			adminUser != null
-			adminService.checkUser("admin", "admin", demoLicense) == true
+			adminService.checkUser("admin", "admin", demoLicense) != null
 			adminUser.getAuthorities().size() == 1
 
 		cleanup:

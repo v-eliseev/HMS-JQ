@@ -18,26 +18,30 @@ class RenderingFilters {
             after = { Map model ->
                 def viewName = new StringBuilder()
 
-                viewName << "/"
-                viewName << (mobileService.isMobileUser(request) ? "mobile/" : "")
+                if (mobileService.isMobileUser(request)) viewName << "/mobile"
                 
                 def user = RequestUtils.getCurrentUser(request)
-                def roles = user?.getAuthorities()
+                def authorities = user?.getAuthorities()
 
-                def namespace = "admin" // TODO change
+                def namespace
+                if (authorities != null) {
+                    switch (authorities.asList()[0].authority) {
+                    case "ROLE_ADMIN":
+                        namespace = "admin"
+                        break
+                    case "ROLE_USER":
+                        namespace = "user"
+                        break
+                    default:
+                        throw new IllegalArgumentException()
+                    }
+                }
+                if (namespace != null) viewName << "/${namespace}"
+                viewName << "/${controllerName}"
+                if (actionName != null) viewName << "/${actionName}" 
 
-                viewName << namespace
-                if (namespace != null)
-                    viewName << "/"
-
-                viewName << controllerName
-                if (actionName != null) 
-                    viewName << "/"
-                viewName << actionName
-
-                log.debug(viewName)
+                log.debug("Rendering $viewName")
                 modelAndView = new ModelAndView(viewName.toString(), model)
-
             }
         }
     }

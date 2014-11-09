@@ -35,11 +35,8 @@ class AdminService {
 	}
 
 	def checkUser(String username, String password, License license) {
-
 		def hash = new CustomPasswordEncoder().encodePassword(password, license.key)
-		def user = SecUser.findByUsernameAndPasswordAndLicense(username, hash, license)
-
-		user != null
+		SecUser.findByUsernameAndPasswordAndLicense(username, hash, license)
 	}
 
 	def getUser(def id) {

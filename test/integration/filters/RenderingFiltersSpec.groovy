@@ -28,13 +28,13 @@ import hms.Base32BytesCodec
     License, Hotel, RoomCategory, Room, Reservation, ReservationStatus])
 class RenderingFiltersSpec extends Specification {
 
-    def licenseService
-    def adminService
-    def license
-    def adminUser
-    def userUser
+    @Shared def licenseService
+    @Shared def adminService
+    @Shared def license
+    @Shared def adminUser
+    @Shared def userUser
 
-    def setup() {
+    def setupSpec() {
         licenseService = new LicenseService()
         adminService = new AdminService()
         mockCodec SHA1Codec

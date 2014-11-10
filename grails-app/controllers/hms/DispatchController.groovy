@@ -5,7 +5,7 @@ import hms.auth.SecRole
 class DispatchController extends BaseController {
 
     def index() {
-    	log.trace("In Dispatch#index")
+    	log.debug("In Dispatch#index")
 
     	def user = getCurrentUser(request)
     	def authorities = user.getAuthorities()

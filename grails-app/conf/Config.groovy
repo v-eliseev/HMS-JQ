@@ -108,9 +108,9 @@ log4j = {
            'org.codehaus.groovy.grails.web.pages',  //  GSP
            'org.codehaus.groovy.grails.web.sitemesh',  //  layouts
            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping' // URL mapping
-    error  'org.codehaus.groovy.grails.commons' // core / classloading
-    error  'org.codehaus.groovy.grails.plugins' // plugins
+           'org.codehaus.groovy.grails.web.mapping', // URL mapping
+           'org.codehaus.groovy.grails.commons', // core / classloading
+           'org.codehaus.groovy.grails.plugins' // plugins
     error  'org.codehaus.groovy.grails.orm.hibernate', // hibernate integration
            'org.springframework',
            'org.hibernate',
@@ -125,7 +125,7 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-	  debug  'grails.app.conf', 
+	  error  'grails.app.conf', 
            'grails.app.bootstrap',
            'grails.app.services.hms', 
            'grails.app.domain.hms', 
@@ -138,9 +138,10 @@ log4j = {
     
     error  'org.apache.cxf'
 
+    error  'grails.plugin.springsecurity'
 
     debug  'roomplanner'
-    debug  'hms'
+    info   'hms'
     debug  'hms.DemoDataScript'
 
     error  'asset.pipeline'
@@ -154,6 +155,10 @@ log4j = {
     Spring Security configuration
 */
 // Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.active = true
+grails.plugin.springsecurity.debug.useFilter = false
+grails.plugin.springsecurity.printStatusMessages = false
+grails.plugin.springsecurity.rejectIfNoRule = true
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
 grails.plugin.springsecurity.authority.className = 'hms.auth.SecRole'

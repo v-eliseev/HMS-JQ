@@ -125,7 +125,7 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-	  error  'grails.app.conf', 
+	  debug  'grails.app.conf', 
            'grails.app.bootstrap',
            'grails.app.services.hms', 
            'grails.app.domain.hms', 
@@ -159,6 +159,7 @@ grails.plugin.springsecurity.active = true
 grails.plugin.springsecurity.debug.useFilter = false
 grails.plugin.springsecurity.printStatusMessages = false
 grails.plugin.springsecurity.rejectIfNoRule = true
+grails.plugin.springsecurity.logout.postOnly = false // TODO
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
 grails.plugin.springsecurity.authority.className = 'hms.auth.SecRole'

@@ -14,8 +14,10 @@ class RenderingFilters {
         /**
             Rendering mobile version
         */
-        renderView(controller:'test', action:'*') {
+        renderView(controller:'(assets|login|logout|superuser)', action:'*', invert: true) {
             after = { Map model ->
+
+                log.trace("In RenderingFilters")
                 def viewName = new StringBuilder()
 
                 if (mobileService.isMobileUser(request)) viewName << "/mobile"
@@ -23,6 +25,8 @@ class RenderingFilters {
                 def user = RequestUtils.getCurrentUser(request)
                 def authorities = user?.getAuthorities()
 
+                log.trace("User: $user")
+                
                 def namespace
                 if (authorities != null) {
                     switch (authorities.asList()[0].authority) {

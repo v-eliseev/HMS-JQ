@@ -5,7 +5,7 @@ import hms.auth.SecUser
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
-class BaseController {
+abstract class BaseController {
 
 	def mobileService
 	def grailsApplication

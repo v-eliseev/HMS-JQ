@@ -37,7 +37,7 @@ class RequestUtils {
             license = License.findByKey(licenseKey)
         }
         if (license && userDetails) {
-            user = SecUser.findByUsernameAndPasswordAndLicense(userDetails.username, userDetails.password, license)
+            user = SecUser.findByUsernameAndLicense(userDetails.username, license)
         }
         return user
     }

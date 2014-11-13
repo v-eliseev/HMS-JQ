@@ -11,17 +11,17 @@ class LicenseFilters {
         ) {
 
             before = {
-                log.debug("Before...")
+                log.trace("Before...")
                 def licenseInstance = RequestUtils.getLicense(request)
                 if (!licenseInstance) {
-                    log.debug("Redirecting to login page...")
+                    log.trace("Redirecting to login page...")
                     redirect(controller: 'login')
                     return false
                 }
             }
 
             after = { Map model ->
-                log.debug("After...")
+                log.trace("After...")
                 if (model) {
                     def licenseInstance = RequestUtils.getLicense(request)
                     if (licenseInstance) {

@@ -35,4 +35,8 @@ beans = {
 	}
 	
 	securityEventListener(hms.auth.CustomSecurityEventListener)
+	
+	wurflHolder(net.sourceforge.wurfl.core.GeneralWURFLEngine, "classpath:/wurfl/wurfl-latest.zip") {
+	}
+	
 }

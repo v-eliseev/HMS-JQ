@@ -45,7 +45,7 @@ def systemConfig = new ConfigObject()
 //     systemConfig = new ConfigSlurper(grailsSettings.grailsEnv).parse(myClassLoader.loadClass("SystemConfig"))
 // }
 
-def mysqlConnectorVersion = "5.1.32" //systemConfig.roomplanner.mysql.connector.version
+def mysqlConnectorVersion = "5.1.34" //systemConfig.roomplanner.mysql.connector.version
 def roombixUiVersion = "0.1-SNAPSHOT" //systemConfig.roomplanner.roombixUi.version
 def roomplannerApiVersion = "0.5-SNAPSHOT" //systemConfig.roomplanner.roomplannerApi.version
 /**
@@ -89,8 +89,8 @@ grails.project.dependency.resolution = {
         runtime "mysql:mysql-connector-java:$mysqlConnectorVersion"
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
 
-        compile 'org.freemarker:freemarker:2.3.20'
-        compile 'joda-time:joda-time:2.4'
+        compile 'org.freemarker:freemarker:2.3.21'
+        compile 'joda-time:joda-time:2.5'
         //compile 'joda-time:joda-time-hibernate:1.3'
 
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
@@ -113,9 +113,9 @@ grails.project.dependency.resolution = {
         //compile ":hibernate:3.6.10.13" 
         compile ":hibernate4:4.3.5.4"
         //build ":tomcat:7.0.54"
-        build ":tomcat:8.0.14.1"
+        build ":tomcat:8.0.15"
 
-        compile ":cxf-client:2.0"
+        compile ":cxf-client:2.0.2"
         compile ":remoting:1.3"
         
         runtime ":mail:1.0.7"
@@ -147,7 +147,7 @@ grails.project.dependency.resolution = {
             export = false
         }
 
-        test (":code-coverage:2.0.3-2") {
+        test (":code-coverage:2.0.3-3") {
             export = false
         }
 

@@ -1,11 +1,16 @@
 package hms
 
+import grails.converters.JSON
+
+import hms.dto.ReservationRequest
+
 class ReservationController extends BaseController {
 
 	static defaultAction = "index"
 
 	def hotelService
 	def reservationService
+	def roomPlanerService
 	def roomService
 
 	/**
@@ -30,6 +35,24 @@ class ReservationController extends BaseController {
 	def create() {
 		License license = getLicense(request)
 
+		log.debug("Create reservation for $license from parameters: $params")
+
+		def dates = params.daterange.split(" - ")
+		def fromDate = Date.parse("MM/dd/yyyy", dates[0])
+		def toDate = Date.parse("MM/dd/yyyy", dates[1])
+		def adults = params.int('adults')
+		def roomCategory = RoomCategory.findById(params.long('roomCategory'))
+
+		reservationService.createReservation(license, 
+			[
+				fromDate: fromDate, 
+				toDate: toDate, 
+				roomCategory: roomCategory, 
+				adults: adults
+			])
+
+		roomPlannerService.createNewPlan(license)
+
 		redirect action: 'index'
 	}
 
@@ -52,75 +75,32 @@ class ReservationController extends BaseController {
 
 	}
 
+	def check() {
+		License license = getLicense(request)
 
-	// def create() {
-	// 	def roomCategoryList = ServiceFactory.getServiceFactory().getServiceByDomainClass(RoomCategory.class)?.list()
-	// 	def reservationMotiveList= ServiceFactory.getServiceFactory().getServiceByDomainClass(ReservationMotive.class)?.list()
-	// 	def distributionChannelList= ServiceFactory.getServiceFactory().getServiceByDomainClass(DistributionChannel.class)?.list()
+		log.trace("Check reservation with params: $params")
 
-	// 	def roomCategoryData = []
-	// 	def reservationMotiveData = []
-	// 	def distributionChannelData = []
+		def dates = params.daterange.split(" - ")
+		def fromDate = Date.parse("MM/dd/yyyy", dates[0])
+		def toDate = Date.parse("MM/dd/yyyy", dates[1])
+		def adults = params.int('adults')
+		def roomCategory = RoomCategory.findById(params.long('roomCategory'))
 
-	// 	roomCategoryList.each { item ->
-	// 		roomCategoryData.add([id: item.id, name: item.name])
-	// 	}
-	// 	reservationMotiveList.each { item ->
-	// 		reservationMotiveData.add([id: item.id, name: item.name])
-	// 	}
-	// 	distributionChannelList.each { item ->
-	// 		distributionChannelData.add([id: item.id, name: item.name])
-	// 	}
+		def reservation = new ReservationRequest(
+			fromDate: fromDate,
+			toDate: toDate,
+			adults: adults,
+			roomCategory: roomCategory,
+		)
 
-	// 	def initial = [
-	// 				fromDate: new Date(),
-	// 				toDate: new Date() + 1
-	// 		]
+		def roomAssignment = roomPlannerService.checkReservation(license, reservation)
+		
+		def result = (roomAssignment != null) ? 'OK' : 'Not OK'
+		def jsonData = [status: result]
+		
+		render jsonData as JSON
+	}
 
-	// 	[
-	// 		roomCategoriesList: roomCategoryData,
-	// 		reservationMotivesList: reservationMotiveData,
-	// 		distributionChannelsList: distributionChannelData,
-	// 		initial: initial
-	// 	]
-	// }
-
-	// def checkAvailabilityJSON() {
-	// 	def roomCategory = params?.roomCategory;
-	// 	def fromDate = params?.fromDate;
-	// 	def toDate = params?.toDate;
-
-	// 	def jsonData = [status: "OK"]
-	// 	render jsonData as JSON
-	// }
-
-	// def save() {
-	// 	def reservationService = ServiceFactory.getServiceFactory().getServiceByDomainClass(Reservation.class)
-	// 	def reservationStatusService = ServiceFactory.getServiceFactory().getServiceByDomainClass(ReservationStatus.class)
-	// 	def reservationStatusNew = reservationStatusService.getStatusNew()
-	// 	def obj = new Reservation([
-	// 				fromDate: new Date(params.fromDate),
-	// 				toDate: new Date(params.toDate),
-	// 				notes: params.notes,
-	// 				reservationStatus: reservationStatusNew
-	// 			])
-	// 	reservationService.create(obj)
-	// 	redirect (action:"list")
-	// }
-
-	// def list() {
-	// 	def service = ServiceFactory.getServiceFactory().getServiceByDomainClass(Reservation.class)
-	// 	def dataList = service?.list()
-	// 	[dataList: dataList]
-	// }
-	
-	// def request() {
-	// 	[
-	// 		fromDate: new Date(),
-	// 		toDate: new Date() + 1,
-	// 		guests: 1
-	// 	]
-	// }
 	
 	def listAvailableRoomTypes() {
 		def parameters = params

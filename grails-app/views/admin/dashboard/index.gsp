@@ -24,7 +24,7 @@
         <g:link class="list-group-item">Room categories <span class="badge">${hotelRoomCategoriesCount}</span></g:link>
         <g:link class="list-group-item">Rooms <span class="badge">${hotelRoomsCount}</span></g:link>
     </div>
-    <g:link controller="admin" action="editHotel">More &hellip;</g:link>
+    <g:link controller="hotel" action="edit">More &hellip;</g:link>
 
 </div>
 <div class="col-lg-8">
@@ -103,7 +103,7 @@
 	<g:each in="${userInstanceList}" status="i" var="userInstance">
 	<tr>
     	<td>
-    		<g:link controller="admin" action="showUser" id="${userInstance.id}">
+    		<g:link controller="secUser" action="show" id="${userInstance.id}">
     			<code>${fieldValue(bean: userInstance, field: "username")}</code>
     		</g:link>
     	</td>
@@ -120,7 +120,7 @@
 	</g:each>
 </tbody>
 </table>
-<g:link controller="admin" action="addUser" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add user</g:link>
+<g:link controller="secUser" action="add" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add user</g:link>
 </div>
 </div>
 

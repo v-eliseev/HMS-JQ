@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
-    <g:link class="navbar-brand" controller="user" action="index">Roombix</g:link>
+    <g:link class="navbar-brand" controller="dashboard" action="index">Roombix</g:link>
   </div>
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">

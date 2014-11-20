@@ -75,18 +75,6 @@ class AdminController extends BaseController {
 	}
 
 	
-	def editHotel() {
-		License license = getLicense(request)
-		def hotel = license.hotel
-		def roomCategoryList = hotel.roomCategories
-
-		[
-			hotelInstance: hotel,
-			roomCategoryInstanceList: roomCategoryList
-		]
-	}
-
-
 	def changePassword() {	
 		License license = getLicense(request)
 		SecUser user = getCurrentUser(request)

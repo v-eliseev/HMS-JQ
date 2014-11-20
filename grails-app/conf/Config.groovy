@@ -158,19 +158,34 @@ log4j = {
 grails.plugin.springsecurity.active = true
 grails.plugin.springsecurity.debug.useFilter = false
 grails.plugin.springsecurity.printStatusMessages = false
-grails.plugin.springsecurity.rejectIfNoRule = true
+grails.plugin.springsecurity.rejectIfNoRule = true // TODO
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false // TODO
 grails.plugin.springsecurity.logout.postOnly = false // TODO
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'hms.auth.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'hms.auth.SecUserRole'
 grails.plugin.springsecurity.authority.className = 'hms.auth.SecRole'
-grails.plugin.springsecurity.securityConfigType = 'Requestmap'
-grails.plugin.springsecurity.requestMap.className = 'hms.auth.SecRequestMap'
+grails.plugin.springsecurity.securityConfigType = 'Annotation' //'Requestmap'
+//grails.plugin.springsecurity.requestMap.className = 'hms.auth.SecRequestMap'
 grails.plugin.springsecurity.useSecurityEventListener = true
 grails.plugin.springsecurity.logout.handlerNames =
 	['rememberMeServices',
 	 'securityContextLogoutHandler',
 	 'securityEventListener']
 
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+
+  '/':                  ['permitAll'], 
+  '/**/favicon.ico':    ['permitAll'], 
+  '/**/assets/**':      ['permitAll'], 
+  '/**/js/**':          ['permitAll'], 
+  '/**/fonts/**':       ['permitAll'],
+  '/login/**':          ['permitAll'], 
+  '/logout/**':         ['permitAll'],
+  '/dbconsole/**':      ['permitAll'],
+  '/monitoring/**':     ['permitAll'],
+  '/superuser/**':      ['permitAll'],
+  '/**':                ['permitAll']
+]
 // environments {
 //   development {
 //     grails.plugins.springsecurity.mock.active = true

@@ -26,8 +26,12 @@ class HotelController extends BaseController {
 
 	def edit() {
 		License license = getLicense(request)
+		def hotel = license.hotel
+		def roomCategoryList = hotel.roomCategories
+
 		[
-			hotelInstance: license.hotel
+			hotelInstance: hotel,
+			roomCategoryInstanceList: roomCategoryList
 		]
 	}
 

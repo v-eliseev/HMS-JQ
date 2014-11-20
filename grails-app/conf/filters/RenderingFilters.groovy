@@ -17,6 +17,9 @@ class RenderingFilters {
         renderView(controller:'(assets|login|logout|superuser)', action:'*', invert: true) {
             after = { Map model ->
 
+                // skip AJAX requests 
+                if (request.xhr) { return true }
+
                 log.trace("In RenderingFilters")
                 def viewName = new StringBuilder()
 

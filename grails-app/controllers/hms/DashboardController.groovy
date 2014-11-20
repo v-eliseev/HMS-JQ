@@ -11,6 +11,7 @@ class DashboardController extends BaseController {
 
 	def hotelService
 	def reservationService
+	def reservationStatusService
 	def roomPlannerService
 
     def index() { 

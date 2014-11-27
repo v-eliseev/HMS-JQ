@@ -1,37 +1,33 @@
-<g:applyLayout name="threeblocks">
+<g:applyLayout name="oneblock">
 
 <head>
 <title><g:message code="title.admin.users" /></title>
 </head>
 
-<content tag="top">
-    <g:link class="btn btn-primary" action="createUser">Create user</g:link>
-</content>
-
 <content tag="main">
 <legend>Users</legend>
-<table class="table table-striped table-condensed">
+<table id="users" class="table table-striped table-condensed">
 <thead>
 	<tr>
 		<g:sortableColumn property="username"
 			title="${message(code: 'license.key.label', default: 'Name')}" />
 		<g:sortableColumn property="enabled"
-			title="${message(code: 'license.demoMode.label', default: 'Enabled')}" />
+			title="${message(code: 'license.demoMode.label', default: 'En')}" />
 		<g:sortableColumn property="accountExpired"
-			title="${message(code: 'license.expires.label', default: 'Expired')}" />
+			title="${message(code: 'license.expires.label', default: 'NEx')}" />
 		<g:sortableColumn property="accountLocked"
-			title="${message(code: 'license.demoMode.label', default: 'Locked')}" />
+			title="${message(code: 'license.demoMode.label', default: 'NLo')}" />
 		<g:sortableColumn property="passwordExpired"
-			title="${message(code: 'license.expires.label', default: 'Password Expired')}" />
+			title="${message(code: 'license.expires.label', default: 'PNEx')}" />
 		<g:sortableColumn property="authorities"
 			title="${message(code: 'license.expires.label', default: 'Authorities')}" />
 	</tr>
 </thead>
 <tbody>
 	<g:each in="${userInstanceList}" status="i" var="userInstance">
-	<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+	<tr>
     	<td>
-    		<g:link controller="secUser" action="edit" id="${userInstance.id}">
+    		<g:link controller="secUser" action="show" id="${userInstance.id}">
     			<code>${fieldValue(bean: userInstance, field: "username")}</code>
     		</g:link>
     	</td>
@@ -60,8 +56,13 @@
 
 </content>
 
-<content tag="sidemenu">
-<g:render template="/templates/adminNavigation"/>
-</content>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#users').dataTable(
+    {
+    })
+});
+
+</script>
 
 </g:applyLayout>

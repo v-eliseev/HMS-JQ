@@ -20,10 +20,6 @@
         <li><i class="fa fa-li fa-envelope"></i> ${hotelInstance.eMail}</li> 
         <li><i class="fa fa-li fa-globe"></i> ${hotelInstance.webSite}</li> 
     </ul>
-    <div class="list-group">
-        <g:link class="list-group-item">Room categories <span class="badge">${hotelRoomCategoriesCount}</span></g:link>
-        <g:link class="list-group-item">Rooms <span class="badge">${hotelRoomsCount}</span></g:link>
-    </div>
     <g:link controller="hotel" action="edit">More &hellip;</g:link>
 
 </div>
@@ -120,7 +116,7 @@
 	</g:each>
 </tbody>
 </table>
-<g:link controller="secUser" action="add" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add user</g:link>
+<g:link controller="secUser" action="index" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Manage users</g:link>
 </div>
 </div>
 

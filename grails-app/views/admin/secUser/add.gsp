@@ -14,7 +14,7 @@
     <div class="col-lg-10">
     <legend>New User Account</legend>
 
-<g:form class="form-horizontal" role="form" action="saveUser" method="POST">
+<g:form class="form-horizontal" role="form" action="create" method="POST">
 <div class="row">
     <div class="col-lg-6">
 

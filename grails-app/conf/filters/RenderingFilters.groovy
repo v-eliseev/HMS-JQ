@@ -16,6 +16,9 @@ class RenderingFilters {
         */
         renderView(controller:'(assets|login|logout|superuser)', action:'*', invert: true) {
             after = { Map model ->
+				
+				// skip redirect requests
+				if (!model) { return true }
 
                 // skip AJAX requests 
                 if (request.xhr) { return true }

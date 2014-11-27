@@ -147,7 +147,7 @@ $('#daterange').daterangepicker();
     
     <li class="nav-header">Hotel</li>
     <small>
-        <g:link controller="admin" action="editHotel">${fieldValue(bean: hotelInstance, field: "name")}</g:link>
+        <g:link controller="hotel" action="edit">${fieldValue(bean: hotelInstance, field: "name")}</g:link>
     </small>
 
     <li class="nav-header">Room categories <span class="badge">5</span></li>
